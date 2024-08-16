@@ -6,7 +6,14 @@ import InputError from '@/components/InputError'
 import Label from '@/components/Label'
 import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
-import { useState } from 'react'
+import { useState, FormEvent } from 'react'
+
+interface Errors {
+    name?: string[];
+    email?: string[];
+    password?: string[];
+    password_confirmation?: string[];
+}
 
 const Page = () => {
     const { register } = useAuth({
@@ -14,13 +21,13 @@ const Page = () => {
         redirectIfAuthenticated: '/dashboard',
     })
 
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [passwordConfirmation, setPasswordConfirmation] = useState('')
-    const [errors, setErrors] = useState([])
+    const [name, setName] = useState<string>('')
+    const [email, setEmail] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
+    const [passwordConfirmation, setPasswordConfirmation] = useState<string>('')
+    const [errors, setErrors] = useState<Errors>({})
 
-    const submitForm = event => {
+    const submitForm = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
 
         register({

@@ -10,7 +10,7 @@ const Page = () => {
         redirectIfAuthenticated: '/dashboard',
     })
 
-    const [status, setStatus] = useState(null)
+    const [status, setStatus] = useState<string | null>(null)
 
     return (
         <>
