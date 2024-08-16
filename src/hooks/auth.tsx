@@ -1,17 +1,39 @@
-import useSWR from 'swr'
-import axios from '@/lib/axios'
-import { useEffect } from 'react'
-import { useParams, useRouter } from 'next/navigation'
-
-interface User {
-    email_verified_at?: string
-    // Add other user properties here
-}
+import useSWR from "swr"
+import axios from "@/lib/axios"
+import { useEffect } from "react"
+import { useRouter, useParams } from "next/navigation"
+import { UserType } from "@/types/User"
 
 interface AuthProps {
-    middleware?: 'auth' | 'guest'
-    redirectIfAuthenticated?: string
+  middleware?: 'auth' | 'guest'
+  redirectIfAuthenticated?: string
 }
+
+// interface Auth {
+//   user: User
+//   register: (data: {
+//     zboba: number
+//     name: string
+//     email: string
+//     password: string
+//     password_confirmation: string
+//   }) => Promise<void>
+//   login: (data: {
+//     email: string
+//     password: string
+//     remember: boolean
+//   }) => Promise<void>
+//   forgotPassword: (data: {
+//     email: string
+//   }) => Promise<AxiosResponse>
+//   resetPassword: (data: {
+//     email: string
+//     password: string
+//     password_confirmation: string
+//   }) => Promise<void>
+//   resendEmailVerification: () => Promise<AxiosResponse>
+//   logout: () => Promise<void>
+// } // #TODO: check this to optimize the code
 
 interface RegisterProps {
     setErrors: (errors: any) => void
@@ -36,18 +58,21 @@ export const useAuth = ({ middleware, redirectIfAuthenticated }: AuthProps = {})
     const router = useRouter()
     const params = useParams()
 
-    const { data: user, error, mutate } = useSWR<User>('/api/user', () =>
-        axios
-            .get('/api/user')
-            .then(res => res.data)
-            .catch(error => {
-                if (error.response.status !== 409) throw error
+    const {
+        data: user,
+        error,
+        mutate,
+    } = useSWR<UserType>("/api/user", () =>
+        axios.get("/api/user")
+        .then((res) => res.data)
+        .catch((error) => {
+            if (error.response.status !== 409) throw error
 
-                router.push('/verify-email')
-            }),
+            router.push("/verify-email")
+        })
     )
 
-    const csrf = () => axios.get('/sanctum/csrf-cookie')
+    const csrf = () => axios.get("/sanctum/csrf-cookie")
 
     const register = async ({ setErrors, ...props }: RegisterProps) => {
         await csrf()
@@ -55,13 +80,13 @@ export const useAuth = ({ middleware, redirectIfAuthenticated }: AuthProps = {})
         setErrors([])
 
         axios
-            .post('/register', props)
-            .then(() => mutate())
-            .catch(error => {
-                if (error.response.status !== 422) throw error
+        .post('/register', props)
+        .then(() => mutate())
+        .catch(error => {
+            if (error.response.status !== 422) throw error
 
-                setErrors(error.response.data.errors)
-            })
+            setErrors(error.response.data.errors)
+        })
     }
 
     const login = async ({ setErrors, setStatus, ...props }: LoginProps) => {
@@ -71,13 +96,13 @@ export const useAuth = ({ middleware, redirectIfAuthenticated }: AuthProps = {})
         setStatus(null)
 
         axios
-            .post('/login', props)
-            .then(() => mutate())
-            .catch(error => {
-                if (error.response.status !== 422) throw error
+        .post('/login', props)
+        .then(() => mutate())
+        .catch(error => {
+            if (error.response.status !== 422) throw error
 
-                setErrors(error.response.data.errors)
-            })
+            setErrors(error.response.data.errors)
+        })
     }
 
     const forgotPassword = async ({ setErrors, setStatus, email }: ForgotPasswordProps) => {
@@ -87,13 +112,13 @@ export const useAuth = ({ middleware, redirectIfAuthenticated }: AuthProps = {})
         setStatus(null)
 
         axios
-            .post('/forgot-password', { email })
-            .then(response => setStatus(response.data.status))
-            .catch(error => {
-                if (error.response.status !== 422) throw error
+        .post('/forgot-password', { email })
+        .then(response => setStatus(response.data.status))
+        .catch(error => {
+            if (error.response.status !== 422) throw error
 
-                setErrors(error.response.data.errors)
-            })
+            setErrors(error.response.data.errors)
+        })
     }
 
     const resetPassword = async ({ setErrors, setStatus, ...props }: ResetPasswordProps) => {
@@ -101,23 +126,23 @@ export const useAuth = ({ middleware, redirectIfAuthenticated }: AuthProps = {})
 
         setErrors([])
         setStatus(null)
-
+        console.log(props, params.token)
         axios
-            .post('/reset-password', { token: params.token, ...props })
-            .then(response =>
-                router.push('/login?reset=' + btoa(response.data.status)),
-            )
-            .catch(error => {
-                if (error.response.status !== 422) throw error
+        .post('/reset-password', { ...props , token: params.token })
+        .then(response =>
+            router.push('/login?reset=' + btoa(response.data.status)),
+        )
+        .catch(error => {
+            if (error.response.status !== 422) throw error
 
-                setErrors(error.response.data.errors)
-            })
+            setErrors(error.response.data.errors)
+        })
     }
 
     const resendEmailVerification = ({ setStatus }: { setStatus: (status: string) => void }) => {
         axios
-            .post('/email/verification-notification')
-            .then(response => setStatus(response.data.status))
+        .post('/email/verification-notification')
+        .then(response => setStatus(response.data.status))
     }
 
     const logout = async () => {
@@ -129,15 +154,22 @@ export const useAuth = ({ middleware, redirectIfAuthenticated }: AuthProps = {})
     }
 
     useEffect(() => {
-        if (middleware === 'guest' && redirectIfAuthenticated && user)
-            router.push(redirectIfAuthenticated ?? '')
+        if (middleware === "guest" && redirectIfAuthenticated && user) {
+            router.push(redirectIfAuthenticated)
+        }
+
         if (
-            window.location.pathname === '/verify-email' &&
-            user?.email_verified_at
-        )
-            router.push(redirectIfAuthenticated ?? '')
-        if (middleware === 'auth' && error) logout()
-    }, [user, error])
+            window.location.pathname === "/verify-email" &&
+            user?.email_verified_at &&
+            redirectIfAuthenticated
+        ) {
+            router.push(redirectIfAuthenticated)
+        }
+
+        if (middleware === "auth" && error) {
+            logout()
+        }
+    }, [user, error, middleware, redirectIfAuthenticated])
 
     return {
         user,

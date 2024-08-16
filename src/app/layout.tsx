@@ -6,7 +6,9 @@ const nunitoFont = Nunito({
     display: 'swap',
 })
 
-const RootLayout = ({ children }) => {
+const RootLayout = (
+    { children } : { children: React.ReactNode }
+) => {
     return (
         <html lang="en" className={nunitoFont.className}>
             <body className="antialiased">{children}</body>

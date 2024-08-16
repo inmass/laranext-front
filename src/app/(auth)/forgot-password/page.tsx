@@ -8,17 +8,23 @@ import { useAuth } from '@/hooks/auth'
 import { useState } from 'react'
 import AuthSessionStatus from '@/app/(auth)/AuthSessionStatus'
 
+interface Errors {
+    email?: string[];
+    password?: string[];
+    password_confirmation?: string[];
+}
+
 const Page = () => {
     const { forgotPassword } = useAuth({
         middleware: 'guest',
         redirectIfAuthenticated: '/dashboard',
     })
 
-    const [email, setEmail] = useState('')
-    const [errors, setErrors] = useState([])
-    const [status, setStatus] = useState(null)
+    const [email, setEmail] = useState<string>('')
+    const [errors, setErrors] = useState<Errors>({});
+    const [status, setStatus] = useState<string | null>(null)
 
-    const submitForm = event => {
+    const submitForm: React.FormEventHandler<HTMLFormElement> = event => {
         event.preventDefault()
 
         forgotPassword({ email, setErrors, setStatus })

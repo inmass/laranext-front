@@ -10,29 +10,36 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import AuthSessionStatus from '@/app/(auth)/AuthSessionStatus'
 
+interface Errors {
+    email?: string[];
+    password?: string[];
+    password_confirmation?: string[];
+}
+
 const Login = () => {
-    const router = useRouter()
+    // const router = useRouter()
+    const router: any = useRouter()
 
     const { login } = useAuth({
         middleware: 'guest',
         redirectIfAuthenticated: '/dashboard',
     })
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [shouldRemember, setShouldRemember] = useState(false)
-    const [errors, setErrors] = useState([])
-    const [status, setStatus] = useState(null)
+    const [email, setEmail] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
+    const [shouldRemember, setShouldRemember] = useState<boolean>(false)
+    const [errors, setErrors] = useState<Errors>({});
+    const [status, setStatus] = useState<string | null>(null)
 
     useEffect(() => {
-        if (router.reset?.length > 0 && errors.length === 0) {
+        if (router.reset?.length > 0 && Object.keys(errors).length === 0) {
             setStatus(atob(router.reset))
         } else {
             setStatus(null)
         }
     })
 
-    const submitForm = async event => {
+    const submitForm: React.FormEventHandler<HTMLFormElement> = async event => {
         event.preventDefault()
 
         login({

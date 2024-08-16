@@ -5,35 +5,44 @@ import Input from '@/components/Input'
 import InputError from '@/components/InputError'
 import Label from '@/components/Label'
 import { useAuth } from '@/hooks/auth'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, FormEvent } from 'react';
 import { useSearchParams } from 'next/navigation'
 import AuthSessionStatus from '@/app/(auth)/AuthSessionStatus'
+
+interface Errors {
+    email?: string[];
+    password?: string[];
+    password_confirmation?: string[];
+}
 
 const PasswordReset = () => {
     const searchParams = useSearchParams()
 
     const { resetPassword } = useAuth({ middleware: 'guest' })
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [passwordConfirmation, setPasswordConfirmation] = useState('')
-    const [errors, setErrors] = useState([])
-    const [status, setStatus] = useState(null)
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [passwordConfirmation, setPasswordConfirmation] = useState<string>('');
+    const [errors, setErrors] = useState<Errors>({});
+    const [status, setStatus] = useState<string | null>(null);
 
-    const submitForm = event => {
-        event.preventDefault()
+    const token = searchParams.get('token') || '';
+
+    const submitForm = (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
 
         resetPassword({
             email,
             password,
             password_confirmation: passwordConfirmation,
+            token,
             setErrors,
             setStatus,
-        })
-    }
+        });
+    };
 
     useEffect(() => {
-        setEmail(searchParams.get('email'))
+        setEmail(searchParams.get('email') || '');
     }, [searchParams.get('email')])
 
     return (
@@ -54,6 +63,7 @@ const PasswordReset = () => {
                         onChange={event => setEmail(event.target.value)}
                         required
                         autoFocus
+                        readOnly
                     />
 
                     <InputError messages={errors.email} className="mt-2" />
