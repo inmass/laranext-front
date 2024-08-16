@@ -7,7 +7,7 @@ import Label from '@/components/Label'
 import { useAuth } from '@/hooks/auth'
 import { useEffect, useState, FormEvent } from 'react';
 import { useSearchParams } from 'next/navigation'
-import AuthSessionStatus from '@/app/(auth)/AuthSessionStatus'
+import AuthSessionStatus from '@/components/AuthSessionStatus'
 
 interface Errors {
     email?: string[];

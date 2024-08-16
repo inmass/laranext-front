@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import AuthCard from '@/app/(auth)/AuthCard'
+import AuthCard from '@/components/AuthCard'
 import ApplicationLogo from '@/components/ApplicationLogo'
 import { ReactNode } from 'react'
 

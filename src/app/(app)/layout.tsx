@@ -1,8 +1,8 @@
 'use client'
 
 import { useAuth } from '@/hooks/auth'
-import Navigation from '@/app/(app)/Navigation'
-import Loading from '@/app/(app)/Loading'
+import Navigation from '@/components/layouts/Navigation'
+import Loading from '@/components/Loading'
 import { ReactNode } from 'react'
 
 const AppLayout = ({ children }: { children: ReactNode }) => {
