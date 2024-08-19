@@ -54,6 +54,8 @@ interface ResetPasswordProps extends LoginProps {
     token: string
 }
 
+type socialProviders = "facebook" | "google"
+
 export const useAuth = ({ middleware, redirectIfAuthenticated }: AuthProps = {}) => {
     const router = useRouter()
     const params = useParams()
@@ -153,6 +155,17 @@ export const useAuth = ({ middleware, redirectIfAuthenticated }: AuthProps = {})
         window.location.pathname = '/login'
     }
 
+    const socialLogin = async (provider: socialProviders) => {
+        await csrf()
+
+        axios.post(`/auth/${provider}/redirect`).then(response => {
+            if (!response.data?.url) {
+                throw new Error('Invalid response')
+            }
+            window.location.href = response.data.url
+        })
+    }
+
     useEffect(() => {
         if (middleware === "guest" && redirectIfAuthenticated && user) {
             router.push(redirectIfAuthenticated)
@@ -179,5 +192,6 @@ export const useAuth = ({ middleware, redirectIfAuthenticated }: AuthProps = {})
         resetPassword,
         resendEmailVerification,
         logout,
+        socialLogin,
     }
 }
