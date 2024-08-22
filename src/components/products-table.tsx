@@ -5,7 +5,7 @@ import {
   TableRow,
   TableHeader,
   TableBody,
-  Table
+  Table,
 } from '@/components/ui/table';
 import {
   Card,
@@ -13,7 +13,7 @@ import {
   CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle
+  CardTitle,
 } from '@/components/ui/card';
 import { Product } from './product';
 import { ProductType } from '@/types/Product';
@@ -24,14 +24,14 @@ import { Button } from '@/components/ui/button';
 export function ProductsTable({
   products,
   offset,
-  totalProducts
+  totalProducts,
 }: {
   products: ProductType[];
   offset: number;
   totalProducts: number;
 }) {
-  let router = useRouter();
-  let productsPerPage = 5;
+  const router = useRouter();
+  const productsPerPage = 5;
 
   function prevPage() {
     router.back();

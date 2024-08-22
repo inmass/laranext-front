@@ -6,7 +6,7 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import Link from 'next/link';
 import { useAuth } from '@/hooks/auth';
@@ -24,7 +24,11 @@ export function User() {
           className="overflow-hidden rounded-full"
         >
           <Image
-            src={user?.avatar ? asset(user.avatar) : asset('images/placeholder-user.webp')}
+            src={
+              user?.avatar
+                ? asset(user.avatar)
+                : asset('images/placeholder-user.webp')
+            }
             width={36}
             height={36}
             alt="Avatar"

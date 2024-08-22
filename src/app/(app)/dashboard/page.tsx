@@ -1,35 +1,27 @@
 import DefaultLayout from '@/components/layouts/dashboard/DefaultLayout';
 import DashboardBreadcrumb from '@/components/layouts/DashboardBreadcrumb';
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle
-  } from '@/components/ui/card';
 
 export const metadata = {
-    title: 'Laravel - Dashboard',
-}
-
+  title: 'Laravel - Dashboard',
+};
 
 const breadcrumbItems = [
-    { label: 'Dashboard', href: '/dashboard' },
-    { label: 'Overview' },
+  { label: 'Dashboard', href: '/dashboard' },
+  { label: 'Overview' },
 ];
 
 const Dashboard = () => {
-    return (
-        <>
-            <DashboardBreadcrumb items={breadcrumbItems} />
-            <DefaultLayout
-                title="Dashboard"
-                description="Manage your products and view their sales performance."
-            >
-                You are logged in!
-            </DefaultLayout>
-        </>
-    )
-}
+  return (
+    <>
+      <DashboardBreadcrumb items={breadcrumbItems} />
+      <DefaultLayout
+        title="Dashboard"
+        description="Manage your products and view their sales performance."
+      >
+        You are logged in!
+      </DefaultLayout>
+    </>
+  );
+};
 
-export default Dashboard
+export default Dashboard;

@@ -6,11 +6,10 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { MoreHorizontal } from 'lucide-react';
 import { TableCell, TableRow } from '@/components/ui/table';
-import { deleteProduct } from '../app/(new)/new/actions';
 import { ProductType } from '@/types/Product';
 
 export function Product({ product }: { product: ProductType }) {
@@ -48,7 +47,7 @@ export function Product({ product }: { product: ProductType }) {
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem>Edit</DropdownMenuItem>
             <DropdownMenuItem>
-              <form action={deleteProduct}>
+              <form action={''}>
                 <button type="submit">Delete</button>
               </form>
             </DropdownMenuItem>
