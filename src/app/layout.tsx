@@ -11,7 +11,7 @@ const RootLayout = (
 ) => {
     return (
         <html lang="en" className={nunitoFont.className}>
-            <body className="antialiased">{children}</body>
+            <body className="dark flex min-h-screen w-full flex-col">{children}</body>
         </html>
     )
 }
