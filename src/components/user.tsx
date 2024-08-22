@@ -1,5 +1,3 @@
-'use client';
-
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import {
@@ -12,6 +10,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import Link from 'next/link';
 import { useAuth } from '@/hooks/auth';
+import { asset } from '@/lib/helpers';
 
 export function User() {
   const { user, logout } = useAuth();
@@ -25,7 +24,7 @@ export function User() {
           className="overflow-hidden rounded-full"
         >
           <Image
-            src={'/placeholder-user.jpg'}
+            src={user?.avatar ? asset(user.avatar) : asset('images/placeholder-user.webp')}
             width={36}
             height={36}
             alt="Avatar"
@@ -34,24 +33,23 @@ export function User() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuLabel>{user?.email}</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Settings</DropdownMenuItem>
-        <DropdownMenuItem>Support</DropdownMenuItem>
+        <DropdownMenuItem>
+          <Link href="#">Settings</Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <Link href="#">Support</Link>
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
-        {user ? (
-          <DropdownMenuItem>
-            <form
-              action={logout}
-            >
-              <button type="submit">Sign Out</button>
-            </form>
-          </DropdownMenuItem>
-        ) : (
-          <DropdownMenuItem>
-            <Link href="/login">Sign In</Link>
-          </DropdownMenuItem>
-        )}
+        <DropdownMenuItem
+          onClick={(e) => {
+            e.preventDefault();
+            logout();
+          }}
+        >
+          Sign Out
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

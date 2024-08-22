@@ -1,5 +1,4 @@
 import Link from 'next/link';
-
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -9,31 +8,34 @@ import {
   BreadcrumbSeparator
 } from '@/components/ui/breadcrumb';
 
-
-
-const DesktopNavigation = () => {
-
-    return (
-        <Breadcrumb className="hidden md:flex">
-        <BreadcrumbList>
-            <BreadcrumbItem>
-            <BreadcrumbLink asChild>
-                <Link href="#">Dashboard</Link>
-            </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-            <BreadcrumbLink asChild>
-                <Link href="#">Products</Link>
-            </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-            <BreadcrumbPage>All Products</BreadcrumbPage>
-            </BreadcrumbItem>
-        </BreadcrumbList>
-        </Breadcrumb>
-    )
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
 }
 
-export default DesktopNavigation
+interface DashboardBreadcrumbProps {
+  items: BreadcrumbItem[];
+}
+
+const DashboardBreadcrumb: React.FC<DashboardBreadcrumbProps> = ({ items }) => {
+  return (
+    <Breadcrumb className="hidden md:flex">
+      <BreadcrumbList>
+        {items.map((item, index) => (
+          <BreadcrumbItem key={index}>
+            {index < items.length - 1 ? (
+              <BreadcrumbLink asChild>
+                <Link href={item.href || '#'}>{item.label}</Link>
+              </BreadcrumbLink>
+            ) : (
+              <BreadcrumbPage>{item.label}</BreadcrumbPage>
+            )}
+            {index < items.length - 1 && <BreadcrumbSeparator />}
+          </BreadcrumbItem>
+        ))}
+      </BreadcrumbList>
+    </Breadcrumb>
+  );
+};
+
+export default DashboardBreadcrumb;

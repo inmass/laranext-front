@@ -9,32 +9,6 @@ interface AuthProps {
   redirectIfAuthenticated?: string
 }
 
-// interface Auth {
-//   user: User
-//   register: (data: {
-//     zboba: number
-//     name: string
-//     email: string
-//     password: string
-//     password_confirmation: string
-//   }) => Promise<void>
-//   login: (data: {
-//     email: string
-//     password: string
-//     remember: boolean
-//   }) => Promise<void>
-//   forgotPassword: (data: {
-//     email: string
-//   }) => Promise<AxiosResponse>
-//   resetPassword: (data: {
-//     email: string
-//     password: string
-//     password_confirmation: string
-//   }) => Promise<void>
-//   resendEmailVerification: () => Promise<AxiosResponse>
-//   logout: () => Promise<void>
-// } // #TODO: check this to optimize the code
-
 interface RegisterProps {
     setErrors: (errors: any) => void
     [key: string]: any

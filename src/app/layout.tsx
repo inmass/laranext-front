@@ -1,5 +1,6 @@
 import { Nunito } from 'next/font/google'
 import '@/app/globals.css'
+import { getAppName } from '@/lib/helpers'
 
 const nunitoFont = Nunito({
     subsets: ['latin'],
@@ -17,7 +18,7 @@ const RootLayout = (
 }
 
 export const metadata = {
-    title: 'Laravel',
+    title: getAppName(),
 }
 
 export default RootLayout

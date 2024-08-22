@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation'
 import AuthSessionStatus from '@/components/AuthSessionStatus'
 import SocialLoginButtons from '@/components/SocialLoginButtons'
 import SectionDivider from '@/components/SectionDivider'
+import DefaultLayout from '@/components/layouts/auth/DefaultLayout'
 
 interface Errors {
     email?: string[];
@@ -54,7 +55,10 @@ const Login = () => {
     }
 
     return (
-        <>
+        <DefaultLayout
+            title="Login"
+            description="Use your email to login to your account."
+        >
             <div id="email-login">
                 <AuthSessionStatus className="mb-4" status={status} />
                 <form onSubmit={submitForm}>
@@ -129,7 +133,7 @@ const Login = () => {
             </div>
             <SectionDivider dividerText="Or continue with" />
             <SocialLoginButtons />
-        </>
+        </DefaultLayout>
     )
 }
 

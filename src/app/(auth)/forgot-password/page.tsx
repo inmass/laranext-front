@@ -7,6 +7,7 @@ import Label from '@/components/Label'
 import { useAuth } from '@/hooks/auth'
 import { useState } from 'react'
 import AuthSessionStatus from '@/components/AuthSessionStatus'
+import DefaultLayout from '@/components/layouts/auth/DefaultLayout'
 
 interface Errors {
     email?: string[];
@@ -31,13 +32,12 @@ const Page = () => {
     }
 
     return (
-        <>
-            <div className="mb-4 text-sm text-gray-600">
-                Forgot your password? No problem. Just let us know your email
+        <DefaultLayout
+            title="Forgot Password"
+            description="Forgot your password? No problem. Just let us know your email
                 address and we will email you a password reset link that
-                will allow you to choose a new one.
-            </div>
-
+                will allow you to choose a new one.."
+        >
             {/* Session Status */}
             <AuthSessionStatus className="mb-4" status={status} />
 
@@ -63,7 +63,7 @@ const Page = () => {
                     <Button>Email Password Reset Link</Button>
                 </div>
             </form>
-        </>
+        </DefaultLayout>
     )
 }
 

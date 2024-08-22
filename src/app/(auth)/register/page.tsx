@@ -9,6 +9,7 @@ import { useAuth } from '@/hooks/auth'
 import { useState, FormEvent } from 'react'
 import SectionDivider from '@/components/SectionDivider'
 import SocialLoginButtons from '@/components/SocialLoginButtons'
+import DefaultLayout from '@/components/layouts/auth/DefaultLayout';
 
 interface Errors {
     name?: string[];
@@ -42,7 +43,10 @@ const Page = () => {
     }
 
     return (
-        <>
+        <DefaultLayout
+            title="Register"
+            description="Welcome! Use your email to create an account."
+        >
             <form onSubmit={submitForm}>
                 {/* Name */}
                 <div>
@@ -129,7 +133,7 @@ const Page = () => {
             </form>
             <SectionDivider dividerText="Or continue with" />
             <SocialLoginButtons />
-        </>
+        </DefaultLayout>
     )
 }
 
