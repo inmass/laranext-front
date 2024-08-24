@@ -1,4 +1,4 @@
-import DefaultLayout from '@/components/layouts/dashboard/DefaultLayout';
+import CardLayout from '@/components/layouts/CardLayout';
 import DashboardBreadcrumb from '@/components/layouts/DashboardBreadcrumb';
 
 export const metadata = {
@@ -14,12 +14,12 @@ const Dashboard = () => {
   return (
     <>
       <DashboardBreadcrumb items={breadcrumbItems} />
-      <DefaultLayout
+      <CardLayout
         title="Dashboard"
         description="Manage your products and view their sales performance."
       >
         You are logged in!
-      </DefaultLayout>
+      </CardLayout>
     </>
   );
 };

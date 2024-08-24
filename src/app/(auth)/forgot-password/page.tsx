@@ -7,7 +7,7 @@ import Label from '@/components/Label';
 import { useAuth } from '@/hooks/auth';
 import { useState } from 'react';
 import AuthSessionStatus from '@/components/AuthSessionStatus';
-import DefaultLayout from '@/components/layouts/auth/DefaultLayout';
+import CardLayout from '@/components/layouts/CardLayout';
 
 interface Errors {
   email?: string[];
@@ -32,7 +32,8 @@ const Page = () => {
   };
 
   return (
-    <DefaultLayout
+    <CardLayout
+      className="w-full max-w-sm"
       title="Forgot Password"
       description="Forgot your password? No problem. Just let us know your email
                 address and we will email you a password reset link that
@@ -63,7 +64,7 @@ const Page = () => {
           <Button>Email Password Reset Link</Button>
         </div>
       </form>
-    </DefaultLayout>
+    </CardLayout>
   );
 };
 

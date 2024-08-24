@@ -8,7 +8,7 @@ import { useAuth } from '@/hooks/auth';
 import { useEffect, useState, FormEvent } from 'react';
 import { useSearchParams } from 'next/navigation';
 import AuthSessionStatus from '@/components/AuthSessionStatus';
-import DefaultLayout from '@/components/layouts/auth/DefaultLayout';
+import CardLayout from '@/components/layouts/CardLayout';
 
 interface Errors {
   email?: string[];
@@ -47,7 +47,8 @@ const PasswordReset = () => {
   }, [searchParams.get('email')]);
 
   return (
-    <DefaultLayout
+    <CardLayout
+      className="w-full max-w-sm"
       title="Reset Password"
       description="Ensure your account is using a long, random password to stay secure."
     >
@@ -111,7 +112,7 @@ const PasswordReset = () => {
           <Button>Reset Password</Button>
         </div>
       </form>
-    </DefaultLayout>
+    </CardLayout>
   );
 };
 

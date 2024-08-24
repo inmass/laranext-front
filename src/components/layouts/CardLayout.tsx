@@ -9,18 +9,20 @@ import {
 import AuthCard from '@/components/AuthCard';
 
 interface DefaultLayoutProps {
-  title: string;
-  description: string;
-  children: React.ReactNode;
+  className?: string;
+  title?: string;
+  description?: string;
+  children?: React.ReactNode;
 }
 
-const DefaultLayout = ({
+const CardLayout = ({
+  className,
   title,
   description,
   children,
 }: DefaultLayoutProps) => {
   return (
-    <Card>
+    <Card className={className}>
       <CardHeader>
         <CardTitle className="text-2xl">{title}</CardTitle>
         <CardDescription>{description}</CardDescription>
@@ -32,4 +34,4 @@ const DefaultLayout = ({
   );
 };
 
-export default DefaultLayout;
+export default CardLayout;

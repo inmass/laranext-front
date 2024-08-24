@@ -11,7 +11,7 @@ import { useRouter } from 'next/navigation';
 import AuthSessionStatus from '@/components/AuthSessionStatus';
 import SocialLoginButtons from '@/components/SocialLoginButtons';
 import SectionDivider from '@/components/SectionDivider';
-import DefaultLayout from '@/components/layouts/auth/DefaultLayout';
+import CardLayout from '@/components/layouts/CardLayout';
 
 interface Errors {
   email?: string[];
@@ -55,7 +55,8 @@ const Login = () => {
   };
 
   return (
-    <DefaultLayout
+    <CardLayout
+      className="w-full max-w-sm"
       title="Login"
       description="Use your email to login to your account."
     >
@@ -125,7 +126,7 @@ const Login = () => {
       </div>
       <SectionDivider dividerText="Or continue with" />
       <SocialLoginButtons />
-    </DefaultLayout>
+    </CardLayout>
   );
 };
 

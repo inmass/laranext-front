@@ -9,7 +9,7 @@ import { useAuth } from '@/hooks/auth';
 import { useState, FormEvent } from 'react';
 import SectionDivider from '@/components/SectionDivider';
 import SocialLoginButtons from '@/components/SocialLoginButtons';
-import DefaultLayout from '@/components/layouts/auth/DefaultLayout';
+import CardLayout from '@/components/layouts/CardLayout';
 
 interface Errors {
   name?: string[];
@@ -43,7 +43,8 @@ const Page = () => {
   };
 
   return (
-    <DefaultLayout
+    <CardLayout
+      className="w-full max-w-sm"
       title="Register"
       description="Welcome! Use your email to create an account."
     >
@@ -130,7 +131,7 @@ const Page = () => {
       </form>
       <SectionDivider dividerText="Or continue with" />
       <SocialLoginButtons />
-    </DefaultLayout>
+    </CardLayout>
   );
 };
 
