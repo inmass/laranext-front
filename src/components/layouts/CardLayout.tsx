@@ -23,10 +23,22 @@ const CardLayout = ({
 }: DefaultLayoutProps) => {
   return (
     <Card className={className}>
-      <CardHeader>
-        <CardTitle className="text-2xl">{title}</CardTitle>
-        <CardDescription>{description}</CardDescription>
-      </CardHeader>
+      {
+        title || description ?
+        <CardHeader>
+          {
+            title ?
+            <CardTitle className="text-2xl">{title}</CardTitle> :
+            null
+          }
+          {
+            description ?
+            <CardDescription>{description}</CardDescription> :
+            null
+          }
+        </CardHeader> :
+        null
+      }
       <CardFooter>
         <AuthCard>{children}</AuthCard>
       </CardFooter>

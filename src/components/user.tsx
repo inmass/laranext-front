@@ -39,12 +39,12 @@ export function User() {
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>{user?.email}</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <Link href="#">Settings</Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Link href="#">Support</Link>
-        </DropdownMenuItem>
+        <Link href="/dashboard/profile">
+          <DropdownMenuItem>Profile</DropdownMenuItem>
+        </Link>
+        <Link href="#">
+          <DropdownMenuItem>Support</DropdownMenuItem>
+        </Link>
         <DropdownMenuSeparator />
         <DropdownMenuItem
           onClick={(e) => {
