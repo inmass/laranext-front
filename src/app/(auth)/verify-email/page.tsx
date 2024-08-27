@@ -1,7 +1,7 @@
 'use client';
 
 import Button from '@/components/Button';
-import DefaultLayout from '@/components/layouts/auth/DefaultLayout';
+import CardLayout from '@/components/layouts/CardLayout';
 import { useAuth } from '@/hooks/auth';
 import { useState } from 'react';
 
@@ -14,7 +14,8 @@ const Page = () => {
   const [status, setStatus] = useState<string | null>(null);
 
   return (
-    <DefaultLayout
+    <CardLayout
+      className="w-full max-w-sm"
       title="Verify Email"
       description="Thanks for signing up! Before getting started, could you verify
                 your email address by clicking on the link we just
@@ -41,7 +42,7 @@ const Page = () => {
           Logout
         </button>
       </div>
-    </DefaultLayout>
+    </CardLayout>
   );
 };
 
