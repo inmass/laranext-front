@@ -7,6 +7,7 @@ import { TrashIcon } from 'lucide-react';
 import AlertDialog from '@/components/layouts/AlertDialog';
 import { useProfile } from '@/hooks/api/profile';
 import toast from 'react-hot-toast';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 const ProfilePictureEditCard = ({ userAvatar }: { userAvatar?: string }) => {
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -31,6 +32,7 @@ const ProfilePictureEditCard = ({ userAvatar }: { userAvatar?: string }) => {
 
     const handleDelete = () => {
         updateProfileAvatar();
+        fileInputRef.current!.value = '';
     };
 
     useEffect(() => {
@@ -44,16 +46,20 @@ const ProfilePictureEditCard = ({ userAvatar }: { userAvatar?: string }) => {
         >
             <p className="text-sm text-gray-500 mb-4 md:mt-6">JPG, GIF or PNG. Max size of 800K</p>
             <div className="mb-4 flex items-center justify-center w-24 h-24 bg-gray-100 rounded-full overflow-hidden border border-gray-300">
-                <Image 
-                    src={
-                        avatar
-                        ? avatar
-                        : asset('images/placeholder-user.webp')
-                    }
-                    width={100}
-                    height={100}
-                    alt="Profile"
-                />
+                {
+                    loading ?
+                    <ClipLoader/> :
+                    <Image 
+                        src={
+                            avatar
+                            ? avatar
+                            : asset('images/placeholder-user.webp')
+                        }
+                        width={100}
+                        height={100}
+                        alt="Profile"
+                    />
+                }
             </div>
             <div className="flex space-x-2">
                 <input
@@ -63,22 +69,12 @@ const ProfilePictureEditCard = ({ userAvatar }: { userAvatar?: string }) => {
                     accept="image/*"
                     className="hidden"
                 />
-                {
-                    loading?
-                    <Button
-                        className="bg-gray-500 cursor-not-allowed"
-                        disabled
-                    >
-                        Uploading...
-                    </Button> :
-                    <Button
-                        className="!m-0"
-                        onClick={handleUploadClick}
-                    >
-                        {/* Upload picture */}
-                        {avatar ? 'Change picture' : 'Upload picture'}
-                    </Button>
-                }
+                <Button
+                    className="!m-0"
+                    onClick={handleUploadClick}
+                >
+                    {avatar ? 'Change picture' : 'Upload picture'}
+                </Button>
                 
                 <AlertDialog
                     trigger={
