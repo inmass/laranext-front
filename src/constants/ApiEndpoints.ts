@@ -10,7 +10,9 @@ const ApiEndpoints = {
         verifyEmail: '/verify-email',
         emailVerificationNotification: '/email/verification-notification',
         SocialLogin: (provider: string) => `/auth/${provider}/redirect`,
-    }
+    },
+    profileDetailsUpdate: '/api/profile',
+    profileAvatarUpdate: '/api/profile/avatar',
 };
 
 export default ApiEndpoints;

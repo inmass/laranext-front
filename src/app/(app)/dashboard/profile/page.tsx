@@ -31,7 +31,7 @@ const Dashboard = () => {
                     <ProfilePictureEditCard userAvatar={user?.avatar} />
                 </div>
                 <div className="md:col-span-2 space-y-6">
-                    <ProfileDetailsUpdateCard user={user} />
+                    <ProfileDetailsUpdateCard/>
                     <PasswordUpdateCard />
                 </div>
                 

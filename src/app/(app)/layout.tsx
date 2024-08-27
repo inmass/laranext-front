@@ -11,6 +11,7 @@ import { SearchInput } from '@/components/search';
 import DesktopNavigation from '@/components/layouts/nav/DesktopNavigation';
 import MobileNavigation from '@/components/layouts/nav/MobileNavigation';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { Toaster } from 'react-hot-toast';
 
 const AppLayout = ({ children }: { children: ReactNode }) => {
   const { user } = useAuth({ middleware: 'auth' });
@@ -32,6 +33,14 @@ const AppLayout = ({ children }: { children: ReactNode }) => {
           </header>
           <main className="grid flex-1 items-start gap-2 p-4 sm:px-6 sm:py-0 md:gap-4 ">
             {children}
+            <Toaster
+              toastOptions={{
+                style: {
+                  background: '#333',
+                  color: '#fff',
+                },
+              }}
+            />
           </main>
         </div>
         <Analytics />

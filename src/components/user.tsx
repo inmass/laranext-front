@@ -21,18 +21,17 @@ export function User() {
         <Button
           variant="outline"
           size="icon"
-          className="overflow-hidden rounded-full"
+          className="overflow-hidden rounded-full bg-gray-100"
         >
           <Image
             src={
               user?.avatar
-                ? asset(user.avatar)
+                ? user.avatar
                 : asset('images/placeholder-user.webp')
             }
-            width={36}
-            height={36}
+            width={100}
+            height={100}
             alt="Avatar"
-            className="overflow-hidden rounded-full"
           />
         </Button>
       </DropdownMenuTrigger>
