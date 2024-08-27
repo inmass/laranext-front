@@ -37,7 +37,7 @@ export function User() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuLabel>{user?.email}</DropdownMenuLabel>
+        <DropdownMenuLabel>{user?.name}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <Link href="/dashboard/profile">
           <DropdownMenuItem>Profile</DropdownMenuItem>

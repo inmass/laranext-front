@@ -3,6 +3,7 @@ import axios from '@/lib/axios';
 import { useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { UserType } from '@/types/User';
+import ApiEndpoints from '@/constants/ApiEndpoints';
 
 interface AuthProps {
   middleware?: 'auth' | 'guest';
@@ -40,28 +41,26 @@ export const useAuth = ({
   const {
     data: user,
     error,
-    mutate,
-  } = useSWR<UserType>('/api/user', () =>
+    mutate: mutateUser,
+  } = useSWR<UserType>(ApiEndpoints.auth.userData, () =>
     axios
-      .get('/api/user')
+      .get(ApiEndpoints.auth.userData)
       .then((res) => res.data.data)
       .catch((error) => {
         if (error.response.status !== 409) throw error;
 
-        router.push('/verify-email');
+        // router.push('/verify-email');
+        router.push(ApiEndpoints.auth.verifyEmail);
       })
   );
 
-  const csrf = () => axios.get('/sanctum/csrf-cookie');
-
   const register = async ({ setErrors, ...props }: RegisterProps) => {
-    await csrf();
 
     setErrors([]);
 
     axios
-      .post('/register', props)
-      .then(() => mutate())
+      .post(ApiEndpoints.auth.register, props)
+      .then(() => mutateUser())
       .catch((error) => {
         if (error.response.status !== 422) throw error;
 
@@ -70,14 +69,13 @@ export const useAuth = ({
   };
 
   const login = async ({ setErrors, setStatus, ...props }: LoginProps) => {
-    await csrf();
 
     setErrors([]);
     setStatus(null);
 
     axios
-      .post('/login', props)
-      .then(() => mutate())
+      .post(ApiEndpoints.auth.login, props)
+      .then(() => mutateUser())
       .catch((error) => {
         if (error.response.status !== 422) throw error;
 
@@ -90,13 +88,12 @@ export const useAuth = ({
     setStatus,
     email,
   }: ForgotPasswordProps) => {
-    await csrf();
 
     setErrors([]);
     setStatus(null);
 
     axios
-      .post('/forgot-password', { email })
+      .post(ApiEndpoints.auth.forgotPassword, { email })
       .then((response) => setStatus(response.data.status))
       .catch((error) => {
         if (error.response.status !== 422) throw error;
@@ -110,15 +107,14 @@ export const useAuth = ({
     setStatus,
     ...props
   }: ResetPasswordProps) => {
-    await csrf();
 
     setErrors([]);
     setStatus(null);
 
     axios
-      .post('/reset-password', { ...props, token: params.token })
+      .post(ApiEndpoints.auth.resetPassword, { ...props, token: params.token })
       .then((response) =>
-        router.push('/login?reset=' + btoa(response.data.status))
+        router.push(ApiEndpoints.auth.login + '?reset=' + btoa(response.data.status))
       )
       .catch((error) => {
         if (error.response.status !== 422) throw error;
@@ -133,22 +129,21 @@ export const useAuth = ({
     setStatus: (status: string) => void;
   }) => {
     axios
-      .post('/email/verification-notification')
+      .post(ApiEndpoints.auth.emailVerificationNotification)
       .then((response) => setStatus(response.data.status));
   };
 
   const logout = async () => {
     if (!error) {
-      await axios.post('/logout').then(() => mutate());
+      await axios.post(ApiEndpoints.auth.logout).then(() => mutateUser());
     }
 
-    window.location.pathname = '/login';
+    window.location.pathname = ApiEndpoints.auth.login;
   };
 
   const socialLogin = async (provider: socialProviders) => {
-    await csrf();
 
-    axios.post(`/auth/${provider}/redirect`).then((response) => {
+    axios.post(ApiEndpoints.auth.SocialLogin(provider)).then((response) => {
       if (!response.data?.url) {
         throw new Error('Invalid response');
       }
@@ -162,7 +157,7 @@ export const useAuth = ({
     }
 
     if (
-      window.location.pathname === '/verify-email' &&
+      window.location.pathname === ApiEndpoints.auth.verifyEmail &&
       user?.email_verified_at &&
       redirectIfAuthenticated
     ) {
@@ -176,6 +171,7 @@ export const useAuth = ({
 
   return {
     user,
+    mutateUser,
     register,
     login,
     forgotPassword,
