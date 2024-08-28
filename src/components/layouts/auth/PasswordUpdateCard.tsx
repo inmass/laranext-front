@@ -1,110 +1,105 @@
-
 import CardLayout from '@/components/layouts/CardLayout';
 import { Input } from '@/components/ui/input';
 import Button from '@/components/Button';
 import InputError from '@/components/InputError';
 import { useProfile } from '@/hooks/api/profile';
-import { useState } from 'react';
-import toast from 'react-hot-toast';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
 
 
-const PasswordUpdateCard = () => {
+const passwordSchema = z.object({
 
-    const { user, updatePassword, loading } = useProfile();
-    const [currentPassword, setCurrentPassword] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
-    const [passwordConfirmation, setPasswordConfirmation] = useState<string>('');
+    currentPassword: z.string().min(1, 'Current password is required'),
+    newPassword: z.string()
+        .min(8, 'Password must be at least 8 characters')
+        .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, 
+        'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'),
+    confirmPassword: z.string().min(1, 'Please confirm your password'),
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
+}).refine((data) => data.newPassword === data.confirmPassword, {
 
-        if (!validateFields()) {
-            return;
-        }
-        
-        if (await updatePassword({ current_password: currentPassword, password, password_confirmation: passwordConfirmation })) {
-            clearFields();
+    message: "Passwords don't match",
+    path: ["confirmPassword"],
+    
+}).refine((data) => data.currentPassword !== data.newPassword, {
+    message: "New password must be different from current password",
+    path: ["newPassword"],
+});
+
+type PasswordFormData = z.infer<typeof passwordSchema>;
+
+const PasswordUpdateCard: React.FC = () => {
+    const { updatePassword, loading } = useProfile();
+    const { register, handleSubmit, formState: { errors, isValid, isDirty }, reset, watch } = useForm<PasswordFormData>({
+        resolver: zodResolver(passwordSchema),
+        mode: 'onChange'
+    });
+
+    const watchAllFields = watch();
+
+    const onSubmit = async (data: PasswordFormData) => {
+        if (await updatePassword({
+            current_password: data.currentPassword,
+            password: data.newPassword,
+            password_confirmation: data.confirmPassword
+        })) {
+            reset();
         }
     };
 
-    const clearFields = () => {
-        setCurrentPassword('');
-        setPassword('');
-        setPasswordConfirmation('');
-    }
-
-    const validateFields = () => {
-        if (!currentPassword || !password || !passwordConfirmation) {
-            toast.error('Please fill all fields');
-            return false;
-        }
-
-        if (password !== passwordConfirmation) {
-            toast.error('New password and password confirmation do not match');
-            return false;
-        }
-
-        return true;
+    const shouldShowError = () => {
+        return Object.values(watchAllFields).some(value => value !== '');
     }
 
     return (
-        <CardLayout
-            title="Change Password"
-        >
-            <form onSubmit={handleSubmit}>
+        <CardLayout title="Change Password">
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
-                    <label htmlFor="current_password">Current Password</label>
-
+                    <label htmlFor="currentPassword">Current Password</label>
                     <Input
-                        id="current_password"
+                        id="currentPassword"
                         type="password"
-                        className="block mt-1 w-full"
-                        value={currentPassword}
-                        onChange={(e) => setCurrentPassword(e.target.value)}
+                        className={`block mt-1 w-full ${shouldShowError() && errors.currentPassword ? 'border-red-500' : ''}`}
+                        {...register('currentPassword')}
                     />
-
-                    <InputError messages={['']} className="mt-2" />
+                    <InputError messages={shouldShowError() && errors.currentPassword?.message ? [errors.currentPassword.message] : []} className="mt-2" />
                 </div>
 
                 <div className="mt-4">
-                    <label htmlFor="password">New Password</label>
-
+                    <label htmlFor="newPassword">New Password</label>
                     <Input
-                        id="password"
+                        id="newPassword"
                         type="password"
-                        className="block mt-1 w-full"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        className={`block mt-1 w-full ${shouldShowError() && errors.newPassword ? 'border-red-500' : ''}`}
+                        {...register('newPassword')}
                     />
-
-                    <InputError messages={['']} className="mt-2" />
+                    <InputError messages={shouldShowError() && errors.newPassword?.message ? [errors.newPassword.message] : []} className="mt-2" />
                 </div>
 
                 <div className="mt-4">
-                    <label htmlFor="password_confirmation">Confirm Password</label>
-
+                    <label htmlFor="confirmPassword">Confirm Password</label>
                     <Input
-                        id="password_confirmation"
+                        id="confirmPassword"
                         type="password"
-                        className="block mt-1 w-full"
-                        value={passwordConfirmation}
-                        onChange={(e) => setPasswordConfirmation(e.target.value)}
+                        className={`block mt-1 w-full ${shouldShowError() && errors.confirmPassword ? 'border-red-500' : ''}`}
+                        {...register('confirmPassword')}
                     />
-
-                    <InputError messages={['']} className="mt-2" />
+                    <InputError messages={shouldShowError() && errors.confirmPassword?.message ? [errors.confirmPassword.message] : []} className="mt-2" />
                 </div>
 
                 <div className="mt-4">
                     <Button
                         type="submit"
-                        disabled={loading}
+                        disabled={loading || !isValid || !isDirty}
                     >
-                        {loading ?'Updating...' : 'Update Password'}
+                        {loading ? 'Updating...' : 'Update Password'}
                     </Button>
                 </div>
             </form>
         </CardLayout>
     );
-}
+};
 
 export default PasswordUpdateCard;
