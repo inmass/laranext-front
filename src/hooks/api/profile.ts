@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useAuth } from '@/hooks/auth';
 import ApiEndpoints from '@/constants/ApiEndpoints';
 import axios from '@/lib/axios';
+import toast from 'react-hot-toast';
 
 interface ProfileData {
   name: string;
@@ -11,26 +12,23 @@ interface ProfileData {
 export const useProfile = () => {
     const { user, mutateUser } = useAuth();
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
 
     const updateProfileDetails = async (profileData: ProfileData) => {
         setLoading(true);
-        setError(null);
         axios.
             put(ApiEndpoints.profileDetailsUpdate, profileData)
             .then((res) => {
-                setLoading(false);
                 mutateUser();
+                setLoading(false);
+                toast.success('Profile updated successfully');
             })
             .catch((error) => {
                 setLoading(false);
-                setError(error.response.data.message);
             });
-    };
+        };
 
     const updateProfileAvatar = async (avatar?: File) => {
         setLoading(true);
-        setError(null);
         if (avatar) {
             const formData = new FormData();
             formData.append('avatar', avatar);
@@ -38,32 +36,48 @@ export const useProfile = () => {
             axios
                 .post(ApiEndpoints.profileAvatarUpdate, formData)
                 .then((res) => {
-                    setLoading(false);
                     mutateUser();
+                    setLoading(false);
+                    toast.success('Avatar updated successfully');
                 })
                 .catch((error) => {
                     setLoading(false);
-                    setError(error.response.data.message);
                 });
         } else {
             axios
                 .delete(ApiEndpoints.profileAvatarUpdate)
                 .then((res) => {
-                    setLoading(false);
                     mutateUser();
+                    setLoading(false);
+                    toast.success('Avatar removed successfully');
                 })
                 .catch((error) => {
                     setLoading(false);
-                    setError(error.response.data.message);
                 });
         }
     };
+
+    const updatePassword = async (passwordData: { current_password: string, password: string, password_confirmation: string }): Promise<boolean> => {
+        setLoading(true);
+        return axios
+            .put(ApiEndpoints.profilePasswordUpdate, passwordData)
+            .then((res) => {
+                mutateUser();
+                setLoading(false);
+                toast.success('Password updated successfully');
+                return true;
+            })
+            .catch((error) => {
+                setLoading(false);
+                return false;
+            });
+    }
 
     return {
         user,
         updateProfileDetails,
         updateProfileAvatar,
-        loading,
-        error
+        updatePassword,
+        loading
     };
 };

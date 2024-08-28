@@ -1,5 +1,6 @@
-import Axios, { AxiosError, AxiosRequestConfig } from 'axios';
+import Axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import ApiEndpoints from '@/constants/ApiEndpoints';
+import toast from 'react-hot-toast';
 
 const axios = Axios.create({
   baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
@@ -30,6 +31,19 @@ axios.interceptors.response.use(
         return Promise.reject(error);
       }
     }
+
+    if (error.response?.status) {
+      if (error.response?.status === 404) {
+        toast.error(process.env.NODE_ENV === 'development' ? error.response.data.message : 'The requested resource was not found');
+      }
+      else if ( error.response?.status >= 400 && error.response?.status < 500 ) {
+        toast.error(error.response.data.message || 'An error occurred');
+      }
+      else if ( error.response?.status >= 500 ) {
+        toast.error(process.env.NODE_ENV === 'development' ? error.response.data.message : 'An error occurred');
+      }
+    }
+
     return Promise.reject(error);
   }
 );

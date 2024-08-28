@@ -13,6 +13,7 @@ const ApiEndpoints = {
     },
     profileDetailsUpdate: '/api/profile',
     profileAvatarUpdate: '/api/profile/avatar',
+    profilePasswordUpdate: '/api/profile/password',
 };
 
 export default ApiEndpoints;

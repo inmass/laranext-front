@@ -6,12 +6,11 @@ import Image from 'next/image';
 import { TrashIcon } from 'lucide-react';
 import AlertDialog from '@/components/layouts/AlertDialog';
 import { useProfile } from '@/hooks/api/profile';
-import toast from 'react-hot-toast';
 import ClipLoader from 'react-spinners/ClipLoader';
 
 const ProfilePictureEditCard = ({ userAvatar }: { userAvatar?: string }) => {
     const fileInputRef = useRef<HTMLInputElement>(null);
-    const { updateProfileAvatar, loading, error } = useProfile();
+    const { updateProfileAvatar, loading } = useProfile();
     const [avatar, setAvatar] = useState(userAvatar);
 
     const handleUploadClick = () => {
@@ -22,11 +21,6 @@ const ProfilePictureEditCard = ({ userAvatar }: { userAvatar?: string }) => {
         const file = event.target.files?.[0];
         if (file) {
             updateProfileAvatar(file);
-            if (!error && !loading) {
-                toast.success('Profile picture updated successfully');
-            } else if (error) {
-                toast.error(error);
-            }
         }
     };
 

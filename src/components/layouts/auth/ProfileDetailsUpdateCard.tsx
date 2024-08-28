@@ -5,22 +5,16 @@ import Button from '@/components/Button';
 import InputError from '@/components/InputError';
 import { useProfile } from '@/hooks/api/profile';
 import { useState } from 'react';
-import toast from 'react-hot-toast';
 
 
 const ProfileDetailsUpdateCard = () => {
 
-    const { user, updateProfileDetails, loading, error } = useProfile();
+    const { user, updateProfileDetails, loading } = useProfile();
     const [name, setName] = useState(user?.name || '');
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        updateProfileDetails({ name });
-        if (!error && !loading) {
-            toast.success('Profile updated successfully');
-        } else if (error) {
-            toast.error(error);
-        }
+        await updateProfileDetails({ name });
     };
 
     return (
