@@ -19,7 +19,7 @@ const ProfileDetailsUpdateCard = () => {
 
     const { user, updateProfileDetails, loading } = useProfile();
 
-    const { register, handleSubmit, formState: { errors, isValid, isDirty } } = useForm<ProfileDetailsFormData>({
+    const { register, handleSubmit, formState: { errors, isValid, isDirty }, reset } = useForm<ProfileDetailsFormData>({
         resolver: zodResolver(ProfileDetailsSchema),
         defaultValues: {
             name: user?.name
@@ -28,7 +28,12 @@ const ProfileDetailsUpdateCard = () => {
     });
 
     const onSubmit = async (data: ProfileDetailsFormData) => {
-        await updateProfileDetails({ name: data.name });
+        if (await updateProfileDetails({ name: data.name })) {
+            const formDefaults = { 
+                name: data.name
+            };
+            reset(formDefaults);
+        }
     };
 
     return (

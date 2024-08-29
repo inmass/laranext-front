@@ -15,15 +15,17 @@ export const useProfile = () => {
 
     const updateProfileDetails = async (profileData: ProfileData) => {
         setLoading(true);
-        axios.
+        return axios.
             put(ApiEndpoints.profileDetailsUpdate, profileData)
             .then((res) => {
                 mutateUser();
                 setLoading(false);
                 toast.success('Profile updated successfully');
+                return true;
             })
             .catch((error) => {
                 setLoading(false);
+                return false;
             });
         };
 
