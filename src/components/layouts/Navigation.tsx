@@ -9,7 +9,7 @@ import { DropdownButton } from '@/components/DropdownLink';
 import { useAuth } from '@/hooks/auth';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import { UserType } from '@/types/User';
+import { UserType } from '@/types/user';
 
 const Navigation = ({ user }: { user: UserType }) => {
   const { logout } = useAuth();

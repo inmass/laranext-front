@@ -2,7 +2,7 @@ import useSWR from 'swr';
 import axios from '@/lib/axios';
 import { useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import { UserType } from '@/types/User';
+import { UserType } from '@/types/user';
 import ApiEndpoints from '@/constants/ApiEndpoints';
 
 interface AuthProps {
