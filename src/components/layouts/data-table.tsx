@@ -9,15 +9,7 @@ import {
   Table,
   TableCell,
 } from '@/components/ui/table';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import { ChevronLeft, ChevronRight, ArrowUpDown, ArrowBigDown, ArrowUp, ArrowDown } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowUpDown, ArrowBigDown, ArrowUp, ArrowDown, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { DataTableRow } from '@/components/layouts/data-table-row';
@@ -30,6 +22,7 @@ interface Column<T> {
   className?: string;
   sortable?: boolean;
   filterable?: boolean;
+  filterType?: 'text' | 'daterange' | 'number';
 }
 
 interface ActionColumn<T> {
@@ -103,14 +96,61 @@ export function DataTable<T>({
     onFilterChange(newFilters);
   };
 
+  const clearFilter = (key: string) => {
+    const newFilters = { ...filters };
+    delete newFilters[key];
+    setFilters(newFilters);
+    onFilterChange(newFilters);
+  };
+
+  const renderFilterInput = (column: Column<T>) => {
+    const accessor = column.accessor as string;
+    
+    switch (column.filterType) {
+      case 'number':
+        return (
+          <Input
+            type="number"
+            placeholder={`Filter by ${column.header}`}
+            onChange={(e) => handleFilter(accessor, e.target.value)}
+            value={filters[accessor] || ''}
+            className="w-40"
+          />
+        );
+      case 'text':
+      default:
+        return (
+          <Input
+            type="text"
+            placeholder={`Filter by ${column.header}`}
+            onChange={(e) => handleFilter(accessor, e.target.value)}
+            value={filters[accessor] || ''}
+            className="w-40"
+          />
+        );
+    }
+  };
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>{title}</CardTitle>
-        <CardDescription>{description}</CardDescription>
-      </CardHeader>
-      <CardContent>
+      <>
+        <div className="flex flex-wrap gap-4 mb-4">
+          {columns.map((column, index) => 
+            column.filterable && (
+              <div key={index} className="flex items-center">
+                {renderFilterInput(column)}
+                {filters[column.accessor as string] && (
+                  <button
+                    onClick={() => clearFilter(column.accessor as string)}
+                    className="ml-2 h-8 w-8"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                )}
+              </div>
+            )
+          )}
+        </div>
+              
         <Table>
           <TableHeader>
             <TableRow>
@@ -135,14 +175,6 @@ export function DataTable<T>({
                       </button>
                     )}
                   </div>
-                  {column.filterable && (
-                    <Input
-                      placeholder={`Filter ${column.header}`}
-                      onChange={(e) => handleFilter(column.accessor as string, e.target.value)}
-                      value={filters[column.accessor as string] || ''}
-                      className="mt-2"
-                    />
-                  )}
                 </TableHead>
               ))}
               <TableHead>Actions</TableHead>
@@ -162,9 +194,8 @@ export function DataTable<T>({
             )}
           </TableBody>
         </Table>
-      </CardContent>
-      <CardFooter>
-        <div className="flex items-center w-full justify-between">
+
+        <div className="flex items-center w-full justify-between mt-4">
           <div className="text-xs text-muted-foreground">
             Showing{' '}
             <strong>
@@ -193,7 +224,6 @@ export function DataTable<T>({
             </Button>
           </div>
         </div>
-      </CardFooter>
-    </Card>
+      </>
   );
 }

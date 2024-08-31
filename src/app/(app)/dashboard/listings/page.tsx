@@ -4,7 +4,6 @@ import Button from '@/components/Button';
 import CardLayout from '@/components/layouts/CardLayout';
 import DashboardBreadcrumb from '@/components/layouts/DashboardBreadcrumb';
 import { DataTable } from '@/components/layouts/data-table';
-import { useAuth } from '@/hooks/auth';
 import { useCarListings } from '@/hooks/useCarListings';
 import { CarListingType } from '@/types/car-listing';
 import Head from 'next/head';
@@ -17,21 +16,20 @@ const breadcrumbItems = [
 ];
 
 const Dashboard = () => {
-    const { user } = useAuth({ middleware: 'auth' });
 
     const [page, setPage] = useState(1);
     const [sort, setSort] = useState<{ key: string; direction: 'asc' | 'desc' } | null>(null);
     const [filters, setFilters] = useState<Record<string, string>>({});
-    const perPage = 10;
+    const perPage = 2;
 
     const { data, isLoading, isError, error, refetch } = useCarListings(page, perPage, sort, filters);
 
     const columns = [
-        { header: 'Title', accessor: 'title' as const, sortable: true, filterable: true },
-        { header: 'Year', accessor: 'year' as const, sortable: true, filterable: true },
-        { header: 'Price', type: 'currency' as const,accessor: 'price' as const, className: 'table-cell' },
+        { header: 'Title', accessor: 'title' as const, sortable: true, filterable: true, filterType: 'text' as const, className: 'w-1/4' },
+        { header: 'Year', accessor: 'year' as const, sortable: true, filterable: true, filterType: 'number' as const },
+        { header: 'Price', type: 'currency' as const,accessor: 'price' as const, className: 'table-cell', sortable: true },
         { header: 'Mileage', accessor: (item: CarListingType) => `${item.mileage.toLocaleString()} miles`, className: 'table-cell' },
-        { header: 'Created At', type: 'date' as const ,accessor: 'created_at' as const, className: 'table-cell' },
+        { header: 'Created At', type: 'date' as const ,accessor: 'created_at' as const, className: 'table-cell', sortable: true },
     ];
 
     const actions = [
@@ -44,7 +42,6 @@ const Dashboard = () => {
     ];
 
     const handleSortChange = (sortKey: string, sortDirection: 'asc' | 'desc') => {
-        // setSort({ key: sortKey, direction: sortDirection });
         setSort(sortKey ? { key: sortKey, direction: sortDirection } : null);
         setPage(1);
         refetch();

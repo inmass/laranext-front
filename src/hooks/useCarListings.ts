@@ -25,12 +25,13 @@ export const useCarListings = (
 ): UseQueryResult<CarListingsResponse, Error> => {
 
   return useQuery({
-    queryKey: ['carListings', page, perPage = 10, sort, filters],
+    queryKey: ['carListings', page, perPage, sort, filters],
     queryFn: async () => {
       const params: Record<string, string | number | undefined> = {
         page,
         per_page: perPage,
       };
+      // console.log(perPage);
 
       // Add sort in the format sort=key or sort=-key
       console.log('sort', sort);
