@@ -1,12 +1,13 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   TableHead,
   TableRow,
   TableHeader,
   TableBody,
   Table,
+  TableCell,
 } from '@/components/ui/table';
 import {
   Card,
@@ -16,15 +17,19 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowUpDown, ArrowBigDown, ArrowUp, ArrowDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { DataTableRow } from '@/components/layouts/data-table-row';
+import ClipLoader from '@/components/clip-loader';
 
 interface Column<T> {
   header: string;
   accessor: keyof T | ((item: T) => React.ReactNode);
   type?: 'text' | 'number' | 'date' | 'image' | 'currency';
   className?: string;
+  sortable?: boolean;
+  filterable?: boolean;
 }
 
 interface ActionColumn<T> {
@@ -33,8 +38,8 @@ interface ActionColumn<T> {
 }
 
 interface DataTableProps<T> {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   columns: Column<T>[];
   actions?: ActionColumn<T>[];
   data: T[];
@@ -45,6 +50,8 @@ interface DataTableProps<T> {
   isError: boolean;
   error: Error | null;
   onPageChange: (page: number) => void;
+  onSortChange: (sortKey: string, sortDirection: 'asc' | 'desc') => void;
+  onFilterChange: (filters: Record<string, string>) => void;
 }
 
 export function DataTable<T>({
@@ -60,8 +67,12 @@ export function DataTable<T>({
   isError,
   error,
   onPageChange,
+  onSortChange,
+  onFilterChange,
 }: DataTableProps<T>) {
-  if (isLoading) return <div>Loading...</div>;
+  const [sortKey, setSortKey] = useState<{ key: string; direction: 'asc' | 'desc' } | null>(null);
+  const [filters, setFilters] = useState<Record<string, string>>({});
+
   if (isError) return <div>Error: {error?.message}</div>;
 
   const totalPages = Math.ceil(totalItems / itemsPerPage);
@@ -73,6 +84,25 @@ export function DataTable<T>({
   function nextPage() {
     onPageChange(Math.min(currentPage + 1, totalPages));
   }
+
+  const handleSort = (key: string) => {
+    let direction: 'asc' | 'desc' = 'asc';
+    if (sortKey && sortKey.key === key && sortKey.direction === 'asc') {
+      direction = 'desc';
+    } else if (sortKey && sortKey.key === key && sortKey.direction === 'desc') {
+      key = '';
+    }
+
+    setSortKey(key ? { key, direction } : null);
+    onSortChange(key, direction);
+  };
+
+  const handleFilter = (key: string, value: string) => {
+    const newFilters = { ...filters, [key]: value };
+    setFilters(newFilters);
+    onFilterChange(newFilters);
+  };
+
 
   return (
     <Card>
@@ -86,16 +116,50 @@ export function DataTable<T>({
             <TableRow>
               {columns.map((column, index) => (
                 <TableHead key={index} className={column.className}>
-                  {column.header}
+                  <div className="flex items-center">
+                    {column.header}
+                    {column.sortable && (
+                      <button
+                        onClick={() => handleSort(column.accessor as string)}
+                        className="ml-2 h-8 w-8 p-0"
+                      >
+                        {sortKey?.key === column.accessor ? (
+                          sortKey.direction === 'asc' ? (
+                            <ArrowUp className="h-4 w-4 text-primary" />
+                          ) : (
+                            <ArrowDown className="h-4 w-4 text-primary" />
+                          )
+                        ) : (
+                          <ArrowUpDown className="h-4 w-4 text-muted-foreground" />
+                        )}
+                      </button>
+                    )}
+                  </div>
+                  {column.filterable && (
+                    <Input
+                      placeholder={`Filter ${column.header}`}
+                      onChange={(e) => handleFilter(column.accessor as string, e.target.value)}
+                      value={filters[column.accessor as string] || ''}
+                      className="mt-2"
+                    />
+                  )}
                 </TableHead>
               ))}
               <TableHead>Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data.map((item) => (
-              <DataTableRow key={item.id} item={item} columns={columns} actions={actions} />
-            ))}
+            {isLoading ? (
+              <TableRow>
+                <TableCell colSpan={columns.length + 1} className="text-center">
+                  <ClipLoader className='text-muted-foreground' />
+                </TableCell>
+              </TableRow>
+            ) : (
+              data.map((item) => (
+                <DataTableRow key={(item as any).id} item={item} columns={columns} actions={actions} />
+              ))
+            )}
           </TableBody>
         </Table>
       </CardContent>
