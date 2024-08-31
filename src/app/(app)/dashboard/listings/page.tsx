@@ -4,7 +4,7 @@ import Button from '@/components/Button';
 import CardLayout from '@/components/layouts/CardLayout';
 import DashboardBreadcrumb from '@/components/layouts/DashboardBreadcrumb';
 import { DataTable } from '@/components/layouts/table/data-table';
-import { CarListingsParams, getCarListings } from '@/hooks/useCarListings';
+import { CarListingsParams, getCarListings } from '@/hooks/api/car-listings';
 import { CarListingType } from '@/types/car-listing';
 import Head from 'next/head';
 import Link from 'next/link';
