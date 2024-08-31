@@ -3,7 +3,7 @@
 import Button from '@/components/Button';
 import CardLayout from '@/components/layouts/CardLayout';
 import DashboardBreadcrumb from '@/components/layouts/DashboardBreadcrumb';
-import { DataTable } from '@/components/layouts/data-table';
+import { DataTable } from '@/components/layouts/table/data-table';
 import { CarListingsParams, getCarListings } from '@/hooks/useCarListings';
 import { CarListingType } from '@/types/car-listing';
 import Head from 'next/head';
@@ -18,7 +18,7 @@ const breadcrumbItems = [
 const CarListings = () => {
     const [params, setParams] = useState({
         page: 1,
-        perPage: 2,
+        perPage: 10,
         sort: null as { key: string; direction: 'asc' | 'desc' } | null,
         filters: {} as Record<string, string>
     });
