@@ -4,25 +4,26 @@ import Button from '@/components/Button';
 import CardLayout from '@/components/layouts/CardLayout';
 import DashboardBreadcrumb from '@/components/layouts/DashboardBreadcrumb';
 import { DataTable } from '@/components/layouts/data-table';
-import { useCarListings } from '@/hooks/useCarListings';
+import { CarListingsParams, getCarListings } from '@/hooks/useCarListings';
 import { CarListingType } from '@/types/car-listing';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 const breadcrumbItems = [
   { label: 'Dashboard', href: '/dashboard' },
   { label: 'Listings'}
 ];
 
-const Dashboard = () => {
+const CarListings = () => {
+    const [params, setParams] = useState({
+        page: 1,
+        perPage: 2,
+        sort: null as { key: string; direction: 'asc' | 'desc' } | null,
+        filters: {} as Record<string, string>
+    });
 
-    const [page, setPage] = useState(1);
-    const [sort, setSort] = useState<{ key: string; direction: 'asc' | 'desc' } | null>(null);
-    const [filters, setFilters] = useState<Record<string, string>>({});
-    const perPage = 2;
-
-    const { data, isLoading, isError, error, refetch } = useCarListings(page, perPage, sort, filters);
+    const { data, isLoading, isError, error } = getCarListings(params.page, params.perPage, params.sort, params.filters);
 
     const columns = [
         { header: 'Title', accessor: 'title' as const, sortable: true, filterable: true, filterType: 'text' as const, className: 'w-1/4' },
@@ -41,25 +42,12 @@ const Dashboard = () => {
         )},
     ];
 
-    const handleSortChange = (sortKey: string, sortDirection: 'asc' | 'desc') => {
-        setSort(sortKey ? { key: sortKey, direction: sortDirection } : null);
-        setPage(1);
-        refetch();
-      };
-    
-    const handleFilterChange = (newFilters: Record<string, string>) => {
-        setFilters(newFilters);
-        setPage(1);
-        refetch();
-    };
+    const handleParamsChange = useCallback((newParams: Partial<CarListingsParams>) => {
+        setParams(prev => ({ ...prev, ...newParams }));
+    }, []);
 
-    const handlePageChange = (newPage: number) => {
-        setPage(newPage);
-        refetch();
-    };
-    
     useEffect(() => {
-        document.title = 'Laravel - Profile';
+        document.title = 'Laravel - Listings';
     }, []);
 
     return (
@@ -72,30 +60,27 @@ const Dashboard = () => {
                 title="Car Listings"
                 description="Manage your car listings and view their details."
             >
-            <div className="flex justify-between items-center mb-6">
-                <h1 className="text-2xl font-semibold"></h1>
-                <Link href="/dashboard/listings/create">
-                    <Button>Create Listing</Button>
-                </Link>
-            </div>
-            <DataTable
-                columns={columns}
-                actions={actions}
-                data={data?.data || []}
-                totalItems={data?.meta.total || 0}
-                currentPage={page}
-                itemsPerPage={perPage}
-                isLoading={isLoading}
-                isError={isError}
-                error={error}
-                onPageChange={handlePageChange}
-                onSortChange={handleSortChange}
-                onFilterChange={handleFilterChange}
-            />
+                <div className="flex justify-between items-center mb-6">
+                    <h1 className="text-2xl font-semibold"></h1>
+                    <Link href="/dashboard/listings/create">
+                        <Button>Create Listing</Button>
+                    </Link>
+                </div>
+                <DataTable
+                    columns={columns}
+                    actions={actions}
+                    data={data?.data || []}
+                    totalItems={data?.meta.total || 0}
+                    currentPage={params.page}
+                    itemsPerPage={params.perPage}
+                    isLoading={isLoading}
+                    isError={isError}
+                    error={error}
+                    onParamsChange={handleParamsChange}
+                />
             </CardLayout>
-            
         </>
     );
 };
 
-export default Dashboard;
+export default CarListings;

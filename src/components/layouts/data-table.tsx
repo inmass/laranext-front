@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   TableHead,
   TableRow,
@@ -9,7 +9,7 @@ import {
   Table,
   TableCell,
 } from '@/components/ui/table';
-import { ChevronLeft, ChevronRight, ArrowUpDown, ArrowBigDown, ArrowUp, ArrowDown, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowUp, ArrowDown, ArrowUpDown, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { DataTableRow } from '@/components/layouts/data-table-row';
@@ -31,8 +31,6 @@ interface ActionColumn<T> {
 }
 
 interface DataTableProps<T> {
-  title?: string;
-  description?: string;
   columns: Column<T>[];
   actions?: ActionColumn<T>[];
   data: T[];
@@ -42,14 +40,14 @@ interface DataTableProps<T> {
   isLoading: boolean;
   isError: boolean;
   error: Error | null;
-  onPageChange: (page: number) => void;
-  onSortChange: (sortKey: string, sortDirection: 'asc' | 'desc') => void;
-  onFilterChange: (filters: Record<string, string>) => void;
+  onParamsChange: (params: {
+    page: number;
+    sort: { key: string; direction: 'asc' | 'desc' } | null;
+    filters: Record<string, string>;
+  }) => void;
 }
 
 export function DataTable<T>({
-  title,
-  description,
   columns,
   actions,
   data,
@@ -59,23 +57,32 @@ export function DataTable<T>({
   isLoading,
   isError,
   error,
-  onPageChange,
-  onSortChange,
-  onFilterChange,
+  onParamsChange,
 }: DataTableProps<T>) {
   const [sortKey, setSortKey] = useState<{ key: string; direction: 'asc' | 'desc' } | null>(null);
   const [filters, setFilters] = useState<Record<string, string>>({});
+  const [page, setPage] = useState(currentPage);
 
-  if (isError) return <div>Error: {error?.message}</div>;
+  useEffect(() => {
+    setPage(currentPage);
+  }, [currentPage]);
 
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
+  const handleParamsChange = useCallback(() => {
+    onParamsChange({ page, sort: sortKey, filters });
+  }, [page, sortKey, filters, onParamsChange]);
+
+  useEffect(() => {
+    handleParamsChange();
+  }, [handleParamsChange]);
+
   function prevPage() {
-    onPageChange(Math.max(currentPage - 1, 1));
+    setPage((prev) => Math.max(prev - 1, 1));
   }
 
   function nextPage() {
-    onPageChange(Math.min(currentPage + 1, totalPages));
+    setPage((prev) => Math.min(prev + 1, totalPages));
   }
 
   const handleSort = (key: string) => {
@@ -87,20 +94,18 @@ export function DataTable<T>({
     }
 
     setSortKey(key ? { key, direction } : null);
-    onSortChange(key, direction);
   };
 
   const handleFilter = (key: string, value: string) => {
-    const newFilters = { ...filters, [key]: value };
-    setFilters(newFilters);
-    onFilterChange(newFilters);
+    setFilters((prev) => ({ ...prev, [key]: value }));
   };
 
   const clearFilter = (key: string) => {
-    const newFilters = { ...filters };
-    delete newFilters[key];
-    setFilters(newFilters);
-    onFilterChange(newFilters);
+    setFilters((prev) => {
+      const newFilters = { ...prev };
+      delete newFilters[key];
+      return newFilters;
+    });
   };
 
   const renderFilterInput = (column: Column<T>) => {
@@ -181,6 +186,13 @@ export function DataTable<T>({
             </TableRow>
           </TableHeader>
           <TableBody>
+            {isError && (
+              <TableRow>
+                <TableCell colSpan={columns.length + 1} className="text-center">
+                  {error?.message}
+                </TableCell>
+              </TableRow>
+            )}
             {isLoading ? (
               <TableRow>
                 <TableCell colSpan={columns.length + 1} className="text-center">

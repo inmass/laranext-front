@@ -17,7 +17,14 @@ interface CarListingsResponse {
   };
 }
 
-export const useCarListings = (
+export interface CarListingsParams {
+  page: number;
+  perPage: number;
+  sort?: { key: string; direction: 'asc' | 'desc' } | null;
+  filters?: Record<string, string>;
+}
+
+export const getCarListings = (
   page: number, 
   perPage: number, 
   sort?: { key: string; direction: 'asc' | 'desc' } | null,
@@ -31,10 +38,8 @@ export const useCarListings = (
         page,
         per_page: perPage,
       };
-      // console.log(perPage);
 
       // Add sort in the format sort=key or sort=-key
-      console.log('sort', sort);
       if (sort) {
         params.sort = `${sort.direction === 'asc' ? '' : '-'}${sort.key}`;
       }
@@ -55,7 +60,8 @@ export const useCarListings = (
   });
 };
 
-export const useCarListing = (id: number): UseQueryResult<CarListingType, Error> => {
+
+export const getCarListing = (id: number): UseQueryResult<CarListingType, Error> => {
   return useQuery({
     queryKey: ['carListing', id],
     queryFn: async () => {
