@@ -40,7 +40,7 @@ const CardLayout = ({
         null
       }
       <CardFooter>
-        <AuthCard>{children}</AuthCard>
+        <div className="w-full">{children}</div>
       </CardFooter>
     </Card>
   );

@@ -20,12 +20,14 @@ const CarListings = () => {
         page: 1,
         perPage: 10,
         sort: null as { key: string; direction: 'asc' | 'desc' } | null,
-        filters: {} as Record<string, string>
+        filters: {} as Record<string, string>,
+        include: ['primaryImage'],
     });
 
-    const { data, isLoading, isError, error } = getCarListings(params.page, params.perPage, params.sort, params.filters);
+    const { data, isLoading, isError, error } = getCarListings(params.page, params.perPage, params.sort, params.filters, params.include);
 
     const columns = [
+        { header: 'Image', type: 'image' as const, accessor: (item: CarListingType) => item.primary_image?.path, className: 'w-1/6' },
         { header: 'Title', accessor: 'title' as const, sortable: true, filterable: true, filterType: 'text' as const, className: 'w-1/4' },
         { header: 'Year', accessor: 'year' as const, sortable: true, filterable: true, filterType: 'number' as const },
         { header: 'Price', type: 'currency' as const,accessor: 'price' as const, className: 'table-cell', sortable: true },

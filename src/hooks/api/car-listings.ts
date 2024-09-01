@@ -22,13 +22,15 @@ export interface CarListingsParams {
   perPage: number;
   sort?: { key: string; direction: 'asc' | 'desc' } | null;
   filters?: Record<string, string>;
+  include?: string[];
 }
 
 export const getCarListings = (
   page: number, 
   perPage: number, 
   sort?: { key: string; direction: 'asc' | 'desc' } | null,
-  filters?: Record<string, string>
+  filters?: Record<string, string>,
+  include?: string[],
 ): UseQueryResult<CarListingsResponse, Error> => {
 
   return useQuery({
@@ -51,6 +53,11 @@ export const getCarListings = (
             params[`filter[${key}]`] = value;
           }
         });
+      }
+
+      // Add additional params
+      if (include) {
+        params.include = include.join(',');
       }
 
       const { data } = await axios.get<CarListingsResponse>(ApiEndpoints.carListings, { params });

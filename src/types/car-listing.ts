@@ -20,6 +20,14 @@ export interface CarListingType {
     updated_at: string;
     deleted_at: string | null;
     slug: string;
+    primary_image?: {
+        id: number;
+        car_listing_id: number;
+        path: string;
+        is_primary: boolean;
+        created_at: string;
+        updated_at: string;
+    };
     user: {
         id: number;
         name: string;
@@ -68,5 +76,12 @@ export interface CarListingType {
             updated_at: string;
         };
     }[];
-    images: any[];
+    images: {
+        id: number;
+        car_listing_id: number;
+        path: string;
+        is_primary: boolean;
+        created_at: string;
+        updated_at: string;
+    }[];
 }

@@ -4,6 +4,7 @@ import { TableCell, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { MoreHorizontal } from 'lucide-react';
+import ImageWithPreview from '@/components/ui/image-with-preview';
 
 interface Column<T> {
   header: string;
@@ -33,15 +34,7 @@ const renderCellContent = <T,>(content: any, type?: string): React.ReactNode => 
     case 'currency':
       return `$${parseFloat(content).toLocaleString()}`;
     case 'image':
-      return Array.isArray(content) && content.length > 0 ? (
-        <Image
-          alt="Item image"
-          className="aspect-square rounded-md object-cover"
-          height={64}
-          src={content[0]}
-          width={64}
-        />
-      ) : null;
+      return <ImageWithPreview alt="Item image" className="aspect-square rounded-md object-cover" height={65} src={content} width={65} />;
     default:
       if (typeof content === 'object' && !React.isValidElement(content)) {
         return JSON.stringify(content);
