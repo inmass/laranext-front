@@ -83,7 +83,7 @@ export function DataTable<T>({
             <TableRow>
               {columns.map((column, index) => (
                 <TableHead key={index} className={column.className}>
-                  <div className="flex items-center">
+                  <div className="flex items-center font-bold">
                     {column.header}
                     {column.sortable && (
                       <button

@@ -16,6 +16,8 @@ const ApiEndpoints = {
     profilePasswordUpdate: '/api/profile/password',
 
     carListings: '/api/backoffice/car-listings',
+
+    bodyStyles: '/api/backoffice/body-styles',
 };
 
 export default ApiEndpoints;

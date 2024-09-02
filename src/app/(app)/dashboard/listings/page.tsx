@@ -27,7 +27,7 @@ const CarListings = () => {
     const { data, isLoading, isError, error } = getCarListings(params);
 
     const columns = [
-        { header: 'Image', type: 'image' as const, accessor: (item: CarListingType) => item.primary_image?.path, className: 'w-1/6' },
+        { header: '', type: 'image' as const, accessor: (item: CarListingType) => item.primary_image?.path, className: 'w-1/12' },
         { header: 'Title', accessor: 'title' as const, sortable: true, filterable: true, filterType: 'text' as const, className: 'w-1/4' },
         { header: 'Year', accessor: 'year' as const, sortable: true, filterable: true, filterType: 'number' as const },
         { header: 'Price', type: 'currency' as const,accessor: 'price' as const, className: 'table-cell', sortable: true },
@@ -77,7 +77,7 @@ const CarListings = () => {
                     data={data?.data || []}
                     totalItems={data?.meta.total || 0}
                     currentPage={params.page}
-                    itemsPerPage={params.perPage}
+                    itemsPerPage={params.perPage || 10}
                     isLoading={isLoading}
                     isError={isError}
                     error={error}

@@ -6,6 +6,7 @@ import { Plus } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import BodyStyleSelect from '@/components/dynamic/body-style-select';
 
 interface AddCarListingDialogProps {
     onAddListing: (formData: any) => void;
@@ -63,26 +64,30 @@ const AddCarListingDialog = ({ onAddListing }: AddCarListingDialogProps) => {
         <form onSubmit={(e) => e.preventDefault()}>
             <div className="space-y-4">
                 <div>
-                <label htmlFor="title">Title</label>
-                <Input
-                    type="text"
-                    id="title"
-                    name="title"
-                    value={formData.title}
-                    onChange={handleInputChange}
-                    placeholder="Car Title"
-                />
+                    <label htmlFor="title">Title</label>
+                    <Input
+                        type="text"
+                        id="title"
+                        name="title"
+                        value={formData.title}
+                        onChange={handleInputChange}
+                        placeholder="Car Title"
+                    />
                 </div>
                 <div>
-                <label htmlFor="year">Year</label>
-                <Input
-                    type="number"
-                    id="year"
-                    name="year"
-                    value={formData.year}
-                    onChange={handleInputChange}
-                    placeholder="Year"
-                />
+                    <label htmlFor="year">Year</label>
+                    <Input
+                        type="number"
+                        id="year"
+                        name="year"
+                        value={formData.year}
+                        onChange={handleInputChange}
+                        placeholder="Year"
+                    />
+                </div>
+                <div>
+                    <label htmlFor="body_style_id">Body Style</label>
+                    <BodyStyleSelect/>
                 </div>
                 <div>
                 <label htmlFor="price">Price</label>
