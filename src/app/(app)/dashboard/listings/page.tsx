@@ -1,6 +1,5 @@
 'use client';
 
-import Button from '@/components/Button';
 import CardLayout from '@/components/layouts/CardLayout';
 import AddCarListingDialog from '@/components/layouts/dashboard/car-listings/new-car-listing-dialog';
 import DashboardBreadcrumb from '@/components/layouts/DashboardBreadcrumb';
@@ -17,7 +16,7 @@ const breadcrumbItems = [
 ];
 
 const CarListings = () => {
-    const [params, setParams] = useState({
+    const [params, setParams] = useState<CarListingsParams>({
         page: 1,
         perPage: 10,
         sort: null as { key: string; direction: 'asc' | 'desc' } | null,
@@ -25,7 +24,7 @@ const CarListings = () => {
         include: ['primaryImage'],
     });
 
-    const { data, isLoading, isError, error } = getCarListings(params.page, params.perPage, params.sort, params.filters, params.include);
+    const { data, isLoading, isError, error } = getCarListings(params);
 
     const columns = [
         { header: 'Image', type: 'image' as const, accessor: (item: CarListingType) => item.primary_image?.path, className: 'w-1/6' },
