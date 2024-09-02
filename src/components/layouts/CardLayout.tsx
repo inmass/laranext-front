@@ -10,7 +10,7 @@ import AuthCard from '@/components/AuthCard';
 
 interface DefaultLayoutProps {
   className?: string;
-  title?: string;
+  title?: string | React.ReactNode;
   description?: string;
   children?: React.ReactNode;
 }

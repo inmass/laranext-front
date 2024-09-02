@@ -2,6 +2,7 @@
 
 import Button from '@/components/Button';
 import CardLayout from '@/components/layouts/CardLayout';
+import AddCarListingDialog from '@/components/layouts/dashboard/car-listings/new-car-listing-dialog';
 import DashboardBreadcrumb from '@/components/layouts/DashboardBreadcrumb';
 import { DataTable } from '@/components/layouts/table/data-table';
 import { CarListingsParams, getCarListings } from '@/hooks/api/car-listings';
@@ -48,6 +49,10 @@ const CarListings = () => {
         setParams(prev => ({ ...prev, ...newParams }));
     }, []);
 
+    const handleAddListing = (formData: any) => {
+        console.log('Add Listing', formData);
+    };
+
     useEffect(() => {
         document.title = 'Laravel - Listings';
     }, []);
@@ -59,15 +64,14 @@ const CarListings = () => {
             </Head>
             <DashboardBreadcrumb items={breadcrumbItems} />
             <CardLayout
-                title="Car Listings"
+                title={
+                    <div className="flex justify-between items-center">
+                        <h1>Car Listings</h1>
+                        <AddCarListingDialog onAddListing={handleAddListing} />
+                    </div>
+                }
                 description="Manage your car listings and view their details."
             >
-                <div className="flex justify-between items-center mb-6">
-                    <h1 className="text-2xl font-semibold"></h1>
-                    <Link href="/dashboard/listings/create">
-                        <Button>Create Listing</Button>
-                    </Link>
-                </div>
                 <DataTable
                     columns={columns}
                     actions={actions}
