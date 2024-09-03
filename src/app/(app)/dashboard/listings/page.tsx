@@ -48,10 +48,6 @@ const CarListings = () => {
         setParams(prev => ({ ...prev, ...newParams }));
     }, []);
 
-    const handleAddListing = (formData: any) => {
-        console.log('Add Listing', formData);
-    };
-
     useEffect(() => {
         document.title = 'Laravel - Listings';
     }, []);
@@ -66,7 +62,7 @@ const CarListings = () => {
                 title={
                     <div className="flex justify-between items-center">
                         <h1>Car Listings</h1>
-                        <AddCarListingDialog onAddListing={handleAddListing} />
+                        <AddCarListingDialog />
                     </div>
                 }
                 description="Manage your car listings and view their details."

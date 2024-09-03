@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { getBodyStyles } from '@/hooks/api/body-styles';
-import SearchableSelect from '@/components/layouts/searchable-select';
+import SearchableSelect, { SearchableSelectRef } from '@/components/layouts/searchable-select';
+
 
 interface BodyStyleSelectProps {
     value?: string;
-    onChange?: (value: string) => void;
+    onChange?: (value: string|number) => void;
+    onBlur?: () => void;
     className?: string;
     disabled?: boolean;
+    name?: string;
 }
 
-const BodyStyleSelect: React.FC<BodyStyleSelectProps> = ({ value, onChange, className, disabled }) => {
+const BodyStyleSelect = forwardRef<SearchableSelectRef, BodyStyleSelectProps>(({ value, onChange, onBlur, className, disabled, name }, ref) => {
     const { data, isLoading, isError } = getBodyStyles({
         page: 1,
         noPagination: true,
@@ -19,16 +22,19 @@ const BodyStyleSelect: React.FC<BodyStyleSelectProps> = ({ value, onChange, clas
 
     return (
         <SearchableSelect
+            ref={ref}
             value={value}
             onChange={onChange}
-            options={data?.map(({ id, name }: any) => ({ label: name, value: id })) || []}
+            onBlur={onBlur}
+            options={data?.map(({ id, name }: any) => ({ label: name, value: String(id) })) || []}
             loading={isLoading}
             error={isError}
             className={className}
             disabled={disabled}
             placeholder="Select a body style"
+            name={name}
         />
     );
-}
+});
 
 export default BodyStyleSelect;

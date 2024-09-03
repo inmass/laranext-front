@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import { Combobox } from '@headlessui/react';
 import { Check, ChevronsDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -13,24 +13,34 @@ interface SearchableSelectProps {
   options: Option[];
   value?: string;
   onChange?: (value: string) => void;
+  onBlur?: () => void;
   placeholder?: string;
   className?: string;
   disabled?: boolean;
   loading?: boolean;
   error?: boolean;
+  name?: string;
 }
 
-const SearchableSelect: React.FC<SearchableSelectProps> = ({
+export interface SearchableSelectRef {
+  focus: () => void;
+  blur: () => void;
+}
+
+const SearchableSelect = forwardRef<SearchableSelectRef, SearchableSelectProps>(({
   options,
   value,
   onChange,
+  onBlur,
   placeholder = 'Select an option',
   className = '',
   disabled = false,
   loading = false,
   error = false,
-}) => {
-  const [query, setQuery] = useState('');
+  name
+}, ref) => {
+  const [query, setQuery] = React.useState('');
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const filteredOptions =
     query === ''
@@ -42,19 +52,28 @@ const SearchableSelect: React.FC<SearchableSelectProps> = ({
             .includes(query.toLowerCase().replace(/\s+/g, ''))
         );
 
-  const selectedOption = options.find(option => option.value === value);
+  useImperativeHandle(ref, () => ({
+    focus: () => inputRef.current?.focus(),
+    blur: () => inputRef.current?.blur(),
+  }));
 
   return (
-    <div className={`relative ${className}`}>
+    <div className={'relative'}>
       <Combobox value={value} onChange={onChange} disabled={disabled}>
         <div className="relative mt-1">
           <div className="relative w-full cursor-default overflow-hidden rounded-md bg-background text-left shadow-sm">
             <Combobox.Input
-              className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+              ref={inputRef}
+              className={cn(
+                'flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
+                className
+              )}
               displayValue={(val: string) => options.find(option => option.value === val)?.label || ''}
               onChange={(event) => setQuery(event.target.value)}
+              onBlur={onBlur}
               placeholder={placeholder}
               aria-label={placeholder}
+              name={name}
             />
             <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
               <ChevronsDown
@@ -115,6 +134,6 @@ const SearchableSelect: React.FC<SearchableSelectProps> = ({
       )}
     </div>
   );
-};
+});
 
 export default SearchableSelect;
