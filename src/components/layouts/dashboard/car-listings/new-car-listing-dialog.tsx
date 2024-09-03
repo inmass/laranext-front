@@ -8,6 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import BodyStyleSelect from '@/components/dynamic/body-style-select';
 import { cn } from '@/lib/utils';
+import Select from '@/components/layouts/select';
 
 
 const addCarListingSchema = z.object({
@@ -51,7 +52,7 @@ const AddCarListingDialog = () => {
     const submitForm = async (data: AddCarListingFormData) => {
         try {
             console.log('Add Listing', data);
-            reset();
+            // reset();
         } catch (error) {
             console.error(error);
         }
@@ -117,19 +118,23 @@ const AddCarListingDialog = () => {
                 </div>
                 <div>
                     <label htmlFor="condition_id">Condition</label>
-                    <select
-                        id="condition_id"
-                        {...register('condition_id')}
-                        className={cn(
-                            errors.condition_id ? 'border-red-500' : '',
-                            'mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+                    <Controller
+                        name="condition_id"
+                        control={control}
+                        render={({ field }) => (
+                            <Select
+                                {...field}
+                                options={[
+                                    { label: 'New', value: '1' },
+                                    { label: 'Used', value: '2' },
+                                    { label: 'Certified Pre-Owned', value: '3' },
+                                ]}
+                                placeholder="Select a condition"
+                                className={cn(errors.condition_id ? 'border-red-500' : '')}
+                                searchable={false}
+                            />
                         )}
-                    >
-                        <option value="">Select a condition</option>
-                        <option value="1">New</option>
-                        <option value="2">Used</option>
-                        <option value="3">Certified Pre-Owned</option>
-                    </select>
+                    />
                     {errors.condition_id && <p className="text-red-500 text-sm">{errors.condition_id.message}</p>}
                 </div>
             </div>

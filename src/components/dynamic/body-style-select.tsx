@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import { getBodyStyles } from '@/hooks/api/body-styles';
-import SearchableSelect, { SearchableSelectRef } from '@/components/layouts/searchable-select';
+import Select, { SelectRef } from '@/components/layouts/select';
 
 
 interface BodyStyleSelectProps {
@@ -12,7 +12,7 @@ interface BodyStyleSelectProps {
     name?: string;
 }
 
-const BodyStyleSelect = forwardRef<SearchableSelectRef, BodyStyleSelectProps>(({ value, onChange, onBlur, className, disabled, name }, ref) => {
+const BodyStyleSelect = forwardRef<SelectRef, BodyStyleSelectProps>(({ value, onChange, onBlur, className, disabled, name }, ref) => {
     const { data, isLoading, isError } = getBodyStyles({
         page: 1,
         noPagination: true,
@@ -21,7 +21,7 @@ const BodyStyleSelect = forwardRef<SearchableSelectRef, BodyStyleSelectProps>(({
     });
 
     return (
-        <SearchableSelect
+        <Select
             ref={ref}
             value={value}
             onChange={onChange}
