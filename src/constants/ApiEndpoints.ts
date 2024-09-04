@@ -18,6 +18,8 @@ const ApiEndpoints = {
     carListings: '/api/backoffice/car-listings',
 
     bodyStyles: '/api/backoffice/body-styles',
+
+    makes: '/api/backoffice/makes',
 };
 
 export default ApiEndpoints;

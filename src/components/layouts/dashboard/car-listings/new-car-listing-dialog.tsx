@@ -9,10 +9,11 @@ import { z } from 'zod';
 import BodyStyleSelect from '@/components/dynamic/body-style-select';
 import { cn } from '@/lib/utils';
 import Select from '@/components/layouts/select';
+import MakeSelect from '@/components/dynamic/make-select';
 
 
 const addCarListingSchema = z.object({
-    // make_id: z.string().min(1, 'Make is required'),
+    make_id: z.string().min(1, 'Make is required'),
     // car_model_id: z.string().min(1, 'Car Model is required'),
     body_style_id: z.string().min(1, 'Body Style is required'),
     condition_id: z.string().min(1, 'Condition is required'),
@@ -95,6 +96,21 @@ const AddCarListingDialog = () => {
                         )}
                     />
                     {errors.body_style_id && <p className="text-red-500 text-sm">{errors.body_style_id.message}</p>}
+                </div>
+                <div>
+                    <label htmlFor="make_id">Car Make</label>
+                    <Controller
+                        name="make_id"
+                        control={control}
+                        render={({ field }) => (
+                            <MakeSelect
+                                {...field}
+                                onChange={(value) => field.onChange(value)}
+                                className={cn(errors.make_id ? 'border-red-500' : '')}
+                            />
+                        )}
+                    />
+                    {errors.make_id && <p className="text-red-500 text-sm">{errors.make_id.message}</p>}
                 </div>
                 <div>
                     <label htmlFor="price">Price</label>
