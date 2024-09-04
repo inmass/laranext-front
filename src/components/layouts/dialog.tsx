@@ -30,7 +30,7 @@ const Dialog = ({
       </RadixDialog.Trigger>
       <RadixDialog.Portal>
         <RadixDialog.Overlay className="fixed inset-0 bg-black/50 z-50" />
-        <RadixDialog.Content className="fixed top-1/2 left-1/2 w-[90vw] max-w-[500px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] rounded-lg border bg-card shadow-sm z-50">
+        <RadixDialog.Content className="fixed top-1/2 left-1/2 overflow-y-auto flex-grow max-h-[90%] w-[90vw] max-w-[500px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] rounded-lg border bg-card shadow-sm z-50">
           <RadixDialog.Title className="text-lg font-bold mb-2">{title}</RadixDialog.Title>
           {description && (
             <RadixDialog.Description className="text-sm text-gray-500 mb-4">
