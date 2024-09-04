@@ -10,11 +10,12 @@ import BodyStyleSelect from '@/components/dynamic/body-style-select';
 import { cn } from '@/lib/utils';
 import Select from '@/components/layouts/select';
 import MakeSelect from '@/components/dynamic/make-select';
+import CarModelSelect from '@/components/dynamic/car-model-select';
 
 
 const addCarListingSchema = z.object({
     make_id: z.string().min(1, 'Make is required'),
-    // car_model_id: z.string().min(1, 'Car Model is required'),
+    car_model_id: z.string().min(1, 'Car Model is required'),
     body_style_id: z.string().min(1, 'Body Style is required'),
     condition_id: z.string().min(1, 'Condition is required'),
     // features: z.array(z.string()).min(1, 'At least one feature is required'),
@@ -37,7 +38,7 @@ const addCarListingSchema = z.object({
 type AddCarListingFormData = z.infer<typeof addCarListingSchema>;
 
 const AddCarListingDialog = () => {
-    const { control, register, handleSubmit, formState: { errors, isSubmitting, isValid }, reset } = useForm<AddCarListingFormData>({
+    const { control, register, handleSubmit, formState: { errors, isSubmitting, isValid }, reset, watch } = useForm<AddCarListingFormData>({
         resolver: zodResolver(addCarListingSchema),
         mode: 'onChange',
         defaultValues: {
@@ -58,6 +59,8 @@ const AddCarListingDialog = () => {
             console.error(error);
         }
     };
+
+    const make_id = watch('make_id');
 
     const formContent = (
         <form onSubmit={handleSubmit(submitForm)}>
@@ -113,6 +116,22 @@ const AddCarListingDialog = () => {
                     {errors.make_id && <p className="text-red-500 text-sm">{errors.make_id.message}</p>}
                 </div>
                 <div>
+                    <label htmlFor="car_model_id">Car Model</label>
+                    <Controller
+                        name="car_model_id"
+                        control={control}
+                        render={({ field }) => (
+                            <CarModelSelect
+                                make_id={make_id}
+                                value={field.value}
+                                onChange={(value) => field.onChange(value)}
+                                className={cn(errors.car_model_id ? 'border-red-500' : '')}
+                            />
+                        )}
+                    />
+                    {errors.car_model_id && <p className="text-red-500 text-sm">{errors.car_model_id.message}</p>}
+                </div>
+                <div>
                     <label htmlFor="price">Price</label>
                     <Input
                         type="number"
@@ -155,7 +174,7 @@ const AddCarListingDialog = () => {
                 </div>
             </div>
             <div className="mt-6 flex justify-end space-x-3">
-                <Button type="submit" disabled={isSubmitting || !isValid}>
+                <Button type="submit" >
                     {isSubmitting ? 'Submitting...' : 'Add Listing'}
                 </Button>
             </div>
