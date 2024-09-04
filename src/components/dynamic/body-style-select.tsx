@@ -33,6 +33,7 @@ const BodyStyleSelect = forwardRef<SelectRef, BodyStyleSelectProps>(({ value, on
             disabled={disabled}
             placeholder="Select a body style"
             name={name}
+            searchable={false}
         />
     );
 });
