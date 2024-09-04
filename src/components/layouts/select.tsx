@@ -134,6 +134,14 @@ const Select = forwardRef<SelectRef, SelectProps>(({
               </div>
               {(open || isOpen) && (
                 <Combobox.Options static className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-background p-1 text-sm focus:outline-none border border-input z-[1]">
+                  {loading && (
+                    <div className="p-4 mt-2 text-sm text-muted-foreground flex items-center justify-center">
+                      <ClipLoader />
+                    </div>
+                  )}
+                  {error && (
+                    <div className="mt-2 text-sm text-destructive">Error loading options</div>
+                  )}
                   {filteredOptions.length === 0 ? (
                     <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
                       Nothing found.
@@ -179,14 +187,6 @@ const Select = forwardRef<SelectRef, SelectProps>(({
           </>
         )}
       </Combobox>
-      {loading && (
-        <div className="p-4 mt-2 text-sm text-muted-foreground flex items-center justify-center">
-          <ClipLoader />
-        </div>
-      )}
-      {error && (
-        <div className="mt-2 text-sm text-destructive">Error loading options</div>
-      )}
     </div>
   );
 });

@@ -174,7 +174,7 @@ const AddCarListingDialog = () => {
                 </div>
             </div>
             <div className="mt-6 flex justify-end space-x-3">
-                <Button type="submit" >
+                <Button type="submit" disabled={isSubmitting || !isValid}>
                     {isSubmitting ? 'Submitting...' : 'Add Listing'}
                 </Button>
             </div>
