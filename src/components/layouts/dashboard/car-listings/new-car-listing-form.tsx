@@ -10,13 +10,14 @@ import DetailsStep from './steps/details-step';
 import PricingStep from './steps/pricing-step';
 import ReviewStep from './steps/review-step';
 import ImageUploadStep from './steps/image-upload-step';
+import FeatureSelectionStep from './steps/feature-selection-step';
 
 const addCarListingSchema = z.object({
     make_id: z.string().min(1, 'Make is required'),
     car_model_id: z.string().min(1, 'Car Model is required'),
     body_style_id: z.string().min(1, 'Body Style is required'),
     condition_id: z.string().min(1, 'Condition is required'),
-    // features: z.array(z.string()).min(1, 'At least one feature is required'),
+    features: z.array(z.string()).min(1, 'At least one feature is required'),
     title: z.string().min(1, 'Title is required'),
     // description: z.string().min(1, 'Description is required'),
     price: z.number().min(1, 'Price is required'),
@@ -27,10 +28,6 @@ const addCarListingSchema = z.object({
     // exterior_color: z.string().min(1, 'Exterior Color is required'),
     // interior_color: z.string().min(1, 'Interior Color is required'),
     // transmission: z.string().min(1, 'Transmission is required'),
-    // images: z.array(z.object({
-    //     image: z.string().min(1, 'Image is required'),
-    //     is_primary: z.boolean()
-    // })).min(1, 'At least one image is required') // one of the images should be primary
     images: z.array(z.object({
         image: z.string().min(1, 'Image is required'),
         is_primary: z.boolean()
@@ -45,6 +42,7 @@ export type CarListingFormData = z.infer<typeof addCarListingSchema>;
 const steps = [
   { id: 'basic-info', title: 'Basic Info', component: BasicInfoStep },
   { id: 'details', title: 'Details', component: DetailsStep },
+  { id: 'features', title: 'Features', component: FeatureSelectionStep },
   { id: 'pricing', title: 'Pricing', component: PricingStep },
   { id: 'images', title: 'Images', component: ImageUploadStep },
   { id: 'review', title: 'Review', component: ReviewStep },
@@ -62,6 +60,7 @@ const CarListingWizard: React.FC = () => {
             make_id: '',
             car_model_id: '',
             condition_id: '',
+            features: [],
             title: '',
             year: 1900,
             price: 1,
@@ -99,10 +98,12 @@ const CarListingWizard: React.FC = () => {
             case 1:
                 return ['body_style_id', 'condition_id', 'title'];
             case 2:
-                return ['price', 'year', 'mileage'];
+                return ['features'];
             case 3:
-                return ['images'];
+                return ['price', 'year', 'mileage'];
             case 4:
+                return ['images'];
+            case 5:
             default:
                 return [];
         }

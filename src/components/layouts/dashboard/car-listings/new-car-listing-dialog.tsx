@@ -18,6 +18,7 @@ const AddCarListingDialog = () => {
             trigger={trigger}
             title="Add New Car Listing"
             description="Enter the details of the new car listing here."
+            className="max-w-[600px]"
         >
             <CarListingWizard />
         </Dialog>

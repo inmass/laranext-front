@@ -24,6 +24,8 @@ const ApiEndpoints = {
     carModels: '/api/backoffice/car-models',
 
     conditions: '/api/backoffice/conditions',
+
+    features: '/api/backoffice/features',
 };
 
 export default ApiEndpoints;
