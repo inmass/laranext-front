@@ -5,17 +5,12 @@ import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { MoreHorizontal } from 'lucide-react';
 import ImageWithPreview from '@/components/ui/image-with-preview';
-
+import { ActionColumn } from './interfaces';
 interface Column<T> {
   header: string;
   accessor: keyof T | ((item: T) => React.ReactNode);
   type?: 'text' | 'number' | 'date' | 'image' | 'currency';
   className?: string;
-}
-
-interface ActionColumn<T> {
-  name: string;
-  accessor: (item: T) => React.ReactNode;
 }
 
 interface DataTableRowProps<T> {

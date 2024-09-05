@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { getMakes } from '@/hooks/api/makes';
+import { getMakes, MakesParams } from '@/hooks/api/makes';
 import Select, { SelectRef } from '@/components/layouts/select';
 
 
@@ -13,12 +13,14 @@ interface MakeSelectProps {
 }
 
 const MakeSelect = forwardRef<SelectRef, MakeSelectProps>(({ value, onChange, onBlur, className, disabled, name }, ref) => {
-    const { data, isLoading, isError } = getMakes({
+    const params: MakesParams = {
         page: 1,
         noPagination: true,
         fields: ['id', 'name'],
         sort: { key: 'name', direction: 'asc' }
-    });
+    };
+
+    const { data, isLoading, isError } = getMakes(params);
 
     return (
         <Select
