@@ -9,6 +9,7 @@ import BasicInfoStep from './steps/basic-info-step';
 import DetailsStep from './steps/details-step';
 import PricingStep from './steps/pricing-step';
 import ReviewStep from './steps/review-step';
+import ImageUploadStep from './steps/image-upload-step';
 
 const addCarListingSchema = z.object({
     make_id: z.string().min(1, 'Make is required'),
@@ -29,7 +30,13 @@ const addCarListingSchema = z.object({
     // images: z.array(z.object({
     //     image: z.string().min(1, 'Image is required'),
     //     is_primary: z.boolean()
-    // })).min(1, 'At least one image is required')
+    // })).min(1, 'At least one image is required') // one of the images should be primary
+    images: z.array(z.object({
+        image: z.string().min(1, 'Image is required'),
+        is_primary: z.boolean()
+    })).min(1, 'At least one image is required').refine(images => images.some(img => img.is_primary), {
+        message: 'At least one image must be primary',
+    }),
 });
 
 export type CarListingFormData = z.infer<typeof addCarListingSchema>;
@@ -39,6 +46,7 @@ const steps = [
   { id: 'basic-info', title: 'Basic Info', component: BasicInfoStep },
   { id: 'details', title: 'Details', component: DetailsStep },
   { id: 'pricing', title: 'Pricing', component: PricingStep },
+  { id: 'images', title: 'Images', component: ImageUploadStep },
   { id: 'review', title: 'Review', component: ReviewStep },
 ];
 
@@ -53,11 +61,12 @@ const CarListingWizard: React.FC = () => {
             body_style_id: '',
             make_id: '',
             car_model_id: '',
-            title: '',
-            year: undefined,
-            price: undefined,
-            mileage: undefined,
             condition_id: '',
+            title: '',
+            year: 1900,
+            price: 1,
+            mileage: 1,
+            images: [],
         },
     });
 
@@ -91,7 +100,9 @@ const CarListingWizard: React.FC = () => {
                 return ['body_style_id', 'condition_id', 'title'];
             case 2:
                 return ['price', 'year', 'mileage'];
-                case 3:
+            case 3:
+                return ['images'];
+            case 4:
             default:
                 return [];
         }
