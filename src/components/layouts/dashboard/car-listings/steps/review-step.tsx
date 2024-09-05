@@ -1,8 +1,9 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
+import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/new-car-listing-form';
 
 const ReviewStep: React.FC = () => {
-  const { getValues } = useFormContext();
+  const { getValues } = useFormContext<CarListingFormData>();
   const values = getValues();
 
   return (

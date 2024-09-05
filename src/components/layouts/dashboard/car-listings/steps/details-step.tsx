@@ -4,9 +4,10 @@ import { cn } from '@/lib/utils';
 import BodyStyleSelect from '@/components/dynamic/body-style-select';
 import { Input } from '@/components/ui/input';
 import Select from '@/components/layouts/select';
+import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/new-car-listing-form';
 
 const DetailsStep: React.FC = () => {
-  const { control, formState: { errors }, register } = useFormContext();
+  const { control, formState: { errors }, register } = useFormContext<CarListingFormData>();
 
   return (
     <div className="space-y-4">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -51,6 +51,8 @@ const CarListingWizard: React.FC = () => {
         mode: 'onChange',
         defaultValues: {
             body_style_id: '',
+            make_id: '',
+            car_model_id: '',
             title: '',
             year: undefined,
             price: undefined,
@@ -59,18 +61,13 @@ const CarListingWizard: React.FC = () => {
         },
     });
 
-    const { handleSubmit, trigger, formState: { errors } } = methods;
+    const { handleSubmit, trigger } = methods;
 
     const nextStep = async () => {
-        console.log('Current Step', currentStep);
-        console.log('Steps', steps.length);
-        console.log('Steps-1', steps.length-1);
         const fields = getFieldsForStep(currentStep);
         const isStepValid = await trigger(fields);
         if (isStepValid) {
-            console.log('Is Step Valid', isStepValid);
             setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
-            console.log('nextStep', currentStep);
         }
     };
 
@@ -102,7 +99,7 @@ const CarListingWizard: React.FC = () => {
 
     return (
         <FormProvider {...methods}>
-            <form onSubmit={handleSubmit(submitForm)}>
+            <form>
                 <Tabs.Root value={steps[currentStep].id} onValueChange={(value) => setCurrentStep(steps.findIndex(step => step.id === value))}>
                     <Tabs.List className="flex space-x-1 rounded-xl bg-muted p-1" aria-label="Manage your account">
                         {steps.map((step, index) => (
@@ -111,10 +108,10 @@ const CarListingWizard: React.FC = () => {
                             value={step.id}
                             disabled={index > currentStep}
                             className={cn(
-                            "w-full bg-card rounded-lg py-2.5 text-sm text-card font-medium leading-none focus:outline-none",
+                            "w-full bg-card rounded-lg py-2.5 text-sm text-card-foreground font-medium leading-none focus:outline-none",
                             index === currentStep
-                                ? "shadow bg-muted-foreground"
-                                : "text-card-foreground hover:bg-muted-foreground hover:text-card"
+                                ? "shadow bg-muted-foreground text-card"
+                                : "bg-muted"
                             )}
                         >
                             {step.title}
@@ -140,9 +137,9 @@ const CarListingWizard: React.FC = () => {
                     )}
                     {
                         currentStep === steps.length - 1 ? (
-                            <Button type="submit">Submit</Button>
+                            <Button type="button" onClick={handleSubmit(submitForm)}>Submit</Button>
                         ) : (
-                            <Button type="button" onClick={nextStep} className='[align-self:flex-end]'>
+                            <Button type="button" onClick={nextStep}>
                                 Next
                             </Button>
                         )

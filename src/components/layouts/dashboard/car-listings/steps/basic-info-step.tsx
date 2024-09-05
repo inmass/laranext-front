@@ -1,20 +1,13 @@
 import React from 'react';
 import { useFormContext, Controller } from 'react-hook-form';
-import { useQuery } from '@tanstack/react-query';
-import { getMakes } from '@/hooks/api/makes';
 import CarModelSelect from '@/components/dynamic/car-model-select';
 import { cn } from '@/lib/utils';
 import MakeSelect from '@/components/dynamic/make-select';
+import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/new-car-listing-form';
 
 const BasicInfoStep: React.FC = () => {
-  const { control, watch, formState: { errors } } = useFormContext();
+  const { control, watch, formState: { errors } } = useFormContext<CarListingFormData>();
   const make_id = watch('make_id');
-
-  const getErrorMessage = (error: any): string => {
-    if (typeof error === 'string') return error;
-    if (error?.message && typeof error.message === 'string') return error.message;
-    return 'This field has an error';
-  };
 
   return (
     <div className="space-y-4">
@@ -31,7 +24,7 @@ const BasicInfoStep: React.FC = () => {
                     />
                 )}
             />
-            {errors.make_id && errors.make_id.message && <p className="text-red-500 text-sm">{getErrorMessage(errors.make_id.message)}</p>}
+            {errors.make_id && <p className="text-red-500 text-sm">{errors.make_id.message}</p>}
         </div>
 
         <div>
@@ -48,7 +41,7 @@ const BasicInfoStep: React.FC = () => {
                     />
                 )}
             />
-            {errors.car_model_id && <p className="text-red-500 text-sm">{getErrorMessage(errors.car_model_id.message)}</p>}
+            {errors.car_model_id && <p className="text-red-500 text-sm">{errors.car_model_id.message}</p>}
         </div>
     </div>
   );
