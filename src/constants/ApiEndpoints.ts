@@ -11,7 +11,7 @@ const ApiEndpoints = {
         emailVerificationNotification: '/email/verification-notification',
         SocialLogin: (provider: string) => `/auth/${provider}/redirect`,
     },
-    profileDetailsUpdate: '/api/profilessss',
+    profileDetailsUpdate: '/api/profile',
     profileAvatarUpdate: '/api/profile/avatar',
     profilePasswordUpdate: '/api/profile/password',
 

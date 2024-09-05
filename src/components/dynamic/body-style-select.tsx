@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { getBodyStyles } from '@/hooks/api/body-styles';
+import { getBodyStyles, BodyStylesParams } from '@/hooks/api/body-styles';
 import Select, { SelectRef } from '@/components/layouts/select';
 
 
@@ -13,12 +13,15 @@ interface BodyStyleSelectProps {
 }
 
 const BodyStyleSelect = forwardRef<SelectRef, BodyStyleSelectProps>(({ value, onChange, onBlur, className, disabled, name }, ref) => {
-    const { data, isLoading, isError } = getBodyStyles({
+
+    const params: BodyStylesParams = {
         page: 1,
         noPagination: true,
         fields: ['id', 'name'],
         sort: { key: 'name', direction: 'asc' }
-    });
+    };
+
+    const { data, isLoading, isError } = getBodyStyles(params);
 
     return (
         <Select
