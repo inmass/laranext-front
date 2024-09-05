@@ -1,9 +1,9 @@
 import React, { forwardRef } from 'react';
-import { getMakes, MakesParams } from '@/hooks/api/makes';
+import { getConditions, ConditionsParams } from '@/hooks/api/conditions';
 import Select, { SelectRef } from '@/components/layouts/select';
 
 
-interface MakeSelectProps {
+interface ConditionSelectProps {
     value?: string;
     onChange?: (value: string|number) => void;
     onBlur?: () => void;
@@ -12,15 +12,16 @@ interface MakeSelectProps {
     name?: string;
 }
 
-const MakeSelect = forwardRef<SelectRef, MakeSelectProps>(({ value, onChange, onBlur, className, disabled, name }, ref) => {
-    const params: MakesParams = {
+const ConditionSelect = forwardRef<SelectRef, ConditionSelectProps>(({ value, onChange, onBlur, className, disabled, name }, ref) => {
+
+    const params: ConditionsParams = {
         page: 1,
         noPagination: true,
         fields: ['id', 'name'],
         sort: { key: 'name', direction: 'asc' }
     };
 
-    const { data, isLoading, isError } = getMakes(params);
+    const { data, isLoading, isError } = getConditions(params);
 
     return (
         <Select
@@ -33,10 +34,11 @@ const MakeSelect = forwardRef<SelectRef, MakeSelectProps>(({ value, onChange, on
             error={isError}
             className={className}
             disabled={disabled}
-            placeholder="Select a car make"
+            placeholder="Select a condition"
             name={name}
+            searchable={false}
         />
     );
 });
 
-export default MakeSelect;
+export default ConditionSelect;

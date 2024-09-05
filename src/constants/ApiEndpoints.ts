@@ -22,6 +22,8 @@ const ApiEndpoints = {
     makes: '/api/backoffice/makes',
 
     carModels: '/api/backoffice/car-models',
+
+    conditions: '/api/backoffice/conditions',
 };
 
 export default ApiEndpoints;

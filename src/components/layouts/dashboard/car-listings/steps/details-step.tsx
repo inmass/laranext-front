@@ -5,6 +5,7 @@ import BodyStyleSelect from '@/components/dynamic/body-style-select';
 import { Input } from '@/components/ui/input';
 import Select from '@/components/layouts/select';
 import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/new-car-listing-form';
+import ConditionSelect from '@/components/dynamic/condition-select';
 
 const DetailsStep: React.FC = () => {
   const { control, formState: { errors }, register } = useFormContext<CarListingFormData>();
@@ -28,25 +29,19 @@ const DetailsStep: React.FC = () => {
       </div>
 
       <div>
-            <label htmlFor="condition_id">Condition</label>
-            <Controller
-                name="condition_id"
-                control={control}
-                render={({ field }) => (
-                    <Select
-                        {...field}
-                        options={[
-                            { label: 'New', value: '1' },
-                            { label: 'Used', value: '2' },
-                            { label: 'Certified Pre-Owned', value: '3' },
-                        ]}
-                        placeholder="Select a condition"
-                        className={cn(errors.condition_id ? 'border-red-500' : '')}
-                        searchable={false}
-                    />
-                )}
-            />
-            {errors.condition_id && <p className="text-red-500 text-sm">{errors.condition_id.message}</p>}
+          <label htmlFor="condition_id">Condition</label>
+          <Controller
+              name="condition_id"
+              control={control}
+              render={({ field }) => (
+                  <ConditionSelect
+                      {...field}
+                      onChange={(value) => field.onChange(value)}
+                      className={cn(errors.condition_id ? 'border-red-500' : '')}
+                  />
+              )}
+          />
+          {errors.condition_id && <p className="text-red-500 text-sm">{errors.condition_id.message}</p>}
         </div>
 
         <div>
