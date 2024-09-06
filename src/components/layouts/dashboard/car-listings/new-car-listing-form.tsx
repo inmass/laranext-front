@@ -6,11 +6,13 @@ import * as Tabs from '@radix-ui/react-tabs';
 import Button from '@/components/Button';
 import { cn } from '@/lib/utils';
 import BasicInfoStep from './steps/basic-info-step';
-import DetailsStep from './steps/details-step';
+import VehicleDetailsStep from './steps/vehicle-details-step';
 import PricingStep from './steps/pricing-step';
 import ReviewStep from './steps/review-step';
 import ImageUploadStep from './steps/image-upload-step';
 import FeatureSelectionStep from './steps/feature-selection-step';
+import AppearanceStep from './steps/appearance-step';
+import DescriptionStep from './steps/description-step';
 
 const addCarListingSchema = z.object({
     make_id: z.string().min(1, 'Make is required'),
@@ -19,15 +21,15 @@ const addCarListingSchema = z.object({
     condition_id: z.string().min(1, 'Condition is required'),
     features: z.array(z.string()).min(1, 'At least one feature is required'),
     title: z.string().min(1, 'Title is required'),
-    // description: z.string().min(1, 'Description is required'),
+    description: z.string().min(1, 'Description is required'),
     price: z.number().min(1, 'Price is required'),
-    // original_price: z.number().nullable(),
+    // original_price: z.number().nullable(), number or NaN
+    original_price: z.union([z.number(), z.string()]).nullable(),
     year: z.number().min(1900, 'Year must be 1900 or later').max(new Date().getFullYear() + 1, 'Year cannot be in the future'),
     mileage: z.number().min(0, 'Mileage cannot be negative'),
-    // vin: z.string().min(1, 'VIN is required'),
-    // exterior_color: z.string().min(1, 'Exterior Color is required'),
-    // interior_color: z.string().min(1, 'Interior Color is required'),
-    // transmission: z.string().min(1, 'Transmission is required'),
+    exterior_color: z.string().min(1, 'Exterior Color is required'),
+    interior_color: z.string().min(1, 'Interior Color is required'),
+    transmission: z.string().min(1, 'Transmission is required'),
     images: z.array(z.object({
         image: z.string().min(1, 'Image is required'),
         is_primary: z.boolean()
@@ -40,13 +42,15 @@ export type CarListingFormData = z.infer<typeof addCarListingSchema>;
 
 
 const steps = [
-  { id: 'basic-info', title: 'Basic Info', component: BasicInfoStep },
-  { id: 'details', title: 'Details', component: DetailsStep },
-  { id: 'features', title: 'Features', component: FeatureSelectionStep },
-  { id: 'pricing', title: 'Pricing', component: PricingStep },
-  { id: 'images', title: 'Images', component: ImageUploadStep },
-  { id: 'review', title: 'Review', component: ReviewStep },
-];
+    { id: 'basic-info', title: 'Basic Info', component: BasicInfoStep },
+    { id: 'vehicle-details', title: 'Details', component: VehicleDetailsStep },
+    { id: 'features', title: 'Features', component: FeatureSelectionStep },
+    { id: 'appearance', title: 'Appearance', component: AppearanceStep },
+    { id: 'pricing', title: 'Pricing', component: PricingStep },
+    { id: 'description', title: 'Description', component: DescriptionStep },
+    { id: 'images', title: 'Images', component: ImageUploadStep },
+    { id: 'review', title: 'Review', component: ReviewStep },
+  ];
 
 
 const CarListingWizard: React.FC = () => {
@@ -66,6 +70,10 @@ const CarListingWizard: React.FC = () => {
             price: 1,
             mileage: 1,
             images: [],
+            description: '',
+            original_price: null,
+            exterior_color: '',
+            interior_color: '',
         },
     });
 
@@ -93,37 +101,44 @@ const CarListingWizard: React.FC = () => {
 
     const getFieldsForStep = (step: number): (keyof CarListingFormData)[] => {
         switch (step) {
-            case 0:
-                return ['make_id', 'car_model_id'];
-            case 1:
-                return ['body_style_id', 'condition_id', 'title'];
-            case 2:
+            case 0: // Basic Info
+                return ['make_id', 'car_model_id', 'year', 'title'];
+            case 1: // Vehicle Details
+                return ['body_style_id', 'condition_id', 'mileage', 'transmission'];
+            case 2: // Features
                 return ['features'];
-            case 3:
-                return ['price', 'year', 'mileage'];
-            case 4:
+            case 3: // Appearance
+                return ['exterior_color', 'interior_color'];
+            case 4: // Pricing
+                return ['price', 'original_price'];
+            case 5: // Description
+                return ['description'];
+            case 6: // Images
                 return ['images'];
-            case 5:
+            case 7: // Review
             default:
                 return [];
         }
     };
+      
 
     return (
         <FormProvider {...methods}>
             <form>
                 <Tabs.Root value={steps[currentStep].id} onValueChange={(value) => setCurrentStep(steps.findIndex(step => step.id === value))}>
-                    <Tabs.List className="flex space-x-1 rounded-xl bg-muted p-1" aria-label="Manage your account">
+                    <Tabs.List className="flex space-x-1 rounded-xl bg-muted p-2 flex-wrap justify-center" aria-label="Manage your account">
                         {steps.map((step, index) => (
                         <Tabs.Trigger
                             key={step.id}
                             value={step.id}
                             disabled={index > currentStep}
                             className={cn(
-                            "w-full bg-card rounded-lg py-2.5 text-sm text-card-foreground font-medium leading-none focus:outline-none",
-                            index === currentStep
+                                "bg-card rounded-lg py-2.5 px-3 text-sm text-card-foreground font-medium leading-none focus:outline-none",
+                                "min-w-[100px] flex-grow max-w-[calc(20%-0.5rem)]", // Set minimum width and maximum width
+                                index === currentStep
                                 ? "shadow bg-muted-foreground text-card"
-                                : "bg-muted"
+                                : "bg-muted",
+                                index >= 5 && "mt-1" // Add top margin for items on the second line
                             )}
                         >
                             {step.title}

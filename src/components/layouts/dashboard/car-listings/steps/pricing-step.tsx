@@ -42,16 +42,7 @@ const PricingStep: React.FC = () => {
         {errors.year && <p className="text-red-500 text-sm">{errors.year.message}</p>}
       </div>
 
-        <div>
-            <label htmlFor="mileage">Mileage</label>
-            <Input
-                type="number"
-                id="mileage"
-                {...register('mileage', { valueAsNumber: true })}
-                className={cn(errors.mileage ? 'border-red-500' : '')}
-            />
-            {errors.mileage && <p className="text-red-500 text-sm">{errors.mileage.message}</p>}
-        </div>
+        
     </div>
   );
 };

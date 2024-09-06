@@ -5,9 +5,10 @@ import { cn } from '@/lib/utils';
 import MakeSelect from '@/components/dynamic/make-select';
 import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/new-car-listing-form';
 import Select from '@/components/layouts/select';
+import { Input } from '@/components/ui/input';
 
 const BasicInfoStep: React.FC = () => {
-  const { control, watch, formState: { errors } } = useFormContext<CarListingFormData>();
+  const { control, watch, formState: { errors }, register } = useFormContext<CarListingFormData>();
   const make_id = watch('make_id');
 
   return (
@@ -46,23 +47,14 @@ const BasicInfoStep: React.FC = () => {
         </div>
 
         <div>
-            <label htmlFor="transmission">Transmission</label>
-            <Controller
-                name="transmission"
-                control={control}
-                render={({ field }) => (
-                    <Select
-                        {...field}
-                        options={[
-                            { label: 'Automatic', value: 'automatic' },
-                            { label: 'Manual', value: 'manual' },
-                        ]}
-                        searchable={false}
-                        className={cn(errors.transmission ? 'border-red-500' : '')}
-                    />
-                )}
-            />
-            {errors.transmission && <p className="text-red-500 text-sm">{errors.transmission.message}</p>}
+          <label htmlFor="title">Title</label>
+          <Input
+              type="text"
+              id="title"
+              {...register('title')}
+              className={cn(errors.title ? 'border-red-500' : '')}
+          />
+          {errors.title && <p className="text-red-500 text-sm">{errors.title.message}</p>}
         </div>
     </div>
   );
