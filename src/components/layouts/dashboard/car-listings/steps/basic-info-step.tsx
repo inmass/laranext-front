@@ -4,6 +4,7 @@ import CarModelSelect from '@/components/dynamic/car-model-select';
 import { cn } from '@/lib/utils';
 import MakeSelect from '@/components/dynamic/make-select';
 import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/new-car-listing-form';
+import Select from '@/components/layouts/select';
 
 const BasicInfoStep: React.FC = () => {
   const { control, watch, formState: { errors } } = useFormContext<CarListingFormData>();
@@ -42,6 +43,26 @@ const BasicInfoStep: React.FC = () => {
                 )}
             />
             {errors.car_model_id && <p className="text-red-500 text-sm">{errors.car_model_id.message}</p>}
+        </div>
+
+        <div>
+            <label htmlFor="transmission">Transmission</label>
+            <Controller
+                name="transmission"
+                control={control}
+                render={({ field }) => (
+                    <Select
+                        {...field}
+                        options={[
+                            { label: 'Automatic', value: 'automatic' },
+                            { label: 'Manual', value: 'manual' },
+                        ]}
+                        searchable={false}
+                        className={cn(errors.transmission ? 'border-red-500' : '')}
+                    />
+                )}
+            />
+            {errors.transmission && <p className="text-red-500 text-sm">{errors.transmission.message}</p>}
         </div>
     </div>
   );

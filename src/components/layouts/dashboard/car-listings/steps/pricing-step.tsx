@@ -19,6 +19,17 @@ const PricingStep: React.FC = () => {
         />
         {errors.price && <p className="text-red-500 text-sm">{errors.price.message}</p>}
       </div>
+      
+      <div>
+        <label htmlFor="original_price">Original Price</label>
+        <Input
+            type="number"
+            id="original_price"
+            {...register('original_price', { valueAsNumber: true })}
+            className={cn(errors.original_price ? 'border-red-500' : '')}
+        />
+        {errors.original_price && <p className="text-red-500 text-sm">{errors.original_price.message}</p>}
+      </div>
 
       <div>
         <label htmlFor="year">Year</label>
