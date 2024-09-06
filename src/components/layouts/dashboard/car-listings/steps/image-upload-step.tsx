@@ -81,13 +81,12 @@ const ImageUploadStep: React.FC = () => {
             >
               <X size={16} />
             </button>
-            {/* a div with background black opacity 0.5 gradient to transparent from bottom to top */}
-            <div className='absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-black to-transparent' >
+            <div className='absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-black to-transparent rounded-b-md' >
               <button 
                 type='button'
                 onClick={() => setPrimary(index)}
                 className={cn(
-                  'absolute bottom-0 left-0 rounded-full p-1 m-1',
+                  'absolute bottom-0 left-0 rounded-full p-1 m-1 text-white',
                   file.is_primary ? 'bg-blue-500' : ''
                 )}
               >

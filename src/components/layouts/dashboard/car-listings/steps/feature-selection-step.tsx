@@ -9,11 +9,6 @@ import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/
 const FeatureSelectionStep: React.FC = () => {
   const { control, formState: { errors, isValid } } = useFormContext<CarListingFormData>();
 
-  console.log('isValid', isValid);
-  console.log('errors', errors);
-  // console submited data
-  console.log('control', control);
-
   const params: FeaturesParams = {
     page: 1,
     noPagination: true,

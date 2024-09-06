@@ -30,7 +30,7 @@ const CheckBox = React.forwardRef<HTMLInputElement, CheckBoxProps>(
             </svg>
           </span>
         </label>
-        <label className="cursor-pointer ml-2 text-slate-600 text-sm" htmlFor={props.id}>
+        <label className="cursor-pointer ml-2 text-sm" htmlFor={props.id}>
           {label}
         </label>
       </div>
