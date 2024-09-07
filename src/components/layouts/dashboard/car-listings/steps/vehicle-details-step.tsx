@@ -6,9 +6,22 @@ import { Input } from '@/components/ui/input';
 import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/new-car-listing-form';
 import ConditionSelect from '@/components/dynamic/condition-select';
 import Select from '@/components/layouts/select';
+import { useLookup } from '../context/lookup-context';
 
 const VehicleDetailsStep: React.FC = () => {
   const { control, formState: { errors }, register } = useFormContext<CarListingFormData>();
+
+  const { addLookupData } = useLookup();
+
+  const handleConditionChange = (field: any, value: string, label: string) => {
+    field.onChange(value);
+    addLookupData('conditions', value, label);
+  };
+
+  const handleBodyStyleChange = (field: any, value: string, label: string) => {
+    field.onChange(value);
+    addLookupData('bodyStyles', value, label);
+  }
 
   return (
     <div className="space-y-4">
@@ -20,7 +33,7 @@ const VehicleDetailsStep: React.FC = () => {
           render={({ field }) => (
             <BodyStyleSelect
               {...field}
-              onChange={(value) => field.onChange(value)}
+              onChange={(value, label) => handleBodyStyleChange(field, value, label)}
               className={cn(errors.body_style_id ? 'border-red-500' : '')}
             />
           )}
@@ -36,7 +49,7 @@ const VehicleDetailsStep: React.FC = () => {
             render={({ field }) => (
                 <ConditionSelect
                     {...field}
-                    onChange={(value) => field.onChange(value)}
+                    onChange={(value, label) => handleConditionChange(field, value, label)}
                     className={cn(errors.condition_id ? 'border-red-500' : '')}
                 />
             )}

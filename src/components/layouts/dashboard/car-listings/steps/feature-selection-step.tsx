@@ -5,6 +5,7 @@ import { FeaturesParams, getFeatures } from "@/hooks/api/features";
 import { GroupedFeatures, groupFeatures } from "@/lib/utils";
 import { FeatureType } from "@/types/feature";
 import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/new-car-listing-form';
+import { useLookup } from '../context/lookup-context';
 
 const FeatureSelectionStep: React.FC = () => {
   const { control, formState: { errors, isValid } } = useFormContext<CarListingFormData>();
@@ -17,11 +18,26 @@ const FeatureSelectionStep: React.FC = () => {
   };
 
   const { data: features, isLoading, error } = getFeatures(params);
+  
+  const { addLookupData } = useLookup();
 
-  const groupedFeatures: GroupedFeatures = useMemo(() => {
-    if (!features?.data) return {};
-    return groupFeatures(features.data);
-  }, [features]);
+  const { groupedFeatures, featureLookup } = useMemo(() => {
+    if (!features?.data) return { groupedFeatures: {}, featureLookup: {} };
+
+    const grouped = groupFeatures(features.data);
+    const lookup: Record<string, string> = {};
+
+    features.data.forEach((feature: FeatureType) => {
+      lookup[feature.id.toString()] = feature.name;
+    });
+
+    // Add all features to lookup data
+    Object.entries(lookup).forEach(([id, name]) => {
+      addLookupData('features', id, name);
+    });
+
+    return { groupedFeatures: grouped, featureLookup: lookup };
+  }, [features, addLookupData]);
 
   if (isLoading) return <div>Loading features...</div>;
   if (error) return <div>Error loading features: {error.message}</div>;

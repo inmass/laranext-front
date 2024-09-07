@@ -13,6 +13,7 @@ import ImageUploadStep from './steps/image-upload-step';
 import FeatureSelectionStep from './steps/feature-selection-step';
 import AppearanceStep from './steps/appearance-step';
 import DescriptionStep from './steps/description-step';
+import { LookupProvider } from './context/lookup-context';
 
 const addCarListingSchema = z.object({
     make_id: z.string().min(1, 'Make is required'),
@@ -23,8 +24,7 @@ const addCarListingSchema = z.object({
     title: z.string().min(1, 'Title is required'),
     description: z.string().min(1, 'Description is required'),
     price: z.number().min(1, 'Price is required'),
-    // original_price: z.number().nullable(), number or NaN
-    original_price: z.union([z.number(), z.string()]).nullable(),
+    original_price: z.union([z.number(), z.nan()]),
     year: z.number().min(1900, 'Year must be 1900 or later').max(new Date().getFullYear() + 1, 'Year cannot be in the future'),
     mileage: z.number().min(0, 'Mileage cannot be negative'),
     exterior_color: z.string().min(1, 'Exterior Color is required'),
@@ -71,9 +71,10 @@ const CarListingWizard: React.FC = () => {
             mileage: 1,
             images: [],
             description: '',
-            original_price: null,
+            original_price: NaN,
             exterior_color: '',
             interior_color: '',
+            transmission: '',
         },
     });
 
@@ -123,57 +124,59 @@ const CarListingWizard: React.FC = () => {
       
 
     return (
-        <FormProvider {...methods}>
-            <form>
-                <Tabs.Root value={steps[currentStep].id} onValueChange={(value) => setCurrentStep(steps.findIndex(step => step.id === value))}>
-                    <Tabs.List className="flex space-x-1 rounded-xl bg-muted p-2 flex-wrap justify-center" aria-label="Manage your account">
+        <LookupProvider>
+            <FormProvider {...methods}>
+                <form>
+                    <Tabs.Root value={steps[currentStep].id} onValueChange={(value) => setCurrentStep(steps.findIndex(step => step.id === value))}>
+                        <Tabs.List className="flex space-x-1 rounded-xl bg-muted p-2 flex-wrap justify-center" aria-label="Manage your account">
+                            {steps.map((step, index) => (
+                            <Tabs.Trigger
+                                key={step.id}
+                                value={step.id}
+                                disabled={index > currentStep}
+                                className={cn(
+                                    "bg-card rounded-lg py-2.5 px-3 text-sm text-card-foreground font-medium leading-none focus:outline-none",
+                                    "min-w-[100px] flex-grow max-w-[calc(20%-0.5rem)]", // Set minimum width and maximum width
+                                    index === currentStep
+                                    ? "shadow bg-muted-foreground text-card"
+                                    : "bg-muted",
+                                    index >= 5 && "mt-1" // Add top margin for items on the second line
+                                )}
+                            >
+                                {step.title}
+                            </Tabs.Trigger>
+                            ))}
+                        </Tabs.List>
                         {steps.map((step, index) => (
-                        <Tabs.Trigger
-                            key={step.id}
-                            value={step.id}
-                            disabled={index > currentStep}
-                            className={cn(
-                                "bg-card rounded-lg py-2.5 px-3 text-sm text-card-foreground font-medium leading-none focus:outline-none",
-                                "min-w-[100px] flex-grow max-w-[calc(20%-0.5rem)]", // Set minimum width and maximum width
-                                index === currentStep
-                                ? "shadow bg-muted-foreground text-card"
-                                : "bg-muted",
-                                index >= 5 && "mt-1" // Add top margin for items on the second line
-                            )}
-                        >
-                            {step.title}
-                        </Tabs.Trigger>
+                            <Tabs.Content key={step.id} value={step.id} className="mt-6">
+                                <step.component />
+                            </Tabs.Content>
                         ))}
-                    </Tabs.List>
-                    {steps.map((step, index) => (
-                        <Tabs.Content key={step.id} value={step.id} className="mt-6">
-                            <step.component />
-                        </Tabs.Content>
-                    ))}
-                </Tabs.Root>
+                    </Tabs.Root>
 
-                {/* <div className="mt-6 flex justify-between"> */}
-                <div className={cn(
-                    'mt-6 flex',
-                    currentStep > 0 ? 'justify-between' : 'justify-end'
-                )}>
-                    {currentStep > 0 && (
-                        <Button type="button" onClick={prevStep}>
-                            Previous
-                        </Button>
-                    )}
-                    {
-                        currentStep === steps.length - 1 ? (
-                            <Button type="button" onClick={handleSubmit(submitForm)}>Submit</Button>
-                        ) : (
-                            <Button type="button" onClick={nextStep}>
-                                Next
+                    {/* <div className="mt-6 flex justify-between"> */}
+                    <div className={cn(
+                        'mt-6 flex',
+                        currentStep > 0 ? 'justify-between' : 'justify-end'
+                    )}>
+                        {currentStep > 0 && (
+                            <Button type="button" onClick={prevStep}>
+                                Previous
                             </Button>
-                        )
-                    }
-                </div>
-            </form>
-        </FormProvider>
+                        )}
+                        {
+                            currentStep === steps.length - 1 ? (
+                                <Button type="button" onClick={handleSubmit(submitForm)}>Submit</Button>
+                            ) : (
+                                <Button type="button" onClick={nextStep}>
+                                    Next
+                                </Button>
+                            )
+                        }
+                    </div>
+                </form>
+            </FormProvider>
+        </LookupProvider>
     );
 };
 

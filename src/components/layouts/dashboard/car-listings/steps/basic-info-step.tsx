@@ -4,12 +4,24 @@ import CarModelSelect from '@/components/dynamic/car-model-select';
 import { cn } from '@/lib/utils';
 import MakeSelect from '@/components/dynamic/make-select';
 import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/new-car-listing-form';
-import Select from '@/components/layouts/select';
 import { Input } from '@/components/ui/input';
+import { useLookup } from '../context/lookup-context';
 
 const BasicInfoStep: React.FC = () => {
   const { control, watch, formState: { errors }, register } = useFormContext<CarListingFormData>();
   const make_id = watch('make_id');
+
+  const { addLookupData } = useLookup();
+
+  const handleMakeChange = (field: any, value: string, label: string) => {
+    field.onChange(value);
+    addLookupData('makes', value, label);
+  };
+
+  const handleModelChange = (field: any, value: string, label: string) => {
+    field.onChange(value);
+    addLookupData('models', value, label);
+  }
 
   return (
     <div className="space-y-4">
@@ -21,7 +33,8 @@ const BasicInfoStep: React.FC = () => {
                 render={({ field }) => (
                     <MakeSelect
                         {...field}
-                        onChange={(value) => field.onChange(value)}
+                        value={field.value}
+                        onChange={(value, label) => handleMakeChange(field, value, label)}
                         className={cn(errors.make_id ? 'border-red-500' : '')}
                     />
                 )}
@@ -38,7 +51,7 @@ const BasicInfoStep: React.FC = () => {
                     <CarModelSelect
                         make_id={make_id}
                         value={field.value}
-                        onChange={field.onChange}
+                        onChange={(value, label) => handleModelChange(field, value, label)}
                         className={cn(errors.car_model_id && "border-red-500")}
                     />
                 )}

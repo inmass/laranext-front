@@ -5,11 +5,21 @@ import Select, { SelectRef } from '@/components/layouts/select';
 interface CarModelSelectProps {
     make_id?: string;
     value?: string;
-    onChange?: (value: string) => void;
+    onChange?: (value: string, label: string) => void;
     onBlur?: () => void;
     className?: string;
     disabled?: boolean;
     name?: string;
+}
+
+interface Option {
+    label: string;
+    value: string;
+}
+
+interface CarModel {
+    id: number;
+    name: string;
 }
 
 const CarModelSelect = forwardRef<SelectRef, CarModelSelectProps>(
@@ -25,13 +35,16 @@ const CarModelSelect = forwardRef<SelectRef, CarModelSelectProps>(
 
     const { data, isLoading, isError } = getCarModels(queryParams);
 
-    const options = useMemo(() => 
-        data?.map(({ id, name }: any) => ({ label: name, value: String(id) })) || []
+    const options: Option[] = useMemo(() => 
+        data?.map(({ id, name }: CarModel) => ({ label: name, value: String(id) })) || []
     , [data]);
 
-    const handleChange = (selectedValue: string | number) => {
-        onChange?.(String(selectedValue));
-    };
+    const handleChange = (selectedValue: string) => {
+        const selectedOption = options.find(option => option.value === selectedValue);
+        if (selectedOption && onChange) {
+            onChange(selectedOption.value, selectedOption.label);
+        }
+    }
 
     return (
         <Select

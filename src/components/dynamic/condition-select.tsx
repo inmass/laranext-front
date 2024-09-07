@@ -5,11 +5,21 @@ import Select, { SelectRef } from '@/components/layouts/select';
 
 interface ConditionSelectProps {
     value?: string;
-    onChange?: (value: string|number) => void;
+    onChange?: (value: string, label: string) => void;
     onBlur?: () => void;
     className?: string;
     disabled?: boolean;
     name?: string;
+}
+
+interface Option {
+    label: string;
+    value: string;
+}
+
+interface Condition {
+    id: number;
+    name: string;
 }
 
 const ConditionSelect = forwardRef<SelectRef, ConditionSelectProps>(({ value, onChange, onBlur, className, disabled, name }, ref) => {
@@ -23,13 +33,22 @@ const ConditionSelect = forwardRef<SelectRef, ConditionSelectProps>(({ value, on
 
     const { data, isLoading, isError } = getConditions(params);
 
+    const options: Option[] = data?.map(({ id, name }: Condition) => ({ label: name, value: String(id) })) || [];
+
+    const handleChange = (selectedValue: string) => {
+        const selectedOption = options.find(option => option.value === selectedValue);
+        if (selectedOption && onChange) {
+            onChange(selectedOption.value, selectedOption.label);
+        }
+    }
+
     return (
         <Select
             ref={ref}
             value={value}
-            onChange={onChange}
+            onChange={handleChange}
             onBlur={onBlur}
-            options={data?.map(({ id, name }: any) => ({ label: name, value: String(id) })) || []}
+            options={options}
             loading={isLoading}
             error={isError}
             className={className}

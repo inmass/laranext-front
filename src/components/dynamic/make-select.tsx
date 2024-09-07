@@ -2,14 +2,23 @@ import React, { forwardRef } from 'react';
 import { getMakes, MakesParams } from '@/hooks/api/makes';
 import Select, { SelectRef } from '@/components/layouts/select';
 
-
 interface MakeSelectProps {
     value?: string;
-    onChange?: (value: string|number) => void;
+    onChange?: (value: string, label: string) => void;
     onBlur?: () => void;
     className?: string;
     disabled?: boolean;
     name?: string;
+}
+
+interface Make {
+    id: number;
+    name: string;
+}
+
+interface Option {
+    label: string;
+    value: string;
 }
 
 const MakeSelect = forwardRef<SelectRef, MakeSelectProps>(({ value, onChange, onBlur, className, disabled, name }, ref) => {
@@ -22,13 +31,22 @@ const MakeSelect = forwardRef<SelectRef, MakeSelectProps>(({ value, onChange, on
 
     const { data, isLoading, isError } = getMakes(params);
 
+    const options: Option[] = data?.map(({ id, name }: Make) => ({ label: name, value: String(id) })) || [];
+
+    const handleChange = (newValue: string) => {
+        const selectedOption = options.find(option => option.value === newValue);
+        if (selectedOption && onChange) {
+            onChange(selectedOption.value, selectedOption.label);
+        }
+    };
+
     return (
         <Select
             ref={ref}
             value={value}
-            onChange={onChange}
+            onChange={handleChange}
             onBlur={onBlur}
-            options={data?.map(({ id, name }: any) => ({ label: name, value: String(id) })) || []}
+            options={options}
             loading={isLoading}
             error={isError}
             className={className}
@@ -38,5 +56,7 @@ const MakeSelect = forwardRef<SelectRef, MakeSelectProps>(({ value, onChange, on
         />
     );
 });
+
+MakeSelect.displayName = 'MakeSelect';
 
 export default MakeSelect;
