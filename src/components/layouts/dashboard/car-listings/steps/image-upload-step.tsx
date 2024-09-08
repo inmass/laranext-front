@@ -1,12 +1,13 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useFormContext, Controller } from 'react-hook-form';
 import { useDropzone } from 'react-dropzone';
 import { X, Image as ImagePlusIcon, Star, StarOff } from 'lucide-react';
 import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/new-car-listing-form';
 import { cn } from '@/lib/utils';
+import { asset } from '@/lib/helpers';
 
 interface ImageData {
-  image: string;
+  image: File;
   is_primary: boolean;
 }
 
@@ -16,10 +17,10 @@ const ImageUploadStep: React.FC = () => {
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     const newImages: ImageData[] = acceptedFiles.map((file) => ({
-      image: URL.createObjectURL(file),
+      image: file,
       is_primary: false
     }));
-    // if no image is primary, set the first one as primary
+
     if (!images.some(img => img.is_primary)) {
       newImages[0].is_primary = true;
     }
@@ -47,6 +48,10 @@ const ImageUploadStep: React.FC = () => {
     setValue('images', newImages);
   };
 
+  useEffect(() => {
+    return () => images.forEach(image => URL.revokeObjectURL(asset(image.image)));
+  }, [images]);
+
   return (
     <div className="space-y-4">
       <Controller
@@ -72,8 +77,8 @@ const ImageUploadStep: React.FC = () => {
       {errors.images && <p className="text-red-500 text-sm">{errors.images.message}</p>}
       <div className="grid grid-cols-3 gap-4">
         {images.map((file: ImageData, index: number) => (
-          <div key={file.image} className="relative">
-            <img src={file.image} alt={`preview ${index}`} className="w-full h-32 object-cover rounded-md" />
+          <div key={file.image.name} className="relative">
+            <img src={asset(file.image)} alt={`preview ${index}`} className="w-full h-32 object-cover rounded-md" />
             <button
               type='button'
               onClick={() => removeImage(index)} 

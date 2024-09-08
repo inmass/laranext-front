@@ -14,6 +14,7 @@ import FeatureSelectionStep from './steps/feature-selection-step';
 import AppearanceStep from './steps/appearance-step';
 import DescriptionStep from './steps/description-step';
 import { LookupProvider } from './context/lookup-context';
+import { createCarListing } from '@/hooks/api/car-listings';
 
 const addCarListingSchema = z.object({
     make_id: z.string().min(1, 'Make is required'),
@@ -30,8 +31,9 @@ const addCarListingSchema = z.object({
     exterior_color: z.string().min(1, 'Exterior Color is required'),
     interior_color: z.string().min(1, 'Interior Color is required'),
     transmission: z.string().min(1, 'Transmission is required'),
+    fuel_type: z.string().min(1, 'Fuel Type is required'),
     images: z.array(z.object({
-        image: z.string().min(1, 'Image is required'),
+        image: z.instanceof(File),
         is_primary: z.boolean()
     })).min(1, 'At least one image is required').refine(images => images.some(img => img.is_primary), {
         message: 'At least one image must be primary',
@@ -78,7 +80,7 @@ const CarListingWizard: React.FC = () => {
         },
     });
 
-    const { handleSubmit, trigger } = methods;
+    const { handleSubmit, trigger, reset } = methods;
 
     const nextStep = async () => {
         const fields = getFieldsForStep(currentStep);
@@ -94,6 +96,9 @@ const CarListingWizard: React.FC = () => {
     const submitForm = async (data: CarListingFormData) => {
         try {
             console.log('Add Listing', data);
+            // createCarListing(data);
+            const response = await createCarListing(data);
+            console.log('Listing created', response);
             // reset();
         } catch (error) {
             console.error(error);

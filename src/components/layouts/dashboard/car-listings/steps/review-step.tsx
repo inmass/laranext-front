@@ -4,6 +4,7 @@ import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/
 import Image from 'next/image';
 import { useLookup } from '../context/lookup-context';
 import { Star } from 'lucide-react';
+import { asset } from '@/lib/helpers';
 
 const ReviewStep: React.FC = () => {
   const { getValues } = useFormContext<CarListingFormData>();
@@ -126,7 +127,7 @@ const ReviewStep: React.FC = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {values.images.map((img, index) => (
             <div key={index} className="relative">
-              <Image src={img.image} alt={`Car image ${index + 1}`} width={200} height={150} className="object-cover rounded" />
+              <Image src={asset(img.image)} alt={`Car image ${index + 1}`} width={200} height={150} className="object-cover rounded" />
               {img.is_primary && (
                 <span className="absolute top-0 left-0 bg-blue-500 text-white text-xs px-2 py-1 rounded-br rounded-tl"><Star size={16} /></span>
               )}

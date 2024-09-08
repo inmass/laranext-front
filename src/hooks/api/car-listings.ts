@@ -4,6 +4,7 @@ import ApiEndpoints from '@/constants/ApiEndpoints';
 import { CarListingType } from '@/types/car-listing';
 import { GetRequestParams, Pagination } from '../../lib/api-params';
 import { buildApiParams } from '@/lib/api-param-builder';
+import { fileToBase64 } from '@/lib/helpers';
 
 interface CarListingsResponse {
   data: CarListingType[];
@@ -35,4 +36,49 @@ export const getCarListing = (id: number): UseQueryResult<CarListingType, Error>
       return data;
     },
   });
+};
+
+interface CreateCarListingFormData {
+  make_id: string;
+  car_model_id: string;
+  body_style_id: string;
+  condition_id: string;
+  features: string[];
+  title: string;
+  description: string;
+  price: number;
+  original_price: number;
+  year: number;
+  mileage: number;
+  exterior_color: string;
+  interior_color: string;
+  transmission: string;
+  fuel_type: string;
+  images: {
+    image: File;
+    is_primary: boolean;
+  }[];
+};
+
+// const fileToBase64 = (file: File): Promise<string> => {
+//   return new Promise((resolve, reject) => {
+//     const reader = new FileReader();
+//     reader.readAsDataURL(file);
+//     reader.onload = () => resolve(reader.result as string);
+//     reader.onerror = error => reject(error);
+//   });
+// };
+
+export const createCarListing = async (data: CreateCarListingFormData): Promise<CarListingType> => {
+  // Create a deep copy of the data object
+  const modifiedData = JSON.parse(JSON.stringify(data));
+
+  // Convert image Files to base64 strings
+  modifiedData.images = await Promise.all(data.images.map(async (img) => ({
+    image: await fileToBase64(img.image),
+    is_primary: img.is_primary
+  })));
+
+  const { data: response } = await axios.post<CarListingType>(ApiEndpoints.carListings, modifiedData);
+  return response;
 };

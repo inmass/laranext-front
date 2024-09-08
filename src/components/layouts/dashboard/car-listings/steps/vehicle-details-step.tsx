@@ -85,6 +85,26 @@ const VehicleDetailsStep: React.FC = () => {
           />
           {errors.transmission && <p className="text-red-500 text-sm">{errors.transmission.message}</p>}
       </div>
+      <div>
+          <label htmlFor="fuel_type">Fuel Type</label>
+          <Controller
+              name="fuel_type"
+              control={control}
+              render={({ field }) => (
+                  <Select
+                      {...field}
+                      options={[
+                          { label: 'Gasoline', value: 'gasoline' },
+                          { label: 'Diesel', value: 'diesel' },
+                          { label: 'Electric', value: 'electric' },
+                      ]}
+                      searchable={false}
+                      className={cn(errors.fuel_type ? 'border-red-500' : '')}
+                  />
+              )}
+          />
+          {errors.fuel_type && <p className="text-red-500 text-sm">{errors.fuel_type.message}</p>}
+        </div>
     </div>
   );
 };
