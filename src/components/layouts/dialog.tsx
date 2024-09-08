@@ -13,6 +13,8 @@ interface DialogProps {
   cancelText?: string;
   actionText?: string;
   className?: string;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 
 const Dialog = ({ 
@@ -25,9 +27,11 @@ const Dialog = ({
   cancelText = "Cancel",
   actionText = "Submit",
   className,
+  open,
+  onOpenChange,
 }: DialogProps) => {
   return (
-    <RadixDialog.Root>
+    <RadixDialog.Root open={open} onOpenChange={onOpenChange}>
       <RadixDialog.Trigger asChild>
         {trigger}
       </RadixDialog.Trigger>

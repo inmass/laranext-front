@@ -14,7 +14,7 @@ import FeatureSelectionStep from './steps/feature-selection-step';
 import AppearanceStep from './steps/appearance-step';
 import DescriptionStep from './steps/description-step';
 import { LookupProvider } from './context/lookup-context';
-import { createCarListing } from '@/hooks/api/car-listings';
+import { useCreateCarListing } from '@/hooks/api/car-listings';
 
 const addCarListingSchema = z.object({
     make_id: z.string().min(1, 'Make is required'),
@@ -55,7 +55,12 @@ const steps = [
   ];
 
 
-const CarListingWizard: React.FC = () => {
+interface CarListingWizardProps {
+    onSubmitSuccess: () => void;
+}
+
+// const CarListingWizard: React.FC = () => {
+const CarListingWizard = ({ onSubmitSuccess }: CarListingWizardProps) => {
 
     const [currentStep, setCurrentStep] = useState(0);
     const methods = useForm<CarListingFormData>({
@@ -77,6 +82,7 @@ const CarListingWizard: React.FC = () => {
             exterior_color: '',
             interior_color: '',
             transmission: '',
+            fuel_type: '',
         },
     });
 
@@ -93,13 +99,11 @@ const CarListingWizard: React.FC = () => {
     const prevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 0));
 
 
+    const createCarListingMutation = useCreateCarListing();
     const submitForm = async (data: CarListingFormData) => {
         try {
-            console.log('Add Listing', data);
-            // createCarListing(data);
-            const response = await createCarListing(data);
-            console.log('Listing created', response);
-            // reset();
+            await createCarListingMutation.mutateAsync(data);
+            onSubmitSuccess();
         } catch (error) {
             console.error(error);
         }

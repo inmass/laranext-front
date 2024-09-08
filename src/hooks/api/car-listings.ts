@@ -1,4 +1,4 @@
-import { useQuery, UseQueryResult } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient, UseQueryResult } from '@tanstack/react-query';
 import axios from '@/lib/axios';
 import ApiEndpoints from '@/constants/ApiEndpoints';
 import { CarListingType } from '@/types/car-listing';
@@ -60,25 +60,23 @@ interface CreateCarListingFormData {
   }[];
 };
 
-// const fileToBase64 = (file: File): Promise<string> => {
-//   return new Promise((resolve, reject) => {
-//     const reader = new FileReader();
-//     reader.readAsDataURL(file);
-//     reader.onload = () => resolve(reader.result as string);
-//     reader.onerror = error => reject(error);
-//   });
-// };
+export const useCreateCarListing = () => {
+  const queryClient = useQueryClient();
 
-export const createCarListing = async (data: CreateCarListingFormData): Promise<CarListingType> => {
-  // Create a deep copy of the data object
-  const modifiedData = JSON.parse(JSON.stringify(data));
-
-  // Convert image Files to base64 strings
-  modifiedData.images = await Promise.all(data.images.map(async (img) => ({
-    image: await fileToBase64(img.image),
-    is_primary: img.is_primary
-  })));
-
-  const { data: response } = await axios.post<CarListingType>(ApiEndpoints.carListings, modifiedData);
-  return response;
+  return useMutation({
+    mutationFn: async (data: CreateCarListingFormData) => {
+      const modifiedData = JSON.parse(JSON.stringify(data));
+      modifiedData.images = await Promise.all(data.images.map(async (img) => ({
+        image: await fileToBase64(img.image),
+        is_primary: img.is_primary
+      })));
+      const { data: response } = await axios.post<CarListingType>(ApiEndpoints.carListings, modifiedData)
+      return response;
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        predicate: (query) => query.queryKey[0] === 'carListings',
+      });
+    }
+  });
 };
