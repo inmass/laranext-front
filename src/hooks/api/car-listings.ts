@@ -90,3 +90,19 @@ export const useCreateCarListing = (onSuccess?: () => void) => {
     },
   });
 };
+
+export const useDeleteCarListing = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (id: number) => {
+      await axios.delete(`${ApiEndpoints.carListings}/${id}`);
+    },
+    onSuccess: () => {
+      toast.success('Car listing deleted successfully');
+      queryClient.refetchQueries({
+        predicate: (query) => query.queryKey[0] === 'carListings',
+      });
+    },
+  });
+}

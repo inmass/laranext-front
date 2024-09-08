@@ -1,10 +1,11 @@
 'use client';
 
+import AlertDialog from '@/components/layouts/AlertDialog';
 import CardLayout from '@/components/layouts/CardLayout';
 import AddCarListingDialog from '@/components/layouts/dashboard/car-listings/new-car-listing-dialog';
 import DashboardBreadcrumb from '@/components/layouts/DashboardBreadcrumb';
 import { DataTable } from '@/components/layouts/table/data-table';
-import { CarListingsParams, getCarListings } from '@/hooks/api/car-listings';
+import { CarListingsParams, getCarListings, useDeleteCarListing } from '@/hooks/api/car-listings';
 import { CarListingType } from '@/types/car-listing';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -25,6 +26,10 @@ const CarListings = () => {
     });
 
     const { data, isLoading, isError, error } = getCarListings(params);
+    const deleteCarListingMutation = useDeleteCarListing();
+    const deleteCarListing = (id: number) => async () => {
+        await deleteCarListingMutation.mutateAsync(id);
+    };
 
     const columns = [
         { header: '', type: 'image' as const, accessor: (item: CarListingType) => item.primary_image?.path, className: 'w-1/12' },
@@ -40,7 +45,16 @@ const CarListings = () => {
             <Link href={`/car-listings/${item.id}`}>View</Link>
         )},
         { name: 'Delete', accessor: (item: CarListingType) => (
-            <p onClick={() => console.log('Delete', item.id)}>Delete</p>
+            <AlertDialog
+                trigger={
+                    <p onClick={(e) => e.stopPropagation()}>Delete</p>
+                }
+                title="Are you absolutely sure?"
+                description="This action cannot be undone. This will permanently delete the car listing."
+                cancelText="Cancel"
+                actionText="Yes, delete listing"
+                onAction={deleteCarListing(item.id)}
+            />
         )},
     ];
 
