@@ -99,11 +99,13 @@ const CarListingWizard = ({ onSubmitSuccess }: CarListingWizardProps) => {
     const prevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 0));
 
 
-    const createCarListingMutation = useCreateCarListing();
+    const createCarListingMutation = useCreateCarListing(() => {
+        onSubmitSuccess();
+    });
+
     const submitForm = async (data: CarListingFormData) => {
         try {
             await createCarListingMutation.mutateAsync(data);
-            onSubmitSuccess();
         } catch (error) {
             console.error(error);
         }

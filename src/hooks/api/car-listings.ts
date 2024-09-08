@@ -5,6 +5,7 @@ import { CarListingType } from '@/types/car-listing';
 import { GetRequestParams, Pagination } from '../../lib/api-params';
 import { buildApiParams } from '@/lib/api-param-builder';
 import { fileToBase64 } from '@/lib/helpers';
+import toast from 'react-hot-toast';
 
 interface CarListingsResponse {
   data: CarListingType[];
@@ -24,6 +25,10 @@ export const getCarListings = (
       return data;
     },
     keepPreviousData: true,
+    staleTime: 0,
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
+    refetchOnReconnect: true,
   });
 };
 
@@ -60,7 +65,7 @@ interface CreateCarListingFormData {
   }[];
 };
 
-export const useCreateCarListing = () => {
+export const useCreateCarListing = (onSuccess?: () => void) => {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -74,9 +79,14 @@ export const useCreateCarListing = () => {
       return response;
     },
     onSuccess: (data) => {
-      queryClient.invalidateQueries({
+      toast.success('Car listing created successfully');
+      queryClient.refetchQueries({
         predicate: (query) => query.queryKey[0] === 'carListings',
       });
-    }
+      
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
   });
 };

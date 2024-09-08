@@ -37,6 +37,11 @@ const ImageUploadStep: React.FC = () => {
   const removeImage = (index: number) => {
     const newImages = [...images];
     newImages.splice(index, 1);
+
+    if (!newImages.some(img => img.is_primary) && newImages.length > 0) {
+      newImages[0].is_primary = true;
+    }
+
     setValue('images', newImages);
   };
 
