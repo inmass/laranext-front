@@ -40,7 +40,7 @@ const DesktopNavigation = () => {
           </Link>
         </NavItem>
 
-        <NavItem href="/dashboard/listings" label="Orders">
+        <NavItem href="/dashboard/car-listings" label="Orders">
           <Car className="h-5 w-5" />
         </NavItem>
 

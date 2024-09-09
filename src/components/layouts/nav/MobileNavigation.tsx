@@ -39,7 +39,7 @@ const MobileNavigation = () => {
             Dashboard
           </Link>
           <Link
-            href="/dashboard/listings"
+            href="/dashboard/car-listings"
             className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
           >
             <Car className="h-5 w-5" />
