@@ -2,11 +2,12 @@
 
 import AlertDialog from '@/components/layouts/AlertDialog';
 import CardLayout from '@/components/layouts/CardLayout';
-import AddCarListingDialog from '@/components/layouts/dashboard/car-listings/new-car-listing-dialog';
+import CarListingFormDialog from '@/components/layouts/dashboard/car-listings/car-listing-form-dialog';
 import DashboardBreadcrumb from '@/components/layouts/DashboardBreadcrumb';
 import { DataTable } from '@/components/layouts/table/data-table';
 import { CarListingsParams, getCarListings, useDeleteCarListing } from '@/hooks/api/car-listings';
 import { CarListingType } from '@/types/car-listing';
+import { Eye, Trash2 } from 'lucide-react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect, useState, useCallback } from 'react';
@@ -22,7 +23,7 @@ const CarListings = () => {
         perPage: 10,
         sort: null as { key: string; direction: 'asc' | 'desc' } | null,
         filters: {} as Record<string, string>,
-        include: ['primaryImage'],
+        include: ['primaryImage', 'images', 'features'], // we include images and features for the edit form
     });
 
     const { data, isLoading, isError, error } = getCarListings(params);
@@ -42,12 +43,16 @@ const CarListings = () => {
 
     const actions = [
         { name: 'View', accessor: (item: CarListingType) => (
-            <Link href={`/car-listings/${item.id}`}>View</Link>
+            <Eye className="h-5 w-5 cursor-pointer text-blue-500" />
         )},
+        { name: 'Edit', accessor: (item: CarListingType) => (
+                <CarListingFormDialog carListing={item} />
+            )
+        },
         { name: 'Delete', accessor: (item: CarListingType) => (
             <AlertDialog
                 trigger={
-                    <p onClick={(e) => e.stopPropagation()}>Delete</p>
+                    <Trash2 className="h-5 w-5 cursor-pointer text-red-500" />
                 }
                 title="Are you absolutely sure?"
                 description="This action cannot be undone. This will permanently delete the car listing."
@@ -76,7 +81,7 @@ const CarListings = () => {
                 title={
                     <div className="flex justify-between items-center">
                         <h1>Car Listings</h1>
-                        <AddCarListingDialog />
+                        <CarListingFormDialog />
                     </div>
                 }
                 description="Manage your car listings and view their details."

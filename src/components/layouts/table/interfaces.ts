@@ -16,6 +16,7 @@ export interface ActionColumn<T> {
 export interface DataTableProps<T> {
     columns: Column<T>[];
     actions?: ActionColumn<T>[];
+    actionsAsDropdown?: boolean;
     data: T[];
     totalItems: number;
     currentPage: number;

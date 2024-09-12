@@ -17,6 +17,7 @@ interface DataTableRowProps<T> {
   item: T;
   columns: Column<T>[];
   actions?: ActionColumn<T>[];
+  actionsAsDropdown?: boolean;
 }
 
 const renderCellContent = <T,>(content: any, type?: string): React.ReactNode => {
@@ -38,7 +39,7 @@ const renderCellContent = <T,>(content: any, type?: string): React.ReactNode => 
   }
 };
 
-export const DataTableRow = <T,>({ item, columns, actions }: DataTableRowProps<T>) => {
+export const DataTableRow = <T,>({ item, columns, actions, actionsAsDropdown = false }: DataTableRowProps<T>) => {
   return (
     <TableRow>
       {columns.map((column, index) => {
@@ -53,22 +54,32 @@ export const DataTableRow = <T,>({ item, columns, actions }: DataTableRowProps<T
         );
       })}
       <TableCell>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button aria-haspopup="true" size="icon" variant="ghost">
-              <MoreHorizontal className="h-4 w-4" />
-              <span className="sr-only">Toggle menu</span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            {actions?.map((action, index) => (
-              <DropdownMenuItem key={index}>
-                {action.accessor(item)}
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
+        {
+          actionsAsDropdown ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button aria-haspopup="true" size="icon" variant="ghost">
+                  <MoreHorizontal className="h-4 w-4" />
+                  <span className="sr-only">Toggle menu</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                {actions?.map((action, index) => (
+                  <DropdownMenuItem key={index}>
+                    {action.accessor(item)}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <div className="flex items-center space-x-2">
+              {actions?.map((action, index) => (
+                <>{action.accessor(item)}</>
+              ))}
+            </div>
+          ) 
+        }
       </TableCell>
     </TableRow>
   );

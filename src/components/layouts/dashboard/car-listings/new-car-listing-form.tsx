@@ -14,7 +14,10 @@ import FeatureSelectionStep from './steps/feature-selection-step';
 import AppearanceStep from './steps/appearance-step';
 import DescriptionStep from './steps/description-step';
 import { LookupProvider } from './context/lookup-context';
-import { useCreateCarListing } from '@/hooks/api/car-listings';
+import { useCreateCarListing, useUpdateCarListing } from '@/hooks/api/car-listings';
+import toast from 'react-hot-toast';
+import { CarListingType } from '@/types/car-listing';
+import { createFileFromImageUrl } from '@/lib/helpers';
 
 const addCarListingSchema = z.object({
     make_id: z.string().min(1, 'Make is required'),
@@ -42,6 +45,8 @@ const addCarListingSchema = z.object({
 
 export type CarListingFormData = z.infer<typeof addCarListingSchema>;
 
+export type UpdateCarListingFormData = CarListingFormData & { id: number };
+
 
 const steps = [
     { id: 'basic-info', title: 'Basic Info', component: BasicInfoStep },
@@ -56,37 +61,40 @@ const steps = [
 
 
 interface CarListingWizardProps {
-    onSubmitSuccess: () => void;
+    onSubmitSuccess?: () => void;
+    carListing?: UpdateCarListingFormData;
 }
 
 // const CarListingWizard: React.FC = () => {
-const CarListingWizard = ({ onSubmitSuccess }: CarListingWizardProps) => {
+const CarListingWizard = ({ onSubmitSuccess, carListing }: CarListingWizardProps) => {
 
     const [currentStep, setCurrentStep] = useState(0);
+    const defaultValues = carListing || {
+        body_style_id: '',
+        make_id: '',
+        car_model_id: '',
+        condition_id: '',
+        features: [],
+        title: '',
+        year: 1900,
+        price: 1,
+        mileage: 1,
+        images: [],
+        description: '',
+        original_price: NaN,
+        exterior_color: '',
+        interior_color: '',
+        transmission: '',
+        fuel_type: '',
+    };
+
     const methods = useForm<CarListingFormData>({
         resolver: zodResolver(addCarListingSchema),
         mode: 'onChange',
-        defaultValues: {
-            body_style_id: '',
-            make_id: '',
-            car_model_id: '',
-            condition_id: '',
-            features: [],
-            title: '',
-            year: 1900,
-            price: 1,
-            mileage: 1,
-            images: [],
-            description: '',
-            original_price: NaN,
-            exterior_color: '',
-            interior_color: '',
-            transmission: '',
-            fuel_type: '',
-        },
+        defaultValues: defaultValues,
     });
 
-    const { handleSubmit, trigger, reset } = methods;
+    const { handleSubmit, trigger, formState: { isDirty }  } = methods;
 
     const nextStep = async () => {
         const fields = getFieldsForStep(currentStep);
@@ -100,14 +108,22 @@ const CarListingWizard = ({ onSubmitSuccess }: CarListingWizardProps) => {
 
 
     const createCarListingMutation = useCreateCarListing(() => {
-        onSubmitSuccess();
+        if (onSubmitSuccess) onSubmitSuccess()
+    });
+
+    const updateCarListingMutation = useUpdateCarListing(() => {
+        // if (onSubmitSuccess) onSubmitSuccess()
     });
 
     const submitForm = async (data: CarListingFormData) => {
         try {
-            await createCarListingMutation.mutateAsync(data);
+            if (carListing) {
+                await updateCarListingMutation.mutateAsync({ ...data, id: carListing.id });
+            } else {
+                await createCarListingMutation.mutateAsync(data);
+            }
         } catch (error) {
-            console.error(error);
+            toast.error('Failed to create car listing');
         }
     };
 
@@ -177,7 +193,7 @@ const CarListingWizard = ({ onSubmitSuccess }: CarListingWizardProps) => {
                         )}
                         {
                             currentStep === steps.length - 1 ? (
-                                <Button type="button" onClick={handleSubmit(submitForm)}>Submit</Button>
+                                <Button type="button" onClick={handleSubmit(submitForm)} disabled={!isDirty}>Submit</Button>
                             ) : (
                                 <Button type="button" onClick={nextStep}>
                                     Next
@@ -192,3 +208,63 @@ const CarListingWizard = ({ onSubmitSuccess }: CarListingWizardProps) => {
 };
 
 export default CarListingWizard;
+
+export function mapCarListingForFormData(carListing: CarListingType): Promise<UpdateCarListingFormData> {
+    const imagePromises = carListing.images.map(img => 
+        createFileFromImageUrl(img.path).then(file => ({
+            image: file,
+            is_primary: img.is_primary
+        }))
+    );
+    return Promise.all(imagePromises).then(images => ({
+        id: carListing.id,
+        make_id: carListing.make_id.toString(),
+        car_model_id: carListing.car_model_id.toString(),
+        body_style_id: carListing.body_style_id.toString(),
+        condition_id: carListing.condition_id.toString(),
+        features: carListing.features.map(f => f.id.toString()),
+        title: carListing.title,
+        description: carListing.description,
+        price: Number(carListing.price),
+        original_price: Number(carListing.original_price),
+        year: carListing.year,
+        mileage: carListing.mileage,
+        exterior_color: carListing.exterior_color,
+        interior_color: carListing.interior_color,
+        transmission: carListing.transmission,
+        fuel_type: carListing.fuel_type,
+        // images: images,
+        images: carListing.images.map(img => ({
+            image: new File([], img.path),
+            is_primary: img.is_primary
+        }))
+    }));
+}
+// export function mapCarListingForFormData(carListing: CarListingType): UpdateCarListingFormData {
+//     const images = carListing.images.map(img => ({
+//         // image: await createFileFromImageUrl(img.path).then(file => file),
+//         image: new File([
+//             new Blob([img.path], { type: 'image/jpeg' })
+//         ], img.path.split('/').pop() || 'image.jpg', { type: 'image/jpeg' }),
+//         is_primary: img.is_primary
+//     }));
+//     return {
+//         id: carListing.id,
+//         make_id: carListing.make_id.toString(),
+//         car_model_id: carListing.car_model_id.toString(),
+//         body_style_id: carListing.body_style_id.toString(),
+//         condition_id: carListing.condition_id.toString(),
+//         features: carListing.features.map(f => f.id.toString()),
+//         title: carListing.title,
+//         description: carListing.description,
+//         price: Number(carListing.price),
+//         original_price: Number(carListing.original_price),
+//         year: carListing.year,
+//         mileage: carListing.mileage,
+//         exterior_color: carListing.exterior_color,
+//         interior_color: carListing.interior_color,
+//         transmission: carListing.transmission,
+//         fuel_type: carListing.fuel_type,
+//         images: images,
+//     };
+// }

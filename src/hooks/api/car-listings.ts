@@ -106,3 +106,29 @@ export const useDeleteCarListing = () => {
     },
   });
 }
+
+export const useUpdateCarListing = (onSuccess?: () => void) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (data: CreateCarListingFormData & { id: number }) => {
+      const modifiedData = JSON.parse(JSON.stringify(data));
+      modifiedData.images = await Promise.all(data.images.map(async (img) => ({
+        image: await fileToBase64(img.image),
+        is_primary: img.is_primary
+      })));
+      const { data: response } = await axios.put<CarListingType>(`${ApiEndpoints.carListings}/${data.id}`, modifiedData)
+      return response;
+    },
+    onSuccess: (data) => {
+      toast.success('Car listing updated successfully');
+      queryClient.refetchQueries({
+        predicate: (query) => query.queryKey[0] === 'carListings',
+      });
+      
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+  });
+}

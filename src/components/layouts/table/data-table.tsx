@@ -19,6 +19,7 @@ import TableFooter from './table-footer';
 export function DataTable<T>({
   columns,
   actions,
+  actionsAsDropdown = false,
   data,
   totalItems,
   currentPage,
@@ -122,7 +123,7 @@ export function DataTable<T>({
               </TableRow>
             ) : (
               data.map((item) => (
-                <DataTableRow key={(item as any).id} item={item} columns={columns} actions={actions} />
+                <DataTableRow key={(item as any).id} item={item} columns={columns} actions={actions} actionsAsDropdown={actionsAsDropdown} />
               ))
             )
             }
