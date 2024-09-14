@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from 'react';
 import { useFormContext, Controller } from 'react-hook-form';
 import { useDropzone } from 'react-dropzone';
 import { X, Image as ImagePlusIcon, Star, StarOff } from 'lucide-react';
-import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/new-car-listing-form';
+import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/car-listing-wizard';
 import { cn } from '@/lib/utils';
 import { asset } from '@/lib/helpers';
 

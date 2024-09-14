@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Dialog from '@/components/layouts/dialog';
 import Button from '@/components/Button';
 import { Pen, Plus } from 'lucide-react';
-import CarListingWizard, { UpdateCarListingFormData, mapCarListingForFormData } from './new-car-listing-form';
+import CarListingWizard, { UpdateCarListingFormData, mapCarListingForFormData } from './car-listing-wizard';
 import { CarListingType } from '@/types/car-listing';
 
 interface CarListingFormDialogProps {

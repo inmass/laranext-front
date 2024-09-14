@@ -3,7 +3,7 @@ import { useFormContext, Controller } from 'react-hook-form';
 import { cn } from '@/lib/utils';
 import BodyStyleSelect from '@/components/dynamic/body-style-select';
 import { Input } from '@/components/ui/input';
-import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/new-car-listing-form';
+import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/car-listing-wizard';
 import ConditionSelect from '@/components/dynamic/condition-select';
 import Editor from '@/components/ui/editor';
 import Select from '@/components/layouts/select';

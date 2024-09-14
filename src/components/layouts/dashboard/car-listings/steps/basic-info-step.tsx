@@ -3,7 +3,7 @@ import { useFormContext, Controller } from 'react-hook-form';
 import CarModelSelect from '@/components/dynamic/car-model-select';
 import { cn } from '@/lib/utils';
 import MakeSelect from '@/components/dynamic/make-select';
-import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/new-car-listing-form';
+import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/car-listing-wizard';
 import { Input } from '@/components/ui/input';
 import { useLookup } from '../context/lookup-context';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFormContext, Controller } from 'react-hook-form';
-import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/new-car-listing-form';
+import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/car-listing-wizard';
 import { CirclePicker } from 'react-color';
 
 const AppearanceStep: React.FC = () => {

@@ -2,7 +2,7 @@ import React from 'react';
 import { useFormContext, Controller } from 'react-hook-form';
 import { cn } from '@/lib/utils';
 import { Input } from '@/components/ui/input';
-import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/new-car-listing-form';
+import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/car-listing-wizard';
 
 const PricingStep: React.FC = () => {
   const { control, formState: { errors }, register } = useFormContext<CarListingFormData>();

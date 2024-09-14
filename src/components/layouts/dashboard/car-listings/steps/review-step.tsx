@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/new-car-listing-form';
+import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/car-listing-wizard';
 import Image from 'next/image';
 import { useLookup } from '../context/lookup-context';
 import { Star } from 'lucide-react';

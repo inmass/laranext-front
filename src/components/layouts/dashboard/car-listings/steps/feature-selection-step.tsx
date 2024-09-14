@@ -4,7 +4,7 @@ import { CheckBox } from "@/components/ui/checkbox";
 import { FeaturesParams, getFeatures } from "@/hooks/api/features";
 import { GroupedFeatures, groupFeatures } from "@/lib/utils";
 import { FeatureType } from "@/types/feature";
-import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/new-car-listing-form';
+import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/car-listing-wizard';
 import { useLookup } from '../context/lookup-context';
 
 const FeatureSelectionStep: React.FC = () => {
