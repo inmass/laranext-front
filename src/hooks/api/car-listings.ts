@@ -60,7 +60,17 @@ interface CreateCarListingFormData {
   transmission: string;
   fuel_type: string;
   images: {
-    image: File;
+    image: File | string;
+    is_primary: boolean;
+  }[];
+};
+
+interface UpdateCarListingFormData extends CreateCarListingFormData {
+  id: number;
+  removed_image_ids?: number[];
+  images: {
+    id?: number;
+    image: File | string;
     is_primary: boolean;
   }[];
 };
@@ -72,7 +82,7 @@ export const useCreateCarListing = (onSuccess?: () => void) => {
     mutationFn: async (data: CreateCarListingFormData) => {
       const modifiedData = JSON.parse(JSON.stringify(data));
       modifiedData.images = await Promise.all(data.images.map(async (img) => ({
-        image: await fileToBase64(img.image),
+        image: typeof img.image === 'string' ? img.image : await fileToBase64(img.image),
         is_primary: img.is_primary
       })));
       const { data: response } = await axios.post<CarListingType>(ApiEndpoints.carListings, modifiedData)
@@ -111,10 +121,12 @@ export const useUpdateCarListing = (onSuccess?: () => void) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (data: CreateCarListingFormData & { id: number }) => {
+    mutationFn: async (data: UpdateCarListingFormData) => {
+      console.log(data);
       const modifiedData = JSON.parse(JSON.stringify(data));
       modifiedData.images = await Promise.all(data.images.map(async (img) => ({
-        image: await fileToBase64(img.image),
+        id: img.id,
+        image: typeof img.image === 'string' ? img.image : await fileToBase64(img.image),
         is_primary: img.is_primary
       })));
       const { data: response } = await axios.put<CarListingType>(`${ApiEndpoints.carListings}/${data.id}`, modifiedData)

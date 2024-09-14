@@ -17,7 +17,6 @@ import { LookupProvider } from './context/lookup-context';
 import { useCreateCarListing, useUpdateCarListing } from '@/hooks/api/car-listings';
 import toast from 'react-hot-toast';
 import { CarListingType } from '@/types/car-listing';
-import { createFileFromImageUrl } from '@/lib/helpers';
 
 const addCarListingSchema = z.object({
     make_id: z.string().min(1, 'Make is required'),
@@ -36,11 +35,13 @@ const addCarListingSchema = z.object({
     transmission: z.string().min(1, 'Transmission is required'),
     fuel_type: z.string().min(1, 'Fuel Type is required'),
     images: z.array(z.object({
-        image: z.instanceof(File),
+        id: z.number().optional(),
+        image: z.union([z.instanceof(File), z.string()]),
         is_primary: z.boolean()
     })).min(1, 'At least one image is required').refine(images => images.some(img => img.is_primary), {
         message: 'At least one image must be primary',
     }),
+    removed_image_ids: z.array(z.number()).optional(),
 });
 
 export type CarListingFormData = z.infer<typeof addCarListingSchema>;
@@ -86,6 +87,7 @@ const CarListingWizard = ({ onSubmitSuccess, carListing }: CarListingWizardProps
         interior_color: '',
         transmission: '',
         fuel_type: '',
+        removed_image_ids: []
     };
 
     const methods = useForm<CarListingFormData>({
@@ -112,7 +114,7 @@ const CarListingWizard = ({ onSubmitSuccess, carListing }: CarListingWizardProps
     });
 
     const updateCarListingMutation = useUpdateCarListing(() => {
-        // if (onSubmitSuccess) onSubmitSuccess()
+        if (onSubmitSuccess) onSubmitSuccess()
     });
 
     const submitForm = async (data: CarListingFormData) => {
@@ -209,14 +211,8 @@ const CarListingWizard = ({ onSubmitSuccess, carListing }: CarListingWizardProps
 
 export default CarListingWizard;
 
-export function mapCarListingForFormData(carListing: CarListingType): Promise<UpdateCarListingFormData> {
-    const imagePromises = carListing.images.map(img => 
-        createFileFromImageUrl(img.path).then(file => ({
-            image: file,
-            is_primary: img.is_primary
-        }))
-    );
-    return Promise.all(imagePromises).then(images => ({
+export function mapCarListingForFormData(carListing: CarListingType): UpdateCarListingFormData {
+    return {
         id: carListing.id,
         make_id: carListing.make_id.toString(),
         car_model_id: carListing.car_model_id.toString(),
@@ -233,38 +229,11 @@ export function mapCarListingForFormData(carListing: CarListingType): Promise<Up
         interior_color: carListing.interior_color,
         transmission: carListing.transmission,
         fuel_type: carListing.fuel_type,
-        // images: images,
         images: carListing.images.map(img => ({
-            image: new File([], img.path),
+            id: img.id,
+            image: img.path,
             is_primary: img.is_primary
-        }))
-    }));
+        })),
+        removed_image_ids: []
+    };
 }
-// export function mapCarListingForFormData(carListing: CarListingType): UpdateCarListingFormData {
-//     const images = carListing.images.map(img => ({
-//         // image: await createFileFromImageUrl(img.path).then(file => file),
-//         image: new File([
-//             new Blob([img.path], { type: 'image/jpeg' })
-//         ], img.path.split('/').pop() || 'image.jpg', { type: 'image/jpeg' }),
-//         is_primary: img.is_primary
-//     }));
-//     return {
-//         id: carListing.id,
-//         make_id: carListing.make_id.toString(),
-//         car_model_id: carListing.car_model_id.toString(),
-//         body_style_id: carListing.body_style_id.toString(),
-//         condition_id: carListing.condition_id.toString(),
-//         features: carListing.features.map(f => f.id.toString()),
-//         title: carListing.title,
-//         description: carListing.description,
-//         price: Number(carListing.price),
-//         original_price: Number(carListing.original_price),
-//         year: carListing.year,
-//         mileage: carListing.mileage,
-//         exterior_color: carListing.exterior_color,
-//         interior_color: carListing.interior_color,
-//         transmission: carListing.transmission,
-//         fuel_type: carListing.fuel_type,
-//         images: images,
-//     };
-// }

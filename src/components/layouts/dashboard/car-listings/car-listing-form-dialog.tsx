@@ -12,23 +12,6 @@ interface CarListingFormDialogProps {
 const CarListingFormDialog = ({ carListing }: CarListingFormDialogProps) => {
 
     const [isOpen, setIsOpen] = useState(false);
-    const [formData, setFormData] = useState<UpdateCarListingFormData | undefined>(undefined);
-    const [isLoading, setIsLoading] = useState(false);
-
-    useEffect(() => {
-        if (carListing && isOpen) {
-            setIsLoading(true);
-            mapCarListingForFormData(carListing)
-                .then(data => {
-                    setFormData(data);
-                    setIsLoading(false);
-                })
-                .catch(error => {
-                    console.error('Error mapping car listing data:', error);
-                    setIsLoading(false);
-                });
-        }
-    }, [carListing, isOpen]);
 
     const handleClose = () => {
         setIsOpen(false);
@@ -45,7 +28,7 @@ const CarListingFormDialog = ({ carListing }: CarListingFormDialogProps) => {
         )      
     );
 
-    // const carListingData = carListing ? mapCarListingForFormData(carListing) : undefined;
+    const carListingData = carListing ? mapCarListingForFormData(carListing) : undefined;
 
     return (
         <Dialog
@@ -56,17 +39,7 @@ const CarListingFormDialog = ({ carListing }: CarListingFormDialogProps) => {
             open={isOpen}
             onOpenChange={setIsOpen}
         >
-            {/* <CarListingWizard onSubmitSuccess={handleClose} carListing={carListingData} /> */}
-            {isLoading ? (
-                <div className="flex justify-center items-center h-40">
-                    <span className="loading loading-spinner loading-lg"></span>
-                </div>
-            ) : (
-                <CarListingWizard 
-                    onSubmitSuccess={handleClose} 
-                    carListing={formData}
-                />
-            )}
+            <CarListingWizard onSubmitSuccess={handleClose} carListing={carListingData} />
         </Dialog>
     );
 };

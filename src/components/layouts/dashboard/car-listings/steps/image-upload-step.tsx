@@ -7,13 +7,15 @@ import { cn } from '@/lib/utils';
 import { asset } from '@/lib/helpers';
 
 interface ImageData {
-  image: File;
+  id?: number;
+  image: File | string;
   is_primary: boolean;
 }
 
 const ImageUploadStep: React.FC = () => {
-  const { control, setValue, watch, formState:  {errors} } = useFormContext<CarListingFormData>();
+  const { control, setValue, watch, formState: { errors } } = useFormContext<CarListingFormData>();
   const images = watch('images') || [];
+  const removedImageIds = watch('removed_image_ids') || [];
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     const newImages: ImageData[] = acceptedFiles.map((file) => ({
@@ -26,7 +28,6 @@ const ImageUploadStep: React.FC = () => {
     }
 
     setValue('images', [...images, ...newImages]);
-
   }, [images, setValue]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ 
@@ -36,7 +37,11 @@ const ImageUploadStep: React.FC = () => {
 
   const removeImage = (index: number) => {
     const newImages = [...images];
-    newImages.splice(index, 1);
+    const removedImage = newImages.splice(index, 1)[0];
+
+    if (removedImage.id) {
+      setValue('removed_image_ids', [...removedImageIds, removedImage.id]);
+    }
 
     if (!newImages.some(img => img.is_primary) && newImages.length > 0) {
       newImages[0].is_primary = true;
@@ -53,8 +58,21 @@ const ImageUploadStep: React.FC = () => {
     setValue('images', newImages);
   };
 
+  const getImageSrc = (image: File | string) => {
+    if (image instanceof File) {
+      return URL.createObjectURL(image);
+    }
+    return asset(image);
+  };
+
   useEffect(() => {
-    return () => images.forEach(image => URL.revokeObjectURL(asset(image.image)));
+    return () => {
+      images.forEach(image => {
+        if (image.image instanceof File) {
+          URL.revokeObjectURL(getImageSrc(image.image));
+        }
+      });
+    };
   }, [images]);
 
   return (
@@ -82,8 +100,12 @@ const ImageUploadStep: React.FC = () => {
       {errors.images && <p className="text-red-500 text-sm">{errors.images.message}</p>}
       <div className="grid grid-cols-3 gap-4">
         {images.map((file: ImageData, index: number) => (
-          <div key={file.image.name} className="relative">
-            <img src={asset(file.image)} alt={`preview ${index}`} className="w-full h-32 object-cover rounded-md" />
+          <div key={file.id || (file.image instanceof File ? file.image.name : file.image)} className="relative">
+            <img 
+              src={getImageSrc(file.image)} 
+              alt={`preview ${index}`} 
+              className="w-full h-32 object-cover rounded-md" 
+            />
             <button
               type='button'
               onClick={() => removeImage(index)} 
