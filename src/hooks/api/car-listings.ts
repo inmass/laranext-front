@@ -122,7 +122,6 @@ export const useUpdateCarListing = (onSuccess?: () => void) => {
 
   return useMutation({
     mutationFn: async (data: UpdateCarListingFormData) => {
-      console.log(data);
       const modifiedData = JSON.parse(JSON.stringify(data));
       modifiedData.images = await Promise.all(data.images.map(async (img) => ({
         id: img.id,

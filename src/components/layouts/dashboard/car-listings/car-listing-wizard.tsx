@@ -162,13 +162,14 @@ const CarListingWizard = ({ onSubmitSuccess, carListing }: CarListingWizardProps
                             <Tabs.Trigger
                                 key={step.id}
                                 value={step.id}
-                                disabled={index > currentStep}
+                                disabled={!carListing && index > currentStep}
                                 className={cn(
                                     "bg-card rounded-lg py-2.5 px-3 text-sm text-card-foreground font-medium leading-none focus:outline-none",
                                     "min-w-[100px] flex-grow max-w-[calc(20%-0.5rem)]", // Set minimum width and maximum width
                                     index === currentStep
                                     ? "shadow bg-muted-foreground text-card"
                                     : "bg-muted",
+                                    !(!carListing && index > currentStep) && "hover:bg-muted-foreground hover:text-card",
                                     index >= 5 && "mt-1" // Add top margin for items on the second line
                                 )}
                             >

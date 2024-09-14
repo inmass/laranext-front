@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
-import { useFormContext, Controller } from 'react-hook-form';
+import { useFormContext, Controller, useFieldArray } from 'react-hook-form';
 import { useDropzone } from 'react-dropzone';
 import { X, Image as ImagePlusIcon, Star, StarOff } from 'lucide-react';
 import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/car-listing-wizard';
@@ -27,7 +27,7 @@ const ImageUploadStep: React.FC = () => {
       newImages[0].is_primary = true;
     }
 
-    setValue('images', [...images, ...newImages]);
+    setValue('images', [...images, ...newImages], { shouldDirty: true });
   }, [images, setValue]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ 
@@ -47,7 +47,7 @@ const ImageUploadStep: React.FC = () => {
       newImages[0].is_primary = true;
     }
 
-    setValue('images', newImages);
+    setValue('images', newImages, { shouldDirty: true });
   };
 
   const setPrimary = (index: number) => {
@@ -55,7 +55,7 @@ const ImageUploadStep: React.FC = () => {
       ...img,
       is_primary: i === index
     }));
-    setValue('images', newImages);
+    setValue('images', newImages, { shouldDirty: true });
   };
 
   const getImageSrc = (image: File | string) => {
