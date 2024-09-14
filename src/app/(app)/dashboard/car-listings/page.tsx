@@ -43,7 +43,7 @@ const CarListings = () => {
 
     const actions = [
         { name: 'View', accessor: (item: CarListingType) => (
-            <Eye className="h-5 w-5 cursor-pointer text-blue-500" />
+            <Eye className="h-5 w-5 cursor-pointer text-blue-300" />
         )},
         { name: 'Edit', accessor: (item: CarListingType) => (
                 <CarListingFormDialog carListing={item} />

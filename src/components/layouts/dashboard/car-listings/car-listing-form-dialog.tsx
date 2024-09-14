@@ -19,7 +19,7 @@ const CarListingFormDialog = ({ carListing }: CarListingFormDialogProps) => {
 
     const trigger = (
         carListing ? (
-            <Pen className="h-5 w-5 cursor-pointer text-blue-500" />
+            <Pen className="h-5 w-5 cursor-pointer text-blue-300" />
         ) : (
             <Button>
                 <Plus className="w-6 h-6 mr-2 inline-block" />
