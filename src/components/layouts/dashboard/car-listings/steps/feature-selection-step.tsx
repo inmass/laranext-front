@@ -9,6 +9,7 @@ import { useLookup } from '../context/lookup-context';
 
 const FeatureSelectionStep: React.FC = () => {
   const { control, formState: { errors, isValid } } = useFormContext<CarListingFormData>();
+  const { addLookupData } = useLookup();
 
   const params: FeaturesParams = {
     page: 1,
@@ -18,8 +19,6 @@ const FeatureSelectionStep: React.FC = () => {
   };
 
   const { data: features, isLoading, error } = getFeatures(params);
-  
-  const { addLookupData } = useLookup();
 
   const { groupedFeatures, featureLookup } = useMemo(() => {
     if (!features?.data) return { groupedFeatures: {}, featureLookup: {} };
@@ -31,13 +30,16 @@ const FeatureSelectionStep: React.FC = () => {
       lookup[feature.id.toString()] = feature.name;
     });
 
-    // Add all features to lookup data
-    Object.entries(lookup).forEach(([id, name]) => {
-      addLookupData('features', id, name);
-    });
-
     return { groupedFeatures: grouped, featureLookup: lookup };
-  }, [features, addLookupData]);
+  }, [features]);
+
+  useEffect(() => {
+    if (featureLookup) {
+      Object.entries(featureLookup).forEach(([id, name]) => {
+        addLookupData('features', id, name);
+      });
+    }
+  }, [featureLookup, addLookupData]);
 
   if (isLoading) return <div>Loading features...</div>;
   if (error) return <div>Error loading features: {error.message}</div>;
