@@ -49,7 +49,7 @@ export type CarListingFormData = z.infer<typeof addCarListingSchema>;
 export type UpdateCarListingFormData = CarListingFormData & { id: number };
 
 
-const steps = [
+const creatingSteps = [
     { id: 'basic-info', title: 'Basic Info', component: BasicInfoStep },
     { id: 'vehicle-details', title: 'Details', component: VehicleDetailsStep },
     { id: 'features', title: 'Features', component: FeatureSelectionStep },
@@ -58,7 +58,17 @@ const steps = [
     { id: 'description', title: 'Description', component: DescriptionStep },
     { id: 'images', title: 'Images', component: ImageUploadStep },
     { id: 'review', title: 'Review', component: ReviewStep },
-  ];
+];
+
+const updatingSteps = [
+    { id: 'basic-info', title: 'Basic Info', component: BasicInfoStep },
+    { id: 'vehicle-details', title: 'Details', component: VehicleDetailsStep },
+    { id: 'features', title: 'Features', component: FeatureSelectionStep },
+    { id: 'appearance', title: 'Appearance', component: AppearanceStep },
+    { id: 'pricing', title: 'Pricing', component: PricingStep },
+    { id: 'description', title: 'Description', component: DescriptionStep },
+    { id: 'images', title: 'Images', component: ImageUploadStep },
+];
 
 
 interface CarListingWizardProps {
@@ -68,6 +78,8 @@ interface CarListingWizardProps {
 
 // const CarListingWizard: React.FC = () => {
 const CarListingWizard = ({ onSubmitSuccess, carListing }: CarListingWizardProps) => {
+
+    const steps = carListing ? updatingSteps : creatingSteps;
 
     const [currentStep, setCurrentStep] = useState(0);
     const defaultValues = carListing || {
@@ -83,8 +95,8 @@ const CarListingWizard = ({ onSubmitSuccess, carListing }: CarListingWizardProps
         images: [],
         description: '',
         original_price: NaN,
-        exterior_color: '',
-        interior_color: '',
+        exterior_color: '#000000',
+        interior_color: '#000000',
         transmission: '',
         fuel_type: '',
         removed_image_ids: []
@@ -96,7 +108,7 @@ const CarListingWizard = ({ onSubmitSuccess, carListing }: CarListingWizardProps
         defaultValues: defaultValues,
     });
 
-    const { handleSubmit, trigger, formState: { isDirty }  } = methods;
+    const { handleSubmit, trigger, formState: { isDirty, isValid: formIsValid }  } = methods;
 
     const nextStep = async () => {
         const fields = getFieldsForStep(currentStep);
@@ -151,6 +163,7 @@ const CarListingWizard = ({ onSubmitSuccess, carListing }: CarListingWizardProps
         }
     };
       
+    const canSkipSteps = !!carListing || formIsValid;
 
     return (
         <LookupProvider>
@@ -162,14 +175,14 @@ const CarListingWizard = ({ onSubmitSuccess, carListing }: CarListingWizardProps
                             <Tabs.Trigger
                                 key={step.id}
                                 value={step.id}
-                                disabled={!carListing && index > currentStep}
+                                disabled={!canSkipSteps && index > currentStep}
                                 className={cn(
                                     "bg-card rounded-lg py-2.5 px-3 text-sm text-card-foreground font-medium leading-none focus:outline-none",
                                     "min-w-[100px] flex-grow max-w-[calc(20%-0.5rem)]", // Set minimum width and maximum width
                                     index === currentStep
                                     ? "shadow bg-muted-foreground text-card"
                                     : "bg-muted",
-                                    !(!carListing && index > currentStep) && "hover:bg-muted-foreground hover:text-card",
+                                    !(!canSkipSteps && index > currentStep) && "hover:bg-muted-foreground hover:text-card",
                                     index >= 5 && "mt-1" // Add top margin for items on the second line
                                 )}
                             >

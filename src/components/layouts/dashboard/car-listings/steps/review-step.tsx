@@ -88,13 +88,13 @@ const ReviewStep: React.FC = () => {
             <div>
               <p className="font-medium text-gray-500">Exterior Color:</p>
               <div className="flex items-center">
-                <div className="w-6 h-6 rounded-full mr-2" style={{ backgroundColor: values.exterior_color }}></div>
+                <div className="w-12 h-6 rounded-full mr-2 p-2 border-2 border-muted" style={{ backgroundColor: values.exterior_color }}></div>
               </div>
             </div>
             <div>
               <p className="font-medium text-gray-500">Interior Color:</p>
               <div className="flex items-center">
-                <div className="w-6 h-6 rounded-full mr-2" style={{ backgroundColor: values.interior_color }}></div>
+                <div className="w-12 h-6 rounded-full mr-2 p-2 border-2 border-muted" style={{ backgroundColor: values.interior_color }}></div>
               </div>
             </div>
           </div>

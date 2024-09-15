@@ -33,7 +33,7 @@ const CarListings = () => {
     };
 
     const columns = [
-        { header: '', type: 'image' as const, accessor: (item: CarListingType) => item.primary_image?.path, className: 'w-1/12' },
+        { header: '', type: 'image' as const, accessor: (item: CarListingType) => item.primary_image?.path, className: 'hidden md:table-cell md:w-1/12' },
         { header: 'Title', accessor: 'title' as const, sortable: true, filterable: true, filterType: 'text' as const, className: 'w-1/4' },
         { header: 'Year', accessor: 'year' as const, sortable: true, filterable: true, filterType: 'number' as const },
         { header: 'Price', type: 'currency' as const,accessor: 'price' as const, className: 'table-cell', sortable: true },

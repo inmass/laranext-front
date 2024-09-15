@@ -29,12 +29,12 @@ const AlertDialog = ({ trigger, title, description, cancelText, actionText, onAc
                     </RadixAlertDialog.Description>
                     <div className="flex justify-end gap-[25px]">
                         <RadixAlertDialog.Cancel asChild>
-                            <Button className="text-gray-900 border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5">
+                            <Button>
                                 {cancelText}
                             </Button>
                         </RadixAlertDialog.Cancel>
                         <RadixAlertDialog.Action asChild>
-                            <Button onClick={onAction} className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5">
+                            <Button onClick={onAction} className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300">
                                 {actionText}
                             </Button>
                         </RadixAlertDialog.Action>

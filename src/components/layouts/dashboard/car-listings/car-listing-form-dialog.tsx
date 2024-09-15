@@ -21,9 +21,9 @@ const CarListingFormDialog = ({ carListing }: CarListingFormDialogProps) => {
         carListing ? (
             <Pen className="h-5 w-5 cursor-pointer text-blue-300" />
         ) : (
-            <Button>
-                <Plus className="w-6 h-6 mr-2 inline-block" />
-                Add New Listing
+            <Button className="p-1 sm:px-4 sm:py-2">
+                <Plus className="w-6 h-6 inline-block sm:mr-2" />
+                <span className='hidden sm:inline'>Add New Listing</span>
             </Button>
         )      
     );
