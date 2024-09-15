@@ -7,7 +7,7 @@ import Label from '@/components/Label';
 import Link from 'next/link';
 import { useAuth } from '@/hooks/auth';
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import AuthSessionStatus from '@/components/AuthSessionStatus';
 import SocialLoginButtons from '@/components/SocialLoginButtons';
 import SectionDivider from '@/components/SectionDivider';
@@ -23,9 +23,10 @@ const Login = () => {
   // const router = useRouter()
   const router: any = useRouter();
 
+  const redirectIfAuthenticated = new URLSearchParams(window.location.search).get('next') || '/dashboard';
   const { login } = useAuth({
     middleware: 'guest',
-    redirectIfAuthenticated: '/dashboard',
+    redirectIfAuthenticated: redirectIfAuthenticated,
   });
 
   const [email, setEmail] = useState<string>('');

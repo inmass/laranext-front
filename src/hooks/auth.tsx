@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 import axios from '@/lib/axios';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { UserType } from '@/types/user';
 import ApiEndpoints from '@/constants/ApiEndpoints';
@@ -37,6 +37,7 @@ export const useAuth = ({
 }: AuthProps = {}) => {
   const router = useRouter();
   const params = useParams();
+  const [isMounted, setIsMounted] = useState(false);
 
   const {
     data: user,
@@ -133,12 +134,13 @@ export const useAuth = ({
       .then((response) => setStatus(response.data.status));
   };
 
-  const logout = async () => {
+  const logout = async (withRedirect = false) => {
     if (!error) {
       await axios.post(ApiEndpoints.auth.logout).then(() => mutateUser());
     }
+    const next = (window.location.pathname !== ApiEndpoints.auth.login) && withRedirect ? window.location.pathname : '';
 
-    window.location.pathname = ApiEndpoints.auth.login;
+    window.location.href = `${ApiEndpoints.auth.login}?next=${next}`;
   };
 
   const socialLogin = async (provider: socialProviders) => {
@@ -165,8 +167,10 @@ export const useAuth = ({
     }
 
     if (middleware === 'auth' && error) {
-      logout();
+      logout(true);
     }
+
+    setIsMounted(true);
   }, [user, error, middleware, redirectIfAuthenticated]);
 
   return {
@@ -179,5 +183,6 @@ export const useAuth = ({
     resendEmailVerification,
     logout,
     socialLogin,
+    isMounted,
   };
 };

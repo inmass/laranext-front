@@ -36,7 +36,11 @@ axios.interceptors.response.use(
       if (error.response?.status === 404) {
         toast.error(process.env.NODE_ENV === 'development' ? error.response.data.message : 'The requested resource was not found');
       }
-      else if ( error.response?.status >= 400 && error.response?.status < 500 ) {
+      else if (
+        // all error status codes between 400 and 500 except 401 if the url is /auth/login
+        (error.response?.status >= 400 && error.response?.status < 500) &&
+        (error.response?.status !== 401 && error.response?.config.url !== ApiEndpoints.auth.login)
+      ) {
         toast.error(error.response.data.message || 'An error occurred');
       }
       else if ( error.response?.status >= 500 ) {

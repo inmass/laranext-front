@@ -14,9 +14,9 @@ import { ThemeToggle } from '@/components/ThemeToggle';
 import { Toaster } from 'react-hot-toast';
 
 const AppLayout = ({ children }: { children: ReactNode }) => {
-  const { user } = useAuth({ middleware: 'auth' });
+  const { user, isMounted } = useAuth({ middleware: 'auth' });
 
-  if (!user) {
+  if (!user || !isMounted) {
     return <Loading />;
   }
 
