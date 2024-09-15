@@ -11,6 +11,7 @@ import {
 import Link from 'next/link';
 import { useAuth } from '@/hooks/auth';
 import { asset } from '@/lib/helpers';
+import AppRoutes from '@/constants/app-routes';
 
 export function User() {
   const { user, logout } = useAuth();
@@ -38,7 +39,7 @@ export function User() {
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>{user?.name}</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <Link href="/dashboard/profile">
+        <Link href={AppRoutes.dashboard.profile}>
           <DropdownMenuItem>Profile</DropdownMenuItem>
         </Link>
         <Link href="#">

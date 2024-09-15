@@ -15,6 +15,7 @@ import {
 import { VercelLogo } from '@/components/icons';
 import { NavItem } from '@/components/nav-item';
 import { useAuth } from '@/hooks/auth';
+import AppRoutes from '@/constants/app-routes';
 
 const DesktopNavigation = () => {
   // const { user } = useAuth();
@@ -33,14 +34,14 @@ const DesktopNavigation = () => {
 
         <NavItem href="#" label="Dashboard">
           <Link
-            href="/dashboard"
+            href={AppRoutes.dashboard.home}
             className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
           >
             <Home className="h-5 w-5" />
           </Link>
         </NavItem>
 
-        <NavItem href="/dashboard/car-listings" label="Orders">
+        <NavItem href={AppRoutes.dashboard.carListings} label="Car Listings">
           <Car className="h-5 w-5" />
         </NavItem>
 

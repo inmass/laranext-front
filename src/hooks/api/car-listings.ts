@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient, UseQueryResult } from '@tanstack/react-query';
 import axios from '@/lib/axios';
-import ApiEndpoints from '@/constants/ApiEndpoints';
+import ApiEndpoints from '@/constants/api-endpoints';
 import { CarListingType } from '@/types/car-listing';
 import { GetRequestParams, Pagination } from '../../lib/api-params';
 import { buildApiParams } from '@/lib/api-param-builder';

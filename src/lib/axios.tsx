@@ -1,5 +1,5 @@
 import Axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
-import ApiEndpoints from '@/constants/ApiEndpoints';
+import ApiEndpoints from '@/constants/api-endpoints';
 import toast from 'react-hot-toast';
 
 const axios = Axios.create({

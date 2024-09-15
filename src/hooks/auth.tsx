@@ -3,7 +3,7 @@ import axios from '@/lib/axios';
 import { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { UserType } from '@/types/user';
-import ApiEndpoints from '@/constants/ApiEndpoints';
+import ApiEndpoints from '@/constants/api-endpoints';
 
 interface AuthProps {
   middleware?: 'auth' | 'guest';

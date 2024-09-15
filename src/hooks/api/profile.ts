@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '@/hooks/auth';
-import ApiEndpoints from '@/constants/ApiEndpoints';
+import ApiEndpoints from '@/constants/api-endpoints';
 import axios from '@/lib/axios';
 import toast from 'react-hot-toast';
 

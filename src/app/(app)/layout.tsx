@@ -8,8 +8,8 @@ import { Analytics } from '@vercel/analytics/react';
 import { User } from '@/components/user';
 import AppProvider from '@/providers/AppProvider';
 import { SearchInput } from '@/components/search';
-import DesktopNavigation from '@/components/layouts/nav/DesktopNavigation';
-import MobileNavigation from '@/components/layouts/nav/MobileNavigation';
+import DesktopNavigation from '@/components/layouts/nav/desktop-navigation';
+import MobileNavigation from '@/components/layouts/nav/mobile-navigation';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { Toaster } from 'react-hot-toast';
 
