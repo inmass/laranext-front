@@ -64,7 +64,7 @@ const ImageWithPreview = ({ src, alt, width, height, className, ...props }: Imag
               <Image
                 src={src}
                 alt={alt}
-                className="max-w-full max-h-full object-contain"
+                className="object-contain max-w-full max-h-[700px]"
                 width={1000}
                 height={1000}
               />
