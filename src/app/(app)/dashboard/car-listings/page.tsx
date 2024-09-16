@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import AlertDialog from '@/components/layouts/AlertDialog';
 import CardLayout from '@/components/layouts/CardLayout';
 import CarListingFormDialog from '@/components/layouts/dashboard/car-listings/car-listing-form-dialog';
@@ -8,23 +9,23 @@ import { DataTable } from '@/components/layouts/table/data-table';
 import { CarListingsParams, getCarListings, useDeleteCarListing } from '@/hooks/api/car-listings';
 import { CarListingType } from '@/types/car-listing';
 import { Eye, Trash2 } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 import Head from 'next/head';
-import Link from 'next/link';
 import { useEffect, useState, useCallback } from 'react';
 
-const breadcrumbItems = [
-  { label: 'Dashboard', href: '/dashboard' },
-  { label: 'Listings'}
-];
-
 const CarListings = () => {
+    const t = useTranslations('Dashboard.CarListings');
+
+    const breadcrumbItems = [
+        { label: t('breadcrumb.dashboard'), href: '/dashboard' },
+        { label: t('breadcrumb.listings')}
+    ];
+
     const [params, setParams] = useState<CarListingsParams>({
         page: 1,
         perPage: 10,
         sort: null as { key: string; direction: 'asc' | 'desc' } | null,
         filters: {} as Record<string, string>,
-        include: ['primaryImage', 'images', 'features'], // we include images and features for the edit form
+        include: ['primaryImage', 'images', 'features'],
     });
 
     const { data, isLoading, isError, error } = getCarListings(params);
@@ -35,30 +36,30 @@ const CarListings = () => {
 
     const columns = [
         { header: '', type: 'image' as const, accessor: (item: CarListingType) => item.primary_image?.path, className: 'hidden md:table-cell md:w-1/12' },
-        { header: 'Title', accessor: 'title' as const, sortable: true, filterable: true, filterType: 'text' as const, className: 'w-1/4' },
-        { header: 'Year', accessor: 'year' as const, sortable: true, filterable: true, filterType: 'number' as const },
-        { header: 'Price', type: 'currency' as const,accessor: 'price' as const, className: 'table-cell', sortable: true },
-        { header: 'Mileage', accessor: (item: CarListingType) => `${item.mileage.toLocaleString()} miles`, className: 'table-cell' },
-        { header: 'Created At', type: 'date' as const ,accessor: 'created_at' as const, className: 'table-cell', sortable: true },
+        { header: t('columns.title'), accessor: 'title' as const, sortable: true, filterable: true, filterType: 'text' as const, className: 'w-1/4' },
+        { header: t('columns.year'), accessor: 'year' as const, sortable: true, filterable: true, filterType: 'number' as const },
+        { header: t('columns.price'), type: 'currency' as const, accessor: 'price' as const, className: 'table-cell', sortable: true },
+        { header: t('columns.mileage'), accessor: (item: CarListingType) => `${item.mileage.toLocaleString()} ${t('columns.miles')}`, className: 'table-cell' },
+        { header: t('columns.createdAt'), type: 'date' as const, accessor: 'created_at' as const, className: 'table-cell', sortable: true },
     ];
 
     const actions = [
-        { name: 'View', accessor: (item: CarListingType) => (
+        { name: t('actions.view'), accessor: (item: CarListingType) => (
             <Eye className="h-5 w-5 cursor-pointer text-blue-300" />
         )},
-        { name: 'Edit', accessor: (item: CarListingType) => (
+        { name: t('actions.edit'), accessor: (item: CarListingType) => (
                 <CarListingFormDialog carListing={item} />
             )
         },
-        { name: 'Delete', accessor: (item: CarListingType) => (
+        { name: t('actions.delete'), accessor: (item: CarListingType) => (
             <AlertDialog
                 trigger={
                     <Trash2 className="h-5 w-5 cursor-pointer text-red-500" />
                 }
-                title="Are you absolutely sure?"
-                description="This action cannot be undone. This will permanently delete the car listing."
-                cancelText="Cancel"
-                actionText="Yes, delete listing"
+                title={t('deleteConfirmation.title')}
+                description={t('deleteConfirmation.description')}
+                cancelText={t('deleteConfirmation.cancelText')}
+                actionText={t('deleteConfirmation.actionText')}
                 onAction={deleteCarListing(item.id)}
             />
         )},
@@ -69,23 +70,23 @@ const CarListings = () => {
     }, []);
 
     useEffect(() => {
-        document.title = 'Laravel - Listings';
-    }, []);
+        document.title = t('pageTitle');
+    }, [t]);
 
     return (
         <>
             <Head>
-                <title>Laravel - Profile</title>
+                <title>{t('pageTitle')}</title>
             </Head>
             <DashboardBreadcrumb items={breadcrumbItems} />
             <CardLayout
                 title={
                     <div className="flex justify-between items-center">
-                        <h1>Car Listings</h1>
+                        <h1>{t('cardTitle')}</h1>
                         <CarListingFormDialog />
                     </div>
                 }
-                description="Manage your car listings and view their details."
+                description={t('cardDescription')}
             >
                 <DataTable
                     columns={columns}

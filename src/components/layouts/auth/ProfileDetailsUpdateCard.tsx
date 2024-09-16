@@ -1,4 +1,4 @@
-
+import { useTranslations } from 'next-intl';
 import CardLayout from '@/components/layouts/CardLayout';
 import { Input } from '@/components/ui/input';
 import Button from '@/components/Button';
@@ -8,14 +8,14 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 
-
-const ProfileDetailsSchema = z.object({
-    name: z.string().min(1, 'Name is required'),
-});
-
-type ProfileDetailsFormData = z.infer<typeof ProfileDetailsSchema>;
-
 const ProfileDetailsUpdateCard = () => {
+    const t = useTranslations('Dashboard.Profile.ProfileDetailsUpdateCard');
+
+    const ProfileDetailsSchema = z.object({
+        name: z.string().min(1, t('validation.nameRequired')),
+    });
+
+    type ProfileDetailsFormData = z.infer<typeof ProfileDetailsSchema>;
 
     const { user, updateProfileDetails, loading } = useProfile();
 
@@ -39,11 +39,11 @@ const ProfileDetailsUpdateCard = () => {
     return (
         <CardLayout
             className="md:col-span-2"
-            title="General information"
+            title={t('title')}
         >
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
-                    <label htmlFor="name">Name</label>
+                    <label htmlFor="name">{t('name')}</label>
 
                     <Input
                         id="name"
@@ -56,7 +56,7 @@ const ProfileDetailsUpdateCard = () => {
                 </div>
 
                 <div className="mt-4">
-                    <label htmlFor="email">Email</label>
+                    <label htmlFor="email">{t('email')}</label>
 
                     <Input
                         id="email"
@@ -74,7 +74,7 @@ const ProfileDetailsUpdateCard = () => {
                         type="submit"
                         disabled={loading || !isValid || !isDirty}
                     >
-                        {loading ?'Updating...' : 'Update Profile'}
+                        {loading ? t('updating') : t('updateProfile')}
                     </Button>
                 </div>
             </form>

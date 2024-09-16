@@ -12,6 +12,7 @@ import AuthSessionStatus from '@/components/AuthSessionStatus';
 import SocialLoginButtons from '@/components/SocialLoginButtons';
 import SectionDivider from '@/components/SectionDivider';
 import CardLayout from '@/components/layouts/CardLayout';
+import { useTranslations } from 'next-intl';
 
 interface Errors {
   email?: string[];
@@ -20,8 +21,8 @@ interface Errors {
 }
 
 const Login = () => {
-  // const router = useRouter()
   const router: any = useRouter();
+  const t = useTranslations('Login');
 
   const redirectIfAuthenticated = new URLSearchParams(window.location.search).get('next') || '/dashboard';
   const { login } = useAuth({
@@ -58,15 +59,15 @@ const Login = () => {
   return (
     <CardLayout
       className="w-full max-w-sm"
-      title="Login"
-      description="Use your email to login to your account."
+      title={t('title')}
+      description={t('description')}
     >
       <div id="email-login">
         <AuthSessionStatus className="mb-4" status={status} />
         <form onSubmit={submitForm}>
           {/* Email Address */}
           <div>
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email">{t('email')}</Label>
 
             <Input
               id="email"
@@ -83,7 +84,7 @@ const Login = () => {
 
           {/* Password */}
           <div className="mt-4">
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="password">{t('password')}</Label>
 
             <Input
               id="password"
@@ -109,7 +110,7 @@ const Login = () => {
                 onChange={(event) => setShouldRemember(event.target.checked)}
               />
 
-              <span className="ml-2 text-sm text-gray-600">Remember me</span>
+              <span className="ml-2 text-sm text-gray-600">{t('rememberMe')}</span>
             </label>
           </div>
 
@@ -118,14 +119,14 @@ const Login = () => {
               href="/forgot-password"
               className="underline text-sm text-gray-600 hover:text-white"
             >
-              Forgot your password?
+              {t('forgotPassword')}
             </Link>
 
-            <Button className="ml-3">Login</Button>
+            <Button className="ml-3">{t('loginButton')}</Button>
           </div>
         </form>
       </div>
-      <SectionDivider dividerText="Or continue with" />
+      <SectionDivider dividerText={t('dividerText')} />
       <SocialLoginButtons />
     </CardLayout>
   );

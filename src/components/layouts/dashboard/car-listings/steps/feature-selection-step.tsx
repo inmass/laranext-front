@@ -6,10 +6,12 @@ import { GroupedFeatures, groupFeatures } from "@/lib/utils";
 import { FeatureType } from "@/types/feature";
 import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/car-listing-wizard';
 import { useLookup } from '../context/lookup-context';
+import { useTranslations } from 'next-intl';
 
 const FeatureSelectionStep: React.FC = () => {
   const { control, formState: { errors, isValid } } = useFormContext<CarListingFormData>();
   const { addLookupData } = useLookup();
+  const t = useTranslations('Dashboard.CarListings.Wizard.steps.FeatureSelectionStep');
 
   const params: FeaturesParams = {
     page: 1,
@@ -41,12 +43,12 @@ const FeatureSelectionStep: React.FC = () => {
     }
   }, [featureLookup, addLookupData]);
 
-  if (isLoading) return <div>Loading features...</div>;
-  if (error) return <div>Error loading features: {error.message}</div>;
+  if (isLoading) return <div>{t('loading')}</div>;
+  if (error) return <div>{t('error', { message: error.message })}</div>;
 
   return (
     <div className="space-y-6 mb-8">
-      <h2 className="text-xl font-semibold">Select Features</h2>
+      <h2 className="text-xl font-semibold">{t('title')}</h2>
       <Controller
         name="features"
         control={control}

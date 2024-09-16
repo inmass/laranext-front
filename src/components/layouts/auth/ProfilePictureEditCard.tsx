@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useTranslations } from 'next-intl';
 import CardLayout from '@/components/layouts/CardLayout';
 import Button from '@/components/Button';
 import { asset } from '@/lib/helpers';
@@ -9,6 +10,7 @@ import { useProfile } from '@/hooks/api/profile';
 import ClipLoader from 'react-spinners/ClipLoader';
 
 const ProfilePictureEditCard = ({ userAvatar }: { userAvatar?: string }) => {
+    const t = useTranslations('Dashboard.Profile.ProfilePictureEditCard');
     const fileInputRef = useRef<HTMLInputElement>(null);
     const { updateProfileAvatar, loading } = useProfile();
     const [avatar, setAvatar] = useState(userAvatar);
@@ -35,10 +37,10 @@ const ProfilePictureEditCard = ({ userAvatar }: { userAvatar?: string }) => {
 
     return (
         <CardLayout
-            title="Profile Picture"
-            description="Add a profile picture to make your account more recognizable."
+            title={t('title')}
+            description={t('description')}
         >
-            <p className="text-sm text-gray-500 mb-4 md:mt-6">JPG, GIF or PNG. Max size of 800K</p>
+            <p className="text-sm text-gray-500 mb-4 md:mt-6">{t('fileRequirements')}</p>
             <div className="mb-4 flex items-center justify-center w-24 h-24 bg-gray-100 rounded-full overflow-hidden border border-gray-300">
                 {
                     loading ?
@@ -51,7 +53,7 @@ const ProfilePictureEditCard = ({ userAvatar }: { userAvatar?: string }) => {
                         }
                         width={100}
                         height={100}
-                        alt="Profile"
+                        alt={t('profileImageAlt')}
                     />
                 }
             </div>
@@ -67,7 +69,7 @@ const ProfilePictureEditCard = ({ userAvatar }: { userAvatar?: string }) => {
                     className="!m-0"
                     onClick={handleUploadClick}
                 >
-                    {avatar ? 'Change picture' : 'Upload picture'}
+                    {avatar ? t('changePicture') : t('uploadPicture')}
                 </Button>
                 
                 <AlertDialog
@@ -78,10 +80,10 @@ const ProfilePictureEditCard = ({ userAvatar }: { userAvatar?: string }) => {
                             <TrashIcon className="w-4 h-4" />
                         </Button>
                     }
-                    title="Are you absolutely sure?"
-                    description="This action cannot be undone. This will permanently delete your profile picture."
-                    cancelText="Cancel"
-                    actionText="Yes, delete picture"
+                    title={t('deleteConfirmation.title')}
+                    description={t('deleteConfirmation.description')}
+                    cancelText={t('deleteConfirmation.cancelText')}
+                    actionText={t('deleteConfirmation.actionText')}
                     onAction={handleDelete}
                 />
             </div>

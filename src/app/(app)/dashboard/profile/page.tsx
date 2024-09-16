@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import DashboardBreadcrumb from '@/components/layouts/DashboardBreadcrumb';
 import { useAuth } from '@/hooks/auth';
 import Head from 'next/head';
@@ -8,22 +9,23 @@ import ProfilePictureEditCard from '@/components/layouts/auth/ProfilePictureEdit
 import PasswordUpdateCard from '@/components/layouts/auth/PasswordUpdateCard';
 import ProfileDetailsUpdateCard from '@/components/layouts/auth/ProfileDetailsUpdateCard';
 
-const breadcrumbItems = [
-  { label: 'Dashboard', href: '/dashboard' },
-  { label: 'Profile' },
-];
-
-const Dashboard = () => {
+const ProfilePage = () => {
     const { user } = useAuth({ middleware: 'auth' });
+    const t = useTranslations('Dashboard');
+
+    const breadcrumbItems = [
+        { label: t('breadcrumb.dashboard'), href: '/dashboard' },
+        { label: t('breadcrumb.profile') },
+    ];
 
     useEffect(() => {
-        document.title = 'Laravel - Profile';
-    }, []);
+        document.title = t('Profile.pageTitle');
+    }, [t]);
 
     return (
         <>
             <Head>
-                <title>Laravel - Profile</title>
+                <title>{t('Profile.pageTitle')}</title>
             </Head>
             <DashboardBreadcrumb items={breadcrumbItems} />
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-auto">
@@ -34,10 +36,9 @@ const Dashboard = () => {
                     <ProfileDetailsUpdateCard/>
                     <PasswordUpdateCard />
                 </div>
-                
             </div>
         </>
     );
 };
 
-export default Dashboard;
+export default ProfilePage;

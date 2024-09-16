@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslations } from 'next-intl';
 import { useFormContext, Controller } from 'react-hook-form';
 import CarModelSelect from '@/components/dynamic/car-model-select';
 import { cn } from '@/lib/utils';
@@ -8,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { useLookup } from '../context/lookup-context';
 
 const BasicInfoStep: React.FC = () => {
+  const t = useTranslations('Dashboard.CarListings.Wizard.steps.BasicInfoStep');
   const { control, watch, formState: { errors }, register } = useFormContext<CarListingFormData>();
   const make_id = watch('make_id');
 
@@ -26,7 +28,7 @@ const BasicInfoStep: React.FC = () => {
   return (
     <div className="space-y-4">
         <div>
-            <label htmlFor="make_id">Car Make</label>
+            <label htmlFor="make_id">{t('labels.carMake')}</label>
             <Controller
                 name="make_id"
                 control={control}
@@ -43,7 +45,7 @@ const BasicInfoStep: React.FC = () => {
         </div>
 
         <div>
-            <label htmlFor="car_model_id">Model</label>
+            <label htmlFor="car_model_id">{t('labels.model')}</label>
             <Controller
                 name="car_model_id"
                 control={control}
@@ -60,7 +62,7 @@ const BasicInfoStep: React.FC = () => {
         </div>
 
         <div>
-          <label htmlFor="title">Title</label>
+          <label htmlFor="title">{t('labels.title')}</label>
           <Input
               type="text"
               id="title"

@@ -10,6 +10,7 @@ import { useState, FormEvent } from 'react';
 import SectionDivider from '@/components/SectionDivider';
 import SocialLoginButtons from '@/components/SocialLoginButtons';
 import CardLayout from '@/components/layouts/CardLayout';
+import { useTranslations } from 'next-intl';
 
 interface Errors {
   name?: string[];
@@ -19,6 +20,7 @@ interface Errors {
 }
 
 const Page = () => {
+  const t = useTranslations('Register');
   const { register } = useAuth({
     middleware: 'guest',
     redirectIfAuthenticated: '/dashboard',
@@ -45,13 +47,13 @@ const Page = () => {
   return (
     <CardLayout
       className="w-full max-w-sm"
-      title="Register"
-      description="Welcome! Use your email to create an account."
+      title={t('title')}
+      description={t('description')}
     >
       <form onSubmit={submitForm}>
         {/* Name */}
         <div>
-          <Label htmlFor="name">Name</Label>
+          <Label htmlFor="name">{t('name')}</Label>
 
           <Input
             id="name"
@@ -68,7 +70,7 @@ const Page = () => {
 
         {/* Email Address */}
         <div className="mt-4">
-          <Label htmlFor="email">Email</Label>
+          <Label htmlFor="email">{t('email')}</Label>
 
           <Input
             id="email"
@@ -84,7 +86,7 @@ const Page = () => {
 
         {/* Password */}
         <div className="mt-4">
-          <Label htmlFor="password">Password</Label>
+          <Label htmlFor="password">{t('password')}</Label>
 
           <Input
             id="password"
@@ -101,7 +103,7 @@ const Page = () => {
 
         {/* Confirm Password */}
         <div className="mt-4">
-          <Label htmlFor="passwordConfirmation">Confirm Password</Label>
+          <Label htmlFor="passwordConfirmation">{t('confirmPassword')}</Label>
 
           <Input
             id="passwordConfirmation"
@@ -123,13 +125,13 @@ const Page = () => {
             href="/login"
             className="underline text-sm text-gray-600 hover:text-gray-900"
           >
-            Already registered?
+            {t('alreadyRegistered')}
           </Link>
 
-          <Button className="ml-4">Register</Button>
+          <Button className="ml-4">{t('registerButton')}</Button>
         </div>
       </form>
-      <SectionDivider dividerText="Or continue with" />
+      <SectionDivider dividerText={t('dividerText')} />
       <SocialLoginButtons />
     </CardLayout>
   );

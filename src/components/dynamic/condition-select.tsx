@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import { getConditions, ConditionsParams } from '@/hooks/api/conditions';
 import Select, { SelectRef } from '@/components/layouts/select';
-
+import { useTranslations } from 'next-intl';
 
 interface ConditionSelectProps {
     value?: string;
@@ -23,6 +23,7 @@ interface Condition {
 }
 
 const ConditionSelect = forwardRef<SelectRef, ConditionSelectProps>(({ value, onChange, onBlur, className, disabled, name }, ref) => {
+    const t = useTranslations('Dashboard.CarListings.Wizard.steps.VehicleDetailsStep.ConditionSelect');
 
     const params: ConditionsParams = {
         page: 1,
@@ -53,7 +54,7 @@ const ConditionSelect = forwardRef<SelectRef, ConditionSelectProps>(({ value, on
             error={isError}
             className={className}
             disabled={disabled}
-            placeholder="Select a condition"
+            placeholder={t('placeholder')}
             name={name}
             searchable={false}
         />

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -18,66 +19,63 @@ import { useCreateCarListing, useUpdateCarListing } from '@/hooks/api/car-listin
 import toast from 'react-hot-toast';
 import { CarListingType } from '@/types/car-listing';
 
-const addCarListingSchema = z.object({
-    make_id: z.string().min(1, 'Make is required'),
-    car_model_id: z.string().min(1, 'Car Model is required'),
-    body_style_id: z.string().min(1, 'Body Style is required'),
-    condition_id: z.string().min(1, 'Condition is required'),
-    features: z.array(z.string()).min(1, 'At least one feature is required'),
-    title: z.string().min(1, 'Title is required'),
-    description: z.string().min(1, 'Description is required'),
-    price: z.number().min(1, 'Price is required'),
+const addCarListingSchema = (t: (key: string) => string) => z.object({
+    make_id: z.string().min(1, { message: t('validation.makeRequired') }),
+    car_model_id: z.string().min(1, { message: t('validation.modelRequired') }),
+    body_style_id: z.string().min(1, { message: t('validation.bodyStyleRequired') }),
+    condition_id: z.string().min(1, { message: t('validation.conditionRequired') }),
+    features: z.array(z.string()).min(1, { message: t('validation.featuresRequired') }),
+    title: z.string().min(1, { message: t('validation.titleRequired') }),
+    description: z.string().min(1, { message: t('validation.descriptionRequired') }),
+    price: z.number().min(1, { message: t('validation.priceRequired') }),
     original_price: z.union([z.number(), z.nan()]),
-    year: z.number().min(1900, 'Year must be 1900 or later').max(new Date().getFullYear() + 1, 'Year cannot be in the future'),
-    mileage: z.number().min(0, 'Mileage cannot be negative'),
-    exterior_color: z.string().min(1, 'Exterior Color is required'),
-    interior_color: z.string().min(1, 'Interior Color is required'),
-    transmission: z.string().min(1, 'Transmission is required'),
-    fuel_type: z.string().min(1, 'Fuel Type is required'),
+    year: z.number()
+        .min(1900, { message: t('validation.yearMin') })
+        .max(new Date().getFullYear() + 1, { message: t('validation.yearMax') }),
+    mileage: z.number().min(0, { message: t('validation.mileageMin') }),
+    exterior_color: z.string().min(1, { message: t('validation.exteriorColorRequired') }),
+    interior_color: z.string().min(1, { message: t('validation.interiorColorRequired') }),
+    transmission: z.string().min(1, { message: t('validation.transmissionRequired') }),
+    fuel_type: z.string().min(1, { message: t('validation.fuelTypeRequired') }),
     images: z.array(z.object({
         id: z.number().optional(),
         image: z.union([z.instanceof(File), z.string()]),
         is_primary: z.boolean()
-    })).min(1, 'At least one image is required').refine(images => images.some(img => img.is_primary), {
-        message: 'At least one image must be primary',
+    })).min(1, { message: t('validation.imagesRequired') })
+    .refine(images => images.some(img => img.is_primary), { 
+        message: t('validation.primaryImageRequired') 
     }),
     removed_image_ids: z.array(z.number()).optional(),
 });
 
-export type CarListingFormData = z.infer<typeof addCarListingSchema>;
+const placeholderT = (key: string) => key;
+const initialSchema = addCarListingSchema(placeholderT);
 
+export type CarListingFormData = z.infer<typeof initialSchema>;
 export type UpdateCarListingFormData = CarListingFormData & { id: number };
-
-
-const creatingSteps = [
-    { id: 'basic-info', title: 'Basic Info', component: BasicInfoStep },
-    { id: 'vehicle-details', title: 'Details', component: VehicleDetailsStep },
-    { id: 'features', title: 'Features', component: FeatureSelectionStep },
-    { id: 'appearance', title: 'Appearance', component: AppearanceStep },
-    { id: 'pricing', title: 'Pricing', component: PricingStep },
-    { id: 'description', title: 'Description', component: DescriptionStep },
-    { id: 'images', title: 'Images', component: ImageUploadStep },
-    { id: 'review', title: 'Review', component: ReviewStep },
-];
-
-const updatingSteps = [
-    { id: 'basic-info', title: 'Basic Info', component: BasicInfoStep },
-    { id: 'vehicle-details', title: 'Details', component: VehicleDetailsStep },
-    { id: 'features', title: 'Features', component: FeatureSelectionStep },
-    { id: 'appearance', title: 'Appearance', component: AppearanceStep },
-    { id: 'pricing', title: 'Pricing', component: PricingStep },
-    { id: 'description', title: 'Description', component: DescriptionStep },
-    { id: 'images', title: 'Images', component: ImageUploadStep },
-];
-
 
 interface CarListingWizardProps {
     onSubmitSuccess?: () => void;
     carListing?: UpdateCarListingFormData;
 }
 
-// const CarListingWizard: React.FC = () => {
 const CarListingWizard = ({ onSubmitSuccess, carListing }: CarListingWizardProps) => {
+
+    const t = useTranslations('Dashboard.CarListings.Wizard');
+    const schema = addCarListingSchema(t);
+
+    const creatingSteps = [
+        { id: 'basic-info', title: t('steps.basicInfo'), component: BasicInfoStep },
+        { id: 'vehicle-details', title: t('steps.vehicleDetails'), component: VehicleDetailsStep },
+        { id: 'features', title: t('steps.features'), component: FeatureSelectionStep },
+        { id: 'appearance', title: t('steps.appearance'), component: AppearanceStep },
+        { id: 'pricing', title: t('steps.pricing'), component: PricingStep },
+        { id: 'description', title: t('steps.description'), component: DescriptionStep },
+        { id: 'images', title: t('steps.images'), component: ImageUploadStep },
+        { id: 'review', title: t('steps.review'), component: ReviewStep },
+    ];
+
+    const updatingSteps = creatingSteps.slice(0, -1);  // Exclude the review step for updates
 
     const steps = carListing ? updatingSteps : creatingSteps;
 
@@ -103,7 +101,7 @@ const CarListingWizard = ({ onSubmitSuccess, carListing }: CarListingWizardProps
     };
 
     const methods = useForm<CarListingFormData>({
-        resolver: zodResolver(addCarListingSchema),
+        resolver: zodResolver(schema),
         mode: 'onChange',
         defaultValues: defaultValues,
     });
@@ -119,7 +117,6 @@ const CarListingWizard = ({ onSubmitSuccess, carListing }: CarListingWizardProps
     };
 
     const prevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 0));
-
 
     const createCarListingMutation = useCreateCarListing(() => {
         if (onSubmitSuccess) onSubmitSuccess()
@@ -137,7 +134,7 @@ const CarListingWizard = ({ onSubmitSuccess, carListing }: CarListingWizardProps
                 await createCarListingMutation.mutateAsync(data);
             }
         } catch (error) {
-            toast.error('Failed to create car listing');
+            toast.error(t('errors.failedToCreate'));
         }
     };
 
@@ -146,7 +143,7 @@ const CarListingWizard = ({ onSubmitSuccess, carListing }: CarListingWizardProps
             case 0: // Basic Info
                 return ['make_id', 'car_model_id', 'year', 'title'];
             case 1: // Vehicle Details
-                return ['body_style_id', 'condition_id', 'mileage', 'transmission'];
+                return ['body_style_id', 'condition_id', 'mileage', 'transmission', 'fuel_type'];
             case 2: // Features
                 return ['features'];
             case 3: // Appearance
@@ -178,12 +175,12 @@ const CarListingWizard = ({ onSubmitSuccess, carListing }: CarListingWizardProps
                                 disabled={!canSkipSteps && index > currentStep}
                                 className={cn(
                                     "bg-card rounded-lg py-2.5 px-3 text-sm text-card-foreground font-medium leading-none focus:outline-none",
-                                    "min-w-[100px] flex-grow max-w-[calc(20%-0.5rem)]", // Set minimum width and maximum width
+                                    "min-w-[100px] flex-grow max-w-[calc(20%-0.5rem)] break-words",
                                     index === currentStep
                                     ? "shadow bg-muted-foreground text-card"
                                     : "bg-muted",
                                     !(!canSkipSteps && index > currentStep) && "hover:bg-muted-foreground hover:text-card",
-                                    index >= 5 && "mt-1" // Add top margin for items on the second line
+                                    index >= 5 && "mt-1"
                                 )}
                             >
                                 {step.title}
@@ -197,22 +194,21 @@ const CarListingWizard = ({ onSubmitSuccess, carListing }: CarListingWizardProps
                         ))}
                     </Tabs.Root>
 
-                    {/* <div className="mt-6 flex justify-between"> */}
                     <div className={cn(
                         'mt-6 flex',
                         currentStep > 0 ? 'justify-between' : 'justify-end'
                     )}>
                         {currentStep > 0 && (
                             <Button type="button" onClick={prevStep}>
-                                Previous
+                                {t('buttons.previous')}
                             </Button>
                         )}
                         {
                             currentStep === steps.length - 1 ? (
-                                <Button type="button" onClick={handleSubmit(submitForm)} disabled={!isDirty}>Submit</Button>
+                                <Button type="button" onClick={handleSubmit(submitForm)} disabled={!isDirty}>{t('buttons.submit')}</Button>
                             ) : (
                                 <Button type="button" onClick={nextStep}>
-                                    Next
+                                    {t('buttons.next')}
                                 </Button>
                             )
                         }

@@ -1,24 +1,22 @@
 import React from 'react';
 import { useFormContext, Controller } from 'react-hook-form';
+import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
-import BodyStyleSelect from '@/components/dynamic/body-style-select';
-import { Input } from '@/components/ui/input';
-import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/car-listing-wizard';
-import ConditionSelect from '@/components/dynamic/condition-select';
 import Editor from '@/components/ui/editor';
-import Select from '@/components/layouts/select';
+import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/car-listing-wizard';
 
 const DescriptionStep: React.FC = () => {
-  const { control, formState: { errors }, register } = useFormContext<CarListingFormData>();
+  const t = useTranslations('Dashboard.CarListings.Wizard.steps.DescriptionStep');
+  const { control, formState: { errors } } = useFormContext<CarListingFormData>();
 
   return (
     <div className="space-y-4">
       <div>
-        <label htmlFor="description" className='text-gray-500'>Write a description for your listing</label>
+        <label htmlFor="description" className='text-gray-500'>{t('descriptionLabel')}</label>
         <Controller
           name="description"
           control={control}
-          rules={{ required: "Description is required" }}
+          rules={{ required: t('descriptionRequired') }}
           render={({ field }) => (
             <Editor
               onChange={field.onChange}

@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect } from 'react';
-import { useFormContext, Controller, useFieldArray } from 'react-hook-form';
+import { useFormContext, Controller } from 'react-hook-form';
 import { useDropzone } from 'react-dropzone';
 import { X, Image as ImagePlusIcon, Star, StarOff } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/car-listing-wizard';
 import { cn } from '@/lib/utils';
 import { asset } from '@/lib/helpers';
@@ -13,6 +14,7 @@ interface ImageData {
 }
 
 const ImageUploadStep: React.FC = () => {
+  const t = useTranslations('Dashboard.CarListings.Wizard.steps.ImageUploadStep');
   const { control, setValue, watch, formState: { errors } } = useFormContext<CarListingFormData>();
   const images = watch('images') || [];
   const removedImageIds = watch('removed_image_ids') || [];
@@ -89,9 +91,9 @@ const ImageUploadStep: React.FC = () => {
             <div className="text-muted-foreground text-sm flex items-center justify-center space-x-2">
               <ImagePlusIcon size={24} />
               {isDragActive ? (
-                <p>Drop the files here ...</p>
+                <p>{t('dropFilesHere')}</p>
               ) : (
-                <p>Drag 'n' drop some files here, or click to select files</p>
+                <p>{t('dragAndDropInstructions')}</p>
               )}
             </div>
           </div>
@@ -103,13 +105,14 @@ const ImageUploadStep: React.FC = () => {
           <div key={file.id || (file.image instanceof File ? file.image.name : file.image)} className="relative">
             <img 
               src={getImageSrc(file.image)} 
-              alt={`preview ${index}`} 
+              alt={t('previewAlt', { index: index + 1 })} 
               className="w-full h-32 object-cover rounded-md" 
             />
             <button
               type='button'
               onClick={() => removeImage(index)} 
               className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1 m-1"
+              aria-label={t('removeImage')}
             >
               <X size={16} />
             </button>
@@ -121,6 +124,7 @@ const ImageUploadStep: React.FC = () => {
                   'absolute bottom-0 left-0 rounded-full p-1 m-1 text-white',
                   file.is_primary ? 'bg-blue-500' : ''
                 )}
+                aria-label={file.is_primary ? t('primaryImage') : t('setPrimaryImage')}
               >
                 {file.is_primary ? <Star size={16} /> : <StarOff size={16} />}
               </button>

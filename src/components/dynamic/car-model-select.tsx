@@ -1,6 +1,7 @@
 import React, { forwardRef, useMemo } from 'react';
 import { getCarModels, CarModelsParams } from '@/hooks/api/car-models';
 import Select, { SelectRef } from '@/components/layouts/select';
+import { useTranslations } from 'next-intl';
 
 interface CarModelSelectProps {
     make_id?: string;
@@ -24,6 +25,7 @@ interface CarModel {
 
 const CarModelSelect = forwardRef<SelectRef, CarModelSelectProps>(
     ({ make_id, value, onChange, onBlur, className, disabled, name }, ref) => {
+    const t = useTranslations('Dashboard.CarListings.Wizard.steps.BasicInfoStep.CarModelSelect');
     
     const queryParams: CarModelsParams = useMemo(() => ({
         page: 1,
@@ -57,7 +59,7 @@ const CarModelSelect = forwardRef<SelectRef, CarModelSelectProps>(
             error={isError}
             className={className}
             disabled={disabled || !make_id}
-            placeholder={make_id ? "Select a car model" : "Select a make first"}
+            placeholder={make_id ? t('placeholderWithMake') : t('placeholderNoMake')}
             name={name}
         />
     );

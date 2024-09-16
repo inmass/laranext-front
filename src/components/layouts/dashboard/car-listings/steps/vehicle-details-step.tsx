@@ -7,11 +7,13 @@ import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/
 import ConditionSelect from '@/components/dynamic/condition-select';
 import Select from '@/components/layouts/select';
 import { useLookup } from '../context/lookup-context';
+import { useTranslations } from 'next-intl';
 
 const VehicleDetailsStep: React.FC = () => {
   const { control, formState: { errors }, register } = useFormContext<CarListingFormData>();
 
   const { addLookupData } = useLookup();
+  const t = useTranslations('Dashboard.CarListings.Wizard.steps.VehicleDetailsStep');
 
   const handleConditionChange = (field: any, value: string, label: string) => {
     field.onChange(value);
@@ -26,7 +28,7 @@ const VehicleDetailsStep: React.FC = () => {
   return (
     <div className="space-y-4">
       <div>
-        <label htmlFor="body_style_id">Body Style</label>
+        <label htmlFor="body_style_id">{t('bodyStyle')}</label>
         <Controller
           name="body_style_id"
           control={control}
@@ -42,7 +44,7 @@ const VehicleDetailsStep: React.FC = () => {
       </div>
 
       <div>
-        <label htmlFor="condition_id">Condition</label>
+        <label htmlFor="condition_id">{t('condition')}</label>
         <Controller
             name="condition_id"
             control={control}
@@ -57,7 +59,7 @@ const VehicleDetailsStep: React.FC = () => {
         {errors.condition_id && <p className="text-red-500 text-sm">{errors.condition_id.message}</p>}
       </div>
       <div>
-          <label htmlFor="mileage">Mileage</label>
+          <label htmlFor="mileage">{t('mileage')}</label>
           <Input
               type="number"
               id="mileage"
@@ -67,7 +69,7 @@ const VehicleDetailsStep: React.FC = () => {
           {errors.mileage && <p className="text-red-500 text-sm">{errors.mileage.message}</p>}
       </div>
       <div>
-          <label htmlFor="transmission">Transmission</label>
+          <label htmlFor="transmission">{t('transmission')}</label>
           <Controller
               name="transmission"
               control={control}
@@ -75,8 +77,8 @@ const VehicleDetailsStep: React.FC = () => {
                   <Select
                       {...field}
                       options={[
-                          { label: 'Automatic', value: 'automatic' },
-                          { label: 'Manual', value: 'manual' },
+                          { label: t('transmissionOptions.automatic'), value: 'automatic' },
+                          { label: t('transmissionOptions.manual'), value: 'manual' },
                       ]}
                       searchable={false}
                       className={cn(errors.transmission ? 'border-red-500' : '')}
@@ -86,7 +88,7 @@ const VehicleDetailsStep: React.FC = () => {
           {errors.transmission && <p className="text-red-500 text-sm">{errors.transmission.message}</p>}
       </div>
       <div>
-          <label htmlFor="fuel_type">Fuel Type</label>
+          <label htmlFor="fuel_type">{t('fuelType')}</label>
           <Controller
               name="fuel_type"
               control={control}
@@ -94,9 +96,9 @@ const VehicleDetailsStep: React.FC = () => {
                   <Select
                       {...field}
                       options={[
-                          { label: 'Gasoline', value: 'gasoline' },
-                          { label: 'Diesel', value: 'diesel' },
-                          { label: 'Electric', value: 'electric' },
+                          { label: t('fuelTypeOptions.gasoline'), value: 'gasoline' },
+                          { label: t('fuelTypeOptions.diesel'), value: 'diesel' },
+                          { label: t('fuelTypeOptions.electric'), value: 'electric' },
                       ]}
                       searchable={false}
                       className={cn(errors.fuel_type ? 'border-red-500' : '')}

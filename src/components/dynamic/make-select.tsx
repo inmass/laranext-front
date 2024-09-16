@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react';
 import { getMakes, MakesParams } from '@/hooks/api/makes';
 import Select, { SelectRef } from '@/components/layouts/select';
+import { useTranslations } from 'next-intl';
 
 interface MakeSelectProps {
     value?: string;
@@ -22,6 +23,8 @@ interface Option {
 }
 
 const MakeSelect = forwardRef<SelectRef, MakeSelectProps>(({ value, onChange, onBlur, className, disabled, name }, ref) => {
+    const t = useTranslations('Dashboard.CarListings.Wizard.steps.BasicInfoStep.MakeSelect');
+
     const params: MakesParams = {
         page: 1,
         noPagination: true,
@@ -30,7 +33,6 @@ const MakeSelect = forwardRef<SelectRef, MakeSelectProps>(({ value, onChange, on
     };
 
     const { data, isLoading, isError } = getMakes(params);
-
     const options: Option[] = data?.map(({ id, name }: Make) => ({ label: name, value: String(id) })) || [];
 
     const handleChange = (newValue: string) => {
@@ -51,12 +53,11 @@ const MakeSelect = forwardRef<SelectRef, MakeSelectProps>(({ value, onChange, on
             error={isError}
             className={className}
             disabled={disabled}
-            placeholder="Select a car make"
+            placeholder={t('placeholder')}
             name={name}
         />
     );
 });
 
 MakeSelect.displayName = 'MakeSelect';
-
 export default MakeSelect;

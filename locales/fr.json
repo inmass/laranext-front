@@ -1,12 +1,261 @@
 {
-    "common": {
-      "welcome": "Bienvenue sur notre application",
-      "home": "Accueil",
-      "about": "À propos",
-      "contact": "Contact"
+  "Login": {
+    "title": "Connexion",
+    "description": "Utilisez votre email pour vous connecter à votre compte.",
+    "email": "Email",
+    "password": "Mot de passe",
+    "rememberMe": "Se souvenir de moi",
+    "forgotPassword": "Mot de passe oublié ?",
+    "loginButton": "Se connecter",
+    "dividerText": "Ou continuer avec"
+  },
+  
+  "SocialLogin": {
+    "loginWithFacebook": "Se connecter avec Facebook",
+    "loginWithGoogle": "Se connecter avec Google"
+  },
+
+  "Register": {
+    "title": "S'inscrire",
+    "description": "Bienvenue ! Utilisez votre email pour créer un compte.",
+    "name": "Nom",
+    "email": "Email",
+    "password": "Mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "alreadyRegistered": "Déjà inscrit ?",
+    "registerButton": "S'inscrire",
+    "dividerText": "Ou continuer avec"
+  },
+
+  "Dashboard": {
+    "breadcrumb": {
+      "dashboard": "Tableau de bord",
+      "profile": "Profil"
     },
-    "home": {
-      "title": "Bienvenue sur notre page d'accueil",
-      "description": "Ceci est une description d'exemple pour la page d'accueil."
+
+    "Profile": {
+      "pageTitle": "Laravel - Profil",
+
+      "ProfilePictureEditCard": {
+        "title": "Photo de profil",
+        "description": "Ajoutez une photo de profil pour rendre votre compte plus reconnaissable.",
+        "fileRequirements": "JPG, GIF ou PNG. Taille maximale de 800K",
+        "profileImageAlt": "Profil",
+        "uploadPicture": "Télécharger une photo",
+        "changePicture": "Changer la photo",
+
+        "deleteConfirmation": {
+          "title": "Êtes-vous absolument sûr ?",
+          "description": "Cette action ne peut pas être annulée. Cela supprimera définitivement votre photo de profil.",
+          "cancelText": "Annuler",
+          "actionText": "Oui, supprimer la photo"
+        }
+      },
+
+      "ProfileDetailsUpdateCard": {
+        "title": "Informations générales",
+        "name": "Nom",
+        "email": "Email",
+        "updating": "Mise à jour...",
+        "updateProfile": "Mettre à jour le profil",
+        "validation": {
+          "nameRequired": "Le nom est requis"
+        }
+      },
+
+      "PasswordUpdateCard": {
+        "title": "Changer le mot de passe",
+        "currentPassword": "Mot de passe actuel",
+        "newPassword": "Nouveau mot de passe",
+        "confirmPassword": "Confirmer le mot de passe",
+        "updating": "Mise à jour...",
+        "updatePassword": "Mettre à jour le mot de passe",
+
+        "validation": {
+          "currentPasswordRequired": "Le mot de passe actuel est requis",
+          "passwordMinLength": "Le mot de passe doit contenir au moins 8 caractères",
+          "passwordComplexity": "Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial",
+          "confirmPasswordRequired": "Veuillez confirmer votre mot de passe",
+          "passwordsMismatch": "Les mots de passe ne correspondent pas",
+          "newPasswordDifferent": "Le nouveau mot de passe doit être différent du mot de passe actuel"
+        }
+      }
+    },
+
+    "CarListings": {
+      "breadcrumb": {
+        "dashboard": "Tableau de bord",
+        "listings": "Annonces"
+      },
+
+      "pageTitle": "Laravel - Annonces",
+      "cardTitle": "Annonces de voitures",
+      "cardDescription": "Gérez vos annonces de voitures et consultez leurs détails.",
+
+      "columns": {
+        "title": "Titre",
+        "year": "Année",
+        "price": "Prix",
+        "mileage": "Kilométrage",
+        "miles": "km",
+        "createdAt": "Créé le"
+      },
+
+      "actions": {
+        "view": "Voir",
+        "edit": "Modifier",
+        "delete": "Supprimer"
+      },
+      
+      "deleteConfirmation": {
+        "title": "Êtes-vous absolument sûr ?",
+        "description": "Cette action ne peut pas être annulée. Cela supprimera définitivement l'annonce de la voiture.",
+        "cancelText": "Annuler",
+        "actionText": "Oui, supprimer l'annonce"
+      },
+
+      "FormDialog": {
+        "addNewListing": "Ajouter une nouvelle annonce",
+        "addTitle": "Ajouter une nouvelle annonce de voiture",
+        "addDescription": "Entrez ici les détails de la nouvelle annonce de voiture.",
+        "editTitle": "Modifier {title}",
+        "editDescription": "Mettez à jour ici les détails de l'annonce de voiture."
+      },
+
+      "Wizard": {
+        "validation": {
+          "makeRequired": "La marque est requise",
+          "modelRequired": "Le modèle de voiture est requis",
+          "bodyStyleRequired": "Le style de carrosserie est requis",
+          "conditionRequired": "L'état est requis",
+          "featuresRequired": "Au moins une caractéristique est requise",
+          "titleRequired": "Le titre est requis",
+          "descriptionRequired": "La description est requise",
+          "priceRequired": "Le prix est requis",
+          "yearMin": "L'année doit être 1900 ou ultérieure",
+          "yearMax": "L'année ne peut pas être dans le futur",
+          "mileageMin": "Le kilométrage ne peut pas être négatif",
+          "exteriorColorRequired": "La couleur extérieure est requise",
+          "interiorColorRequired": "La couleur intérieure est requise",
+          "transmissionRequired": "La transmission est requise",
+          "fuelTypeRequired": "Le type de carburant est requis",
+          "imagesRequired": "Au moins une image est requise",
+          "primaryImageRequired": "Au moins une image doit être principale"
+        },
+
+        "steps": {
+          "basicInfo": "Infos de base",
+          "vehicleDetails": "Détails",
+          "features": "Caractéristiques",
+          "appearance": "Apparence",
+          "pricing": "Tarification",
+          "description": "Description",
+          "images": "Images",
+          "review": "Révision",
+
+          "BasicInfoStep": {
+            "labels": {
+              "carMake": "Marque de voiture",
+              "model": "Modèle",
+              "title": "Titre"
+            },
+
+            "MakeSelect": {
+              "placeholder": "Sélectionnez une marque de voiture"
+            },
+
+            "CarModelSelect": {
+              "placeholderWithMake": "Sélectionnez un modèle de voiture",
+              "placeholderNoMake": "Sélectionnez d'abord une marque"
+            }
+          },
+
+          "VehicleDetailsStep": {
+            "bodyStyle": "Type de carrosserie",
+            "condition": "État",
+            "mileage": "Kilométrage",
+            "transmission": "Transmission",
+            "transmissionOptions": {
+              "automatic": "Automatique",
+              "manual": "Manuelle"
+            },
+            "fuelType": "Type de carburant",
+            "fuelTypeOptions": {
+              "gasoline": "Essence",
+              "diesel": "Diesel",
+              "electric": "Électrique"
+            },
+            "BodyStyleSelect": {
+              "placeholder": "Sélectionnez un type de carrosserie"
+            },
+            "ConditionSelect": {
+              "placeholder": "Sélectionnez un état"
+            }
+          },
+
+          "FeatureSelectionStep": {
+            "loading": "Chargement des caractéristiques...",
+            "error": "Erreur lors du chargement des caractéristiques : {message}",
+            "title": "Sélectionnez les caractéristiques"
+          },
+
+          "AppearanceStep": {
+            "exteriorColor": "Couleur extérieure",
+            "interiorColor": "Couleur intérieure"
+          },
+
+          "Pricing": {
+            "price": "Prix",
+            "originalPrice": "Prix d'origine",
+            "year": "Année"
+          },
+
+          "DescriptionStep": {
+            "descriptionLabel": "Écrivez une description pour votre annonce",
+            "descriptionRequired": "La description est requise"
+          },
+
+          "ImageUploadStep": {
+            "dropFilesHere": "Déposez les fichiers ici ...",
+            "dragAndDropInstructions": "Glissez et déposez des fichiers ici, ou cliquez pour sélectionner des fichiers",
+            "previewAlt": "aperçu {index}",
+            "removeImage": "Supprimer l'image",
+            "primaryImage": "Image principale",
+            "setPrimaryImage": "Définir comme image principale"
+          },
+
+          "ReviewStep": {
+            "basicInformation": "Informations de base",
+            "make": "Marque",
+            "model": "Modèle",
+            "year": "Année",
+            "title": "Titre",
+            "vehicleDetails": "Détails du véhicule",
+            "bodyStyle": "Type de carrosserie",
+            "condition": "État",
+            "mileage": "Kilométrage",
+            "mileageValue": "{value} kilomètres",
+            "transmission": "Transmission",
+            "features": "Caractéristiques",
+            "appearance": "Apparence",
+            "exteriorColor": "Couleur extérieure",
+            "interiorColor": "Couleur intérieure",
+            "pricing": "Prix",
+            "price": "Prix",
+            "originalPrice": "Prix d'origine",
+            "description": "Description",
+            "images": "Images",
+            "carImageAlt": "Image de voiture {index}",
+            "reviewInstructions": "Veuillez examiner attentivement toutes les informations ci-dessus. Si tout semble correct, vous pouvez procéder à la soumission de votre annonce. Si vous devez apporter des modifications, vous pouvez revenir aux étapes précédentes."
+          }
+        },
+
+        "buttons": {
+          "previous": "Précédent",
+          "next": "Suivant",
+          "submit": "Soumettre"
+        }
+      }
     }
   }
+}

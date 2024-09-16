@@ -1,9 +1,11 @@
 import Button from './Button';
 import { useAuth } from '../hooks/auth';
 import { FaFacebookF, FaGoogle } from 'react-icons/fa';
+import { useTranslations } from 'next-intl';
 
 const SocialLoginButtons = () => {
   const { socialLogin } = useAuth();
+  const t = useTranslations('SocialLogin');
 
   return (
     <div className="mt-4 flex flex-col items-center" id="social-login-buttons">
@@ -20,7 +22,7 @@ const SocialLoginButtons = () => {
         }}
       >
         <FaFacebookF className="w-5 h-5 mr-2" />
-        Login with Facebook
+        {t('loginWithFacebook')}
       </Button>
       <Button
         onClick={() => socialLogin('google')}
@@ -35,7 +37,7 @@ const SocialLoginButtons = () => {
         }}
       >
         <FaGoogle className="w-5 h-5 mr-2" />
-        Login with Google
+        {t('loginWithGoogle')}
       </Button>
     </div>
   );

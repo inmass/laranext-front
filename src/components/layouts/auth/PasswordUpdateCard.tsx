@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import CardLayout from '@/components/layouts/CardLayout';
 import { Input } from '@/components/ui/input';
 import Button from '@/components/Button';
@@ -8,29 +9,26 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 
-
-const passwordSchema = z.object({
-
-    currentPassword: z.string().min(1, 'Current password is required'),
-    newPassword: z.string()
-        .min(8, 'Password must be at least 8 characters')
-        .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, 
-        'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'),
-    confirmPassword: z.string().min(1, 'Please confirm your password'),
-
-}).refine((data) => data.newPassword === data.confirmPassword, {
-
-    message: "Passwords don't match",
-    path: ["confirmPassword"],
-    
-}).refine((data) => data.currentPassword !== data.newPassword, {
-    message: "New password must be different from current password",
-    path: ["newPassword"],
-});
-
-type PasswordFormData = z.infer<typeof passwordSchema>;
-
 const PasswordUpdateCard: React.FC = () => {
+    const t = useTranslations('Dashboard.Profile.PasswordUpdateCard');
+
+    const passwordSchema = z.object({
+        currentPassword: z.string().min(1, t('validation.currentPasswordRequired')),
+        newPassword: z.string()
+            .min(8, t('validation.passwordMinLength'))
+            .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, 
+            t('validation.passwordComplexity')),
+        confirmPassword: z.string().min(1, t('validation.confirmPasswordRequired')),
+    }).refine((data) => data.newPassword === data.confirmPassword, {
+        message: t('validation.passwordsMismatch'),
+        path: ["confirmPassword"],
+    }).refine((data) => data.currentPassword !== data.newPassword, {
+        message: t('validation.newPasswordDifferent'),
+        path: ["newPassword"],
+    });
+
+    type PasswordFormData = z.infer<typeof passwordSchema>;
+
     const { updatePassword, loading } = useProfile();
     const { register, handleSubmit, formState: { errors, isValid, isDirty }, reset, watch } = useForm<PasswordFormData>({
         resolver: zodResolver(passwordSchema),
@@ -54,10 +52,10 @@ const PasswordUpdateCard: React.FC = () => {
     }
 
     return (
-        <CardLayout title="Change Password">
+        <CardLayout title={t('title')}>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
-                    <label htmlFor="currentPassword">Current Password</label>
+                    <label htmlFor="currentPassword">{t('currentPassword')}</label>
                     <Input
                         id="currentPassword"
                         type="password"
@@ -68,7 +66,7 @@ const PasswordUpdateCard: React.FC = () => {
                 </div>
 
                 <div className="mt-4">
-                    <label htmlFor="newPassword">New Password</label>
+                    <label htmlFor="newPassword">{t('newPassword')}</label>
                     <Input
                         id="newPassword"
                         type="password"
@@ -79,7 +77,7 @@ const PasswordUpdateCard: React.FC = () => {
                 </div>
 
                 <div className="mt-4">
-                    <label htmlFor="confirmPassword">Confirm Password</label>
+                    <label htmlFor="confirmPassword">{t('confirmPassword')}</label>
                     <Input
                         id="confirmPassword"
                         type="password"
@@ -94,7 +92,7 @@ const PasswordUpdateCard: React.FC = () => {
                         type="submit"
                         disabled={loading || !isValid || !isDirty}
                     >
-                        {loading ? 'Updating...' : 'Update Password'}
+                        {loading ? t('updating') : t('updatePassword')}
                     </Button>
                 </div>
             </form>

@@ -158,7 +158,6 @@ export const useAuth = ({
     await axios.post(ApiEndpoints.auth.setLocale, { locale: newLocale })
       .then((response) => {
         mutateUser();
-        toast.success(response.data.message);
       });
   }
 

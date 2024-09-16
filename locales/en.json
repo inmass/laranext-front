@@ -1,12 +1,261 @@
 {
-    "common": {
-      "welcome": "Welcome to our app",
-      "home": "Home",
-      "about": "About",
-      "contact": "Contact"
+  "Login": {
+    "title": "Login",
+    "description": "Use your email to login to your account.",
+    "email": "Email",
+    "password": "Password",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot your password?",
+    "loginButton": "Login",
+    "dividerText": "Or continue with"
+  },
+
+  "SocialLogin": {
+    "loginWithFacebook": "Login with Facebook",
+    "loginWithGoogle": "Login with Google"
+  },
+
+  "Register": {
+    "title": "Register",
+    "description": "Welcome! Use your email to create an account.",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "alreadyRegistered": "Already registered?",
+    "registerButton": "Register",
+    "dividerText": "Or continue with"
+  },
+
+  "Dashboard": {
+    "breadcrumb": {
+      "dashboard": "Dashboard",
+      "profile": "Profile"
     },
-    "home": {
-      "title": "Welcome to our homepage",
-      "description": "This is a sample description for the homepage."
+
+    "Profile": {
+      "pageTitle": "Laravel - Profile",
+
+      "ProfilePictureEditCard": {
+        "title": "Profile Picture",
+        "description": "Add a profile picture to make your account more recognizable.",
+        "fileRequirements": "JPG, GIF or PNG. Max size of 800K",
+        "profileImageAlt": "Profile",
+        "uploadPicture": "Upload picture",
+        "changePicture": "Change picture",
+
+        "deleteConfirmation": {
+          "title": "Are you absolutely sure?",
+          "description": "This action cannot be undone. This will permanently delete your profile picture.",
+          "cancelText": "Cancel",
+          "actionText": "Yes, delete picture"
+        }
+      },
+
+      "ProfileDetailsUpdateCard": {
+        "title": "General information",
+        "name": "Name",
+        "email": "Email",
+        "updating": "Updating...",
+        "updateProfile": "Update Profile",
+        "validation": {
+          "nameRequired": "Name is required"
+        }
+      },
+
+      "PasswordUpdateCard": {
+        "title": "Change Password",
+        "currentPassword": "Current Password",
+        "newPassword": "New Password",
+        "confirmPassword": "Confirm Password",
+        "updating": "Updating...",
+        "updatePassword": "Update Password",
+
+        "validation": {
+          "currentPasswordRequired": "Current password is required",
+          "passwordMinLength": "Password must be at least 8 characters",
+          "passwordComplexity": "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
+          "confirmPasswordRequired": "Please confirm your password",
+          "passwordsMismatch": "Passwords don't match",
+          "newPasswordDifferent": "New password must be different from current password"
+        }
+      }
+    },
+
+    "CarListings": {
+      "breadcrumb": {
+        "dashboard": "Dashboard",
+        "listings": "Listings"
+      },
+
+      "pageTitle": "Laravel - Listings",
+      "cardTitle": "Car Listings",
+      "cardDescription": "Manage your car listings and view their details.",
+
+      "columns": {
+        "title": "Title",
+        "year": "Year",
+        "price": "Price",
+        "mileage": "Mileage",
+        "miles": "miles",
+        "createdAt": "Created At"
+      },
+
+      "actions": {
+        "view": "View",
+        "edit": "Edit",
+        "delete": "Delete"
+      },
+
+      "deleteConfirmation": {
+        "title": "Are you absolutely sure?",
+        "description": "This action cannot be undone. This will permanently delete the car listing.",
+        "cancelText": "Cancel",
+        "actionText": "Yes, delete listing"
+      },
+
+      "FormDialog": {
+        "addNewListing": "Add New Listing",
+        "addTitle": "Add New Car Listing",
+        "addDescription": "Enter the details of the new car listing here.",
+        "editTitle": "Edit {title}",
+        "editDescription": "Update the details of the car listing here."
+      },
+
+      "Wizard": {
+        "validation": {
+          "makeRequired": "Make is required",
+          "modelRequired": "Car Model is required",
+          "bodyStyleRequired": "Body Style is required",
+          "conditionRequired": "Condition is required",
+          "featuresRequired": "At least one feature is required",
+          "titleRequired": "Title is required",
+          "descriptionRequired": "Description is required",
+          "priceRequired": "Price is required",
+          "yearMin": "Year must be 1900 or later",
+          "yearMax": "Year cannot be in the future",
+          "mileageMin": "Mileage cannot be negative",
+          "exteriorColorRequired": "Exterior Color is required",
+          "interiorColorRequired": "Interior Color is required",
+          "transmissionRequired": "Transmission is required",
+          "fuelTypeRequired": "Fuel Type is required",
+          "imagesRequired": "At least one image is required",
+          "primaryImageRequired": "At least one image must be primary"
+        },
+
+        "steps": {
+          "basicInfo": "Basic Info",
+          "vehicleDetails": "Details",
+          "features": "Features",
+          "appearance": "Appearance",
+          "pricing": "Pricing",
+          "description": "Description",
+          "images": "Images",
+          "review": "Review",
+
+          "BasicInfoStep": {
+            "labels": {
+              "carMake": "Car Make",
+              "model": "Model",
+              "title": "Title"
+            },
+
+            "MakeSelect": {
+              "placeholder": "Select a car make"
+            },
+
+            "CarModelSelect": {
+              "placeholderWithMake": "Select a car model",
+              "placeholderNoMake": "Select a make first"
+            }
+          },
+
+          "VehicleDetailsStep": {
+            "bodyStyle": "Body Style",
+            "condition": "Condition",
+            "mileage": "Mileage",
+            "transmission": "Transmission",
+            "transmissionOptions": {
+              "automatic": "Automatic",
+              "manual": "Manual"
+            },
+            "fuelType": "Fuel Type",
+            "fuelTypeOptions": {
+              "gasoline": "Gasoline",
+              "diesel": "Diesel",
+              "electric": "Electric"
+            },
+            "BodyStyleSelect": {
+              "placeholder": "Select a body style"
+            },
+            "ConditionSelect": {
+              "placeholder": "Select a condition"
+            }
+          },
+
+          "FeatureSelectionStep": {
+            "loading": "Loading features...",
+            "error": "Error loading features: {message}",
+            "title": "Select Features"
+          },
+
+          "AppearanceStep": {
+            "exteriorColor": "Exterior Color",
+            "interiorColor": "Interior Color"
+          },
+
+          "Pricing": {
+            "price": "Price",
+            "originalPrice": "Original Price",
+            "year": "Year"
+          },
+
+          "DescriptionStep": {
+            "descriptionLabel": "Write a description for your listing",
+            "descriptionRequired": "Description is required"
+          },
+
+          "ImageUploadStep": {
+            "dropFilesHere": "Drop the files here ...",
+            "dragAndDropInstructions": "Drag 'n' drop some files here, or click to select files",
+            "previewAlt": "preview {index}",
+            "removeImage": "Remove image",
+            "primaryImage": "Primary image",
+            "setPrimaryImage": "Set as primary image"
+          },
+
+          "ReviewStep": {
+            "basicInformation": "Basic Information",
+            "make": "Make",
+            "model": "Model",
+            "year": "Year",
+            "title": "Title",
+            "vehicleDetails": "Vehicle Details",
+            "bodyStyle": "Body Style",
+            "condition": "Condition",
+            "mileage": "Mileage",
+            "mileageValue": "{value} miles",
+            "transmission": "Transmission",
+            "features": "Features",
+            "appearance": "Appearance",
+            "exteriorColor": "Exterior Color",
+            "interiorColor": "Interior Color",
+            "pricing": "Pricing",
+            "price": "Price",
+            "originalPrice": "Original Price",
+            "description": "Description",
+            "images": "Images",
+            "carImageAlt": "Car image {index}",
+            "reviewInstructions": "Please review all the information above carefully. If everything looks correct, you can proceed to submit your listing. If you need to make any changes, you can go back to the previous steps."
+          }
+        },
+
+        "buttons": {
+          "previous": "Previous",
+          "next": "Next",
+          "submit": "Submit"
+        }
+      }
     }
+  }
 }

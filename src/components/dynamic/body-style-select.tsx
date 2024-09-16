@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import { getBodyStyles, BodyStylesParams } from '@/hooks/api/body-styles';
 import Select, { SelectRef } from '@/components/layouts/select';
-
+import { useTranslations } from 'next-intl';
 
 interface BodyStyleSelectProps {
     value?: string;
@@ -23,6 +23,7 @@ interface BodyStyle {
 }
 
 const BodyStyleSelect = forwardRef<SelectRef, BodyStyleSelectProps>(({ value, onChange, onBlur, className, disabled, name }, ref) => {
+    const t = useTranslations('Dashboard.CarListings.Wizard.steps.VehicleDetailsStep.BodyStyleSelect');
 
     const params: BodyStylesParams = {
         page: 1,
@@ -53,7 +54,7 @@ const BodyStyleSelect = forwardRef<SelectRef, BodyStyleSelectProps>(({ value, on
             error={isError}
             className={className}
             disabled={disabled}
-            placeholder="Select a body style"
+            placeholder={t('placeholder')}
             name={name}
             searchable={false}
         />
