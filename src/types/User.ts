@@ -7,4 +7,5 @@ export interface UserType {
   updated_at: Date;
   role: string;
   avatar: string;
+  locale: string;
 }

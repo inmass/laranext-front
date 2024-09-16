@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { UserType } from '@/types/user';
 import ApiEndpoints from '@/constants/api-endpoints';
+import toast from 'react-hot-toast';
 
 interface AuthProps {
   middleware?: 'auth' | 'guest';
@@ -153,6 +154,14 @@ export const useAuth = ({
     });
   };
 
+  const setLocale = async (newLocale: string) => {
+    await axios.post(ApiEndpoints.auth.setLocale, { locale: newLocale })
+      .then((response) => {
+        mutateUser();
+        toast.success(response.data.message);
+      });
+  }
+
   useEffect(() => {
     if (middleware === 'guest' && redirectIfAuthenticated && user) {
       router.push(redirectIfAuthenticated);
@@ -183,6 +192,7 @@ export const useAuth = ({
     resendEmailVerification,
     logout,
     socialLogin,
+    setLocale,
     isMounted,
   };
 };

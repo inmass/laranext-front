@@ -10,6 +10,7 @@ const ApiEndpoints = {
         verifyEmail: '/verify-email',
         emailVerificationNotification: '/email/verification-notification',
         SocialLogin: (provider: string) => `/auth/${provider}/redirect`,
+        setLocale: '/api/locale',
     },
     profileDetailsUpdate: '/api/profile',
     profileAvatarUpdate: '/api/profile/avatar',

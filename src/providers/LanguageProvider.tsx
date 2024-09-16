@@ -3,42 +3,51 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { NextIntlClientProvider } from 'next-intl';
 import { locales, defaultLocale } from '@root/i18n';
+import { useAuth } from '@/hooks/auth';
 
 type LanguageContextType = {
   locale: string;
-  setLocale: (locale: string) => void;
+  setLocale: (locale: string) => Promise<void>;
 };
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocale] = useState(defaultLocale);
+  const [locale, setLocaleState] = useState(defaultLocale);
   const [messages, setMessages] = useState({});
+  const { user, setLocale: setLocaleHook } = useAuth();
 
   useEffect(() => {
-    // Load language from localStorage or user preferences
-    const savedLocale = localStorage.getItem('language') || defaultLocale;
-    setLocale(savedLocale);
+    // Load language from user preference if logged in, otherwise from localStorage
+    const savedLocale = user?.locale || localStorage.getItem('language') || defaultLocale;
+    setLocaleState(savedLocale);
 
     // Load messages for the language
     import(`@root/locales/${savedLocale}.json`)
       .then((messages) => setMessages(messages.default))
       .catch(console.error);
-  }, []);
+  }, [user]);
 
-  const changeLocale = (newLocale: string) => {
+  const setLocale = async (newLocale: string) => {
     if (locales.includes(newLocale)) {
-      setLocale(newLocale);
+      setLocaleState(newLocale);
       localStorage.setItem('language', newLocale);
+
       // Load new messages
-      import(`@root/locales/${newLocale}.json`)
-        .then((messages) => setMessages(messages.default))
-        .catch(console.error);
+      const newMessages = await import(`@root/locales/${newLocale}.json`).catch(console.error);
+      if (newMessages) {
+        setMessages(newMessages.default);
+      }
+
+      // If user is logged in, update language preference in the database
+      if (user) {
+        await setLocaleHook(newLocale);
+      }
     }
   };
 
   return (
-    <LanguageContext.Provider value={{ locale, setLocale: changeLocale }}>
+    <LanguageContext.Provider value={{ locale, setLocale }}>
       <NextIntlClientProvider locale={locale} messages={messages}>
         {children}
       </NextIntlClientProvider>
