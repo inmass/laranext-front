@@ -2,6 +2,7 @@ import React from 'react';
 import { Input } from '@/components/ui/input';
 import { Column } from './interfaces';
 import { X } from 'lucide-react';
+import { useTranslations } from 'next-intl';
         
 
 interface TableFiltersProps<T> {
@@ -12,6 +13,8 @@ interface TableFiltersProps<T> {
 }
 
 const TableFilters = <T,>({ columns, filters, handleFilter, setFilters }: TableFiltersProps<T>) => {
+
+    const t = useTranslations('General.table.filters');
 
     const clearFilter = (key: string) => {
         setFilters((prev) => {
@@ -29,7 +32,7 @@ const TableFilters = <T,>({ columns, filters, handleFilter, setFilters }: TableF
             return (
                 <Input
                 type="number"
-                placeholder={`Filter by ${column.header}`}
+                placeholder={t('filterBy', { column: column.header })}
                 onChange={(e) => handleFilter(accessor, e.target.value)}
                 value={filters[accessor] || ''}
                 className="w-40"
@@ -40,7 +43,7 @@ const TableFilters = <T,>({ columns, filters, handleFilter, setFilters }: TableF
             return (
                 <Input
                 type="text"
-                placeholder={`Filter by ${column.header}`}
+                placeholder={t('filterBy', { column: column.header })}
                 onChange={(e) => handleFilter(accessor, e.target.value)}
                 value={filters[accessor] || ''}
                 className="w-40"

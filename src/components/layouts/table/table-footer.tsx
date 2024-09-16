@@ -3,6 +3,7 @@
 import React from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useTranslations } from 'next-intl';
 
 
 interface TableFooterProps {
@@ -14,16 +15,17 @@ interface TableFooterProps {
 }
 
 const TableFooter = ({ currentPage, itemsPerPage, totalItems, prevPage, nextPage }: TableFooterProps) => {
+    const t = useTranslations('General.table.footer');
     const totalPages = Math.ceil(totalItems / itemsPerPage);
 
     return (
         <div className="flex items-center w-full justify-between mt-4">
             <div className="text-xs text-muted-foreground">
-                Showing {' '}
-                <strong>
-                    {((currentPage - 1) * itemsPerPage) + 1}-{Math.min(currentPage * itemsPerPage, totalItems)}
-                </strong>{' '}
-                of <strong>{totalItems}</strong> items
+                {t('showing', {
+                    start: ((currentPage - 1) * itemsPerPage) + 1,
+                    end: Math.min(currentPage * itemsPerPage, totalItems),
+                    total: totalItems
+                })}
             </div>
             <div className="flex">
                 <Button
@@ -33,7 +35,7 @@ const TableFooter = ({ currentPage, itemsPerPage, totalItems, prevPage, nextPage
                     disabled={currentPage === 1}
                 >
                     <ChevronLeft className="mr-2 h-4 w-4" />
-                    Prev
+                    {t('prev')}
                 </Button>
                 <Button
                     onClick={nextPage}
@@ -41,7 +43,7 @@ const TableFooter = ({ currentPage, itemsPerPage, totalItems, prevPage, nextPage
                     size="sm"
                     disabled={currentPage === totalPages}
                 >
-                    Next
+                    {t('next')}
                     <ChevronRight className="ml-2 h-4 w-4" />
                 </Button>
             </div>

@@ -257,5 +257,19 @@
         }
       }
     }
+  },
+
+  "General": {
+    "table": {
+      "footer": {
+        "showing": "Showing {start} to {end} of {total} entries",
+        "prev": "Previous",
+        "next": "Next"
+      },
+
+      "filters": {
+        "filterBy": "Filter by {column}"
+      }
+    }
   }
 }
