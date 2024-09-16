@@ -2,6 +2,7 @@ import { Nunito } from 'next/font/google';
 import '@/app/globals.css';
 import { getAppName } from '@/lib/helpers';
 import { ThemeProvider } from '@/providers/ThemeProvider';
+import { LanguageProvider } from '@/providers/LanguageProvider';
 
 const nunitoFont = Nunito({
   subsets: ['latin'],
@@ -10,10 +11,12 @@ const nunitoFont = Nunito({
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <html lang="en" className={nunitoFont.className}>
+    <html className={nunitoFont.className}>
       <body className="flex min-h-screen w-full flex-col">
         <ThemeProvider>
-          {children}
+          <LanguageProvider>
+            {children}
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

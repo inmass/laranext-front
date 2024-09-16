@@ -12,6 +12,7 @@ import DesktopNavigation from '@/components/layouts/nav/desktop-navigation';
 import MobileNavigation from '@/components/layouts/nav/mobile-navigation';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { Toaster } from 'react-hot-toast';
+import { LanguageSwitcher } from '@/components/language-switcher';
 
 const AppLayout = ({ children }: { children: ReactNode }) => {
   const { user, isMounted } = useAuth({ middleware: 'auth' });
@@ -28,6 +29,7 @@ const AppLayout = ({ children }: { children: ReactNode }) => {
           <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
             <MobileNavigation />
             <SearchInput />
+            <LanguageSwitcher />
             <ThemeToggle />
             <User />
           </header>

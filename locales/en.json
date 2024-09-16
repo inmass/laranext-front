@@ -1,0 +1,12 @@
+{
+    "common": {
+      "welcome": "Welcome to our app",
+      "home": "Home",
+      "about": "About",
+      "contact": "Contact"
+    },
+    "home": {
+      "title": "Welcome to our homepage",
+      "description": "This is a sample description for the homepage."
+    }
+}

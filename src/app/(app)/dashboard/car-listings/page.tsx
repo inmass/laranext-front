@@ -8,6 +8,7 @@ import { DataTable } from '@/components/layouts/table/data-table';
 import { CarListingsParams, getCarListings, useDeleteCarListing } from '@/hooks/api/car-listings';
 import { CarListingType } from '@/types/car-listing';
 import { Eye, Trash2 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect, useState, useCallback } from 'react';

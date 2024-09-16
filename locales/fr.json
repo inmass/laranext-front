@@ -1,0 +1,12 @@
+{
+    "common": {
+      "welcome": "Bienvenue sur notre application",
+      "home": "Accueil",
+      "about": "À propos",
+      "contact": "Contact"
+    },
+    "home": {
+      "title": "Bienvenue sur notre page d'accueil",
+      "description": "Ceci est une description d'exemple pour la page d'accueil."
+    }
+  }
