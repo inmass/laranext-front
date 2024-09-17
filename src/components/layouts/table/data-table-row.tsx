@@ -6,6 +6,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { MoreHorizontal } from 'lucide-react';
 import ImageWithPreview from '@/components/ui/image-with-preview';
 import { ActionColumn } from './interfaces';
+import { useTranslations } from 'next-intl';
 interface Column<T> {
   header: string;
   accessor: keyof T | ((item: T) => React.ReactNode);
@@ -21,6 +22,8 @@ interface DataTableRowProps<T> {
 }
 
 const renderCellContent = <T,>(content: any, type?: string): React.ReactNode => {
+  const t = useTranslations();
+
   if (content === null || content === undefined) {
     return '';
   }
@@ -31,6 +34,8 @@ const renderCellContent = <T,>(content: any, type?: string): React.ReactNode => 
       return `$${parseFloat(content).toLocaleString()}`;
     case 'image':
       return <ImageWithPreview alt="Item image" className="aspect-square rounded-md object-cover" height={65} src={content} width={65} />;
+    case 'mileage':
+      return `${parseFloat(content).toLocaleString()} ${t('General.table.km')}`;
     default:
       if (typeof content === 'object' && !React.isValidElement(content)) {
         return JSON.stringify(content);

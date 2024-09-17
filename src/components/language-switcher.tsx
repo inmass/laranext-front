@@ -48,7 +48,7 @@ export function LanguageSwitcher() {
           <DropdownMenuItem 
             key={loc}
             onClick={() => setLocale(loc)}
-            className="flex items-center rounded-full cursor-pointer hover:bg-white"
+            className="flex items-center rounded-full cursor-pointer focus:bg-transparent"
           >
             <Image
               src={flagUrls[loc]}

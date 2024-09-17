@@ -25,7 +25,7 @@ const AppearanceStep: React.FC = () => {
     <div className="space-y-4">
         <div>
           <label htmlFor="exterior_color">{t('exteriorColor')}</label>
-          <div className='bg-muted p-2 rounded-md w-80 mb-2 mt-2'>
+          <div className='bg-muted p-2 rounded-md w-80 mb-2 mt-2 w-full'>
             <Controller
               name="exterior_color"
               control={control}
@@ -43,7 +43,7 @@ const AppearanceStep: React.FC = () => {
         </div>
         <div>
           <label htmlFor="interior_color">{t('interiorColor')}</label>
-          <div className='bg-muted p-2 rounded-md w-80 mb-2 mt-2'>
+          <div className='bg-muted p-2 rounded-md w-80 mb-2 mt-2 w-full'>
             <Controller
               name="interior_color"
               control={control}

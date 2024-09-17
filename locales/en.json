@@ -97,7 +97,7 @@
         "year": "Year",
         "price": "Price",
         "mileage": "Mileage",
-        "miles": "miles",
+        "km": "km",
         "createdAt": "Created At"
       },
 
@@ -234,7 +234,7 @@
             "bodyStyle": "Body Style",
             "condition": "Condition",
             "mileage": "Mileage",
-            "mileageValue": "{value} miles",
+            "mileageValue": "{value} km",
             "transmission": "Transmission",
             "features": "Features",
             "appearance": "Appearance",
@@ -261,6 +261,8 @@
 
   "General": {
     "table": {
+      "km": "km",
+      
       "footer": {
         "showing": "Showing {start} to {end} of {total} entries",
         "prev": "Previous",

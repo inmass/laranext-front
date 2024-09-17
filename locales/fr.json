@@ -97,7 +97,7 @@
         "year": "Année",
         "price": "Prix",
         "mileage": "Kilométrage",
-        "miles": "km",
+        "km": "km",
         "createdAt": "Créé le"
       },
 
@@ -261,6 +261,8 @@
 
   "General": {
     "table": {
+      "km": "km",
+      
       "footer": {
         "showing": "Affichage de {start} à {end} sur {total} entrées",
         "prev": "Précédent",

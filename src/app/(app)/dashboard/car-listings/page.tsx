@@ -39,7 +39,7 @@ const CarListings = () => {
         { header: t('columns.title'), accessor: 'title' as const, sortable: true, filterable: true, filterType: 'text' as const, className: 'w-1/4' },
         { header: t('columns.year'), accessor: 'year' as const, sortable: true, filterable: true, filterType: 'number' as const },
         { header: t('columns.price'), type: 'currency' as const, accessor: 'price' as const, className: 'table-cell', sortable: true },
-        { header: t('columns.mileage'), accessor: (item: CarListingType) => `${item.mileage.toLocaleString()} ${t('columns.miles')}`, className: 'table-cell' },
+        { header: t('columns.mileage'), type: 'mileage' as const, accessor: 'mileage' as const, className: 'table-cell', sortable: true },
         { header: t('columns.createdAt'), type: 'date' as const, accessor: 'created_at' as const, className: 'table-cell', sortable: true },
     ];
 
