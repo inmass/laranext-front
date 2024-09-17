@@ -256,6 +256,64 @@
           "next": "Next",
           "submit": "Submit"
         }
+      },
+
+      "api": {
+        "createSuccess": "Car Listing created successfully",
+        "updateSuccess": "Car Listing updated successfully",
+        "deleteSuccess": "Car Listing deleted successfully"
+      }
+    },
+
+    "Makes": {
+      "pageTitle": "Manage Makes",
+      "breadcrumb": {
+        "dashboard": "Dashboard",
+        "makes": "Makes"
+      },
+      "cardTitle": "Makes",
+      "cardDescription": "Manage and view all car makes",
+      "columns": {
+        "name": "Name",
+        "slug": "Slug",
+        "createdAt": "Created At",
+        "updatedAt": "Updated At"
+      },
+      "actions": {
+        "delete": "Delete"
+      },
+      "deleteConfirmation": {
+        "title": "Delete Make",
+        "description": "Are you sure you want to delete this make? This action cannot be undone.",
+        "cancelText": "Cancel",
+        "actionText": "Delete"
+      },
+      "FormDialog": {
+        "addNewMake": "Add New Make",
+        "addTitle": "Add New Make",
+        "editTitle": "Edit Make: {name}",
+        "addDescription": "Enter the details for the new make",
+        "editDescription": "Edit the details of the make",
+        "updateButton": "Update",
+        "createButton": "Create",
+        "labels": {
+          "name": "Name"
+        },
+        "validation": {
+          "nameRequired": "Name is required"
+        },
+        "buttons": {
+          "submit": "Submit",
+          "close": "Close"
+        },
+        "updateSuccess": "Make updated successfully",
+        "createSuccess": "Make created successfully",
+        "error": "An error occurred. Please try again."
+      },
+      "api": {
+        "createSuccess": "Make created successfully",
+        "updateSuccess": "Make updated successfully",
+        "deleteSuccess": "Make deleted successfully"
       }
     }
   },

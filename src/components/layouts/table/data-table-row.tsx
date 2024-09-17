@@ -84,7 +84,9 @@ export const DataTableRow = <T,>({ item, columns, actions, actionsAsDropdown = f
           ) : (
             <div className="flex items-center space-x-2">
               {actions?.map((action, index) => (
-                <>{action.accessor(item)}</>
+                <span key={index}>
+                  {action.accessor(item)}
+                </span>
               ))}
             </div>
           ) 

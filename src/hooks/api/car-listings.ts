@@ -6,6 +6,7 @@ import { GetRequestParams, Pagination } from '../../lib/api-params';
 import { buildApiParams } from '@/lib/api-param-builder';
 import { fileToBase64 } from '@/lib/helpers';
 import toast from 'react-hot-toast';
+import { useTranslations } from 'next-intl';
 
 interface CarListingsResponse {
   data: CarListingType[];
@@ -77,6 +78,7 @@ interface UpdateCarListingFormData extends CreateCarListingFormData {
 
 export const useCreateCarListing = (onSuccess?: () => void) => {
   const queryClient = useQueryClient();
+  const t = useTranslations('Dashboard.CarListings.api');
 
   return useMutation({
     mutationFn: async (data: CreateCarListingFormData) => {
@@ -89,7 +91,7 @@ export const useCreateCarListing = (onSuccess?: () => void) => {
       return response;
     },
     onSuccess: (data) => {
-      toast.success('Car listing created successfully');
+      toast.success(t('createSuccess'));
       queryClient.refetchQueries({
         predicate: (query) => query.queryKey[0] === 'carListings',
       });
@@ -103,13 +105,14 @@ export const useCreateCarListing = (onSuccess?: () => void) => {
 
 export const useDeleteCarListing = () => {
   const queryClient = useQueryClient();
+  const t = useTranslations('Dashboard.CarListings.api');
 
   return useMutation({
     mutationFn: async (id: number) => {
       await axios.delete(`${ApiEndpoints.carListings}/${id}`);
     },
     onSuccess: () => {
-      toast.success('Car listing deleted successfully');
+      toast.success(t('deleteSuccess'));
       queryClient.refetchQueries({
         predicate: (query) => query.queryKey[0] === 'carListings',
       });
@@ -119,6 +122,7 @@ export const useDeleteCarListing = () => {
 
 export const useUpdateCarListing = (onSuccess?: () => void) => {
   const queryClient = useQueryClient();
+  const t = useTranslations('Dashboard.CarListings.api');
 
   return useMutation({
     mutationFn: async (data: UpdateCarListingFormData) => {
@@ -132,7 +136,7 @@ export const useUpdateCarListing = (onSuccess?: () => void) => {
       return response;
     },
     onSuccess: (data) => {
-      toast.success('Car listing updated successfully');
+      toast.success(t('updateSuccess'));
       queryClient.refetchQueries({
         predicate: (query) => query.queryKey[0] === 'carListings',
       });

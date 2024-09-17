@@ -256,6 +256,64 @@
           "next": "Suivant",
           "submit": "Soumettre"
         }
+      },
+
+      "api": {
+        "createSuccess": "Annonce de voiture créée avec succès",
+        "updateSuccess": "Annonce de voiture mise à jour avec succès",
+        "deleteSuccess": "Annonce de voiture supprimée avec succès"
+      }
+    },
+
+    "Makes": {
+      "pageTitle": "Gérer les Marques",
+      "breadcrumb": {
+        "dashboard": "Tableau de bord",
+        "makes": "Marques"
+      },
+      "cardTitle": "Marques",
+      "cardDescription": "Gérer et visualiser toutes les marques de voitures",
+      "columns": {
+        "name": "Nom",
+        "slug": "Slug",
+        "createdAt": "Créé le",
+        "updatedAt": "Mis à jour le"
+      },
+      "actions": {
+        "delete": "Supprimer"
+      },
+      "deleteConfirmation": {
+        "title": "Supprimer la Marque",
+        "description": "Êtes-vous sûr de vouloir supprimer cette marque ? Cette action ne peut pas être annulée.",
+        "cancelText": "Annuler",
+        "actionText": "Supprimer"
+      },
+      "FormDialog": {
+        "addNewMake": "Ajouter une Nouvelle Marque",
+        "addTitle": "Ajouter une Nouvelle Marque",
+        "editTitle": "Modifier la Marque : {name}",
+        "addDescription": "Entrez les détails de la nouvelle marque",
+        "editDescription": "Modifiez les détails de la marque",
+        "updateButton": "Mettre à jour",
+        "createButton": "Créer",
+        "labels": {
+          "name": "Nom"
+        },
+        "validation": {
+          "nameRequired": "Le nom est requis"
+        },
+        "buttons": {
+          "submit": "Soumettre",
+          "close": "Fermer"
+        },
+        "updateSuccess": "Marque mise à jour avec succès",
+        "createSuccess": "Marque créée avec succès",
+        "error": "Une erreur s'est produite. Veuillez réessayer."
+      },
+      "api": {
+        "createSuccess": "Marque créée avec succès",
+        "updateSuccess": "Marque mise à jour avec succès",
+        "deleteSuccess": "Marque supprimée avec succès"
       }
     }
   },

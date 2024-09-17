@@ -33,7 +33,7 @@ const MakeSelect = forwardRef<SelectRef, MakeSelectProps>(({ value, onChange, on
     };
 
     const { data, isLoading, isError } = getMakes(params);
-    const options: Option[] = data?.map(({ id, name }: Make) => ({ label: name, value: String(id) })) || [];
+    const options: Option[] = data?.data?.map(({ id, name }: Make) => ({ label: name, value: String(id) })) || [];
 
     const handleChange = (newValue: string) => {
         const selectedOption = options.find(option => option.value === newValue);

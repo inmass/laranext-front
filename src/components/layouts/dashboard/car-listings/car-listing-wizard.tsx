@@ -134,7 +134,9 @@ const CarListingWizard = ({ onSubmitSuccess, carListing }: CarListingWizardProps
                 await createCarListingMutation.mutateAsync(data);
             }
         } catch (error) {
-            toast.error(t('errors.failedToCreate'));
+            // toast.error(t('errors.failedToCreate'));
+            // #TODO: Add logging
+            console.error(error);
         }
     };
 
