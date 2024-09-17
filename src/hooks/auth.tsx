@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { UserType } from '@/types/user';
 import ApiEndpoints from '@/constants/api-endpoints';
-import toast from 'react-hot-toast';
+import AppRoutes from '@/constants/app-routes';
 
 type RoleType = 'admin' | 'user';
 
@@ -194,7 +194,7 @@ export const useAuth = ({
     }
 
     if (user && requiredRole && !userCanAccess()) {
-      router.push('/dashboard');
+      router.push(AppRoutes.dashboard.home);
     }
 
     // wait few milliseconds to avoid flickering
