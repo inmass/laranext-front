@@ -315,6 +315,57 @@
         "updateSuccess": "Marque mise à jour avec succès",
         "deleteSuccess": "Marque supprimée avec succès"
       }
+    },
+
+    "CarModels": {
+      "pageTitle": "Gérer les Modèles de Voiture",
+      "breadcrumb": {
+        "dashboard": "Tableau de bord",
+        "carModels": "Modèles de Voiture"
+      },
+      "cardTitle": "Modèles de Voiture",
+      "cardDescription": "Gérer et visualiser tous les modèles de voiture",
+      "columns": {
+        "name": "Nom",
+        "slug": "Slug",
+        "make": "Marque",
+        "createdAt": "Créé le",
+        "updatedAt": "Mis à jour le"
+      },
+      "actions": {
+        "edit": "Modifier",
+        "delete": "Supprimer"
+      },
+      "deleteConfirmation": {
+        "title": "Supprimer le Modèle de Voiture",
+        "description": "Êtes-vous sûr de vouloir supprimer ce modèle de voiture ? Cette action ne peut pas être annulée.",
+        "cancelText": "Annuler",
+        "actionText": "Supprimer"
+      },
+      "FormDialog": {
+        "addNewCarModel": "Ajouter un Nouveau Modèle de Voiture",
+        "addTitle": "Ajouter un Nouveau Modèle de Voiture",
+        "editTitle": "Modifier le Modèle de Voiture : {name}",
+        "addDescription": "Entrez les détails du nouveau modèle de voiture",
+        "editDescription": "Modifier les détails du modèle de voiture",
+        "labels": {
+          "name": "Nom",
+          "carMake": "Marque de Voiture"
+        },
+        "validation": {
+          "nameRequired": "Le nom est requis",
+          "makeRequired": "La marque de voiture est requise"
+        },
+        "buttons": {
+          "close": "Fermer",
+          "submit": "Soumettre"
+        }
+      },
+      "api": {
+        "createSuccess": "Modèle de voiture créé avec succès",
+        "updateSuccess": "Modèle de voiture mis à jour avec succès",
+        "deleteSuccess": "Modèle de voiture supprimé avec succès"
+      }
     }
   },
 

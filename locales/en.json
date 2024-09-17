@@ -315,6 +315,58 @@
         "updateSuccess": "Make updated successfully",
         "deleteSuccess": "Make deleted successfully"
       }
+    },
+
+    "CarModels": {
+      "pageTitle": "Manage Car Models",
+      "breadcrumb": {
+        "dashboard": "Dashboard",
+        "carModels": "Car Models"
+      },
+      "cardTitle": "Car Models",
+      "cardDescription": "Manage and view all car models",
+      "columns": {
+        "name": "Name",
+        "slug": "Slug",
+        "make": "Make",
+        "createdAt": "Created At",
+        "updatedAt": "Updated At"
+      },
+
+      "actions": {
+        "edit": "Edit",
+        "delete": "Delete"
+      },
+      "deleteConfirmation": {
+        "title": "Delete Car Model",
+        "description": "Are you sure you want to delete this car model? This action cannot be undone.",
+        "cancelText": "Cancel",
+        "actionText": "Delete"
+      },
+      "FormDialog": {
+        "addNewCarModel": "Add New Car Model",
+        "addTitle": "Add New Car Model",
+        "editTitle": "Edit Car Model: {name}",
+        "addDescription": "Enter the details for the new car model",
+        "editDescription": "Edit the details of the car model",
+        "labels": {
+          "name": "Name",
+          "carMake": "Car Make"
+        },
+        "validation": {
+          "nameRequired": "Name is required",
+          "makeRequired": "Car Make is required"
+        },
+        "buttons": {
+          "close": "Close",
+          "submit": "Submit"
+        }
+      },
+      "api": {
+        "createSuccess": "Car Model created successfully",
+        "updateSuccess": "Car Model updated successfully",
+        "deleteSuccess": "Car Model deleted successfully"
+      }
     }
   },
 

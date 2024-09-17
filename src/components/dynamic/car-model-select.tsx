@@ -38,7 +38,7 @@ const CarModelSelect = forwardRef<SelectRef, CarModelSelectProps>(
     const { data, isLoading, isError } = getCarModels(queryParams);
 
     const options: Option[] = useMemo(() => 
-        data?.map(({ id, name }: CarModel) => ({ label: name, value: String(id) })) || []
+        data?.data?.map(({ id, name }: CarModel) => ({ label: name, value: String(id) })) || []
     , [data]);
 
     const handleChange = (selectedValue: string) => {

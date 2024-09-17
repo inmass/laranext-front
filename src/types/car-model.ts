@@ -5,7 +5,7 @@ export interface CarModelType {
     updated_at: string;
     name: string;
     slug: string;
-    car_model?: {
+    make?: {
         id: number;
         created_at: string;
         updated_at: string;

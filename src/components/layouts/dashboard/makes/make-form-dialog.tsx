@@ -56,6 +56,7 @@ const MakeFormDialog = ({ make }: MakeFormDialogProps) => {
 
     const handleClose = () => {
         setIsOpen(false);
+        reset();
     };
 
     const trigger = make ? (
