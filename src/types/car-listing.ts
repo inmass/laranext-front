@@ -28,7 +28,7 @@ export interface CarListingType {
         created_at: string;
         updated_at: string;
     };
-    user: {
+    user?: {
         id: number;
         name: string;
         email: string;

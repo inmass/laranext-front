@@ -67,6 +67,7 @@ export function DataTable<T>({
   };
 
   const handleFilter = (key: string, value: string) => {
+    setPage(1);
     setFilters((prev) => ({ ...prev, [key]: value }));
   };
 

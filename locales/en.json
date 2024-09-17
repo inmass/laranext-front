@@ -93,6 +93,7 @@
       "cardDescription": "Manage your car listings and view their details.",
 
       "columns": {
+        "user": "User",
         "title": "Title",
         "year": "Year",
         "price": "Price",

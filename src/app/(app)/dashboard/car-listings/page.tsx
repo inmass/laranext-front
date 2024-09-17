@@ -11,8 +11,11 @@ import { CarListingType } from '@/types/car-listing';
 import { Eye, Trash2 } from 'lucide-react';
 import Head from 'next/head';
 import { useEffect, useState, useCallback } from 'react';
+import { useAuth } from '@/hooks/auth';
 
 const CarListings = () => {
+    const { user } = useAuth({ requiredRole: ['admin', 'user'] });
+
     const t = useTranslations('Dashboard.CarListings');
 
     const breadcrumbItems = [
@@ -25,7 +28,7 @@ const CarListings = () => {
         perPage: 10,
         sort: null as { key: string; direction: 'asc' | 'desc' } | null,
         filters: {} as Record<string, string>,
-        include: ['primaryImage', 'images', 'features'],
+        include: ['primaryImage', 'images', 'features', 'user'],
     });
 
     const { data, isLoading, isError, error } = getCarListings(params);
@@ -36,12 +39,17 @@ const CarListings = () => {
 
     const columns = [
         { header: '', type: 'image' as const, accessor: (item: CarListingType) => item.primary_image?.path, className: 'hidden md:table-cell md:w-1/12' },
+        { header: t('columns.user'), accessor: (item: CarListingType)  => item.user?.name, className: 'table-cell', filterable: true, filterType: 'text' as const, filterParam: 'user.name' as const },
         { header: t('columns.title'), accessor: 'title' as const, sortable: true, filterable: true, filterType: 'text' as const, className: 'w-1/4' },
         { header: t('columns.year'), accessor: 'year' as const, sortable: true, filterable: true, filterType: 'number' as const },
         { header: t('columns.price'), type: 'currency' as const, accessor: 'price' as const, className: 'table-cell', sortable: true },
         { header: t('columns.mileage'), type: 'mileage' as const, accessor: 'mileage' as const, className: 'table-cell', sortable: true },
         { header: t('columns.createdAt'), type: 'date' as const, accessor: 'created_at' as const, className: 'table-cell', sortable: true },
     ];
+    
+    if (user?.role != 'admin') {
+        columns.splice(1, 1);
+    }
 
     const actions = [
         { name: t('actions.view'), accessor: (item: CarListingType) => (

@@ -1,11 +1,12 @@
 export interface Column<T> {
     header: string;
     accessor: keyof T | ((item: T) => React.ReactNode);
-    type?: 'text' | 'number' | 'date' | 'image' | 'currency';
+    type?: 'text' | 'number' | 'date' | 'image' | 'currency' | 'mileage';
     className?: string;
     sortable?: boolean;
     filterable?: boolean;
     filterType?: 'text' | 'daterange' | 'number';
+    filterParam?: string;
 }
 
 export interface ActionColumn<T> {

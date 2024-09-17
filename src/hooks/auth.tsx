@@ -6,9 +6,12 @@ import { UserType } from '@/types/user';
 import ApiEndpoints from '@/constants/api-endpoints';
 import toast from 'react-hot-toast';
 
+type RoleType = 'admin' | 'user';
+
 interface AuthProps {
   middleware?: 'auth' | 'guest';
   redirectIfAuthenticated?: string;
+  requiredRole?: RoleType|RoleType[];
 }
 
 interface RegisterProps {
@@ -35,6 +38,7 @@ type socialProviders = 'facebook' | 'google';
 export const useAuth = ({
   middleware,
   redirectIfAuthenticated,
+  requiredRole,
 }: AuthProps = {}) => {
   const router = useRouter();
   const params = useParams();
@@ -51,10 +55,21 @@ export const useAuth = ({
       .catch((error) => {
         if (error.response.status !== 409) throw error;
 
-        // router.push('/verify-email');
         router.push(ApiEndpoints.auth.verifyEmail);
       })
   );
+
+  const userCanAccess = (): boolean => {
+    if (!user) {
+      return false;
+    }
+
+    if (!requiredRole) {
+      return true;
+    }
+
+    return typeof requiredRole === 'string' ? user.role === requiredRole : requiredRole.includes(user.role);
+  }
 
   const register = async ({ setErrors, ...props }: RegisterProps) => {
 
@@ -178,7 +193,14 @@ export const useAuth = ({
       logout(true);
     }
 
-    setIsMounted(true);
+    if (user && requiredRole && !userCanAccess()) {
+      router.push('/dashboard');
+    }
+
+    // wait few milliseconds to avoid flickering
+    setTimeout(() => {
+      setIsMounted(true);
+    }, 500);
   }, [user, error, middleware, redirectIfAuthenticated]);
 
   return {

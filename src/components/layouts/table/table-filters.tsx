@@ -25,7 +25,7 @@ const TableFilters = <T,>({ columns, filters, handleFilter, setFilters }: TableF
     };
     
     const renderFilterInput = (column: Column<T>) => {
-        const accessor = column.accessor as string;
+        const accessor = column.filterParam as string || column.accessor as string;
         
         switch (column.filterType) {
             case 'number':
@@ -58,9 +58,9 @@ const TableFilters = <T,>({ columns, filters, handleFilter, setFilters }: TableF
                     column.filterable && (
                         <div key={index} className="flex items-center">
                             {renderFilterInput(column)}
-                            {filters[column.accessor as string] && (
+                            {(filters[column.filterParam as string] || filters[column.accessor as string]) && (
                                 <button
-                                    onClick={() => clearFilter(column.accessor as string)}
+                                    onClick={() => clearFilter(column.filterParam as string || column.accessor as string)}
                                     className="ml-2 h-8 w-8"
                                 >
                                     <X className="h-4 w-4" />

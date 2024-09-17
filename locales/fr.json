@@ -93,6 +93,7 @@
       "cardDescription": "Gérez vos annonces de voitures et consultez leurs détails.",
 
       "columns": {
+        "user": "Utilisateur",
         "title": "Titre",
         "year": "Année",
         "price": "Prix",

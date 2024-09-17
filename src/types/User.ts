@@ -5,7 +5,7 @@ export interface UserType {
   email_verified_at?: Date;
   created_at: Date;
   updated_at: Date;
-  role: string;
+  role: 'admin' | 'user';
   avatar: string;
   locale: string;
 }

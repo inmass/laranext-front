@@ -7,11 +7,15 @@ import { MoreHorizontal } from 'lucide-react';
 import ImageWithPreview from '@/components/ui/image-with-preview';
 import { ActionColumn } from './interfaces';
 import { useTranslations } from 'next-intl';
-interface Column<T> {
-  header: string;
-  accessor: keyof T | ((item: T) => React.ReactNode);
-  type?: 'text' | 'number' | 'date' | 'image' | 'currency';
-  className?: string;
+export interface Column<T> {
+    header: string;
+    accessor: keyof T | ((item: T) => React.ReactNode);
+    type?: 'text' | 'number' | 'date' | 'image' | 'currency' | 'mileage';
+    className?: string;
+    sortable?: boolean;
+    filterable?: boolean;
+    filterType?: 'text' | 'daterange' | 'number';
+    filterParam?: string;
 }
 
 interface DataTableRowProps<T> {
