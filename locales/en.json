@@ -476,6 +476,54 @@
         "updateSuccess": "Condition updated successfully",
         "deleteSuccess": "Condition deleted successfully"
       }
+    },
+
+    "BodyStyles": {
+      "pageTitle": "Body Styles",
+      "cardTitle": "Body Styles Management",
+      "cardDescription": "Manage vehicle body styles",
+      "breadcrumb": {
+        "dashboard": "Dashboard",
+        "bodyStyles": "Body Styles"
+      },
+      "columns": {
+        "name": "Name",
+        "slug": "Slug",
+        "createdAt": "Created At",
+        "updatedAt": "Updated At"
+      },
+      "actions": {
+        "edit": "Edit",
+        "delete": "Delete"
+      },
+      "deleteConfirmation": {
+        "title": "Delete Body Style",
+        "description": "Are you sure you want to delete this body style? This action cannot be undone.",
+        "cancelText": "Cancel",
+        "actionText": "Delete"
+      },
+      "FormDialog": {
+        "addTitle": "Add New Body Style",
+        "editTitle": "Edit Body Style: {name}",
+        "addDescription": "Create a new vehicle body style",
+        "editDescription": "Modify the existing body style",
+        "validation": {
+          "nameRequired": "Name is required"
+        },
+        "labels": {
+          "name": "Name"
+        },
+        "buttons": {
+          "close": "Close",
+          "submit": "Submit"
+        },
+        "addNewBodyStyle": "Add New Body Style"
+      },
+      "api": {
+        "createSuccess": "Body style created successfully",
+        "updateSuccess": "Body style updated successfully",
+        "deleteSuccess": "Body style deleted successfully"
+      }
     }
   },
 

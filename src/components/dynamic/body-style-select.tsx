@@ -34,7 +34,7 @@ const BodyStyleSelect = forwardRef<SelectRef, BodyStyleSelectProps>(({ value, on
 
     const { data, isLoading, isError } = getBodyStyles(params);
 
-    const options: Option[] = data?.map(({ id, name }: BodyStyle) => ({ label: name, value: String(id) })) || [];
+    const options: Option[] = data?.data?.map(({ id, name }: BodyStyle) => ({ label: name, value: String(id) })) || [];
 
     const handleChange = (selectedValue: string) => {
         const selectedOption = options.find(option => option.value === selectedValue);

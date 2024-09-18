@@ -127,7 +127,7 @@
         "validation": {
           "makeRequired": "La marque est requise",
           "modelRequired": "Le modèle de voiture est requis",
-          "bodyStyleRequired": "Le style de carrosserie est requis",
+          "bodyStyleRequired": "Le type de carrosserie est requis",
           "conditionRequired": "L'état est requis",
           "featuresRequired": "Au moins une caractéristique est requise",
           "titleRequired": "Le titre est requis",
@@ -474,6 +474,54 @@
         "createSuccess": "Condition créée avec succès",
         "updateSuccess": "Condition mise à jour avec succès",
         "deleteSuccess": "Condition supprimée avec succès"
+      }
+    },
+
+    "BodyStyles": {
+      "pageTitle": "Styles de Carrosserie",
+      "cardTitle": "Gestion des Styles de Carrosserie",
+      "cardDescription": "Gérer les styles de carrosserie des véhicules",
+      "breadcrumb": {
+        "dashboard": "Tableau de Bord",
+        "bodyStyles": "Styles de Carrosserie"
+      },
+      "columns": {
+        "name": "Nom",
+        "slug": "Slug",
+        "createdAt": "Créé le",
+        "updatedAt": "Mis à jour le"
+      },
+      "actions": {
+        "edit": "Modifier",
+        "delete": "Supprimer"
+      },
+      "deleteConfirmation": {
+        "title": "Supprimer le type de carrosserie",
+        "description": "Êtes-vous sûr de vouloir supprimer ce type de carrosserie ? Cette action est irréversible.",
+        "cancelText": "Annuler",
+        "actionText": "Supprimer"
+      },
+      "FormDialog": {
+        "addTitle": "Ajouter un Nouveau type de carrosserie",
+        "editTitle": "Modifier le type de carrosserie : {name}",
+        "addDescription": "Créer un nouveau type de carrosserie de véhicule",
+        "editDescription": "Modifier le type de carrosserie existant",
+        "validation": {
+          "nameRequired": "Le nom est obligatoire"
+        },
+        "labels": {
+          "name": "Nom"
+        },
+        "buttons": {
+          "close": "Fermer",
+          "submit": "Soumettre"
+        },
+        "addNewBodyStyle": "Ajouter un Nouveau type de carrosserie"
+      },
+      "api": {
+        "createSuccess": "type de carrosserie créé avec succès",
+        "updateSuccess": "type de carrosserie mis à jour avec succès",
+        "deleteSuccess": "type de carrosserie supprimé avec succès"
       }
     }
   },
