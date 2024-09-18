@@ -11,11 +11,8 @@ import { ConditionType } from '@/types/condition';
 import { Eye, Trash2 } from 'lucide-react';
 import Head from 'next/head';
 import { useEffect, useState, useCallback } from 'react';
-import { useAuth } from '@/hooks/auth';
 
 const Conditions = () => {
-    const { user } = useAuth({ requiredRole: ['admin'] });
-
     const t = useTranslations('Dashboard.Conditions');
 
     const breadcrumbItems = [

@@ -11,11 +11,8 @@ import { CarModelType } from '@/types/car-model';
 import { Eye, Trash2 } from 'lucide-react';
 import Head from 'next/head';
 import { useEffect, useState, useCallback } from 'react';
-import { useAuth } from '@/hooks/auth';
 
 const CarModels = () => {
-    const { user } = useAuth({ requiredRole: ['admin'] });
-
     const t = useTranslations('Dashboard.CarModels');
 
     const breadcrumbItems = [

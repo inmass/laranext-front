@@ -11,11 +11,8 @@ import { MakeType } from '@/types/make';
 import { Eye, Trash2 } from 'lucide-react';
 import Head from 'next/head';
 import { useEffect, useState, useCallback } from 'react';
-import { useAuth } from '@/hooks/auth';
 
 const Makes = () => {
-    const { user } = useAuth({ requiredRole: ['admin'] });
-
     const t = useTranslations('Dashboard.Makes');
 
     const breadcrumbItems = [

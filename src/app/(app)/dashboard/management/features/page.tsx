@@ -11,11 +11,8 @@ import { FeatureType } from '@/types/feature';
 import { Eye, Trash2 } from 'lucide-react';
 import Head from 'next/head';
 import { useEffect, useState, useCallback } from 'react';
-import { useAuth } from '@/hooks/auth';
 
 const Features = () => {
-    const { user } = useAuth({ requiredRole: ['admin'] });
-
     const t = useTranslations('Dashboard.Features');
 
     const breadcrumbItems = [
