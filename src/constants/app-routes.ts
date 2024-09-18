@@ -7,6 +7,7 @@ const AppRoutes = {
             makes: '/dashboard/management/makes',
             models: '/dashboard/management/car-models',
             features: '/dashboard/management/features',
+            featureTypes: '/dashboard/management/feature-types',
             bodyStyles: '/dashboard/management/body-styles',
             conditions: '/dashboard/management/conditions',
             users: '/dashboard/management/users',

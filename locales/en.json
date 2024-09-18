@@ -368,6 +368,66 @@
         "updateSuccess": "Car Model updated successfully",
         "deleteSuccess": "Car Model deleted successfully"
       }
+    },
+
+    "Features": {
+      "breadcrumb": {
+        "dashboard": "Dashboard",
+        "features": "Features"
+      },
+      "pageTitle": "Features",
+      "cardTitle": "Features",
+      "cardDescription": "Manage your features here",
+      "columns": {
+        "name": "Name",
+        "slug": "Slug",
+        "createdAt": "Created At",
+        "updatedAt": "Updated At"
+      },
+      "actions": {
+        "edit": "Edit",
+        "delete": "Delete"
+      },
+      "deleteConfirmation": {
+        "title": "Delete Feature",
+        "description": "Are you sure you want to delete this feature? This action cannot be undone.",
+        "cancelText": "Cancel",
+        "actionText": "Delete"
+      },
+      "FormDialog": {
+        "addTitle": "Add New Feature",
+        "editTitle": "Edit Feature: {name}",
+        "addDescription": "Create a new feature",
+        "editDescription": "Modify the existing feature",
+        "labels": {
+          "name": "Feature Name",
+          "featureType": "Feature Type"
+        },
+        "validation": {
+          "nameRequired": "Feature name is required",
+          "featureTypeRequired": "Feature type is required"
+        },
+        "buttons": {
+          "close": "Close",
+          "submit": "Submit"
+        },
+        "addNewFeature": "Add New Feature",
+        "FeatureTypeSelect": {
+          "placeholder": "Select a feature type"
+        }
+      },
+      "api": {
+        "createSuccess": "Feature created successfully",
+        "updateSuccess": "Feature updated successfully",
+        "deleteSuccess": "Feature deleted successfully"
+      }
+    },
+    "FeaturesTypes": {
+      "api": {
+        "createSuccess": "Feature type created successfully",
+        "updateSuccess": "Feature type updated successfully",
+        "deleteSuccess": "Feature type deleted successfully"
+      }
     }
   },
 

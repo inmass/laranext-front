@@ -27,6 +27,8 @@ const ApiEndpoints = {
     conditions: '/api/backoffice/conditions',
 
     features: '/api/backoffice/features',
+
+    featureTypes: '/api/backoffice/feature-types',
 };
 
 export default ApiEndpoints;

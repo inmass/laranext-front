@@ -367,6 +367,66 @@
         "updateSuccess": "Modèle de voiture mis à jour avec succès",
         "deleteSuccess": "Modèle de voiture supprimé avec succès"
       }
+    },
+
+    "Features": {
+      "breadcrumb": {
+        "dashboard": "Tableau de bord",
+        "features": "Fonctionnalités"
+      },
+      "pageTitle": "Fonctionnalités",
+      "cardTitle": "Fonctionnalités",
+      "cardDescription": "Gérez vos fonctionnalités ici",
+      "columns": {
+        "name": "Nom",
+        "slug": "Identifiant",
+        "createdAt": "Créé le",
+        "updatedAt": "Mis à jour le"
+      },
+      "actions": {
+        "edit": "Modifier",
+        "delete": "Supprimer"
+      },
+      "deleteConfirmation": {
+        "title": "Supprimer la fonctionnalité",
+        "description": "Êtes-vous sûr de vouloir supprimer cette fonctionnalité ? Cette action est irréversible.",
+        "cancelText": "Annuler",
+        "actionText": "Supprimer"
+      },
+      "FormDialog": {
+        "addTitle": "Ajouter une nouvelle fonctionnalité",
+        "editTitle": "Modifier la fonctionnalité : {name}",
+        "addDescription": "Créer une nouvelle fonctionnalité",
+        "editDescription": "Modifier la fonctionnalité existante",
+        "labels": {
+          "name": "Nom de la fonctionnalité",
+          "featureType": "Type de fonctionnalité"
+        },
+        "validation": {
+          "nameRequired": "Le nom de la fonctionnalité est requis",
+          "featureTypeRequired": "Le type de fonctionnalité est requis"
+        },
+        "buttons": {
+          "close": "Fermer",
+          "submit": "Envoyer"
+        },
+        "addNewFeature": "Ajouter une nouvelle fonctionnalité",
+        "FeatureTypeSelect": {
+          "placeholder": "Sélectionnez un type de fonctionnalité"
+        }
+      },
+      "api": {
+        "createSuccess": "Fonctionnalité créée avec succès",
+        "updateSuccess": "Fonctionnalité mise à jour avec succès",
+        "deleteSuccess": "Fonctionnalité supprimée avec succès"
+      }
+    },
+    "FeaturesTypes": {
+      "api": {
+        "createSuccess": "Type de fonctionnalité créé avec succès",
+        "updateSuccess": "Type de fonctionnalité mis à jour avec succès",
+        "deleteSuccess": "Type de fonctionnalité supprimé avec succès"
+      }
     }
   },
 
