@@ -34,7 +34,7 @@ const ConditionSelect = forwardRef<SelectRef, ConditionSelectProps>(({ value, on
 
     const { data, isLoading, isError } = getConditions(params);
 
-    const options: Option[] = data?.map(({ id, name }: Condition) => ({ label: name, value: String(id) })) || [];
+    const options: Option[] = data?.data?.map(({ id, name }: Condition) => ({ label: name, value: String(id) })) || [];
 
     const handleChange = (selectedValue: string) => {
         const selectedOption = options.find(option => option.value === selectedValue);

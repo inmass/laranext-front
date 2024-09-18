@@ -427,6 +427,54 @@
         "updateSuccess": "Type de fonctionnalité mis à jour avec succès",
         "deleteSuccess": "Type de fonctionnalité supprimé avec succès"
       }
+    },
+
+    "Conditions": {
+      "breadcrumb": {
+        "dashboard": "Tableau de bord",
+        "conditions": "Conditions"
+      },
+      "pageTitle": "Conditions",
+      "cardTitle": "Conditions",
+      "cardDescription": "Gérez vos conditions ici",
+      "columns": {
+        "name": "Nom",
+        "slug": "Identifiant",
+        "createdAt": "Créé le",
+        "updatedAt": "Mis à jour le"
+      },
+      "actions": {
+        "edit": "Modifier",
+        "delete": "Supprimer"
+      },
+      "deleteConfirmation": {
+        "title": "Supprimer la condition",
+        "description": "Êtes-vous sûr de vouloir supprimer cette condition ? Cette action est irréversible.",
+        "cancelText": "Annuler",
+        "actionText": "Supprimer"
+      },
+      "FormDialog": {
+        "addTitle": "Ajouter une nouvelle condition",
+        "editTitle": "Modifier la condition : {name}",
+        "addDescription": "Créer une nouvelle condition",
+        "editDescription": "Modifier la condition existante",
+        "labels": {
+          "name": "Nom de la condition"
+        },
+        "validation": {
+          "nameRequired": "Le nom de la condition est requis"
+        },
+        "buttons": {
+          "close": "Fermer",
+          "submit": "Envoyer"
+        },
+        "addNewCondition": "Ajouter une nouvelle condition"
+      },
+      "api": {
+        "createSuccess": "Condition créée avec succès",
+        "updateSuccess": "Condition mise à jour avec succès",
+        "deleteSuccess": "Condition supprimée avec succès"
+      }
     }
   },
 
