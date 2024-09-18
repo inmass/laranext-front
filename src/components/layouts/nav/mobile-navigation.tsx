@@ -83,9 +83,9 @@ const MobileNavigation = () => {
               <NavLink href={AppRoutes.dashboard.management.conditions} icon={<Thermometer className="h-5 w-5" />}>
                 Conditions
               </NavLink>
-              <NavLink href={AppRoutes.dashboard.management.users} icon={<Users2 className="h-5 w-5" />}>
+              {/* <NavLink href={AppRoutes.dashboard.management.users} icon={<Users2 className="h-5 w-5" />}>
                 Users
-              </NavLink>
+              </NavLink> */}
               <NavLink href="#" icon={<LineChart className="h-5 w-5" />}>
                 Settings
               </NavLink>

@@ -70,9 +70,9 @@ const DesktopNavigation = () => {
                 <Thermometer className="h-5 w-5" />
               </NavItem>
 
-              <NavItem href={AppRoutes.dashboard.management.users} label="Users">
+              {/* <NavItem href={AppRoutes.dashboard.management.users} label="Users">
                 <Users2 className="h-5 w-5" />
-              </NavItem>
+              </NavItem> */}
             </>
           )
         }
