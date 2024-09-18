@@ -4,4 +4,5 @@ export interface MakeType {
     updated_at: string;
     name: string;
     slug: string;
+    has_car_models: boolean;
 };

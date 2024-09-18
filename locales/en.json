@@ -276,6 +276,7 @@
       "columns": {
         "name": "Name",
         "slug": "Slug",
+        "hasCarModels": "Has Car Models",
         "createdAt": "Created At",
         "updatedAt": "Updated At"
       },
@@ -383,6 +384,8 @@
       "filters": {
         "filterBy": "Filter by {column}"
       }
-    }
+    },
+    "yes": "Yes",
+    "no": "No"
   }
 }

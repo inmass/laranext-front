@@ -40,6 +40,7 @@ const Makes = () => {
     const columns = [
         { header: t('columns.name'), accessor: 'name' as const, sortable: true, filterable: true, filterType: 'text' as const, className: 'table-cell' },
         { header: t('columns.slug'), accessor: 'slug' as const },
+        { header: t('columns.hasCarModels'), accessor: 'has_car_models' as const, type: 'boolean' as const},
         { header: t('columns.createdAt'), type: 'date' as const, accessor: 'created_at' as const, className: 'table-cell', sortable: true },
         { header: t('columns.updatedAt'), type: 'date' as const, accessor: 'updated_at' as const, className: 'table-cell', sortable: true },
     ];

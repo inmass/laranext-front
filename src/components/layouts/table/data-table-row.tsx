@@ -1,29 +1,11 @@
 import React from 'react';
-import Image from 'next/image';
 import { TableCell, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { MoreHorizontal } from 'lucide-react';
 import ImageWithPreview from '@/components/ui/image-with-preview';
-import { ActionColumn } from './interfaces';
 import { useTranslations } from 'next-intl';
-export interface Column<T> {
-    header: string;
-    accessor: keyof T | ((item: T) => React.ReactNode);
-    type?: 'text' | 'number' | 'date' | 'image' | 'currency' | 'mileage';
-    className?: string;
-    sortable?: boolean;
-    filterable?: boolean;
-    filterType?: 'text' | 'daterange' | 'number';
-    filterParam?: string;
-}
-
-interface DataTableRowProps<T> {
-  item: T;
-  columns: Column<T>[];
-  actions?: ActionColumn<T>[];
-  actionsAsDropdown?: boolean;
-}
+import { DataTableRowProps } from './interfaces';
 
 const renderCellContent = <T,>(content: any, type?: string): React.ReactNode => {
   const t = useTranslations();
@@ -40,6 +22,10 @@ const renderCellContent = <T,>(content: any, type?: string): React.ReactNode => 
       return <ImageWithPreview alt="Item image" className="aspect-square rounded-md object-cover" height={65} src={content} width={65} />;
     case 'mileage':
       return `${parseFloat(content).toLocaleString()} ${t('General.table.km')}`;
+    case 'boolean':
+      return content ?
+        <span className="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Yes</span> :
+        <span className="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">No</span>;
     default:
       if (typeof content === 'object' && !React.isValidElement(content)) {
         return JSON.stringify(content);

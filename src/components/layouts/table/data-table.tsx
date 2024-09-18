@@ -81,7 +81,7 @@ export function DataTable<T>({
         />
               
         <Table>
-          <TableHeader>
+          <TableHeader className=' !rounded-br !rounded-tl  border-b-[3px]'>
             <TableRow>
               {columns.map((column, index) => (
                 <TableHead key={index} className={column.className}>
