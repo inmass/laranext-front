@@ -29,6 +29,10 @@ export const getCarModels = (
     },
 
     keepPreviousData: true,
+    staleTime: 0,
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
+    refetchOnReconnect: true,
   });
 };
 
