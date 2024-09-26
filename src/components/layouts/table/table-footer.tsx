@@ -22,7 +22,7 @@ const TableFooter = ({ currentPage, itemsPerPage, totalItems, prevPage, nextPage
         <div className="flex items-center w-full justify-between mt-4">
             <div className="text-xs text-muted-foreground">
                 {t('showing', {
-                    start: ((currentPage - 1) * itemsPerPage) + 1,
+                    start: totalItems > 0 ? ((currentPage - 1) * itemsPerPage) + 1 : 0,
                     end: Math.min(currentPage * itemsPerPage, totalItems),
                     total: totalItems
                 })}
@@ -41,7 +41,7 @@ const TableFooter = ({ currentPage, itemsPerPage, totalItems, prevPage, nextPage
                     onClick={nextPage}
                     variant="ghost"
                     size="sm"
-                    disabled={currentPage === totalPages}
+                    disabled={currentPage === totalPages || totalPages === 0}
                 >
                     {t('next')}
                     <ChevronRight className="ml-2 h-4 w-4" />
