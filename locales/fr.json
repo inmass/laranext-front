@@ -526,6 +526,20 @@
     }
   },
 
+  "FrontOffice": {
+    "Header": {
+      "browseCars": "Parcourir les voitures",
+      "sellYourCar": "Vendre votre voiture",
+      "aboutUs": "À propos de nous"
+    },
+    "Hero": {
+      "title": "Trouvez votre rêve de voiture",
+      "description": "Nous avons une large gamme de voitures à vendre, du petit véhicule urbain au SUV et camion lourd.",
+      "browseWatches": "Parcourir les montres",
+      "sellYourWatch": "Vendre votre montre"
+    }
+  },
+
   "General": {
     "table": {
       "km": "km",

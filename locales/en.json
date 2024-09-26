@@ -527,6 +527,20 @@
     }
   },
 
+  "FrontOffice": {
+    "Header": {
+      "browseCars": "Browse Cars",
+      "sellYourCar": "Sell Your Car",
+      "aboutUs": "About Us"
+    },
+    "Hero": {
+      "title": "Find Your Dream Car",
+      "description": "We have a wide range of cars for sale, from small city cars to large SUVs and trucks.",
+      "browseWatches": "Browse Watches",
+      "sellYourWatch": "Sell Your Watch"
+    }
+  },
+
   "General": {
     "table": {
       "km": "km",
