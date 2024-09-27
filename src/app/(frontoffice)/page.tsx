@@ -9,6 +9,7 @@ const Home = () => {
   return (
     <>
       <Hero />
+      <div>test</div>
     </>
   );
 };

@@ -58,11 +58,11 @@ const Login = () => {
 
   return (
     <CardLayout
-      className="w-full max-w-sm"
+      className="w-full max-w-sm bg-card/85"
       title={t('title')}
       description={t('description')}
     >
-      <div id="email-login">
+      <div id="email-login text-white">
         <AuthSessionStatus className="mb-4" status={status} />
         <form onSubmit={submitForm}>
           {/* Email Address */}
@@ -110,14 +110,14 @@ const Login = () => {
                 onChange={(event) => setShouldRemember(event.target.checked)}
               />
 
-              <span className="ml-2 text-sm text-gray-600">{t('rememberMe')}</span>
+              <span className="ml-2 text-sm text-muted-foreground">{t('rememberMe')}</span>
             </label>
           </div>
 
           <div className="flex items-center justify-end mt-4">
             <Link
               href="/forgot-password"
-              className="underline text-sm text-gray-600 hover:text-white"
+              className="underline text-sm text-muted-foreground hover:text-foreground"
             >
               {t('forgotPassword')}
             </Link>

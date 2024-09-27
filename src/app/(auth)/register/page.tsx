@@ -46,7 +46,7 @@ const Page = () => {
 
   return (
     <CardLayout
-      className="w-full max-w-sm"
+      className="w-full max-w-sm bg-card/85"
       title={t('title')}
       description={t('description')}
     >
@@ -123,7 +123,7 @@ const Page = () => {
         <div className="flex items-center justify-end mt-4">
           <Link
             href="/login"
-            className="underline text-sm text-gray-600 hover:text-gray-900"
+            className="underline text-sm text-muted-foreground hover:text-foreground"
           >
             {t('alreadyRegistered')}
           </Link>

@@ -29,6 +29,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       ref.current = true;
       return;
     }
+    console.log(theme);
 
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');

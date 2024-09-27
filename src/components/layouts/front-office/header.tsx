@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import AppRoutes from '@/constants/app-routes';
@@ -11,11 +13,11 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ isLandingPage = false }) => {
-    const bgClass = isLandingPage ? 'bg-transparent' : 'bg-gray-900';
+    const textClass = isLandingPage ? 'text-white' : 'text-foreground';
     const t = useTranslations('FrontOffice.Header');
 
     return (
-      <header className={`flex justify-between items-center p-10 ${bgClass} text-white fixed w-full z-10`}>
+      <header className={`flex justify-between items-center p-10 g-transparent ${textClass} fixed w-full z-10`}>
         <div className="text-xl font-bold">{String(getAppName()).toUpperCase()}</div>
         <nav>
           <ul className="flex space-x-10">
@@ -47,11 +49,7 @@ const Header: React.FC<HeaderProps> = ({ isLandingPage = false }) => {
                 </button>
             </Link>
             <LanguageSwitcher />
-            {
-                !isLandingPage && (
-                    <ThemeToggle />
-                )
-            }
+            <ThemeToggle />
         </div>
       </header>
     );

@@ -33,7 +33,7 @@ const Page = () => {
 
   return (
     <CardLayout
-      className="w-full max-w-sm"
+      className="w-full max-w-sm bg-card/85"
       title="Forgot Password"
       description="Forgot your password? No problem. Just let us know your email
                 address and we will email you a password reset link that

@@ -48,7 +48,7 @@ const PasswordReset = () => {
 
   return (
     <CardLayout
-      className="w-full max-w-sm"
+      className="w-full max-w-sm bg-card/85"
       title="Reset Password"
       description="Ensure your account is using a long, random password to stay secure."
     >

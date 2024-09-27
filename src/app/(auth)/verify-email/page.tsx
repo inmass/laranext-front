@@ -15,7 +15,7 @@ const Page = () => {
 
   return (
     <CardLayout
-      className="w-full max-w-sm"
+      className="w-full max-w-sm bg-card/85"
       title="Verify Email"
       description="Thanks for signing up! Before getting started, could you verify
                 your email address by clicking on the link we just
@@ -36,7 +36,7 @@ const Page = () => {
 
         <button
           type="button"
-          className="underline text-sm text-gray-600 hover:text-gray-900"
+          className="underline text-sm text-muted-foreground hover:text-gray-900"
           onClick={logout}
         >
           Logout

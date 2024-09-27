@@ -3,7 +3,7 @@ import Header from '@/components/layouts/front-office/header';
 
 const FrontOfficeLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div>
       <Header />
       <main>{children}</main>
     </div>

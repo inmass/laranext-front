@@ -74,7 +74,7 @@ const Dialog = ({
           }
           <RadixDialog.Close asChild>
             <button 
-              className="absolute top-5 right-5 text-gray-400 hover:text-gray-600" 
+              className="absolute top-5 right-5 text-gray-400 hover:text-muted-foreground" 
               aria-label="Close"
               onClick={onClose}
             >
