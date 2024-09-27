@@ -1,8 +1,5 @@
-'use client';
-
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import AppRoutes from '@/constants/app-routes';
 import { getAppName } from '@/lib/helpers';
 import { useTranslations } from 'next-intl';

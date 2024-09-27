@@ -1,15 +1,16 @@
+'use client'
+
 import React from 'react';
 import Image from 'next/image';
 import Header from './header';
 import { asset } from '@/lib/helpers';
 import { useTranslations } from 'next-intl';
+import Button from '@/components/Button';
 
 // Hero component
 const Hero: React.FC = () => {
 
-  // const t = useTranslations('FrontOffice.Hero');
-  // place holder for now
-  const t = (key: string) => key;
+  const t = useTranslations('FrontOffice.Hero');
 
   return (
     <>
@@ -21,16 +22,16 @@ const Hero: React.FC = () => {
           layout="fill"
           objectFit="cover"
         />
-        <div className="absolute inset-0 bg-black bg-opacity-[0.7] flex flex-col justify-center items-center text-white">
-          <h1 className="text-4xl font-bold mb-4">{t('title')}</h1>
+        <div className="absolute inset-0 bg-black bg-opacity-[0.6] flex flex-col justify-center items-center text-white">
+          <h1 className="text-3xl font-bold mb-4">{t('title')}</h1>
           <p className="text-xl mb-8">{t('description')}</p>
           <div className="flex space-x-4">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-              {t('browseWatches')}
-            </button>
-            <button className="bg-transparent hover:bg-white hover:text-black border border-white text-white font-bold py-2 px-4 rounded">
-              {t('sellYourWatch')}
-            </button>
+            <Button className='text-md'>
+              {t('browseCars')}
+            </Button>
+            <Button className='bg-accent text-accent-foreground hover:bg-accent/80 text-md'>
+              {t('sellYourCar')}
+            </Button>
           </div>
         </div>
       </div>

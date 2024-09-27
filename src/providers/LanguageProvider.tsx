@@ -4,6 +4,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { NextIntlClientProvider } from 'next-intl';
 import { locales, defaultLocale } from '@root/i18n';
 import { useAuth } from '@/hooks/auth';
+import Loading from '@/components/Loading';
 
 type LanguageContextType = {
   locale: string;
@@ -13,6 +14,7 @@ type LanguageContextType = {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
+  const [loading, setLoading] = useState(true);
   const [locale, setLocaleState] = useState(defaultLocale);
   const [messages, setMessages] = useState({});
   const { user, setLocale: setLocaleHook } = useAuth();
@@ -25,7 +27,8 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     // Load messages for the language
     import(`@root/locales/${savedLocale}.json`)
       .then((messages) => setMessages(messages.default))
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => setLoading(false));
   }, [user]);
 
   const setLocale = async (newLocale: string) => {
@@ -43,14 +46,21 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
       if (user) {
         await setLocaleHook(newLocale);
       }
+
+      setLoading(false)
     }
   };
 
   return (
     <LanguageContext.Provider value={{ locale, setLocale }}>
-      <NextIntlClientProvider locale={locale} messages={messages}>
-        {children}
-      </NextIntlClientProvider>
+      {
+        loading ?
+        <Loading /> : (
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            {children}
+          </NextIntlClientProvider>
+        )
+      }
     </LanguageContext.Provider>
   );
 }
