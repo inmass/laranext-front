@@ -13,6 +13,11 @@ const AppRoutes = {
             users: '/dashboard/management/users',
         },
     },
+    frontOffice: {
+        home: '/',
+        browse: '/browse',
+        about: '/about',
+    },
 };
 
 export default AppRoutes;

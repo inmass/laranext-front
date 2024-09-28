@@ -5,7 +5,9 @@ const FrontOfficeLayout: React.FC<{ children: React.ReactNode }> = ({ children }
   return (
     <div>
       <Header />
-      <main>{children}</main>
+      <main className="md:pt-40">
+        {children}
+      </main>
     </div>
   );
 };

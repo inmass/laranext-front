@@ -17,7 +17,7 @@ const Hero: React.FC = () => {
       <Header isLandingPage={true} />
       <div className="relative h-[90vh]">
         <Image
-          src={ asset('images/layout/hero-image.jpeg') }
+          src={ asset('images/layout/hero-image.webp') }
           alt="Luxury watch background"
           layout="fill"
           objectFit="cover"

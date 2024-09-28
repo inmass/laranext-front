@@ -1,4 +1,4 @@
-import Hero from '@/components/layouts/front-office/hero';
+import Hero from '@/components/layouts/front-office/home/hero';
 import LoginLinks from '@/components/LoginLinks';
 
 export const metadata = {
@@ -8,7 +8,7 @@ export const metadata = {
 const Home = () => {
   return (
     <>
-      test
+      t
     </>
   );
 };

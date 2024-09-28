@@ -538,6 +538,11 @@
       "description": "We have a wide range of cars for sale, from small city cars to large SUVs and trucks.",
       "browseCars": "Browse Cars",
       "sellYourCar": "Sell Your Car"
+    },
+    "AboutUs": {
+      "title": "About Us",
+      "description": "{appName} is a premier online platform dedicated to buying and selling vintage cars. Our carefully curated marketplace features exceptional classic automobiles from passionate sellers. Car enthusiasts can list their vintage vehicles, connecting with serious buyers who share their love for automotive history. All transactions are completed privately between users. Whether you're a buyer seeking the perfect classic car or a seller showcasing a unique piece of automotive heritage, {appName} offers a trusted space for vintage car enthusiasts.",
+      "learnMore": "List Your Car Now"
     }
   },
 
