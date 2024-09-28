@@ -1,25 +1,34 @@
-'use client'
+// 'use client'
 
 import Button from '@/components/Button';
 import { LanguageSwitcher } from '@/components/language-switcher';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { asset, getAppName } from '@/lib/helpers';
+import Link from 'next/link';
 import Image from 'next/image';
 import { ReactNode, useEffect } from 'react';
+import { ArrowLeft } from 'lucide-react';
+
+export const metadata = {
+    title: getAppName() + ' - Authentication',
+}
 
 const Layout = ({ children }: { children: ReactNode }) => {
 
-  useEffect(() => {
-      document.title = getAppName() + ' - Authentication';
-  }, []);
-
   return (
     <>
-        <div
-            className="p-4 w-full flex justify-end items-center gap-2 bg-transparent fixed z-10"
-        >
-            <ThemeToggle />
-            <LanguageSwitcher />
+        <div className="flex justify-between items-center bg-transparent z-10 fixed p-4 w-full">
+            <div className="flex justify-start items-center gap-2">
+                <Link href="/" className="text-white">
+                    <ArrowLeft />
+                </Link>
+            </div>
+            <div
+                className="flex  items-center gap-2"
+            >
+                <ThemeToggle />
+                <LanguageSwitcher />
+            </div>
         </div>
         <div className="relative h-screen">
             <Image

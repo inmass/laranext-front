@@ -11,6 +11,7 @@ import { MakeType } from '@/types/make';
 import { Eye, Trash2 } from 'lucide-react';
 import Head from 'next/head';
 import { useEffect, useState, useCallback } from 'react';
+import { getAppName } from '@/lib/helpers';
 
 const Makes = () => {
     const t = useTranslations('Dashboard.Makes');
@@ -66,7 +67,7 @@ const Makes = () => {
     }, []);
 
     useEffect(() => {
-        document.title = t('pageTitle');
+        document.title = getAppName() + ' - ' + t('pageTitle');
     }, [t]);
 
     return (

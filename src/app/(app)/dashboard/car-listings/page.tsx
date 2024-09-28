@@ -12,6 +12,7 @@ import { Eye, Trash2 } from 'lucide-react';
 import Head from 'next/head';
 import { useEffect, useState, useCallback } from 'react';
 import { useAuth } from '@/hooks/auth';
+import { getAppName } from '@/lib/helpers';
 
 const CarListings = () => {
     const { user } = useAuth({ requiredRole: ['admin', 'user'] });
@@ -78,14 +79,11 @@ const CarListings = () => {
     }, []);
 
     useEffect(() => {
-        document.title = t('pageTitle');
+        document.title = getAppName() + ' - ' + t('pageTitle');
     }, [t]);
 
     return (
         <>
-            <Head>
-                <title>{t('pageTitle')}</title>
-            </Head>
             <DashboardBreadcrumb items={breadcrumbItems} />
             <CardLayout
                 title={

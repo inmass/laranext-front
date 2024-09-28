@@ -11,6 +11,7 @@ import { FeatureType } from '@/types/feature';
 import { Eye, Trash2 } from 'lucide-react';
 import Head from 'next/head';
 import { useEffect, useState, useCallback } from 'react';
+import { getAppName } from '@/lib/helpers';
 
 const Features = () => {
     const t = useTranslations('Dashboard.Features');
@@ -65,7 +66,7 @@ const Features = () => {
     }, []);
 
     useEffect(() => {
-        document.title = t('pageTitle');
+        document.title = getAppName() + ' - ' + t('pageTitle');
     }, [t]);
 
     return (

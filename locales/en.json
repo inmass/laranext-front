@@ -34,7 +34,7 @@
     },
 
     "Profile": {
-      "pageTitle": "Laravel - Profile",
+      "pageTitle": "Profile",
 
       "ProfilePictureEditCard": {
         "title": "Profile Picture",
@@ -88,7 +88,7 @@
         "listings": "Listings"
       },
 
-      "pageTitle": "Laravel - Listings",
+      "pageTitle": "Listings",
       "cardTitle": "Car Listings",
       "cardDescription": "Manage your car listings and view their details.",
 

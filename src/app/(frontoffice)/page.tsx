@@ -1,8 +1,8 @@
 import Hero from '@/components/layouts/front-office/hero';
-import LoginLinks from '@/components/LoginLinks';
+import { getAppName } from '@/lib/helpers';
 
 export const metadata = {
-  title: 'Laravel',
+  title: getAppName() + ' - ' + 'Home'
 };
 
 const Home = () => {

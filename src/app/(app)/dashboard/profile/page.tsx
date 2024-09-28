@@ -19,7 +19,7 @@ const ProfilePage = () => {
     ];
 
     useEffect(() => {
-        document.title = t('Profile.pageTitle');
+        document.title = getAppName() + ' - ' + t('Profile.pageTitle');
     }, [t]);
 
     return (

@@ -11,6 +11,7 @@ import { CarModelType } from '@/types/car-model';
 import { Eye, Trash2 } from 'lucide-react';
 import Head from 'next/head';
 import { useEffect, useState, useCallback } from 'react';
+import { getAppName } from '@/lib/helpers';
 
 const CarModels = () => {
     const t = useTranslations('Dashboard.CarModels');
@@ -67,7 +68,7 @@ const CarModels = () => {
     }, []);
 
     useEffect(() => {
-        document.title = t('pageTitle');
+        document.title = getAppName() + ' - ' + t('pageTitle');
     }, [t]);
 
     return (

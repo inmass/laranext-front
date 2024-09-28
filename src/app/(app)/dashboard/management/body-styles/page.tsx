@@ -11,6 +11,7 @@ import { BodyStyleType } from '@/types/body-style';
 import { Eye, Trash2 } from 'lucide-react';
 import Head from 'next/head';
 import { useEffect, useState, useCallback } from 'react';
+import { getAppName } from '@/lib/helpers';
 
 const BodyStyles = () => {
     const t = useTranslations('Dashboard.BodyStyles');
@@ -65,7 +66,7 @@ const BodyStyles = () => {
     }, []);
 
     useEffect(() => {
-        document.title = t('pageTitle');
+        document.title = getAppName() + ' - ' + t('pageTitle');
     }, [t]);
 
     return (

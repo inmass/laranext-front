@@ -34,7 +34,7 @@
     },
 
     "Profile": {
-      "pageTitle": "Laravel - Profil",
+      "pageTitle": "Profil",
 
       "ProfilePictureEditCard": {
         "title": "Photo de profil",
@@ -88,7 +88,7 @@
         "listings": "Annonces"
       },
 
-      "pageTitle": "Laravel - Annonces",
+      "pageTitle": "Annonces",
       "cardTitle": "Annonces de voitures",
       "cardDescription": "Gérez vos annonces de voitures et consultez leurs détails.",
 

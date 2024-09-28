@@ -11,6 +11,7 @@ import { ConditionType } from '@/types/condition';
 import { Eye, Trash2 } from 'lucide-react';
 import Head from 'next/head';
 import { useEffect, useState, useCallback } from 'react';
+import { getAppName } from '@/lib/helpers';
 
 const Conditions = () => {
     const t = useTranslations('Dashboard.Conditions');
@@ -65,7 +66,7 @@ const Conditions = () => {
     }, []);
 
     useEffect(() => {
-        document.title = t('pageTitle');
+        document.title = getAppName() + ' - ' + t('pageTitle');
     }, [t]);
 
     return (
