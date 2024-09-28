@@ -9,16 +9,16 @@ import { LanguageSwitcher } from '@/components/language-switcher';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { Search, ShoppingCart, User } from 'lucide-react';
 
-interface HeaderProps {
+interface DesktopHeaderProps {
     isLandingPage?: boolean;
 }
 
-const Header: React.FC<HeaderProps> = ({ isLandingPage = false }) => {
+const DesktopHeader: React.FC<DesktopHeaderProps> = ({ isLandingPage = false }) => {
     const textClass = isLandingPage ? 'text-white' : 'text-foreground';
     const t = useTranslations('FrontOffice.Header');
 
     return (
-      <header className={`flex justify-between items-center p-10 g-transparent ${textClass} fixed w-full z-10`}>
+      <header className={`hidden md:flex justify-between items-center p-10 g-transparent ${textClass} fixed w-full z-10`}>
         <div className="text-xl font-bold">{String(getAppName()).toUpperCase()}</div>
         <nav>
           <ul className="flex space-x-10">
@@ -54,4 +54,4 @@ const Header: React.FC<HeaderProps> = ({ isLandingPage = false }) => {
     );
   };
 
-export default Header;
+export default DesktopHeader;

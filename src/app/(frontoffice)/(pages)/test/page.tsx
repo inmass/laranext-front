@@ -8,7 +8,7 @@ export const metadata = {
 const Home = () => {
   return (
     <>
-      <Hero />
+      test
     </>
   );
 };

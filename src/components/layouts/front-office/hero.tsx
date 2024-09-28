@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
-import Header from './header';
+import Header from '@/components/layouts/front-office/header/header';
 import { asset } from '@/lib/helpers';
 import { useTranslations } from 'next-intl';
 import Button from '@/components/Button';
