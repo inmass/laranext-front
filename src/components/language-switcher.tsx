@@ -33,7 +33,7 @@ export function LanguageSwitcher() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="px-2 justify-center rounded-full focus-visible:ring-0">
+        <Button variant="ghost" className="px-2 justify-center rounded-full focus-visible:ring-0 focus-visible:ring-offset-0 hover:bg-transparent p-0">
           <Image
             src={flagUrls[locale]}
             alt={locale}
@@ -43,7 +43,7 @@ export function LanguageSwitcher() {
           />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="center" className="w-32 text-center border-none rounded-full min-w-[0px] w-max">
+      <DropdownMenuContent align="center" className="w-32 text-center border-none rounded-full min-w-[0px] w-max bg-transparent shadow-none">
         {otherLocales.map((loc) => (
           <DropdownMenuItem 
             key={loc}

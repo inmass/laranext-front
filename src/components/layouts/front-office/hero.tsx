@@ -15,7 +15,7 @@ const Hero: React.FC = () => {
   return (
     <>
       <Header isLandingPage={true} />
-      <div className="relative h-screen">
+      <div className="relative h-[90vh]">
         <Image
           src={ asset('images/layout/hero-image.jpeg') }
           alt="Luxury watch background"
@@ -29,7 +29,7 @@ const Hero: React.FC = () => {
             <Button className='text-md'>
               {t('browseCars')}
             </Button>
-            <Button className='bg-accent text-accent-foreground hover:bg-accent/80 text-md'>
+            <Button className='bg-[#F1F5F9] text-[#10172A] hover:bg-[#F1F5F9]/80 text-md'>
               {t('sellYourCar')}
             </Button>
           </div>
