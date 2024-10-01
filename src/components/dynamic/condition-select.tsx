@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import { getConditions, ConditionsParams } from '@/hooks/api/conditions';
-import Select, { SelectRef } from '@/components/layouts/select';
+import Select, { emptyValue, SelectRef } from '@/components/layouts/select';
 import { useTranslations } from 'next-intl';
 
 interface ConditionSelectProps {
@@ -40,6 +40,8 @@ const ConditionSelect = forwardRef<SelectRef, ConditionSelectProps>(({ value, on
         const selectedOption = options.find(option => option.value === selectedValue);
         if (selectedOption && onChange) {
             onChange(selectedOption.value, selectedOption.label);
+        } else if (selectedValue === emptyValue) {
+            onChange?.('', '');
         }
     }
 

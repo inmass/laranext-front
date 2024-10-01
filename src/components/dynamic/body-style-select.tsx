@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import { getBodyStyles, BodyStylesParams } from '@/hooks/api/body-styles';
-import Select, { SelectRef } from '@/components/layouts/select';
+import Select, { emptyValue, SelectRef } from '@/components/layouts/select';
 import { useTranslations } from 'next-intl';
 
 interface BodyStyleSelectProps {
@@ -40,6 +40,8 @@ const BodyStyleSelect = forwardRef<SelectRef, BodyStyleSelectProps>(({ value, on
         const selectedOption = options.find(option => option.value === selectedValue);
         if (selectedOption && onChange) {
             onChange(selectedOption.value, selectedOption.label);
+        } else if (selectedValue === emptyValue) {
+            onChange?.('', '');
         }
     }
 

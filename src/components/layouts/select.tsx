@@ -1,8 +1,9 @@
 import React, { forwardRef, useImperativeHandle, useRef, useState, useEffect } from 'react';
 import { Combobox } from '@headlessui/react';
-import { Check, ChevronsDown } from 'lucide-react';
+import { Check, ChevronsDown, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import ClipLoader from '@/components/clip-loader';
+import { Button } from '../ui/button';
 
 interface Option {
   value: string;
@@ -28,6 +29,8 @@ export interface SelectRef {
   blur: () => void;
 }
 
+export const emptyValue = 'empty';
+
 const Select = forwardRef<SelectRef, SelectProps>(({
   options,
   value,
@@ -41,6 +44,7 @@ const Select = forwardRef<SelectRef, SelectProps>(({
   name,
   searchable = true
 }, ref) => {
+  const [selectedOption, setSelectedOption] = useState<string>(value ?? '');
   const [query, setQuery] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -71,6 +75,13 @@ const Select = forwardRef<SelectRef, SelectProps>(({
     setQuery('');
   };
 
+  const handleClear = () => {
+    setQuery('');
+    onChange?.(emptyValue);
+    setSelectedOption('');
+    closeDropdown();
+  };
+
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
       if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
@@ -88,9 +99,10 @@ const Select = forwardRef<SelectRef, SelectProps>(({
   return (
     <div className={'relative'} ref={containerRef}>
       <Combobox 
-        value={value} 
+        value={selectedOption ?? ''} 
         onChange={(newValue) => {
           onChange?.(newValue);
+          setSelectedOption(newValue);
           closeDropdown();
         }} 
         disabled={disabled}
@@ -122,15 +134,24 @@ const Select = forwardRef<SelectRef, SelectProps>(({
                     )}
                     onClick={() => setIsOpen(!isOpen)}
                   >
-                    {options.find(option => option.value === value)?.label || placeholder}
+                    {options.find(option => option.value === selectedOption)?.label || placeholder}
                   </Combobox.Button>
                 )}
-                <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
-                  <ChevronsDown
-                    className="h-4 w-4 text-gray-400"
-                    aria-hidden="true"
-                  />
-                </Combobox.Button>
+                {
+                  selectedOption && selectedOption !== '' ? (
+                    <Button variant="ghost" className="text-gray-400 absolute inset-y-0 right-0 flex items-center pr-2 hover:bg-transparent" onClick={handleClear}>
+                      <X className="h-4 w-4" />
+                    </Button>
+                  ) : (
+                    <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
+                      <ChevronsDown
+                          className="h-4 w-4 text-gray-400"
+                        aria-hidden="true"
+                      />
+                    </Combobox.Button>
+                  )
+                }
+                
               </div>
               {(open || isOpen) && (
                 <Combobox.Options static className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-background p-1 text-sm focus:outline-none border border-input z-[1]">

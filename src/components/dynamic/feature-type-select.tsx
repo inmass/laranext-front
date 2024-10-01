@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import { getFeatureTypes, FeatureTypesParams } from '@/hooks/api/feature-types';
-import Select, { SelectRef } from '@/components/layouts/select';
+import Select, { emptyValue, SelectRef } from '@/components/layouts/select';
 import { useTranslations } from 'next-intl';
 
 interface FeatureTypeSelectProps {
@@ -39,6 +39,8 @@ const FeatureTypeSelect = forwardRef<SelectRef, FeatureTypeSelectProps>(({ value
         const selectedOption = options.find(option => option.value === newValue);
         if (selectedOption && onChange) {
             onChange(selectedOption.value, selectedOption.label);
+        } else if (newValue === emptyValue) {
+            onChange?.('', '');
         }
     };
 

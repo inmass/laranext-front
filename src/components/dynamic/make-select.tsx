@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import { getMakes, MakesParams } from '@/hooks/api/makes';
-import Select, { SelectRef } from '@/components/layouts/select';
+import Select, { emptyValue, SelectRef } from '@/components/layouts/select';
 import { useTranslations } from 'next-intl';
 
 interface MakeSelectProps {
@@ -39,6 +39,8 @@ const MakeSelect = forwardRef<SelectRef, MakeSelectProps>(({ value, onChange, on
         const selectedOption = options.find(option => option.value === newValue);
         if (selectedOption && onChange) {
             onChange(selectedOption.value, selectedOption.label);
+        } else if (newValue === emptyValue) {
+            onChange?.('', '');
         }
     };
 

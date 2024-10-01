@@ -1,6 +1,6 @@
 import React, { forwardRef, useMemo } from 'react';
 import { getCarModels, CarModelsParams } from '@/hooks/api/car-models';
-import Select, { SelectRef } from '@/components/layouts/select';
+import Select, { emptyValue, SelectRef } from '@/components/layouts/select';
 import { useTranslations } from 'next-intl';
 
 interface CarModelSelectProps {
@@ -45,6 +45,8 @@ const CarModelSelect = forwardRef<SelectRef, CarModelSelectProps>(
         const selectedOption = options.find(option => option.value === selectedValue);
         if (selectedOption && onChange) {
             onChange(selectedOption.value, selectedOption.label);
+        } else if (selectedValue === emptyValue) {
+            onChange?.('', '');
         }
     }
 
