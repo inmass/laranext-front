@@ -32,6 +32,7 @@ const Home = () => {
                 <div className="mt-2">
                   <h3 className="text-lg font-semibold">{carListing.title}</h3>
                   <p className="text-gray-500">{carListing.description}</p>
+                  <p className="text-gray-500">{carListing.price}</p>
                 </div>
               </div>
             ))}

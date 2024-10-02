@@ -11,7 +11,7 @@ import BodyStyleSelect from '@/components/dynamic/body-style-select';
 import ConditionSelect from '@/components/dynamic/condition-select';
 import { useTranslations } from 'next-intl';
 import { FuelTypes, TransmissionTypes } from '@/constants/constants';
-
+import Slider from '@/components/ui/slider';
 interface FilterProps {
     params: CarListingsParams;
     setParams: (params: CarListingsParams) => void;
@@ -27,7 +27,6 @@ const Filters: React.FC<FilterProps> = ({ params, setParams, className }) => {
     setParams({ ...params, filters: {} });
     setTransmissionFilters([]);
     setFuelTypeFilters([]);
-    // setParams({ ...params, filters: { ...params.filters, make_id: '', body_style_id: '', condition_id: '', price_gte: '', price_lte: '', transmission: '', fuel_type: '' } });
   };
 
   const handleMakeChange = (value: string) => {
@@ -57,15 +56,11 @@ const Filters: React.FC<FilterProps> = ({ params, setParams, className }) => {
   };
 
   useEffect(() => {
-    if (transmissionFilters.length > 0) {
       handleTransmissionChange(transmissionFilters);
-    }
   }, [transmissionFilters]);
 
   useEffect(() => {
-    if (fuelTypeFilters.length > 0) {
       handleFuelTypeChange(fuelTypeFilters);
-    }
   }, [fuelTypeFilters]);
 
   return (
@@ -77,7 +72,7 @@ const Filters: React.FC<FilterProps> = ({ params, setParams, className }) => {
     )}>
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-lg font-bold">{t('title')}</h2>
-        <Button variant="ghost" className='p-0' onClick={handleReset}>
+        <Button variant="ghost" className='p-0 text-gray-400 hover:bg-transparent' onClick={handleReset}>
           <RefreshCcw className='h-5 w-5' />
         </Button>
       </div>
@@ -120,16 +115,15 @@ const Filters: React.FC<FilterProps> = ({ params, setParams, className }) => {
 
         <div>
           <h3 className="text-sm font-semibold mb-2">{t('price')}</h3>
-          {/* <Slider
+          <Slider
             min={0}
             max={100000}
             step={1000}
-            value={[params.filters?.price_min || 0, params.filters?.price_max || 100000]}
+            value={[Number(params.filters?.price_gte || 0), Number(params.filters?.price_lte || 100000)]}
             onValueChange={handlePriceChange}
-          /> */}
-          <input type="range" min="0" max="100000" step="1000" value={params.filters?.price_min || 0} onChange={(e) => handlePriceChange([e.target.valueAsNumber, Number(params.filters?.price_max || 100000)])} />
+          />
           <div className="flex justify-between text-xs mt-2">
-            <span>{t('priceRange', { min: params.filters?.price_min || 0, max: params.filters?.price_max || 100000 })}</span>
+            <span>{t('priceRange', { min: params.filters?.price_gte || 0, max: params.filters?.price_lte || 100000 })}</span>
           </div>
         </div>
 
