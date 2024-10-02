@@ -8,6 +8,7 @@ import ConditionSelect from '@/components/dynamic/condition-select';
 import Select from '@/components/layouts/select';
 import { useLookup } from '../context/lookup-context';
 import { useTranslations } from 'next-intl';
+import { FuelTypes, TransmissionTypes } from '@/constants/constants';
 
 const VehicleDetailsStep: React.FC = () => {
   const { control, formState: { errors }, register } = useFormContext<CarListingFormData>();
@@ -76,10 +77,7 @@ const VehicleDetailsStep: React.FC = () => {
               render={({ field }) => (
                   <Select
                       {...field}
-                      options={[
-                          { label: t('transmissionOptions.automatic'), value: 'automatic' },
-                          { label: t('transmissionOptions.manual'), value: 'manual' },
-                      ]}
+                      options={TransmissionTypes.map(type => ({ label: t(`transmissionOptions.${type}`), value: type }))}
                       searchable={false}
                       className={cn(errors.transmission ? 'border-red-500' : '')}
                   />
@@ -95,11 +93,7 @@ const VehicleDetailsStep: React.FC = () => {
               render={({ field }) => (
                   <Select
                       {...field}
-                      options={[
-                          { label: t('fuelTypeOptions.gasoline'), value: 'gasoline' },
-                          { label: t('fuelTypeOptions.diesel'), value: 'diesel' },
-                          { label: t('fuelTypeOptions.electric'), value: 'electric' },
-                      ]}
+                      options={FuelTypes.map(type => ({ label: t(`fuelTypeOptions.${type}`), value: type }))}
                       searchable={false}
                       className={cn(errors.fuel_type ? 'border-red-500' : '')}
                   />

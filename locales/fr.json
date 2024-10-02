@@ -542,6 +542,34 @@
       "title": "À propos de nous",
       "description": "Nous sommes une plateforme en ligne de premier plan dédiée à l'achat et à la vente de voitures anciennes. Notre collection soigneusement sélectionnée comprend des voitures anciennes provenant de vendeurs passionnés. Les vendeurs peuvent lister leurs voitures pour un faible frais, en se connectant avec des acheteurs sérieux, tout en effectuant toutes les transactions de manière privée entre utilisateurs. Que vous soyez un acheteur à la recherche de la voiture parfaite ou un vendeur présentant une pièce unique, {appName} offre un espace de confiance pour les amateurs de voitures anciennes.",
       "learnMore": "Lister votre voiture maintenant"
+    },
+    "CarListings": {
+      "Filters": {
+        "title": "Filtres",
+        "reset": "Réinitialiser",
+        "make": "Marque",
+        "bodyStyle": "Style de carrosserie",
+        "condition": "Condition",
+        "fuelType": "Type de carburant",
+        "transmission": "Transmission",
+        "price": "Prix",
+        "priceRange": "Prix : {min} - {max}",
+        "year": "Année",
+        "mileage": "Kilométrage",
+        "features": "Fonctionnalités",
+        "exteriorColor": "Couleur extérieure",
+        "interiorColor": "Couleur intérieure",
+        "search": "Rechercher",
+        "transmissionTypes": {
+          "automatic": "Automatique",
+          "manual": "Manuelle"
+        },
+        "fuelTypes": {
+          "gasoline": "Essence",
+          "diesel": "Diesel",
+          "electric": "Électrique"
+        }
+      }
     }
   },
 

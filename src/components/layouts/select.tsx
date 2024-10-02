@@ -96,6 +96,19 @@ const Select = forwardRef<SelectRef, SelectProps>(({
     };
   }, []);
 
+  useEffect(() => {
+    onChange?.(value ?? '');
+    setSelectedOption(value ?? '');
+  }, [value]);
+
+  // useEffect(() => {
+  //   // if selected option is not in options, set it to empty
+  //   if (selectedOption && options.length && !options.find(option => option.value === selectedOption)) {
+  //     onChange?.(emptyValue);
+  //     setSelectedOption('');
+  //   }
+  // }, [options]);
+
   return (
     <div className={'relative'} ref={containerRef}>
       <Combobox 

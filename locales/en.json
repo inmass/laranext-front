@@ -543,6 +543,34 @@
       "title": "About Us",
       "description": "{appName} is a premier online platform dedicated to buying and selling vintage cars. Our carefully curated marketplace features exceptional classic automobiles from passionate sellers. Car enthusiasts can list their vintage vehicles, connecting with serious buyers who share their love for automotive history. All transactions are completed privately between users. Whether you're a buyer seeking the perfect classic car or a seller showcasing a unique piece of automotive heritage, {appName} offers a trusted space for vintage car enthusiasts.",
       "learnMore": "List Your Car Now"
+    },
+    "CarListings": {
+      "Filters": {
+        "title": "Filters",
+        "reset": "Reset",
+        "make": "Make",
+        "bodyStyle": "Body Style",
+        "condition": "Condition",
+        "fuelType": "Fuel Type",
+        "transmission": "Transmission",
+        "price": "Price",
+        "priceRange": "Price Range: {min} - {max}",
+        "year": "Year",
+        "mileage": "Mileage",
+        "features": "Features",
+        "exteriorColor": "Exterior Color",
+        "interiorColor": "Interior Color",
+        "search": "Search",
+        "transmissionTypes": {
+          "automatic": "Automatic",
+          "manual": "Manual"
+        },
+        "fuelTypes": {
+          "gasoline": "Gasoline",
+          "diesel": "Diesel",
+          "electric": "Electric"
+        }
+      }
     }
   },
 

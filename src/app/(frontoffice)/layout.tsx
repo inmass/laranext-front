@@ -7,7 +7,7 @@ export const metadata = {
 const FrontOfficeLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <AppProvider>
-      <main>
+      <main className='bg-muted'>
        {children}
       </main>
     </AppProvider>
