@@ -10,7 +10,7 @@ const Home = () => {
 
   const [params, setParams] = useState<CarListingsParams>({
     page: 1,
-    perPage: 8,
+    perPage: 9,
     // sort: null as { key: string; direction: 'asc' | 'desc' } | null,
     sort: { key: 'created_at', direction: 'desc' } as { key: string; direction: 'asc' | 'desc' } | null,
     filters: {} as Record<string, string>,

@@ -73,7 +73,7 @@ const CarListingsList = ({ data, params, setParams, className }: CarListingsList
 
       <TableFooter
         currentPage={params.page}
-        itemsPerPage={params.perPage ?? 8}
+        itemsPerPage={params.perPage ?? 9}
         totalItems={data?.meta?.total ?? 0}
         prevPage={() => setParams({ ...params, page: params.page - 1 })}
         nextPage={() => setParams({ ...params, page: params.page + 1 })}
