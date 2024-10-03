@@ -1,16 +1,20 @@
-import Button from '@/components/Button';
 import ImageWithPreview from '@/components/ui/image-with-preview';
+import { CarListingsParams, CarListingsResponse } from '@/hooks/api/car-listings';
 import { getMakeImage } from '@/lib/helpers';
 import { cn } from '@/lib/utils';
-import { CarListingType } from '@/types/car-listing';
 import Image from 'next/image';
 import Link from 'next/link';
+import TableFooter from '@/components/layouts/table/table-footer';
 interface CarListingsListProps {
-  carListings?: CarListingType[];
+  data?: CarListingsResponse;
+  params: CarListingsParams;
+  setParams: (params: CarListingsParams) => void;
   className?: string;
 }
 
-const CarListingsList = ({ carListings, className }: CarListingsListProps) => {
+const CarListingsList = ({ data, params, setParams, className }: CarListingsListProps) => {
+
+  const carListings = data?.data;
 
   return (
     <div className={cn(
@@ -66,6 +70,14 @@ const CarListingsList = ({ carListings, className }: CarListingsListProps) => {
         )
       }
       </div>
+
+      <TableFooter
+        currentPage={params.page}
+        itemsPerPage={params.perPage ?? 8}
+        totalItems={data?.meta?.total ?? 0}
+        prevPage={() => setParams({ ...params, page: params.page - 1 })}
+        nextPage={() => setParams({ ...params, page: params.page + 1 })}
+      />
     </div>
   );
 };

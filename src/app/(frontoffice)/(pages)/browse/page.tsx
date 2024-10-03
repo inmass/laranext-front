@@ -2,10 +2,8 @@
 
 import CarListingsList from '@/components/layouts/front-office/browse/car-listings-list';
 import Filters from '@/components/layouts/front-office/browse/filters';
-import Hero from '@/components/layouts/front-office/home/hero';
-import LoginLinks from '@/components/LoginLinks';
+import Loading from '@/components/Loading';
 import { CarListingsParams, getCarListings } from '@/hooks/api/car-listings';
-import Image from 'next/image';
 import { useState } from 'react';
 
 const Home = () => {
@@ -24,7 +22,13 @@ const Home = () => {
   return (
     <div className="md:grid md:grid-cols-4">
       <Filters className="md:col-span-1" params={params} setParams={setParams} />
-      <CarListingsList carListings={data?.data} className="md:col-span-3" />
+      {
+        isLoading ? 
+        <div className="md:col-span-3">
+          <Loading />
+        </div> :
+        <CarListingsList data={data} params={params} setParams={setParams} className="md:col-span-3" />
+      }
     </div>
   );
 };

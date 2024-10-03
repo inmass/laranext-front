@@ -8,7 +8,7 @@ import { fileToBase64 } from '@/lib/helpers';
 import toast from 'react-hot-toast';
 import { useTranslations } from 'next-intl';
 
-interface CarListingsResponse {
+export interface CarListingsResponse {
   data: CarListingType[];
   meta: Pagination;
 }

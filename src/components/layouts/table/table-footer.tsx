@@ -27,26 +27,30 @@ const TableFooter = ({ currentPage, itemsPerPage, totalItems, prevPage, nextPage
                     total: totalItems
                 })}
             </div>
-            <div className="flex">
-                <Button
-                    onClick={prevPage}
-                    variant="ghost"
-                    size="sm"
-                    disabled={currentPage === 1}
-                >
-                    <ChevronLeft className="mr-2 h-4 w-4" />
-                    {t('prev')}
-                </Button>
-                <Button
-                    onClick={nextPage}
-                    variant="ghost"
-                    size="sm"
-                    disabled={currentPage === totalPages || totalPages === 0}
-                >
-                    {t('next')}
-                    <ChevronRight className="ml-2 h-4 w-4" />
-                </Button>
-            </div>
+            {
+                (currentPage > 1 || (currentPage !== totalPages && totalPages !== 0)) && (
+                    <div className="flex">
+                        <Button
+                            onClick={prevPage}
+                            variant="ghost"
+                            size="sm"
+                            disabled={currentPage === 1}
+                        >
+                            <ChevronLeft className="mr-2 h-4 w-4" />
+                            {t('prev')}
+                        </Button>
+                        <Button
+                            onClick={nextPage}
+                            variant="ghost"
+                            size="sm"
+                            disabled={currentPage === totalPages || totalPages === 0}
+                        >
+                            {t('next')}
+                            <ChevronRight className="ml-2 h-4 w-4" />
+                        </Button>
+                    </div>
+                )
+            }
         </div>
     );
 };

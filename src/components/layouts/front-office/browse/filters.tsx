@@ -3,7 +3,6 @@ import { CarListingsParams } from '@/hooks/api/car-listings';
 import { cn } from '@/lib/utils';
 import { RefreshCcw, Search } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
-// import { Slider } from '@/components/ui/slider';
 import { Button } from '@/components/ui/button';
 import { CheckBox } from "@/components/ui/checkbox";
 import MakeSelect from '@/components/dynamic/make-select';
@@ -24,33 +23,33 @@ const Filters: React.FC<FilterProps> = ({ params, setParams, className }) => {
   const [fuelTypeFilters, setFuelTypeFilters] = useState<string[]>([]);
 
   const handleReset = () => {
-    setParams({ ...params, filters: {} });
+    setParams({ ...params, filters: {}, page: 1 });
     setTransmissionFilters([]);
     setFuelTypeFilters([]);
   };
 
   const handleMakeChange = (value: string) => {
-    setParams({ ...params, filters: { ...params.filters, make_id: value } });
+    setParams({ ...params, filters: { ...params.filters, make_id: value }, page: 1 });
   };
 
   const handleBodyStyleChange = (value: string) => {
-    setParams({ ...params, filters: { ...params.filters, body_style_id: value } });
+    setParams({ ...params, filters: { ...params.filters, body_style_id: value }, page: 1 });
   };
 
   const handleConditionChange = (value: string) => {
-    setParams({ ...params, filters: { ...params.filters, condition_id: value } });
+    setParams({ ...params, filters: { ...params.filters, condition_id: value }, page: 1 });
   };
 
   const handlePriceChange = (value: number[]) => {
-    setParams({ ...params, filters: { ...params.filters, price_gte: value[0].toString(), price_lte: value[1].toString() } });
+    setParams({ ...params, filters: { ...params.filters, price_gte: value[0].toString(), price_lte: value[1].toString() }, page: 1 });
   };
 
   const handleTransmissionChange = (values: string[]) => {
-    setParams({ ...params, filters: { ...params.filters, transmission: transmissionFilters.join(',') } });
+    setParams({ ...params, filters: { ...params.filters, transmission: transmissionFilters.join(',') }, page: 1 });
   };
 
   const handleFuelTypeChange = (values: string[]) => {
-    setParams({ ...params, filters: { ...params.filters, fuel_type: fuelTypeFilters.join(',') } });
+    setParams({ ...params, filters: { ...params.filters, fuel_type: fuelTypeFilters.join(',') }, page: 1 });
   };
 
   useEffect(() => {
@@ -79,7 +78,7 @@ const Filters: React.FC<FilterProps> = ({ params, setParams, className }) => {
         <Input 
           placeholder={t('search')} 
           value={params.filters?.title || ''}
-          onChange={(e) => setParams({ ...params, filters: { ...params.filters, title: e.target.value } })}
+          onChange={(e) => setParams({ ...params, filters: { ...params.filters, title: e.target.value }, page: 1 })}
         />
         <Button variant="ghost" className="text-gray-400 absolute inset-y-0 right-0 flex items-center pr-2 hover:bg-transparent">
           <Search className="h-4 w-4" />
