@@ -574,6 +574,34 @@
       "askingPrice": "Asking Price",
       "carListings": "Car Listings",
       "noListingsFound": "No listings found :("
+    },
+    "CarListingView": {
+      "askingPrice": "Asking Price",
+      "listingNotFound": "Listing not found",
+      "description": "Description",
+      "features": "Features",
+      "technicalDetails": "Technical Details",
+      "year": "Year",
+      "mileage": "Mileage",
+      "transmission": "Transmission",
+      "fuelType": "Fuel Type",
+      "bodyStyle": "Body Style",
+      "condition": "Condition",
+      "engine": "Engine",
+      "power": "Power",
+      "acceleration": "Acceleration",
+      "topSpeed": "Top Speed",
+      "fuelConsumption": "Fuel Consumption",
+      "co2Emissions": "CO2 Emissions",
+      "transmissionTypes": {
+        "automatic": "Automatic",
+        "manual": "Manual"
+      },
+      "fuelTypes": {
+        "gasoline": "Gasoline",
+        "diesel": "Diesel",
+        "electric": "Electric"
+      }
     }
   },
 

@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { createPortal } from 'react-dom';
 
 interface ImageWithPreviewProps {
     src: string;
@@ -43,10 +44,35 @@ const ImageWithPreview = ({ src, alt, width, height, className, asBackground = f
       }
     };
   
+    const PreviewPortal = () => {
+      return createPortal(
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75"
+          onClick={handleOverlayClick}
+        >
+          <div className="relative max-w-3xl max-h-3xl">
+            <button
+              onClick={closePreview}
+              className="absolute top-4 right-4 text-white hover:text-gray-300"
+            >
+              <X size={24} />
+            </button>
+            <Image
+              src={src}
+              alt={alt}
+              className="object-contain max-w-full max-h-[700px]"
+              width={1000}
+              height={1000}
+            />
+          </div>
+        </div>,
+        document.body
+      );
+    };
+
     return (
       <>
         {asBackground ? (
-          // make bigger image on hover
             <div className={cn(
               "cursor-pointer bg-cover bg-center",
               className
@@ -62,28 +88,7 @@ const ImageWithPreview = ({ src, alt, width, height, className, asBackground = f
             {...props}
           />
         )}
-        {isPreviewOpen && (
-          <div 
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75"
-            onClick={handleOverlayClick}
-          >
-            <div className="relative max-w-3xl max-h-3xl">
-              <button
-                onClick={closePreview}
-                className="absolute top-4 right-4 text-white hover:text-gray-300"
-              >
-                <X size={24} />
-              </button>
-              <Image
-                src={src}
-                alt={alt}
-                className="object-contain max-w-full max-h-[700px]"
-                width={1000}
-                height={1000}
-              />
-            </div>
-          </div>
-        )}
+        {isPreviewOpen && <PreviewPortal />}
       </>
     );
   };

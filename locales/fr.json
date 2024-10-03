@@ -573,6 +573,34 @@
       "askingPrice": "Prix demandé",
       "carListings": "Annonces de voiture",
       "noListingsFound": "Aucune annonce trouvée :("
+    },
+    "CarListingView": {
+      "askingPrice": "Prix demandé",
+      "listingNotFound": "Annonce non trouvée",
+      "description": "Description",
+      "features": "Caractéristiques",
+      "technicalDetails": "Détails techniques",
+      "year": "Année",
+      "mileage": "Kilométrage",
+      "transmission": "Transmission",
+      "fuelType": "Type de carburant",
+      "bodyStyle": "Type de carrosserie",
+      "condition": "État",
+      "engine": "Moteur",
+      "power": "Puissance",
+      "acceleration": "Accélération",
+      "topSpeed": "Vitesse maximale",
+      "fuelConsumption": "Consommation de carburant",
+      "co2Emissions": "Émissions de CO2",
+      "transmissionTypes": {
+        "automatic": "Automatique",
+        "manual": "Manuelle"
+      },
+      "fuelTypes": {
+        "gasoline": "Essence",
+        "diesel": "Diesel",
+        "electric": "Électrique"
+      }
     }
   },
 

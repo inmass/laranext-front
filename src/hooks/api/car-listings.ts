@@ -32,14 +32,13 @@ export const getCarListings = (
     refetchOnReconnect: true,
   });
 };
-
-
-export const getCarListing = (id: number): UseQueryResult<CarListingType, Error> => {
+    
+export const getCarListing = (slug: string): UseQueryResult<CarListingType, Error> => {
   return useQuery({
-    queryKey: ['carListing', id],
+    queryKey: ['carListing', slug],
     queryFn: async () => {
-      const { data } = await axios.get<CarListingType>(`${ApiEndpoints.carListings}/${id}`);
-      return data;
+      const { data } = await axios.get<{data: CarListingType}>(`${ApiEndpoints.carListings}/${slug}`);
+      return data?.data;
     },
   });
 };

@@ -17,6 +17,7 @@ const AppRoutes = {
         home: '/',
         browse: '/browse',
         about: '/about',
+        listing: (slug: string) => `/listing/${slug}`,
     },
 };
 

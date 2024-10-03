@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import TableFooter from '@/components/layouts/table/table-footer';
 import { useTranslations } from 'next-intl';
+import AppRoutes from '@/constants/app-routes';
 interface CarListingsListProps {
   data?: CarListingsResponse;
   params: CarListingsParams;
@@ -38,7 +39,7 @@ const CarListingsList = ({ data, params, setParams, className }: CarListingsList
                 height={300}
                 className="rounded-t-lg h-[150px]"
               />
-              <Link href='#'>
+              <Link href={AppRoutes.frontOffice.listing(carListing.slug)}>
                 <div className='bg-muted/40 rounded-b-lg hover:scale-[1.01] hover:rounded-b-lg transition-all duration-300'>
                   <div className="p-4">
 

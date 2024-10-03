@@ -61,6 +61,13 @@ export interface CarListingType {
         name: string;
         slug: string;
     };
+    body_style: {
+        id: number;
+        created_at: string;
+        updated_at: string;
+        name: string;
+        slug: string;
+    };
     features: {
         id: number;
         created_at: string;

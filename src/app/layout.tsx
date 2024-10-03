@@ -13,7 +13,7 @@ const poppinsFont = Poppins({
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html className={poppinsFont.className}>
-      <body className="flex min-h-screen w-full flex-col transition-all duration-300 ease-in-out">
+      <body className="flex min-h-screen w-full flex-col ease-in-out">
         <ThemeProvider>
           <LanguageProvider>
             {children}
