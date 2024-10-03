@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import TableFooter from '@/components/layouts/table/table-footer';
+import { useTranslations } from 'next-intl';
 interface CarListingsListProps {
   data?: CarListingsResponse;
   params: CarListingsParams;
@@ -15,13 +16,15 @@ interface CarListingsListProps {
 const CarListingsList = ({ data, params, setParams, className }: CarListingsListProps) => {
 
   const carListings = data?.data;
+  const t = useTranslations('FrontOffice.CarListings');
+  // const t = (key: string) => key;
 
   return (
     <div className={cn(
       'p-4 pl-8 pt-16',
       className
     )}>
-      <h2 className="text-3xl font-bold mb-4">Car Listings</h2>
+      <h2 className="text-3xl font-bold mb-4">{t('carListings')}</h2>
       <div className={cn('products grid grid-cols-1 md:grid-cols-3 gap-4 gap-y-12')}>
         {
           carListings && carListings.length > 0 ? 
@@ -57,7 +60,7 @@ const CarListingsList = ({ data, params, setParams, className }: CarListingsList
                     </div>
                   </div>
                   <div className="rounded-b-lg p-2 px-4 bg-muted-foreground/15">
-                    <p className="text-muted-foreground">{carListing.price}€ <span className="text-muted-foreground/70 text-xs">Asking Price</span></p>
+                    <p className="text-muted-foreground">{carListing.price}€ <span className="text-muted-foreground/70 text-xs">{t('askingPrice')}</span></p>
                   </div>
                 </div>
               </Link>
@@ -65,7 +68,7 @@ const CarListingsList = ({ data, params, setParams, className }: CarListingsList
           ))
         ) : (
           <div className="col-span-3">
-            <p>No listings found :(</p>
+            <p>{t('noListingsFound')}</p>
           </div>
         )
       }

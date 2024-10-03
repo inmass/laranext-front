@@ -570,7 +570,10 @@
           "diesel": "Diesel",
           "electric": "Electric"
         }
-      }
+      },
+      "askingPrice": "Asking Price",
+      "carListings": "Car Listings",
+      "noListingsFound": "No listings found :("
     }
   },
 

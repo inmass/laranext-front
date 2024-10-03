@@ -569,7 +569,10 @@
           "diesel": "Diesel",
           "electric": "Électrique"
         }
-      }
+      },
+      "askingPrice": "Prix demandé",
+      "carListings": "Annonces de voiture",
+      "noListingsFound": "Aucune annonce trouvée :("
     }
   },
 
