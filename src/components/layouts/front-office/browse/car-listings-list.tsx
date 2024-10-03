@@ -26,7 +26,7 @@ const CarListingsList = ({ data, params, setParams, className }: CarListingsList
         {
           carListings && carListings.length > 0 ? 
           (carListings.map((carListing) => (
-            <div className="bg-card rounded-lg border border-border col-span-1 hover:border-border/50 transition-all duration-300">
+            <div className="bg-muted/40 rounded-lg border border-border col-span-1 hover:border-border/50 transition-all duration-300">
               <ImageWithPreview
                 asBackground={true}
                 src={carListing.primary_image?.path ?? ''}
@@ -36,7 +36,7 @@ const CarListingsList = ({ data, params, setParams, className }: CarListingsList
                 className="rounded-t-lg h-[150px]"
               />
               <Link href='#'>
-                <div className='bg-card rounded-b-lg hover:scale-[1.01] hover:rounded-b-lg transition-all duration-300'>
+                <div className='bg-muted/40 rounded-b-lg hover:scale-[1.01] hover:rounded-b-lg transition-all duration-300'>
                   <div className="p-4">
 
                     <div className="flex items-center gap-2 mb-4 h-6">
@@ -56,8 +56,8 @@ const CarListingsList = ({ data, params, setParams, className }: CarListingsList
                       <span className="">{carListing.mileage}</span>
                     </div>
                   </div>
-                  <div className="rounded-b-lg p-2 px-4 bg-muted/60">
-                    <p className="text-muted-foreground">{carListing.price}€ <span className="text-muted-foreground/50 text-xs">Asking Price</span></p>
+                  <div className="rounded-b-lg p-2 px-4 bg-muted-foreground/15">
+                    <p className="text-muted-foreground">{carListing.price}€ <span className="text-muted-foreground/70 text-xs">Asking Price</span></p>
                   </div>
                 </div>
               </Link>

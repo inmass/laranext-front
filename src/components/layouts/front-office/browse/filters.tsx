@@ -64,7 +64,7 @@ const Filters: React.FC<FilterProps> = ({ params, setParams, className }) => {
     <div className={cn(
         "hidden md:block",
         // only border bottom and right
-        "bg-card p-10 border-r border-border",
+        "bg-muted/40 p-10 border-r border-border",
         className
     )}>
       <div className="flex justify-between items-center mb-6">
