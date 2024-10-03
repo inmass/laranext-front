@@ -30,8 +30,6 @@ const Filters: React.FC<FilterProps> = ({ params, setParams, className }) => {
   };
 
   const handleMakeChange = (value: string) => {
-
-    console.log(value, 'changed');
     setParams({ ...params, filters: { ...params.filters, make_id: value } });
   };
 

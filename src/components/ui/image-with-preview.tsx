@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { X } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface ImageWithPreviewProps {
     src: string;
@@ -8,12 +9,16 @@ interface ImageWithPreviewProps {
     width: number;
     height: number;
     className?: string;
+    asBackground?: boolean;
 }
 
-const ImageWithPreview = ({ src, alt, width, height, className, ...props }: ImageWithPreviewProps) => {
+const ImageWithPreview = ({ src, alt, width, height, className, asBackground = false, ...props }: ImageWithPreviewProps) => {
     const [isPreviewOpen, setIsPreviewOpen] = useState(false);
 
-    const openPreview = () => setIsPreviewOpen(true);
+    // const openPreview = () => setIsPreviewOpen(true);
+    const openPreview = () => {
+      setIsPreviewOpen(true);
+    }
     const closePreview = useCallback(() => setIsPreviewOpen(false), []);
   
     useEffect(() => {
@@ -40,15 +45,23 @@ const ImageWithPreview = ({ src, alt, width, height, className, ...props }: Imag
   
     return (
       <>
-        <Image
-          src={src}
-          alt={alt}
-          width={width}
-          height={height}
-          className={`cursor-pointer ${className}`}
-          onClick={openPreview}
-          {...props}
-        />
+        {asBackground ? (
+          // make bigger image on hover
+            <div className={cn(
+              "cursor-pointer bg-cover bg-center",
+              className
+            )} style={{ backgroundImage: `url(${src})` }} onClick={openPreview}/>
+        ) : (
+          <Image
+            src={src}
+            alt={alt}
+            width={width}
+            height={height}
+            className={`cursor-pointer ${className}`}
+            onClick={openPreview}
+            {...props}
+          />
+        )}
         {isPreviewOpen && (
           <div 
             className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75"

@@ -2,23 +2,20 @@ import * as React from 'react';
 import { cn } from '@/lib/utils';
 import * as SliderPrimitive from '@radix-ui/react-slider';
 
-export interface RangeSliderProps extends Omit<SliderPrimitive.SliderProps, 'value' | 'onValueChange'> {
+export interface RangeSliderProps extends Omit<SliderPrimitive.SliderProps, 'value'> {
   className?: string;
-  min: number;
-  max: number;
   value: [number, number];
-  onValueChange: (value: [number, number]) => void;
 }
 
 const RangeSlider = React.forwardRef<HTMLSpanElement, RangeSliderProps>(
-  ({ className, min, max, value, onValueChange, ...props }, ref) => (
+  ({ className, value, ...props }, ref) => (
     <SliderPrimitive.Root
       ref={ref}
       className={cn('relative flex w-full touch-none select-none items-center', className)}
-      min={min}
-      max={max}
+      min={props.min}
+      max={props.max}
       value={value}
-      onValueChange={onValueChange}
+      onValueChange={props.onValueChange}
       step={props.step || 1}
       {...props}
     >

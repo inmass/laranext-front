@@ -8,6 +8,7 @@ import { Button } from '../ui/button';
 interface Option {
   value: string;
   label: string;
+  labelElement?: React.ReactNode;
 }
 
 interface SelectProps {
@@ -128,7 +129,7 @@ const Select = forwardRef<SelectRef, SelectProps>(({
                   <Combobox.Input
                     ref={inputRef}
                     className={cn(
-                      'flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
+                      'flex h-10 w-full rounded-md border border-input focus:border-input bg-background px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
                       className
                     )}
                     displayValue={(val: string) => options.find(option => option.value === val)?.label || ''}
@@ -142,8 +143,9 @@ const Select = forwardRef<SelectRef, SelectProps>(({
                 ) : (
                   <Combobox.Button 
                     className={cn(
-                      'flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm  file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
-                      className
+                      'flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 truncate',
+                      className,
+                      !options.find(option => option.value === selectedOption) && 'text-muted-foreground'
                     )}
                     onClick={() => setIsOpen(!isOpen)}
                   >
@@ -156,7 +158,7 @@ const Select = forwardRef<SelectRef, SelectProps>(({
                       <X className="h-4 w-4" />
                     </Button>
                   ) : (
-                    <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
+                    <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2 my-2 bg-background border-r border-input text-muted-foreground">
                       <ChevronsDown
                           className="h-4 w-4 text-gray-400"
                         aria-hidden="true"
@@ -199,7 +201,7 @@ const Select = forwardRef<SelectRef, SelectProps>(({
                                 selected ? 'font-medium' : 'font-normal'
                               }`}
                             >
-                              {option.label}
+                              {option.labelElement ?? option.label}
                             </span>
                             {selected ? (
                               <span

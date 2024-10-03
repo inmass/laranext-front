@@ -57,3 +57,9 @@ export function fileToBase64(file: File): Promise<string> {
 export function getAppName(): string {
   return process.env.NEXT_PUBLIC_APP_NAME || 'Laravel';
 }
+
+export function getMakeImage(make: string): string {
+  // https://raw.githubusercontent.com/filippofilip95/car-logos-dataset/refs/heads/master/logos/thumb/bmw.png
+  // https://vl.imgix.net/img/acura-logo.png
+  return asset(`https://vl.imgix.net/img/${make.toLowerCase()}-logo.png`);
+}
