@@ -586,6 +586,9 @@
       "fuelType": "Type de carburant",
       "bodyStyle": "Type de carrosserie",
       "condition": "État",
+      "originalPrice": "Prix original",
+      "exteriorColor": "Couleur extérieure",
+      "interiorColor": "Couleur intérieure",
       "engine": "Moteur",
       "power": "Puissance",
       "acceleration": "Accélération",
@@ -600,7 +603,9 @@
         "gasoline": "Essence",
         "diesel": "Diesel",
         "electric": "Électrique"
-      }
+      },
+      "contactSeller": "Contacter le vendeur",
+      "viewNumber": "Voir le numéro"
     }
   },
 

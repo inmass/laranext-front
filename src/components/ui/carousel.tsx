@@ -54,7 +54,7 @@ export const Carousel: React.FC<CarouselProps> = ({ children }) => {
           <ChevronRight className="h-4 w-4" />
         </Button>
       </div>
-      <div className="flex mt-4 space-x-2 overflow-x-auto">
+      <div className="flex mt-4 space-x-2 overflow-x-auto items-center">
         {children.map((child: React.ReactNode, index: number) => {
           const childElement = React.isValidElement(child) ? child : null;
           return (
@@ -62,8 +62,8 @@ export const Carousel: React.FC<CarouselProps> = ({ children }) => {
               variant="ghost"
               size="icon"
               key={index}
-              className={`w-16 h-16 flex-shrink-0 overflow-hidden rounded-lg ${
-                index === currentIndex ? 'border-2 border-foreground' : ''
+              className={`w-10 h-10 flex-shrink-0 overflow-hidden rounded-lg ${
+                index === currentIndex ? 'w-12 h-12' : ''
               }`}
               onClick={() => setCurrentIndex(index)}
             >

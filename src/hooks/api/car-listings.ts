@@ -40,6 +40,7 @@ export const getCarListing = (slug: string): UseQueryResult<CarListingType, Erro
       const { data } = await axios.get<{data: CarListingType}>(`${ApiEndpoints.carListings}/${slug}`);
       return data?.data;
     },
+    keepPreviousData: true,
   });
 };
 

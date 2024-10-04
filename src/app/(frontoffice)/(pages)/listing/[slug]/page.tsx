@@ -10,18 +10,34 @@ import Image from 'next/image';
 import { Carousel } from "@/components/ui/carousel";
 import { Badge } from "@/components/ui/badge";
 import SectionDivider from '@/components/SectionDivider';
+import { Button } from "@/components/ui/button";
+import { FaCheckCircle, FaDashcube, FaEye, FaTimesCircle, FaWhatsapp } from "react-icons/fa";
+import { getFeatures } from "@/hooks/api/features";
+import { groupFeatures } from "@/lib/utils";
+import { Check, Minus, X } from "lucide-react";
+import { ReactNode } from "react";
 
 const ListingPage = () => {
     const { slug } = useParams();
     const { data: carListing, isLoading, isError, error } = getCarListing(slug as string);
     const t = useTranslations('FrontOffice.CarListingView');
 
+    const featuresParams = {
+        page: 1,
+        noPagination: true,
+        fields: ['id', 'name', 'feature_type_id'],
+        include: ['featureType'],
+    };
+    const { data: features } = getFeatures(featuresParams);
+
     if (isLoading) return <Loading />;
     if (isError) return <div>{error.message}</div>;
     if (!carListing) return <div>{t('listingNotFound')}</div>;
 
+    const groupedFeatures = groupFeatures(features?.data ?? []);
+
     return (
-        <div className="container mx-auto px-4 py-20">
+        <div className="container mx-auto px-4 md:px-10 py-10">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
                     <Carousel>
@@ -37,17 +53,21 @@ const ListingPage = () => {
                         ))}
                     </Carousel>
                 </div>
-                <div>
-                    <div className="flex items-center gap-4 mb-4">
-                        <Image 
-                            src={getMakeImage(carListing.make?.name ?? '')} 
-                            alt={carListing.make?.name ?? ''} 
-                            width={60} 
-                            height={40}
-                        />
-                        <h1 className="text-3xl font-bold">{carListing.title}</h1>
+                <div className="relative">
+                    <div className="gap-4 justify-center lg:flex lg:justify-between lg:items-start lg:gap-2">
+                        <div>
+                            <div className="flex items-center gap-4 mb-4">
+                                <Image 
+                                    src={getMakeImage(carListing.make?.name ?? '')} 
+                                    alt={carListing.make?.name ?? ''} 
+                                    width={60} 
+                                    height={40}
+                                />
+                                <h1 className="text-2xl font-bold">{carListing.title}</h1>
+                            </div>
+                            <p className="text-xl font-semibold mb-4">{carListing.price}€ <span className="text-muted-foreground text-sm">{t('askingPrice')}</span></p>
+                        </div>
                     </div>
-                    <p className="text-2xl font-semibold mb-4">{carListing.price}€ <span className="text-muted-foreground text-sm">{t('askingPrice')}</span></p>
                     <div className="grid grid-cols-2 gap-4 mb-6">
                         <DetailItem label={t('year')} value={carListing.year} />
                         <DetailItem label={t('mileage')} value={`${carListing.mileage} km`} />
@@ -55,39 +75,80 @@ const ListingPage = () => {
                         <DetailItem label={t('fuelType')} value={t(`fuelTypes.${carListing.fuel_type}`)} />
                         <DetailItem label={t('bodyStyle')} value={carListing.body_style?.name} />
                         <DetailItem label={t('condition')} value={carListing.condition?.name} />
+                        <DetailItem label={t('fuelType')} value={carListing.fuel_type} />
+                        <DetailItem label={t('originalPrice')} value={carListing.original_price && Number(carListing.original_price) > 0 ? carListing.original_price : '---'} />
+                        <DetailItem label={t('exteriorColor')} value={(
+                            <div className="flex items-center">
+                                <div className="w-7 h-7 rounded-full mr-2 p-2 border-2 border-muted" style={{ backgroundColor: carListing.exterior_color }}></div>
+                            </div>
+                        )} />
+                        <DetailItem label={t('interiorColor')} value={(
+                            <div className="flex items-center">
+                                <div className="w-7 h-7 rounded-full mr-2 p-2 border-2 border-muted" style={{ backgroundColor: carListing.interior_color }}></div>
+                            </div>
+                        )} />
                     </div>
-                    <div dangerouslySetInnerHTML={{ __html: carListing.description }} />
+                    <div className="sm:flex gap-2 mb-4">
+                        <Button className="bg-[#25D366] text-white hover:bg-[#1fa950] mb-2">
+                            <FaWhatsapp className="mr-2 w-5 h-5" />
+                            {t('contactSeller')}
+                        </Button>
+                        <Button className="bg-[#ffc700] text-white hover:bg-[#ffb700]">
+                            <FaEye className="mr-2 w-5 h-5" />
+                            {t('viewNumber')}
+                        </Button>
+                    </div>
                 </div>
+            </div>
+            <SectionDivider dividerText={t('description')} />
+            <div>
+                <div dangerouslySetInnerHTML={{ __html: carListing.description }} />
             </div>
             <SectionDivider dividerText={t('features')} />
             <div>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    {carListing.features?.map((feature, index) => (
-                        <Badge key={index} variant="outline">
-                            {feature.name}
-                        </Badge>
+                    {Object.values(groupedFeatures).map((group: any, index: any) => (
+                        <div key={index}>
+                            <h3 className="text-lg font-medium mb-2">{group.name}</h3>
+                            <div className="flex flex-col flex-wrap gap-2">
+                                {group.features.map((feature: any, index: any) => (
+                                    <div key={index} className="text-sm font-medium flex items-center">
+                                        {
+                                            carListing.features?.some(f => f.id === feature.id) ?
+                                            <Check className="mr-2 w-4 h-4 text-green-500" /> :
+                                            <Minus className="mr-2 w-4 h-4 text-foreground" />
+                                        }
+                                        <p>{feature.name}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
                     ))}
                 </div>
             </div>
-            <SectionDivider dividerText={t('technicalDetails')} />
+            {/* <SectionDivider dividerText={t('technicalDetails')} />
             <div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <DetailItem label={t('engine')} value={carListing.fuel_type} />
-                    {/* <DetailItem label={t('power')} value={`${carListing.power} hp`} />
+                    <DetailItem label={t('power')} value={`${carListing.power} hp`} />
                     <DetailItem label={t('acceleration')} value={`${carListing.acceleration} s (0-100 km/h)`} />
                     <DetailItem label={t('topSpeed')} value={`${carListing.top_speed} km/h`} />
                     <DetailItem label={t('fuelConsumption')} value={`${carListing.fuel_consumption} l/100km`} />
-                    <DetailItem label={t('co2Emissions')} value={`${carListing.co2_emissions} g/km`} /> */}
+                    <DetailItem label={t('co2Emissions')} value={`${carListing.co2_emissions} g/km`} />
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 };
 
-const DetailItem = ({ label, value }: { label: string, value: string | number | undefined }) => (
+const DetailItem = ({ label, value }: { label: string, value: string | number | ReactNode | undefined }) => (
     <div>
         <p className="text-sm text-muted-foreground">{label}</p>
-        <p className="font-medium">{value}</p>
+        {
+            // if value is react node
+            typeof value === 'object' ? value :
+            <p className="font-medium">{value}</p>
+        }
     </div>
 );
 

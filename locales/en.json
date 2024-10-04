@@ -587,6 +587,9 @@
       "fuelType": "Fuel Type",
       "bodyStyle": "Body Style",
       "condition": "Condition",
+      "originalPrice": "Original Price",
+      "exteriorColor": "Exterior Color",
+      "interiorColor": "Interior Color",
       "engine": "Engine",
       "power": "Power",
       "acceleration": "Acceleration",
@@ -601,7 +604,9 @@
         "gasoline": "Gasoline",
         "diesel": "Diesel",
         "electric": "Electric"
-      }
+      },
+      "contactSeller": "Contact Seller",
+      "viewNumber": "View Number"
     }
   },
 

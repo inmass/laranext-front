@@ -115,7 +115,7 @@ const Filters: React.FC<FilterProps> = ({ params, setParams, className }) => {
           <Slider
             min={0}
             max={100000}
-            step={1000}
+            step={10000}
             value={[Number(params.filters?.price_gte || 0), Number(params.filters?.price_lte || 100000)]}
             onValueChange={handlePriceChange}
           />
