@@ -606,7 +606,9 @@
         "electric": "Electric"
       },
       "contactSeller": "Contact Seller",
-      "viewNumber": "View Number"
+      "viewNumber": "View Number",
+      "viewNumberDescription": "Please be aware that you should not send money to the seller in advance by bank transfer or through an agency when buying goods available on the site.",
+      "phoneNumber": "Phone Number"
     },
     "HowItWorks": {
       "title": "How it works?",

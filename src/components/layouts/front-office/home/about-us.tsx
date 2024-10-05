@@ -13,7 +13,7 @@ const AboutUs: React.FC = () => {
   const t = useTranslations('FrontOffice.AboutUs');
 
   return (
-    <div className="relative p-10 md:p-20 lg:p-40 lg:grid lg:grid-cols-2 lg:gap-10 bg-white text-[#020817]">
+    <div className="relative py-20 p-10 md:p-20 lg:p-40 lg:grid lg:grid-cols-2 lg:gap-10 bg-white text-[#020817]">
         <div className="relative z-10 max-w-3xl z-[1]">
             <h2 className="text-3xl font-bold mb-4">{t('title')}</h2>
             <p className="mb-4">

@@ -16,6 +16,7 @@ import { getFeatures } from "@/hooks/api/features";
 import { groupFeatures } from "@/lib/utils";
 import { Check, Minus, X } from "lucide-react";
 import { ReactNode } from "react";
+import Dialog from "@/components/layouts/dialog";
 
 const ListingPage = () => {
     const { slug } = useParams();
@@ -89,13 +90,22 @@ const ListingPage = () => {
                         )} />
                     </div>
                     <div className="sm:flex gap-2 mb-4">
-                        <Button className="bg-[#25D366] text-white hover:bg-[#1fa950] mb-2">
-                            <FaWhatsapp className="mr-2 w-5 h-5" />
-                            {t('contactSeller')}
-                        </Button>
-                        <Button className="bg-[#ffc700] text-white hover:bg-[#ffb700]">
-                            <FaEye className="mr-2 w-5 h-5" />
-                            {t('viewNumber')}
+                        <Dialog
+                            description={t('viewNumberDescription')}
+                            trigger={
+                                <Button className="mb-2">
+                                    <FaEye className="mr-2 w-5 h-5" />
+                                    {t('viewNumber')}
+                                </Button>
+                            }
+                            children={
+                                <div>
+                                    <p>{carListing.user?.name}</p>
+                                </div>
+                            }
+                        />
+                        <Button className="bg-[#25D366] text-white hover:bg-[#1fa950] rounded-full">
+                            <FaWhatsapp className="w-5 h-5" />
                         </Button>
                     </div>
                 </div>
