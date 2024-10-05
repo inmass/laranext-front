@@ -7,8 +7,8 @@ import { getAppName } from '@/lib/helpers';
 const Footer: React.FC = () => {
   return (
     <footer className="bg-foreground text-background py-8 mt-20">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="container mx-auto px-10">
+        <div className="text-center md:text-left grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <h2 className="text-3xl font-bold mb-4">{getAppName().toUpperCase()}</h2>
           </div>
@@ -29,7 +29,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
         
-        <div className="mt-8 flex flex-col md:flex-row justify-between items-center">
+        <div className="mt-10 flex flex-col md:flex-row justify-between items-center text-sm">
           <p>&copy; 2024 {getAppName()}. All Rights Reserved.</p>
           <div className="flex space-x-4 mt-4 md:mt-0">
             <Link href="https://instagram.com/klasikiat" aria-label="Instagram" target="_blank" rel="noopener noreferrer">

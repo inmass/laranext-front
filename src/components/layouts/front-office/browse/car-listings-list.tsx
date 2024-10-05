@@ -22,7 +22,7 @@ const CarListingsList = ({ data, params, setParams, className }: CarListingsList
 
   return (
     <div className={cn(
-      'p-4 pl-8 pt-16',
+      'p-4 md:pl-8 pt-16',
       className
     )}>
       <h2 className="text-3xl font-bold mb-4">{t('carListings')}</h2>
