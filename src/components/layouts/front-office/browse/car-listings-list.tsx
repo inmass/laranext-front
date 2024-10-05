@@ -22,7 +22,7 @@ const CarListingsList = ({ data, params, setParams, className }: CarListingsList
 
   return (
     <div className={cn(
-      'p-4 md:pl-8 pt-16',
+      'p-4 md:pl-8 pt-16 pb-40',
       className
     )}>
       <h2 className="text-3xl font-bold mb-4">{t('carListings')}</h2>
@@ -30,7 +30,7 @@ const CarListingsList = ({ data, params, setParams, className }: CarListingsList
         {
           carListings && carListings.length > 0 ? 
           (carListings.map((carListing) => (
-            <div className="bg-muted/40 rounded-lg border border-border col-span-1 hover:border-border/50 transition-all duration-300">
+            <div className="bg-muted/40 rounded-lg border border-border col-span-1 hover:border-border/50 transition-all duration-300 flex flex-col">
               <ImageWithPreview
                 asBackground={true}
                 src={carListing.primary_image?.path ?? ''}
@@ -39,10 +39,9 @@ const CarListingsList = ({ data, params, setParams, className }: CarListingsList
                 height={300}
                 className="rounded-t-lg h-[150px]"
               />
-              <Link href={AppRoutes.frontOffice.listing(carListing.slug)}>
-                <div className='bg-muted/40 rounded-b-lg hover:scale-[1.01] hover:rounded-b-lg transition-all duration-300'>
-                  <div className="p-4">
-
+              <Link href={AppRoutes.frontOffice.listing(carListing.slug)} className="flex-grow flex flex-col">
+                <div className='bg-muted/40 rounded-b-lg hover:scale-[1.01] hover:rounded-b-lg transition-all duration-300 flex flex-col flex-grow'>
+                  <div className="p-4 flex-grow">
                     <div className="flex items-center gap-2 mb-4 h-6">
                       <Image 
                         src={getMakeImage(carListing.make?.name ?? '')} 
@@ -53,7 +52,7 @@ const CarListingsList = ({ data, params, setParams, className }: CarListingsList
                       <span className="text-xs font-medium">{carListing.car_model?.name}</span>
                     </div>
                     <h3 className="text-lg font-semibold text-card-foreground">{carListing.title}</h3>
-                    <div className="flex items-center gap-2 text-muted-foreground text-sm flex-wrap">
+                    <div className="flex items-center gap-2 text-muted-foreground text-sm flex-wrap mt-2">
                       <span className="">{carListing.year}</span>·
                       <span className="">{carListing.transmission}</span>·
                       <span className="">{carListing.fuel_type}</span>·

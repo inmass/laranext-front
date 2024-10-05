@@ -6,7 +6,7 @@ import { getAppName } from '@/lib/helpers';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-foreground text-background py-8 mt-20">
+    <footer className="bg-foreground text-background py-8 ">
       <div className="container mx-auto px-10">
         <div className="text-center md:text-left grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
