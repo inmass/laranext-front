@@ -18,7 +18,6 @@ interface FeatureFormDialogProps {
 
 const FeatureFormDialog = ({ feature }: FeatureFormDialogProps) => {
     const t = useTranslations('Dashboard.Features.FormDialog');
-    console.log(feature);
 
     const [isOpen, setIsOpen] = useState(false);
     const schema = z.object({

@@ -6,7 +6,6 @@ export function createFileFromImageUrl(imageUrl: string): Promise<File> {
       credentials: 'include',
     })
       .then((response) => {
-        console.log(response);
         if (!response.ok) {
           throw new Error('Failed to load image');
         }

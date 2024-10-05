@@ -38,7 +38,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({ isLandingPage = false }) 
             <header 
                 ref={headerRef}
                 className={cn(
-                    `hidden md:flex justify-between items-center p-6 px-10 ${textClass} w-full z-10`,
+                    `hidden lg:flex justify-between items-center p-6 px-10 ${textClass} w-full z-10`,
                     'transition-all duration-300 ease-in-out', // Add transition
                     {
                         'fixed': isFixed || isLandingPage,

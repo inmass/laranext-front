@@ -606,6 +606,12 @@
       },
       "contactSeller": "Contacter le vendeur",
       "viewNumber": "Voir le numéro"
+    },
+    "HowItWorks": {
+      "title": "Comment ça marche?",
+      "step1": "Inscrivez-vous et rejoignez notre communauté de collectionneurs de voitures.",
+      "step2": "Postez votre voiture à vendre ou parcourrez notre collection exclusive.",
+      "step3": "Vendez votre voiture ou achetez la voiture de vos rêves."
     }
   },
 

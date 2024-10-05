@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import AppRoutes from '@/constants/app-routes';
 import { getAppName } from '@/lib/helpers';
@@ -26,6 +26,7 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useAuth } from '@/hooks/auth';
 import { usePathname } from 'next/navigation';
+import { cn } from '@/lib/utils';
 
 interface MobileHeaderProps {
     isLandingPage?: boolean;
@@ -36,6 +37,8 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({ isLandingPage = false }) =>
     const t = useTranslations('FrontOffice.Header');
     const pathname = usePathname();
     const [open, setOpen] = useState(false);
+    const headerRef = useRef<HTMLElement>(null);
+    const [isScrolled, setIsScrolled] = useState(false);
 
     const closeMenu = () => setOpen(false);
 
@@ -43,23 +46,45 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({ isLandingPage = false }) =>
 
     const NavLink = ({ href, icon, children }: { href: string; icon?: React.ReactNode; children: React.ReactNode }) => (
         <Link
-        href={href}
-        className={`flex items-center gap-4 px-2.5 ${
-            isActive(href) ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'
-        }`}
-        onClick={closeMenu}
+            href={href}
+            className={`flex items-center gap-4 px-2.5 ${
+                isActive(href) ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'
+            }`}
+            onClick={closeMenu}
         >
-        {icon}
-        {children}
+            {icon}
+            {children}
         </Link>
     );
 
+    useEffect(() => {
+        const header = headerRef.current;
+        if (!header) return;
+
+        const handleScroll = () => {
+            const headerHeight = header.offsetHeight;
+            setIsScrolled(window.scrollY > headerHeight);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
     return (
-        <div className="md:hidden">
+        <div className="lg:hidden">
             <Sheet open={open} onOpenChange={setOpen}>
-            <div className={`${isLandingPage ? 'fixed' : ''} z-10 flex justify-between items-center w-full p-5`}>
+            <div
+                ref={headerRef}
+                className={cn(
+                    'z-10 flex justify-between items-center w-full p-5',
+                    {
+                    'fixed': isScrolled || isLandingPage,
+                    'bg-background': isScrolled,
+                    }
+                )}
+            >
                 <SheetTrigger asChild>
-                    <Button size="icon" variant="ghost" className={`hover:bg-transparent ${isLandingPage ? 'text-white hover:text-white' : ''}`}>
+                    <Button size="icon" variant="ghost" className={`hover:bg-transparent ${isLandingPage && !isScrolled ? 'text-white hover:text-white' : ''}`}>
                         <MenuIcon className="h-7 w-7" />
                         <span className="sr-only">Toggle Menu</span>
                     </Button>
