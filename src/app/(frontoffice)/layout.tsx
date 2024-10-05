@@ -1,3 +1,4 @@
+import Footer from '@/components/layouts/front-office/footer';
 import AppProvider from '@/providers/AppProvider';
 
 export const metadata = {
@@ -10,6 +11,7 @@ const FrontOfficeLayout: React.FC<{ children: React.ReactNode }> = ({ children }
       <main className='bg-background'>
        {children}
       </main>
+      <Footer />
     </AppProvider>
   );
 };
