@@ -58,7 +58,5 @@ export function getAppName(): string {
 }
 
 export function getMakeImage(make: string): string {
-  // https://raw.githubusercontent.com/filippofilip95/car-logos-dataset/refs/heads/master/logos/thumb/bmw.png
-  // https://vl.imgix.net/img/acura-logo.png
-  return asset(`https://vl.imgix.net/img/${make.toLowerCase()}-logo.png`);
+  return asset(`/images/makes/${make}.png`);
 }

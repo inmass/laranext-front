@@ -59,7 +59,7 @@ const ListingPage = () => {
                         <div>
                             <div className="flex items-center gap-4 mb-4">
                                 <Image 
-                                    src={getMakeImage(carListing.make?.name ?? '')} 
+                                    src={getMakeImage(carListing.make?.slug ?? '')} 
                                     alt={carListing.make?.name ?? ''} 
                                     width={60} 
                                     height={40}

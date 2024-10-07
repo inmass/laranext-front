@@ -17,6 +17,7 @@ interface MakeSelectProps {
 interface Make {
     id: number;
     name: string;
+    slug: string;
 }
 
 interface Option {
@@ -30,17 +31,17 @@ const MakeSelect = forwardRef<SelectRef, MakeSelectProps>(({ value, onChange, on
     const params: MakesParams = {
         page: 1,
         noPagination: true,
-        fields: ['id', 'name'],
+        fields: ['id', 'name', 'slug'],
         sort: { key: 'name', direction: 'asc' }
     };
 
     const { data, isLoading, isError } = getMakes(params);
 
-    const generateLabel = (make: string): React.ReactNode => {
+    const generateLabel = (make: string, slug: string): React.ReactNode => {
         return (
             <div className='flex items-center gap-2'>
                 <Image
-                    src={getMakeImage(make)}
+                    src={getMakeImage(slug)}
                     alt={make}
                     width={30}
                     height={30}
@@ -50,7 +51,7 @@ const MakeSelect = forwardRef<SelectRef, MakeSelectProps>(({ value, onChange, on
         )
     };
 
-    const options: Option[] = data?.data?.map(({ id, name }: Make) => ({ label: name, value: String(id), labelElement: generateLabel(name) })) || [];
+    const options: Option[] = data?.data?.map(({ id, name, slug }: Make) => ({ label: name, value: String(id), labelElement: generateLabel(name, slug) })) || [];
 
     const handleChange = (newValue: string) => {
         const selectedOption = options.find(option => option.value === newValue);
