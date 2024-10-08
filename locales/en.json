@@ -26,7 +26,16 @@
     "confirmPassword": "Confirm Password",
     "alreadyRegistered": "Already registered?",
     "registerButton": "Register",
-    "dividerText": "Or continue with"
+    "dividerText": "Or continue with",
+    "validation": {
+      "nameRequired": "Name is required",
+      "emailInvalid": "Email is invalid",
+      "phoneRequired": "Phone is required",
+      "phoneInvalid": "Phone is invalid",
+      "passwordMinLength": "Password must be at least 8 characters",
+      "confirmPasswordRequired": "Please confirm your password",
+      "passwordsMismatch": "Passwords don't match"
+    }
   },
 
   "Dashboard": {
