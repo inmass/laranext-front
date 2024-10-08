@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import ProfilePictureEditCard from '@/components/layouts/auth/ProfilePictureEditCard';
 import PasswordUpdateCard from '@/components/layouts/auth/PasswordUpdateCard';
 import ProfileDetailsUpdateCard from '@/components/layouts/auth/ProfileDetailsUpdateCard';
+import { getAppName } from '@/lib/helpers';
 
 const ProfilePage = () => {
     const { user } = useAuth({ middleware: 'auth' });

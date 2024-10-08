@@ -57,6 +57,7 @@
       "ProfileDetailsUpdateCard": {
         "title": "Informations générales",
         "name": "Nom",
+        "phone": "Téléphone",
         "email": "Email",
         "updating": "Mise à jour...",
         "updateProfile": "Mettre à jour le profil",

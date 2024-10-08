@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 
 interface ProfileData {
   name: string;
+  phone: string;
   // Add other profile fields
 }
 

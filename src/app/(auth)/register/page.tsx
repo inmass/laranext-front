@@ -6,12 +6,13 @@ import InputError from '@/components/InputError';
 import Label from '@/components/Label';
 import Link from 'next/link';
 import { useAuth } from '@/hooks/auth';
-import { useState, FormEvent, useEffect } from 'react';
+import { useState, FormEvent, useEffect, useRef } from 'react';
 import SectionDivider from '@/components/SectionDivider';
 import SocialLoginButtons from '@/components/SocialLoginButtons';
 import CardLayout from '@/components/layouts/CardLayout';
 import { useTranslations } from 'next-intl';
 import ClipLoader from 'react-spinners/ClipLoader';
+import { PhoneInput } from '@/components/ui/phone-input';
 
 interface Errors {
   name?: string[];
@@ -35,7 +36,8 @@ const Page = () => {
   const [passwordConfirmation, setPasswordConfirmation] = useState<string>('');
   const [errors, setErrors] = useState<Errors>({});
   const [loading, setLoading] = useState<boolean>(false);
-
+  const phoneInputRef = useRef<HTMLInputElement>(null);
+  
   const submitForm = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -101,13 +103,14 @@ const Page = () => {
         <div className="mt-4">
           <Label htmlFor="phone">{t('phone')}</Label>
 
-          <Input
-            id="phone"
-            type="text"
-            value={phone}
-            className="block mt-1 w-full"
-            onChange={(event) => setPhone(event.target.value)}
-            required
+
+          <PhoneInput
+            value={phone || ''}
+            ref={phoneInputRef}
+            onChange={(value) => setPhone(value)}
+            inputProps={{
+              required: true,
+            }}
           />
 
           <InputError messages={errors.phone} className="mt-2" />
