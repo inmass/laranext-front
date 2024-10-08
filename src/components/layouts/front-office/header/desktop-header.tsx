@@ -50,8 +50,8 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({ isLandingPage = false }) 
                 <nav>
                   <ul className="flex space-x-10">
                     <li><Link href={AppRoutes.frontOffice.browse}>{t('browseCars')}</Link></li>
-                    <li><Link href={AppRoutes.dashboard.home}>{t('sellYourCar')}</Link></li>
-                    <li><Link href={AppRoutes.dashboard.home}>{t('aboutUs')}</Link></li>
+                    <li><Link href={AppRoutes.dashboard.carListings}>{t('sellYourCar')}</Link></li>
+                    <li><Link href={AppRoutes.frontOffice.about}>{t('aboutUs')}</Link></li>
                   </ul>
                 </nav>
                 <div className="flex space-x-5 justify-end items-center">

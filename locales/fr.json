@@ -541,7 +541,84 @@
     "AboutUs": {
       "title": "À propos de nous",
       "description": "Nous sommes une plateforme en ligne de premier plan dédiée à l'achat et à la vente de voitures anciennes. Notre collection soigneusement sélectionnée comprend des voitures anciennes provenant de vendeurs passionnés. Les vendeurs peuvent lister leurs voitures pour un faible frais, en se connectant avec des acheteurs sérieux, tout en effectuant toutes les transactions de manière privée entre utilisateurs. Que vous soyez un acheteur à la recherche de la voiture parfaite ou un vendeur présentant une pièce unique, {appName} offre un espace de confiance pour les amateurs de voitures anciennes.",
-      "learnMore": "Lister votre voiture maintenant"
+      "learnMore": "Lister votre voiture maintenant",
+      "ourStory": {
+        "title": "Notre histoire",
+        "content": "{appName} a été fondée en 2010 avec une vision de créer un marché unique pour les collectionneurs de voitures anciennes. Ce qui a commencé comme une petite communauté de collectionneurs passionnés a grandi en une plateforme complète connectant les acheteurs et les vendeurs de véhicules exceptionnels. Notre histoire a été portée par un amour pour l'histoire automobile et une volonté de préserver ces œuvres de l'art en mouvement.",
+        "imageAlt": "Vintage cars in showroom"
+      },
+      "ourMission": {
+        "title": "Notre mission",
+        "content": "Chez {appName}, notre mission est de fournir une plateforme fiable pour les amateurs de voitures anciennes à acheter, vendre et apprécier les voitures anciennes. Nous voulons rendre chaque transaction une expérience agréable et agréable, en créant une communauté qui partage une passion pour l'histoire automobile."
+      },
+      "ourValues": {
+        "title": "Nos valeurs",
+        "value1": "L'authenticité: Nous garantissons l'intégrité et l'originalité de chaque annonce.",
+        "value2": "La communauté: Nous favorisons les connexions entre les amateurs de voitures anciennes.",
+        "value3": "L'éducation: Nous promouvons le partage de connaissances sur les voitures anciennes.",
+        "value4": "La conservation: Nous contribuons à la conservation de l'histoire automobile."
+      }
+    },
+    "Contact": {
+      "title": "Contactez-nous",
+      "description": "Contactez-nous pour toute question concernant l'achat, la vente ou nos services.",
+      "address": "123 Classic Car Lane, Vintage City, 90210",
+      "phone": "+1 (555) 234-5678",
+      "email": "info@vintagecars.com",
+      "form": {
+        "name": "Votre nom",
+        "email": "Votre email",
+        "message": "Votre message",
+        "submit": "Envoyer le message"
+      }
+    },
+    "PrivacyPolicy": {
+      "title": "Politique de confidentialité",
+      "lastUpdated": "Dernière mise à jour: {date}",
+      "introduction": {
+        "title": "Introduction",
+        "content": "Chez {appName}, nous nous engageons à protéger votre vie privée et à assurer la sécurité de vos informations personnelles. Cette politique de confidentialité explique comment nous collectons, utilisons, divulguons et protégeons vos données lorsque vous utilisez notre site web et nos services."
+      },
+      "dataCollection": {
+        "title": "Informations que nous collectons",
+        "content": "Nous collectons des informations personnelles que vous nous fournissez, telles que votre nom, votre adresse e-mail, votre numéro de téléphone et les détails sur les voitures que vous listez ou que vous enquêtez. Nous collectons également des informations non personnelles sur vos interactions avec notre site web."
+      },
+      "dataUsage": {
+        "title": "Comment nous utilisons vos informations",
+        "content": "Nous utilisons vos informations personnelles pour fournir et améliorer nos services, traiter les transactions, communiquer avec vous à propos de votre compte et nos services, et respecter les obligations légales."
+      },
+      "dataSecurity": {
+        "title": "Sécurité des données",
+        "content": "Nous mettons en place des mesures techniques et organisationnelles appropriées pour protéger vos informations personnelles contre l'accès non autorisé, la modification, la divulgation ou la destruction."
+      },
+      "cookies": {
+        "title": "Cookies et technologies de suivi",
+        "content": "Nous utilisons des cookies et des technologies de suivi similaires pour améliorer votre expérience de navigation, analyser le trafic du site web et personnaliser le contenu. Vous pouvez contrôler les paramètres des cookies dans vos préférences de navigateur."
+      },
+      "thirdPartySharing": {
+        "title": "Partage avec des tiers",
+        "content": "Nous ne vendons pas vos informations personnelles à des tiers. Nous pouvons partager vos informations avec des prestataires de services qui nous aident à opérer notre site web et à conduire notre entreprise."
+      },
+      "userRights": {
+        "title": "Vos droits",
+        "content": "Vous avez le droit d'accéder, de corriger ou de supprimer vos informations personnelles. Vous pouvez également vous opposer ou restreindre certains traitements de vos données. Pour exercer ces droits, veuillez nous contacter à l'aide des informations fournies à la fin de cette politique."
+      },
+      "changes": {
+        "title": "Changements à cette politique",
+        "content": "Nous pouvons mettre à jour cette politique de confidentialité de temps en temps. Nous vous informerons de toutes les modifications en publiant la nouvelle politique sur cette page et en mettant à jour la date de 'Dernière mise à jour'."
+      },
+      "contact": {
+        "title": "Contactez-nous",
+        "content": "Si vous avez des questions concernant cette politique de confidentialité, veuillez nous contacter à l'adresse privacy@vintagecars.com."
+      }
+    },
+    "Footer": {
+      "explore": "Explorer",
+      "browse": "Parcourir",
+      "aboutUs": "À propos de nous",
+      "contactUs": "Contactez-nous",
+      "privacyPolicy": "Politique de confidentialité",
+      "copyright": "© {year} {appName}. Tous droits réservés."
     },
     "CarListings": {
       "Filters": {

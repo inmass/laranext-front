@@ -542,7 +542,84 @@
     "AboutUs": {
       "title": "About Us",
       "description": "{appName} is a premier online platform dedicated to buying and selling vintage cars. Our carefully curated marketplace features exceptional classic automobiles from passionate sellers. Car enthusiasts can list their vintage vehicles, connecting with serious buyers who share their love for automotive history. All transactions are completed privately between users. Whether you're a buyer seeking the perfect classic car or a seller showcasing a unique piece of automotive heritage, {appName} offers a trusted space for vintage car enthusiasts.",
-      "learnMore": "List Your Car Now"
+      "learnMore": "List Your Car Now",
+      "ourStory": {
+        "title": "Our Story",
+        "content": "{appName} was founded in 2010 with a vision to create a unique marketplace for vintage and classic car enthusiasts. What started as a small community of passionate collectors has grown into a comprehensive platform connecting buyers and sellers of exceptional automobiles. Our journey has been driven by a love for automotive history and a commitment to preserving these rolling works of art.",
+        "imageAlt": "Vintage cars in showroom"
+      },
+      "ourMission": {
+        "title": "Our Mission",
+        "content": "At {appName}, our mission is to provide a trusted platform for vintage car enthusiasts to buy, sell, and appreciate classic automobiles. We aim to make every transaction a smooth and enjoyable experience, fostering a community that shares a passion for automotive heritage."
+      },
+      "ourValues": {
+        "title": "Our Values",
+        "value1": "Authenticity: We ensure the integrity and originality of every listing.",
+        "value2": "Community: We foster connections among classic car enthusiasts.",
+        "value3": "Education: We promote knowledge sharing about vintage automobiles.",
+        "value4": "Preservation: We contribute to the conservation of automotive history."
+      }
+    },
+    "Contact": {
+      "title": "Contact Us",
+      "description": "Get in touch with us for any inquiries about buying, selling, or our services.",
+      "address": "123 Classic Car Lane, Vintage City, 90210",
+      "phone": "+1 (555) 234-5678",
+      "email": "info@vintagecars.com",
+      "form": {
+        "name": "Your Name",
+        "email": "Your Email",
+        "message": "Your Message",
+        "submit": "Send Message"
+      }
+    },
+    "PrivacyPolicy": {
+      "title": "Privacy Policy",
+      "lastUpdated": "Last Updated: {date}",
+      "introduction": {
+        "title": "Introduction",
+        "content": "At {appName}, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your data when you use our website and services."
+      },
+      "dataCollection": {
+        "title": "Information We Collect",
+        "content": "We collect personal information that you provide to us, such as your name, email address, phone number, and details about the cars you list or inquire about. We also collect non-personal information about your interactions with our website."
+      },
+      "dataUsage": {
+        "title": "How We Use Your Information",
+        "content": "We use your personal information to provide and improve our services, process transactions, communicate with you about your account and our services, and comply with legal obligations."
+      },
+      "dataSecurity": {
+        "title": "Data Security",
+        "content": "We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction."
+      },
+      "cookies": {
+        "title": "Cookies and Tracking Technologies",
+        "content": "We use cookies and similar tracking technologies to enhance your browsing experience, analyze website traffic, and personalize content. You can control cookie settings in your browser preferences."
+      },
+      "thirdPartySharing": {
+        "title": "Third-Party Sharing",
+        "content": "We do not sell your personal information to third parties. We may share your information with service providers who assist us in operating our website and conducting our business."
+      },
+      "userRights": {
+        "title": "Your Rights",
+        "content": "You have the right to access, correct, or delete your personal information. You can also object to or restrict certain processing of your data. To exercise these rights, please contact us using the information provided at the end of this policy."
+      },
+      "changes": {
+        "title": "Changes to This Policy",
+        "content": "We may update this privacy policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the 'Last Updated' date."
+      },
+      "contact": {
+        "title": "Contact Us",
+        "content": "If you have any questions about this Privacy Policy, please contact us at privacy@vintagecars.com."
+      }
+    },
+    "Footer": {
+      "explore": "Explore",
+      "browse": "Browse",
+      "aboutUs": "About Us",
+      "contactUs": "Contact Us",
+      "privacyPolicy": "Privacy Policy",
+      "copyright": "© {year} {appName}. All rights reserved."
     },
     "CarListings": {
       "Filters": {

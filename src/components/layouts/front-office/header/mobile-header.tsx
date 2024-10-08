@@ -105,8 +105,8 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({ isLandingPage = false }) =>
                 </div>
                 <nav className="grid gap-6 text-lg font-medium z-50">
                     {NavLink({ href: AppRoutes.frontOffice.browse, children: t('browseCars') })}
-                    {NavLink({ href: AppRoutes.dashboard.home, children: t('sellYourCar') })}
-                    {NavLink({ href: AppRoutes.dashboard.home, children: t('aboutUs') })}
+                    {NavLink({ href: AppRoutes.dashboard.carListings, children: t('sellYourCar') })}
+                    {NavLink({ href: AppRoutes.frontOffice.about, children: t('aboutUs') })}
                     <div className="flex space-x-5  items-center text-foreground">
                         {/* <Link href="#" className="flex items-center">
                             <button aria-label="Search">

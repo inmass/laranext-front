@@ -16,7 +16,9 @@ const AppRoutes = {
     frontOffice: {
         home: '/',
         browse: '/browse',
-        about: '/about',
+        about: '/about-us',
+        contact: '/contact-us',
+        privacyPolicy: '/privacy-policy',
         listing: (slug: string) => `/listing/${slug}`,
     },
 };
