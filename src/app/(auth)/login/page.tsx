@@ -114,6 +114,16 @@ const Login = () => {
             </label>
           </div>
 
+
+          <div className="flex items-center justify-end mt-4">
+            <Link
+              href="/register"
+              className="underline text-sm text-muted-foreground hover:text-foreground"
+            >
+              {t('register')}
+            </Link>
+          </div>
+
           <div className="flex items-center justify-end mt-4">
             <Link
               href="/forgot-password"

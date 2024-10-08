@@ -6,15 +6,17 @@ import InputError from '@/components/InputError';
 import Label from '@/components/Label';
 import Link from 'next/link';
 import { useAuth } from '@/hooks/auth';
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent, useEffect } from 'react';
 import SectionDivider from '@/components/SectionDivider';
 import SocialLoginButtons from '@/components/SocialLoginButtons';
 import CardLayout from '@/components/layouts/CardLayout';
 import { useTranslations } from 'next-intl';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 interface Errors {
   name?: string[];
   email?: string[];
+  phone?: string[];
   password?: string[];
   password_confirmation?: string[];
 }
@@ -28,21 +30,32 @@ const Page = () => {
 
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
+  const [phone, setPhone] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [passwordConfirmation, setPasswordConfirmation] = useState<string>('');
   const [errors, setErrors] = useState<Errors>({});
+  const [loading, setLoading] = useState<boolean>(false);
 
   const submitForm = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    setLoading(true);
+
     register({
       name,
       email,
+      phone,
       password,
       password_confirmation: passwordConfirmation,
       setErrors,
     });
   };
+
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      setLoading(false);
+    }
+  }, [errors]);
 
   return (
     <CardLayout
@@ -82,6 +95,22 @@ const Page = () => {
           />
 
           <InputError messages={errors.email} className="mt-2" />
+        </div>
+
+        {/* Phone */}
+        <div className="mt-4">
+          <Label htmlFor="phone">{t('phone')}</Label>
+
+          <Input
+            id="phone"
+            type="text"
+            value={phone}
+            className="block mt-1 w-full"
+            onChange={(event) => setPhone(event.target.value)}
+            required
+          />
+
+          <InputError messages={errors.phone} className="mt-2" />
         </div>
 
         {/* Password */}
@@ -128,7 +157,9 @@ const Page = () => {
             {t('alreadyRegistered')}
           </Link>
 
-          <Button className="ml-4">{t('registerButton')}</Button>
+          <Button className="ml-4" disabled={loading}>
+            {loading ? <ClipLoader className='text-white' size={20} /> : t('registerButton')}
+          </Button>
         </div>
       </form>
       <SectionDivider dividerText={t('dividerText')} />

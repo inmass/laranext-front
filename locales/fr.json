@@ -5,6 +5,7 @@
     "email": "Email",
     "password": "Mot de passe",
     "rememberMe": "Se souvenir de moi",
+    "register": "Pas de compte ? S'inscrire",
     "forgotPassword": "Mot de passe oublié ?",
     "loginButton": "Se connecter",
     "dividerText": "Ou continuer avec"
@@ -20,6 +21,7 @@
     "description": "Bienvenue ! Utilisez votre email pour créer un compte.",
     "name": "Nom",
     "email": "Email",
+    "phone": "Téléphone",
     "password": "Mot de passe",
     "confirmPassword": "Confirmer le mot de passe",
     "alreadyRegistered": "Déjà inscrit ?",

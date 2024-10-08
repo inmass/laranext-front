@@ -101,16 +101,17 @@ const ListingPage = () => {
                             }
                             children={
                                 <div>
-                                    {/* #TODO: add phone number to the user */}
-                                    <Link href={`tel:${carListing.user?.phone ?? ''}`}>
+                                    <Link href={`tel:${carListing.user?.phone}`}>
                                         {carListing.user?.phone ?? '---'}
                                     </Link>
                                 </div>
                             }
                         />
-                        <Button className="bg-[#25D366] text-white hover:bg-[#1fa950] rounded-full p-2">
-                            <FaWhatsapp className="w-5 h-5" />
-                        </Button>
+                        <Link href={`https://wa.me/${carListing.user?.phone}`} target="_blank">
+                            <Button className="bg-[#25D366] text-white hover:bg-[#1fa950] rounded-full p-2">
+                                <FaWhatsapp className="w-5 h-5" />
+                            </Button>
+                        </Link>
                     </div>
                 </div>
             </div>
