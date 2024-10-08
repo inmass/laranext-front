@@ -17,6 +17,7 @@ import { groupFeatures } from "@/lib/utils";
 import { Check, Minus, X } from "lucide-react";
 import { ReactNode } from "react";
 import Dialog from "@/components/layouts/dialog";
+import Link from "next/link";
 
 const ListingPage = () => {
     const { slug } = useParams();
@@ -100,11 +101,14 @@ const ListingPage = () => {
                             }
                             children={
                                 <div>
-                                    <p>{carListing.user?.name}</p>
+                                    {/* #TODO: add phone number to the user */}
+                                    <Link href={`tel:${carListing.user?.phone ?? ''}`}>
+                                        {carListing.user?.phone ?? '---'}
+                                    </Link>
                                 </div>
                             }
                         />
-                        <Button className="bg-[#25D366] text-white hover:bg-[#1fa950] rounded-full">
+                        <Button className="bg-[#25D366] text-white hover:bg-[#1fa950] rounded-full p-2">
                             <FaWhatsapp className="w-5 h-5" />
                         </Button>
                     </div>

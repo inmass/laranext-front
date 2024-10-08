@@ -28,12 +28,12 @@ const HowItWorks: React.FC<{ className?: string }> = ({ className }) => {
     return (
         <section className={cn("relative bg-[#020817] text-white py-16 overflow-hidden md:p-40", className)}>
             <Image
-                src={ asset('images/layout/bmw-classic.webp') }
+                src={ asset('images/layout/bmw-green.webp') }
                 alt="Background"
                 layout="fill"
                 objectFit="cover"
                 quality={100}
-                className="opacity-[0.1]"
+                className="opacity-[0.2]"
             />
             <div className="container mx-auto px-4 z-10">
                 <h2 className="text-3xl font-bold mb-12 text-center">{t('title')}</h2>

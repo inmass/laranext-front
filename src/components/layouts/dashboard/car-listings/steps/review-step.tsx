@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Star } from 'lucide-react';
 import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/car-listing-wizard';
 import { useLookup } from '../context/lookup-context';
-import { asset } from '@/lib/helpers';
+import { asset, getMakeImage } from '@/lib/helpers';
 
 const ReviewStep: React.FC = () => {
   const t = useTranslations('Dashboard.CarListings.Wizard.steps.ReviewStep');
@@ -34,7 +34,10 @@ const ReviewStep: React.FC = () => {
           <div className="grid grid-cols-2 gap-4">
             <div>
               <p className="font-medium text-gray-500">{t('make')}:</p>
-              <p>{lookupFunctions.getMakeName(values.make_id)}</p>
+              {/* <div className="flex items-center"> */}
+                <Image src={getMakeImage(lookupFunctions.getMakeName(values.make_id).replace(/\s+/g, '-').toLowerCase())} alt={lookupFunctions.getMakeName(values.make_id)} width={60} height={30} />
+                {/* <p>{lookupFunctions.getMakeName(values.make_id)}</p> */}
+              {/* </div> */}
             </div>
             <div>
               <p className="font-medium text-gray-500">{t('model')}:</p>
