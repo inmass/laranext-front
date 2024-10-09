@@ -27,6 +27,12 @@ const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
           maxLength: 16,
           ...props.inputProps,
         }}
+        buttonStyle={{
+          backgroundColor: 'hsl(var(--border))',
+          border: 'none',
+          borderRight: '1px solid',
+          borderColor: 'hsl(var(--border))',
+        }}
       />
     );
   }

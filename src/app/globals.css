@@ -90,3 +90,13 @@ input[type='search']::-moz-search-cancel-button {
 input[type='search']::-ms-clear {
   display: none;
 }
+
+.selected-flag {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 0 !important;
+}
+.selected-flag:hover {
+  background-color: transparent !important;
+}
