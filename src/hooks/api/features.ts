@@ -28,10 +28,7 @@ export const getFeatures = (
     },
 
     keepPreviousData: true,
-    staleTime: 0,
-    refetchOnMount: true,
-    refetchOnWindowFocus: true,
-    refetchOnReconnect: true,
+    staleTime: 60 * 60 * 1000,
   });
 };
 
