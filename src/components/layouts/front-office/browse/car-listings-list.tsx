@@ -43,12 +43,14 @@ const CarListingsList = ({ data, params, setParams, className }: CarListingsList
                 <div className='bg-muted/40 rounded-b-lg hover:scale-[1.01] hover:rounded-b-lg transition-all duration-300 flex flex-col flex-grow'>
                   <div className="p-4 flex-grow">
                     <div className="flex items-center gap-2 mb-4 h-6">
-                      <Image 
-                        src={getMakeImage(carListing.make?.name ?? '')} 
-                        alt={carListing.make?.name ?? ''} 
-                        width={40} 
-                        height={30}
-                      />
+                      {carListing.make?.slug && (
+                        <Image 
+                          src={getMakeImage(carListing.make.slug ?? '')} 
+                          alt={carListing.make.name ?? ''} 
+                          width={40} 
+                          height={30}
+                        />
+                      )}
                       <span className="text-xs font-medium">{carListing.car_model?.name}</span>
                     </div>
                     <h3 className="text-lg font-semibold text-card-foreground">{carListing.title}</h3>
