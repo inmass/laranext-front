@@ -15,6 +15,9 @@ const Home = () => {
     sort: { key: 'created_at', direction: 'desc' } as { key: string; direction: 'asc' | 'desc' } | null,
     filters: {} as Record<string, string>,
     include: ['primaryImage', 'images', 'make', 'carModel'],
+    aditionalParams: {
+      'browsing': 'true',
+    } as Record<string, string>,
   });
 
   const { data, isLoading, isError, error } = getCarListings(params);

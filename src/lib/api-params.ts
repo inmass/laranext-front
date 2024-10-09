@@ -6,6 +6,7 @@ export interface GetRequestParams {
     include?: string[];
     fields?: string[];
     noPagination?: boolean;
+    aditionalParams?: Record<string, string>;
 }
 
 export interface Pagination {

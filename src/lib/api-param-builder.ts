@@ -1,7 +1,7 @@
 import { GetRequestParams } from "@/lib/api-params";
   
 export function buildApiParams(queryParams: GetRequestParams): Record<string, string | number | boolean> {
-    const { page, perPage, sort, filters, include, fields, noPagination } = queryParams;
+    const { page, perPage, sort, filters, include, fields, noPagination, aditionalParams } = queryParams;
     
     const params: Record<string, string | number> = {
         page,
@@ -30,6 +30,12 @@ export function buildApiParams(queryParams: GetRequestParams): Record<string, st
 
     if (noPagination) {
         params.no_pagination = '';
+    }
+
+    if (aditionalParams) {
+        Object.entries(aditionalParams).forEach(([key, value]) => {
+            params[key] = value;
+        });
     }
 
     return params;
