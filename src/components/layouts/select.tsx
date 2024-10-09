@@ -110,6 +110,8 @@ const Select = forwardRef<SelectRef, SelectProps>(({
   //   }
   // }, [options]);
 
+  const selectedOptionData = options.find(option => option.value === selectedOption);
+
   return (
     <div className={'relative'} ref={containerRef}>
       <Combobox 
@@ -126,31 +128,44 @@ const Select = forwardRef<SelectRef, SelectProps>(({
             <div className="relative mt-1">
               <div className="relative w-full cursor-default overflow-hidden rounded-md bg-background text-left">
                 {searchable ? (
-                  <Combobox.Input
-                    ref={inputRef}
-                    className={cn(
-                      'flex h-10 w-full rounded-md border border-input focus:border-input bg-background px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
-                      className
+                  <div className="flex items-center">
+                    {selectedOptionData?.labelImage && (
+                      <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
+                        {selectedOptionData.labelImage}
+                      </div>
                     )}
-                    displayValue={(val: string) => options.find(option => option.value === val)?.label || ''}
-                    onChange={handleInputChange}
-                    onBlur={onBlur}
-                    placeholder={placeholder}
-                    aria-label={placeholder}
-                    name={name}
-                    onClick={() => setIsOpen(true)}
-                    autoComplete="off"
-                  />
+                    <Combobox.Input
+                      ref={inputRef}
+                      className={cn(
+                        'flex h-10 w-full rounded-md border border-input focus:border-input bg-background px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
+                        selectedOptionData?.labelImage && 'pl-12',
+                        className
+                      )}
+                      displayValue={(val: string) => options.find(option => option.value === val)?.label || ''}
+                      onChange={handleInputChange}
+                      onBlur={onBlur}
+                      placeholder={placeholder}
+                      aria-label={placeholder}
+                      name={name}
+                      onClick={() => setIsOpen(true)}
+                      autoComplete="off"
+                    />
+                  </div>
                 ) : (
                   <Combobox.Button 
                     className={cn(
-                      'flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 truncate',
+                      'flex items-center h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 truncate',
                       className,
-                      !options.find(option => option.value === selectedOption) && 'text-muted-foreground'
+                      !selectedOptionData && 'text-muted-foreground'
                     )}
                     onClick={() => setIsOpen(!isOpen)}
                   >
-                    {options.find(option => option.value === selectedOption)?.label || placeholder}
+                    <div className="flex items-center">
+                      {selectedOptionData?.labelImage && (
+                        <div className="mr-2">{selectedOptionData.labelImage}</div>
+                      )}
+                      <span>{selectedOptionData?.label || placeholder}</span>
+                    </div>
                   </Combobox.Button>
                 )}
                 {
@@ -189,7 +204,7 @@ const Select = forwardRef<SelectRef, SelectProps>(({
                         key={option.value}
                         className={({ active }) =>
                           cn(
-                            'relative cursor-default select-none px-2 py-1.5 pl-8 pr-4 rounded-md',
+                            'relative cursor-pointer select-none px-2 py-1.5 pl-8 pr-4 rounded-md',
                             active ? 'bg-accent text-accent-foreground' : 'text-foreground'
                           )
                         }
