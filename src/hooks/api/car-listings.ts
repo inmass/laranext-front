@@ -26,10 +26,6 @@ export const getCarListings = (
       return data;
     },
     keepPreviousData: true,
-    staleTime: 0,
-    refetchOnMount: true,
-    refetchOnWindowFocus: true,
-    refetchOnReconnect: true,
   });
 };
     

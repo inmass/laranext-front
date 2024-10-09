@@ -27,7 +27,7 @@ const CarListings = () => {
     const [params, setParams] = useState<CarListingsParams>({
         page: 1,
         perPage: 10,
-        sort: null as { key: string; direction: 'asc' | 'desc' } | null,
+        sort: { key: 'created_at', direction: 'desc' } as { key: string; direction: 'asc' | 'desc' },
         filters: {} as Record<string, string>,
         include: ['primaryImage', 'images', 'features', 'user'],
     });
@@ -97,6 +97,7 @@ const CarListings = () => {
                 <DataTable
                     columns={columns}
                     actions={actions}
+                    defaultSort={params.sort}
                     data={data?.data || []}
                     totalItems={data?.meta.total || 0}
                     currentPage={params.page}

@@ -18,6 +18,7 @@ export interface DataTableProps<T> {
     columns: Column<T>[];
     actions?: ActionColumn<T>[];
     actionsAsDropdown?: boolean;
+    defaultSort?: { key: string; direction: 'asc' | 'desc' } | null;
     data: T[];
     totalItems: number;
     currentPage: number;

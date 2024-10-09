@@ -24,10 +24,6 @@ const RelatedListings: React.FC<RelatedListingsProps> = ({ listing }) => {
     },
     fields: ['id', 'title', 'slug', 'make_id', 'year', 'transmission', 'fuel_type', 'mileage', 'car_model_id', 'price'],
     include: ['primaryImage', 'make', 'carModel'],
-    // sort: {
-    //     key: 'most_viewed',
-    //     direction: 'desc',
-    // },
     aditionalParams: {
         'browsing': 'true',
     } as Record<string, string>,

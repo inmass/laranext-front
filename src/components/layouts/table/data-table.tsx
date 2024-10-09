@@ -19,6 +19,7 @@ import TableFooter from './table-footer';
 export function DataTable<T>({
   columns,
   actions,
+  defaultSort,
   actionsAsDropdown = false,
   data,
   totalItems,
@@ -29,7 +30,7 @@ export function DataTable<T>({
   error,
   onParamsChange,
 }: DataTableProps<T>) {
-  const [sortKey, setSortKey] = useState<{ key: string; direction: 'asc' | 'desc' } | null>(null);
+  const [sortKey, setSortKey] = useState<{ key: string; direction: 'asc' | 'desc' } | null>(defaultSort || null);
   const [filters, setFilters] = useState<Record<string, string>>({});
   const [page, setPage] = useState(currentPage);
 

@@ -113,7 +113,7 @@ const ListingPage = () => {
                         <Dialog
                             description={t('viewNumberDescription')}
                             trigger={
-                                <Button className="mb-2">
+                                <Button className="mb-2 mr-2 sm:mr-0">
                                     <FaEye className="mr-2 w-5 h-5" />
                                     {t('viewNumber')}
                                 </Button>
