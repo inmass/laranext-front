@@ -18,6 +18,7 @@ import { Check, Minus, X } from "lucide-react";
 import { ReactNode } from "react";
 import Dialog from "@/components/layouts/dialog";
 import Link from "next/link";
+import RelatedListings from '@/components/layouts/front-office/browse/related-listings';
 
 const ListingPage = () => {
     const { slug } = useParams();
@@ -159,6 +160,7 @@ const ListingPage = () => {
                     ))}
                 </div>
             </div>
+            <RelatedListings listing={carListing} />
             {/* <SectionDivider dividerText={t('technicalDetails')} />
             <div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
