@@ -696,7 +696,9 @@
       "contactSeller": "Contacter le vendeur",
       "viewNumber": "Voir le numéro",
       "viewNumberDescription": "Veuillez faire attention à ne pas envoyer d'argent au vendeur en avance par virement bancaire ou par l'intermédiaire d'une agence lors de l'achat de biens disponibles sur le site.",
-      "phoneNumber": "Numéro de téléphone"
+      "phoneNumber": "Numéro de téléphone",
+      "seller": "Vendeur",
+      "anonymousSeller": "Vendeur anonyme"
     },
     "HowItWorks": {
       "title": "Comment ça marche?",

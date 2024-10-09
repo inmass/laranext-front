@@ -5,7 +5,7 @@ import ImageWithPreview from "@/components/ui/image-with-preview";
 import { getCarListing } from "@/hooks/api/car-listings";
 import { useParams } from "next/navigation";
 import { useTranslations } from 'next-intl';
-import { getMakeImage } from '@/lib/helpers';
+import { asset, getMakeImage } from '@/lib/helpers';
 import Image from 'next/image';
 import { Carousel } from "@/components/ui/carousel";
 import { Badge } from "@/components/ui/badge";
@@ -89,6 +89,24 @@ const ListingPage = () => {
                                 <div className="w-7 h-7 rounded-full mr-2 p-2 border-2 border-muted" style={{ backgroundColor: carListing.interior_color }}></div>
                             </div>
                         )} />
+                    </div>
+                    <div className="flex items-center gap-3 mb-4">
+                        <div className="overflow-hidden rounded-full bg-gray-100 w-12 h-12 flex items-center justify-center">
+                            <Image
+                                src={
+                                    carListing.user?.avatar
+                                    ? carListing.user.avatar
+                                    : asset('images/placeholder-user.webp')
+                                }
+                                width={50}
+                                height={50}
+                                alt={carListing.user?.name || t('anonymousSeller')}
+                            />
+                        </div>
+                        <div>
+                            <p className="text-sm text-muted-foreground">{t('seller')}</p>
+                            <p className="font-medium">{carListing.user?.name || t('anonymousSeller')}</p>
+                        </div>
                     </div>
                     <div className="sm:flex gap-2 mb-4">
                         <Dialog
