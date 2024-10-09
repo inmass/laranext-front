@@ -8,7 +8,7 @@ import { Button } from '../ui/button';
 interface Option {
   value: string;
   label: string;
-  labelElement?: React.ReactNode;
+  labelImage?: React.ReactNode;
 }
 
 interface SelectProps {
@@ -139,6 +139,7 @@ const Select = forwardRef<SelectRef, SelectProps>(({
                     aria-label={placeholder}
                     name={name}
                     onClick={() => setIsOpen(true)}
+                    autoComplete="off"
                   />
                 ) : (
                   <Combobox.Button 
@@ -201,7 +202,12 @@ const Select = forwardRef<SelectRef, SelectProps>(({
                                 selected ? 'font-medium' : 'font-normal'
                               }`}
                             >
-                              {option.labelElement ?? option.label}
+                              {option.labelImage ? (
+                                <div className='flex items-center gap-2'>
+                                  {option.labelImage}
+                                  <span>{option.label}</span>
+                                </div>
+                              ) : option.label}
                             </span>
                             {selected ? (
                               <span

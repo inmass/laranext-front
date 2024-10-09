@@ -37,21 +37,18 @@ const MakeSelect = forwardRef<SelectRef, MakeSelectProps>(({ value, onChange, on
 
     const { data, isLoading, isError } = getMakes(params);
 
-    const generateLabel = (make: string, slug: string): React.ReactNode => {
+    const generateImageElement = (make: string, slug: string): React.ReactNode => {
         return (
-            <div className='flex items-center gap-2'>
-                <Image
-                    src={getMakeImage(slug)}
-                    alt={make}
-                    width={30}
-                    height={30}
-                />
-                <span>{make}</span>
-            </div>
+            <Image
+                src={getMakeImage(slug)}
+                alt={make}
+                width={30}
+                height={30}
+            />
         )
     };
 
-    const options: Option[] = data?.data?.map(({ id, name, slug }: Make) => ({ label: name, value: String(id), labelElement: generateLabel(name, slug) })) || [];
+    const options: Option[] = data?.data?.map(({ id, name, slug }: Make) => ({ label: name, value: String(id), labelImage: generateImageElement(name, slug) })) || [];
 
     const handleChange = (newValue: string) => {
         const selectedOption = options.find(option => option.value === newValue);

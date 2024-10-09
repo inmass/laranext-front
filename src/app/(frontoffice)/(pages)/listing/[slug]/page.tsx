@@ -81,12 +81,12 @@ const ListingPage = () => {
                         <DetailItem label={t('originalPrice')} value={carListing.original_price && Number(carListing.original_price) > 0 ? carListing.original_price : '---'} />
                         <DetailItem label={t('exteriorColor')} value={(
                             <div className="flex items-center">
-                                <div className="w-7 h-7 rounded-full mr-2 p-2 border-2 border-muted" style={{ backgroundColor: carListing.exterior_color }}></div>
+                                <div className="w-7 h-7 rounded-full mt-2 mr-2 p-2 border-2 border-muted" style={{ backgroundColor: carListing.exterior_color }}></div>
                             </div>
                         )} />
                         <DetailItem label={t('interiorColor')} value={(
                             <div className="flex items-center">
-                                <div className="w-7 h-7 rounded-full mr-2 p-2 border-2 border-muted" style={{ backgroundColor: carListing.interior_color }}></div>
+                                <div className="w-7 h-7 rounded-full mt-2 mr-2 p-2 border-2 border-muted" style={{ backgroundColor: carListing.interior_color }}></div>
                             </div>
                         )} />
                     </div>
