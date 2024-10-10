@@ -6,6 +6,8 @@ import Header from '@/components/layouts/front-office/header/header';
 import { asset } from '@/lib/helpers';
 import { useTranslations } from 'next-intl';
 import Button from '@/components/Button';
+import Link from 'next/link';
+import AppRoutes from '@/constants/app-routes';
 
 // Hero component
 const Hero: React.FC = () => {
@@ -26,12 +28,16 @@ const Hero: React.FC = () => {
           <h1 className="text-3xl font-bold mb-4 text-center">{t('title')}</h1>
           <p className="text-xl mb-8 text-center">{t('description')}</p>
           <div className="flex space-x-4">
-            <Button className='md:text-md'>
-              {t('browseCars')}
-            </Button>
-            <Button className='bg-[#F1F5F9] text-[#10172A] hover:bg-[#F1F5F9]/80 md:text-md'>
-              {t('sellYourCar')}
-            </Button>
+            <Link href={AppRoutes.frontOffice.browse}>
+              <Button className='md:text-md'>
+                {t('browseCars')}
+              </Button>
+            </Link>
+            <Link href={AppRoutes.dashboard.home}>
+              <Button className='bg-[#F1F5F9] text-[#10172A] hover:bg-[#F1F5F9]/80 md:text-md'>
+                {t('sellYourCar')}
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

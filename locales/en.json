@@ -708,6 +708,11 @@
       "step1": "Sign up and join our community of car collectors.",
       "step2": "Post your car for sale or browse through our exclusive collection.",
       "step3": "Get your car sold or buy the car of your dreams."
+    },
+    "JoinUs": {
+      "title": "Join Us",
+      "description": "Join our community of car collectors and get access to exclusive features.",
+      "registerNow": "Register Now"
     }
   },
 
