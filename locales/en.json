@@ -730,14 +730,15 @@
     "fuelTypes": {
       "gasoline": "Gasoline",
       "diesel": "Diesel",
-      "electric": "Electric"
+      "electric": "Electric",
+      "hybrid": "Hybrid"
     },
     "transmissionTypes": {
       "automatic": "Automatic",
-      "manual": "Manual",
-      "hybrid": "Hybrid"
+      "manual": "Manual"
     },
     "conditionTypes": {
+      "placeholder": "Select a condition",
       "excellent": "Excellent",
       "good": "Good",
       "fair": "Fair",
@@ -745,6 +746,7 @@
       "project": "Project"
     },
     "bodyStyles": {
+      "placeholder": "Select a body style",
       "coupe": "Coupe",
       "sedan": "Sedan",
       "convertible": "Convertible",

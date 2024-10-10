@@ -3,7 +3,8 @@
 export const FuelTypes = [
     'gasoline',
     'diesel',
-    'electric'
+    'electric',
+    'hybrid'
 ];
 
 export const TransmissionTypes = [
