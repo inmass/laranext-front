@@ -725,6 +725,61 @@
       }
     },
     "yes": "Oui",
-    "no": "Non"
+    "no": "Non",
+    "fuelTypes": {
+      "gasoline": "Essence",
+      "diesel": "Diesel",
+      "electric": "Électrique"
+    },
+    "transmissionTypes": {
+      "automatic": "Automatique",
+      "manual": "Manuelle",
+      "hybrid": "Hybride"
+    },
+    "conditionTypes": {
+      "excellent": "Excellent",
+      "good": "Bon",
+      "fair": "Moyen",
+      "poor": "Mauvais",
+      "project": "Projet"
+    },
+    "bodyStyles": {
+      "coupe": "Coupé",
+      "sedan": "Sedan",
+      "convertible": "Convertible",
+      "wagon": "Break",
+      "hardtop": "Hardtop"
+    },
+    "featureTypes": {
+      "exterior": "Extérieur",
+      "interior": "Intérieur",
+      "mechanical": "Mécanique",
+      "safety": "Sécurité",
+      "comfort": "Confort",
+      "entertainment": "Divertissement"
+    },
+    "features": {
+      "chromeBumpers": "Pare-chocs chromés",
+      "customPaint": "Peinture personnalisée",
+      "alloyWheels": "Roues en alliage",
+      "convertibleTop": "Toit convertible",
+      "leatherSeats": "Sièges cuir",
+      "woodTrim": "Plinthe en bois",
+      "customDashboard": "Dashboard personnalisé",
+      "floorMats": "Mats de sol",
+      "powerSteering": "Direction assistée",
+      "powerBrakes": "Freins à disque",
+      "automaticTransmission": "Transmission automatique",
+      "manualTransmission": "Transmission manuelle",
+      "seatBelts": "Ceintures de sécurité",
+      "discBrakes": "Freins à disque",
+      "fogLights": "Phares de brouillard",
+      "airConditioning": "Climatisation",
+      "powerWindows": "Vitres électriques",
+      "tiltSteeringWheel": "Volant réglable en inclinaison",
+      "amFmRadio": "Radio AM/FM",
+      "8TrackPlayer": "Lecteur 8 pistes",
+      "cassettePlayer": "Lecteur de cassette"
+    }
   }
 }

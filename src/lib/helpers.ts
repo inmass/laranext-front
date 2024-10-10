@@ -1,4 +1,5 @@
 import axios from "@/lib/axios";
+import { useTranslations } from "next-intl";
 
 export function createFileFromImageUrl(imageUrl: string): Promise<File> {
   return new Promise((resolve, reject) => {
@@ -60,3 +61,40 @@ export function getAppName(): string {
 export function getMakeImage(make: string): string {
   return asset(`/images/makes/${make}.png`);
 }
+
+type TFunction = (key: string) => string;
+
+function camelize(str: string): string {
+  str = str.replace(/[^a-zA-Z0-9 ]/g, ' ');
+
+  return str
+    .replace(/[-_ ]/g, ' ')
+    .toLowerCase()
+    .replace(/\s(.)/g, (_, char) => char.toUpperCase())
+    .replace(/\s/g, '');
+}
+
+export function translateFeatureType(featureType: string, t: TFunction): string {
+  return t(camelize(featureType));
+}
+
+export function translateFeature(feature: string, t: TFunction): string {
+  return t(camelize(feature));
+}
+
+export function translateConditionType(conditionType: string, t: TFunction): string {
+  return t(camelize(conditionType));
+}
+
+export function translateBodyStyle(bodyStyle: string, t: TFunction): string {
+  return t(camelize(bodyStyle));
+}
+
+export function translateFuelType(fuelType: string, t: TFunction): string {
+  return t(camelize(fuelType));
+}
+
+export function translateTransmissionType(transmissionType: string, t: TFunction): string {
+  return t(camelize(transmissionType));
+}
+

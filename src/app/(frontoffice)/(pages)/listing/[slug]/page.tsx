@@ -5,7 +5,7 @@ import ImageWithPreview from "@/components/ui/image-with-preview";
 import { getCarListing } from "@/hooks/api/car-listings";
 import { useParams } from "next/navigation";
 import { useTranslations } from 'next-intl';
-import { asset, getMakeImage } from '@/lib/helpers';
+import { asset, getMakeImage, translateConditionType, translateFeature, translateFeatureType, translateFuelType, translateTransmissionType } from '@/lib/helpers';
 import Image from 'next/image';
 import { Carousel } from "@/components/ui/carousel";
 import { Badge } from "@/components/ui/badge";
@@ -24,6 +24,11 @@ const ListingPage = () => {
     const { slug } = useParams();
     const { data: carListing, isLoading, isError, error } = getCarListing(slug as string);
     const t = useTranslations('FrontOffice.CarListingView');
+    const tFeatureTypes = useTranslations('General.featureTypes');
+    const tFeatures = useTranslations('General.features');
+    const tTransmissionTypes = useTranslations('General.transmissionTypes');
+    const tFuelTypes = useTranslations('General.fuelTypes');
+    const tConditionTypes = useTranslations('General.conditionTypes');
 
     const featuresParams = {
         page: 1,
@@ -74,11 +79,10 @@ const ListingPage = () => {
                     <div className="grid grid-cols-2 gap-4 mb-6">
                         <DetailItem label={t('year')} value={carListing.year} />
                         <DetailItem label={t('mileage')} value={`${carListing.mileage} km`} />
-                        <DetailItem label={t('transmission')} value={t(`transmissionTypes.${carListing.transmission}`)} />
-                        <DetailItem label={t('fuelType')} value={t(`fuelTypes.${carListing.fuel_type}`)} />
+                        <DetailItem label={t('transmission')} value={translateTransmissionType(carListing.transmission, tTransmissionTypes)} />
+                        <DetailItem label={t('fuelType')} value={translateFuelType(carListing.fuel_type, tFuelTypes)} />
                         <DetailItem label={t('bodyStyle')} value={carListing.body_style?.name} />
-                        <DetailItem label={t('condition')} value={carListing.condition?.name} />
-                        <DetailItem label={t('fuelType')} value={carListing.fuel_type} />
+                        <DetailItem label={t('condition')} value={translateConditionType(carListing.condition?.name, tConditionTypes)} />
                         <DetailItem label={t('originalPrice')} value={carListing.original_price && Number(carListing.original_price) > 0 ? carListing.original_price : '---'} />
                         <DetailItem label={t('exteriorColor')} value={(
                             <div className="flex items-center">
@@ -143,7 +147,7 @@ const ListingPage = () => {
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     {Object.values(groupedFeatures).map((group: any, index: any) => (
                         <div key={index}>
-                            <h3 className="text-lg font-medium mb-2">{group.name}</h3>
+                            <h3 className="text-lg font-medium mb-2">{translateFeatureType(group.name, tFeatureTypes)}</h3>
                             <div className="flex flex-col flex-wrap gap-2">
                                 {group.features.map((feature: any, index: any) => (
                                     <div key={index} className="text-sm font-medium flex items-center">
@@ -152,7 +156,7 @@ const ListingPage = () => {
                                             <Check className="mr-2 w-4 h-4 text-green-500" /> :
                                             <Minus className="mr-2 w-4 h-4 text-foreground" />
                                         }
-                                        <p>{feature.name}</p>
+                                        <p>{translateFeature(feature.name, tFeatures)}</p>
                                     </div>
                                 ))}
                             </div>

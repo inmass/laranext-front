@@ -726,6 +726,61 @@
       }
     },
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "fuelTypes": {
+      "gasoline": "Gasoline",
+      "diesel": "Diesel",
+      "electric": "Electric"
+    },
+    "transmissionTypes": {
+      "automatic": "Automatic",
+      "manual": "Manual",
+      "hybrid": "Hybrid"
+    },
+    "conditionTypes": {
+      "excellent": "Excellent",
+      "good": "Good",
+      "fair": "Fair",
+      "poor": "Poor",
+      "project": "Project"
+    },
+    "bodyStyles": {
+      "coupe": "Coupe",
+      "sedan": "Sedan",
+      "convertible": "Convertible",
+      "wagon": "Wagon",
+      "hardtop": "Hardtop"
+    },
+    "featureTypes": {
+      "exterior": "Exterior",
+      "interior": "Interior",
+      "mechanical": "Mechanical",
+      "safety": "Safety",
+      "comfort": "Comfort",
+      "entertainment": "Entertainment"
+    },
+    "features": {
+      "chromeBumpers": "Chrome Bumpers",
+      "customPaint": "Custom Paint",
+      "alloyWheels": "Alloy Wheels",
+      "convertibleTop": "Convertible Top",
+      "leatherSeats": "Leather Seats",
+      "woodTrim": "Wood Trim",
+      "customDashboard": "Custom Dashboard",
+      "floorMats": "Floor Mats",
+      "powerSteering": "Power Steering",
+      "powerBrakes": "Power Brakes",
+      "automaticTransmission": "Automatic Transmission",
+      "manualTransmission": "Manual Transmission",
+      "seatBelts": "Seat Belts",
+      "discBrakes": "Disc Brakes",
+      "fogLights": "Fog Lights",
+      "airConditioning": "Air Conditioning",
+      "powerWindows": "Power Windows",
+      "tiltSteeringWheel": "Tilt Steering Wheel",
+      "amFmRadio": "AM/FM Radio",
+      "8TrackPlayer": "8-Track Player",
+      "cassettePlayer": "Cassette Player"
+    }
   }
 }

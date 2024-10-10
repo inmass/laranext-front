@@ -2,6 +2,7 @@ import React, { forwardRef } from 'react';
 import { getFeatureTypes, FeatureTypesParams } from '@/hooks/api/feature-types';
 import Select, { emptyValue, SelectRef } from '@/components/layouts/select';
 import { useTranslations } from 'next-intl';
+import { translateFeatureType } from '@/lib/helpers';
 
 interface FeatureTypeSelectProps {
     value?: string;
@@ -23,7 +24,7 @@ interface Option {
 }
 
 const FeatureTypeSelect = forwardRef<SelectRef, FeatureTypeSelectProps>(({ value, onChange, onBlur, className, disabled, name }, ref) => {
-    const t = useTranslations('Dashboard.Features.FormDialog.FeatureTypeSelect');
+    const t = useTranslations('General.featureTypes');
 
     const params: FeatureTypesParams = {
         page: 1,
@@ -33,7 +34,7 @@ const FeatureTypeSelect = forwardRef<SelectRef, FeatureTypeSelectProps>(({ value
     };
 
     const { data, isLoading, isError } = getFeatureTypes(params);
-    const options: Option[] = data?.data?.map(({ id, name }: FeatureType) => ({ label: name, value: String(id) })) || [];
+    const options: Option[] = data?.data?.map(({ id, name }: FeatureType) => ({ label: translateFeatureType(name, t), value: String(id) })) || [];
 
     const handleChange = (newValue: string) => {
         const selectedOption = options.find(option => option.value === newValue);

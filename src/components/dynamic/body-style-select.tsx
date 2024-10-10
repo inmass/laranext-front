@@ -2,6 +2,7 @@ import React, { forwardRef } from 'react';
 import { getBodyStyles, BodyStylesParams } from '@/hooks/api/body-styles';
 import Select, { emptyValue, SelectRef } from '@/components/layouts/select';
 import { useTranslations } from 'next-intl';
+import { translateBodyStyle } from '@/lib/helpers';
 
 interface BodyStyleSelectProps {
     value?: string;
@@ -23,7 +24,7 @@ interface BodyStyle {
 }
 
 const BodyStyleSelect = forwardRef<SelectRef, BodyStyleSelectProps>(({ value, onChange, onBlur, className, disabled, name }, ref) => {
-    const t = useTranslations('Dashboard.CarListings.Wizard.steps.VehicleDetailsStep.BodyStyleSelect');
+    const t = useTranslations('General.bodyStyles');
 
     const params: BodyStylesParams = {
         page: 1,
@@ -34,7 +35,7 @@ const BodyStyleSelect = forwardRef<SelectRef, BodyStyleSelectProps>(({ value, on
 
     const { data, isLoading, isError } = getBodyStyles(params);
 
-    const options: Option[] = data?.data?.map(({ id, name }: BodyStyle) => ({ label: name, value: String(id) })) || [];
+    const options: Option[] = data?.data?.map(({ id, name }: BodyStyle) => ({ label: translateBodyStyle(name, t), value: String(id) })) || [];
 
     const handleChange = (selectedValue: string) => {
         const selectedOption = options.find(option => option.value === selectedValue);

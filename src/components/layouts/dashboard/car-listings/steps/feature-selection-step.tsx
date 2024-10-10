@@ -7,11 +7,14 @@ import { FeatureType } from "@/types/feature";
 import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/car-listing-wizard';
 import { useLookup } from '../context/lookup-context';
 import { useTranslations } from 'next-intl';
+import { translateFeature, translateFeatureType } from '@/lib/helpers';
 
 const FeatureSelectionStep: React.FC = () => {
   const { control, formState: { errors, isValid } } = useFormContext<CarListingFormData>();
   const { addLookupData } = useLookup();
   const t = useTranslations('Dashboard.CarListings.Wizard.steps.FeatureSelectionStep');
+  const tFeatureTypes = useTranslations('General.featureTypes');
+  const tFeatures = useTranslations('General.features');
 
   const params: FeaturesParams = {
     page: 1,
@@ -56,12 +59,12 @@ const FeatureSelectionStep: React.FC = () => {
           <>
             {Object.entries(groupedFeatures).map(([typeId, { name, features }]) => (
               <div key={typeId} className="space-y-2">
-                <h3 className="text-lg font-medium">{name}</h3>
+                <h3 className="text-lg font-medium">{translateFeatureType(name, tFeatureTypes)}</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {features.map((feature: FeatureType) => (
                     <CheckBox 
                       key={feature.id}
-                      label={feature.name}
+                      label={translateFeature(feature.name, tFeatures)}
                       id={`feature-${feature.id}`}
                       checked={field.value?.includes(feature.id.toString())}
                       onChange={(e) => {
