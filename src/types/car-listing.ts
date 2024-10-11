@@ -20,6 +20,7 @@ export interface CarListingType {
     updated_at: string;
     deleted_at: string | null;
     slug: string;
+    is_sold: boolean;
     primary_image?: {
         id: number;
         car_listing_id: number;

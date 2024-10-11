@@ -111,7 +111,8 @@
         "price": "Price",
         "mileage": "Mileage",
         "km": "km",
-        "createdAt": "Created At"
+        "createdAt": "Created At",
+        "isSold": "Sold"
       },
 
       "actions": {
@@ -273,7 +274,17 @@
       "api": {
         "createSuccess": "Car Listing created successfully",
         "updateSuccess": "Car Listing updated successfully",
-        "deleteSuccess": "Car Listing deleted successfully"
+        "deleteSuccess": "Car Listing deleted successfully",
+        "updateStatusSuccess": "Status of the car listing updated successfully"
+      },
+
+      "isSoldConfirmation": {
+        "description": {
+          "toSold": "This action cannot be undone. This will change the status of the car listing to sold.",
+          "toNotSold": "This action cannot be undone. This will change the status of the car listing to not sold."
+        },
+        "cancelText": "Cancel",
+        "actionText": "Yes, change status"
       }
     },
 
@@ -657,12 +668,14 @@
         "fuelTypes": {
           "gasoline": "Gasoline",
           "diesel": "Diesel",
-          "electric": "Electric"
+          "electric": "Electric",
+          "hybrid": "Hybrid"
         }
       },
       "askingPrice": "Asking Price",
       "carListings": "Car Listings",
-      "noListingsFound": "No listings found :("
+      "noListingsFound": "No listings found :(",
+      "sold": "This car was sold"
     },
     "CarListingView": {
       "askingPrice": "Asking Price",
@@ -701,7 +714,8 @@
       "seller": "Seller",
       "anonymousSeller": "Anonymous Seller",
       "relatedListings": "Related Listings",
-      "title": "Similar Cars"
+      "title": "Similar Cars",
+      "sold": "This car was sold"
     },
     "HowItWorks": {
       "title": "How it works?",

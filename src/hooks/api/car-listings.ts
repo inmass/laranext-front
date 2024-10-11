@@ -145,3 +145,20 @@ export const useUpdateCarListing = (onSuccess?: () => void) => {
     },
   });
 }
+
+export const useUpdateCarListingStatus = () => {
+  const queryClient = useQueryClient();
+  const t = useTranslations('Dashboard.CarListings.api');
+
+  return useMutation({
+    mutationFn: async ({ id, is_sold }: { id: number; is_sold: 0 | 1 }) => {
+      await axios.put(`${ApiEndpoints.carListingStatus(id)}`, { is_sold });
+    },
+    onSuccess: () => {
+      toast.success(t('updateStatusSuccess'));
+      queryClient.refetchQueries({
+        predicate: (query) => query.queryKey[0] === 'carListings',
+      });
+    },
+  });
+}

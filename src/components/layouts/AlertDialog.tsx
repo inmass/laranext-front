@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 interface AlertDialogProps {
     trigger: React.ReactNode;
-    title: string;
+    title?: string;
     description: string;
     cancelText: string;
     actionText: string;
@@ -23,7 +23,7 @@ const AlertDialog = ({ trigger, title, description, cancelText, actionText, onAc
             <RadixAlertDialog.Portal>
                 <RadixAlertDialog.Overlay className="fixed inset-0 bg-black bg-opacity-50 z-50" onClick={() => setOpen(false)} />
                 <RadixAlertDialog.Content className="fixed top-1/2 left-1/2 max-h-[85vh] w-[90vw] max-w-[500px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] rounded-lg border bg-card text-card-foreground shadow-sm z-50">
-                    <RadixAlertDialog.Title className="text-lg font-medium">{title}</RadixAlertDialog.Title>
+                    {title && <RadixAlertDialog.Title className="text-lg font-medium">{title}</RadixAlertDialog.Title>}
                     <RadixAlertDialog.Description className="mt-2 mb-5 text-sm text-gray-500">
                         {description}
                     </RadixAlertDialog.Description>

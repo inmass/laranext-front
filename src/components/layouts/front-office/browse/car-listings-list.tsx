@@ -23,7 +23,7 @@ const CarListingsList = ({ data, params, setParams, className }: CarListingsList
       className
     )}>
       <h2 className="text-3xl font-bold mb-4">{t('carListings')}</h2>
-      <div className={cn('products grid grid-cols-1 md:grid-cols-3 gap-4 gap-y-12')}>
+      <div className={cn('products grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 gap-y-12')}>
         {
           carListings && carListings.length > 0 ? 
           (carListings.map((carListing) => (

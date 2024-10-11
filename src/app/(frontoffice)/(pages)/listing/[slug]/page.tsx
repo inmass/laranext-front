@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { FaCheckCircle, FaDashcube, FaEye, FaTimesCircle, FaWhatsapp } from "react-icons/fa";
 import { getFeatures } from "@/hooks/api/features";
 import { groupFeatures } from "@/lib/utils";
-import { Check, Minus, X } from "lucide-react";
+import { Check, LucideMessageCircleWarning, Minus, X } from "lucide-react";
 import { ReactNode } from "react";
 import Dialog from "@/components/layouts/dialog";
 import Link from "next/link";
@@ -77,13 +77,18 @@ const ListingPage = () => {
                         </div>
                     </div>
                     <div className="grid grid-cols-2 gap-4 mb-6">
+                        { true && (
+                            <>
+                                <DetailItem label={t('originalPrice')} value={carListing.original_price} />
+                                <br />
+                            </>
+                        )}
                         <DetailItem label={t('year')} value={carListing.year} />
                         <DetailItem label={t('mileage')} value={`${carListing.mileage} km`} />
                         <DetailItem label={t('transmission')} value={translateTransmissionType(carListing.transmission, tTransmissionTypes)} />
                         <DetailItem label={t('fuelType')} value={translateFuelType(carListing.fuel_type, tFuelTypes)} />
                         <DetailItem label={t('bodyStyle')} value={carListing.body_style?.name} />
                         <DetailItem label={t('condition')} value={translateConditionType(carListing.condition?.name, tConditionTypes)} />
-                        <DetailItem label={t('originalPrice')} value={carListing.original_price && Number(carListing.original_price) > 0 ? carListing.original_price : '---'} />
                         <DetailItem label={t('exteriorColor')} value={(
                             <div className="flex items-center">
                                 <div className="w-7 h-7 rounded-full mt-2 mr-2 p-2 border-2 border-muted" style={{ backgroundColor: carListing.exterior_color }}></div>
@@ -95,47 +100,59 @@ const ListingPage = () => {
                             </div>
                         )} />
                     </div>
-                    <div className="flex items-center gap-3 mb-4">
-                        <div className="overflow-hidden rounded-full bg-gray-100 w-12 h-12 flex items-center justify-center">
-                            <Image
-                                src={
-                                    carListing.user?.avatar
-                                    ? carListing.user.avatar
-                                    : asset('images/placeholder-user.webp')
-                                }
-                                width={50}
-                                height={50}
-                                alt={carListing.user?.name || t('anonymousSeller')}
-                            />
-                        </div>
-                        <div>
-                            <p className="text-sm text-muted-foreground">{t('seller')}</p>
-                            <p className="font-medium">{carListing.user?.name || t('anonymousSeller')}</p>
-                        </div>
-                    </div>
-                    <div className="sm:flex gap-2 mb-4">
-                        <Dialog
-                            description={t('viewNumberDescription')}
-                            trigger={
-                                <Button className="mb-2 mr-2 sm:mr-0">
-                                    <FaEye className="mr-2 w-5 h-5" />
-                                    {t('viewNumber')}
-                                </Button>
-                            }
-                            children={
-                                <div>
-                                    <Link href={`tel:${carListing.user?.phone}`}>
-                                        {carListing.user?.phone ?? '---'}
-                                    </Link>
+                    {/* seller info */}
+                    {!carListing.is_sold ?
+                        (<>
+                            <div className="flex items-center gap-3 mb-4">
+                                <div className="overflow-hidden rounded-full bg-gray-100 w-12 h-12 flex items-center justify-center">
+                                    <Image
+                                        src={
+                                            carListing.user?.avatar
+                                            ? carListing.user.avatar
+                                            : asset('images/placeholder-user.webp')
+                                        }
+                                        width={50}
+                                        height={50}
+                                        alt={carListing.user?.name || t('anonymousSeller')}
+                                    />
                                 </div>
-                            }
-                        />
-                        <Link href={`https://wa.me/${carListing.user?.phone}`} target="_blank">
-                            <Button className="bg-[#25D366] text-white hover:bg-[#1fa950] rounded-full p-2">
-                                <FaWhatsapp className="w-5 h-5" />
-                            </Button>
-                        </Link>
-                    </div>
+                                <div>
+                                    <p className="text-sm text-muted-foreground">{t('seller')}</p>
+                                    <p className="font-medium">{carListing.user?.name || t('anonymousSeller')}</p>
+                                </div>
+                            </div>
+                            <div className="sm:flex gap-2 mb-4">
+                                <Dialog
+                                    description={t('viewNumberDescription')}
+                                    trigger={
+                                        <Button className="mb-2 mr-2 sm:mr-0">
+                                            <FaEye className="mr-2 w-5 h-5" />
+                                            {t('viewNumber')}
+                                        </Button>
+                                    }
+                                    children={
+                                        <div>
+                                            <Link href={`tel:${carListing.user?.phone}`}>
+                                                {carListing.user?.phone ?? '---'}
+                                            </Link>
+                                        </div>
+                                    }
+                                />
+                                <Link href={`https://wa.me/${carListing.user?.phone}`} target="_blank">
+                                    <Button className="bg-[#25D366] text-white hover:bg-[#1fa950] rounded-full p-2">
+                                        <FaWhatsapp className="w-5 h-5" />
+                                    </Button>
+                                </Link>
+                            </div>
+                        </>) : (
+                            <div className="text-lg text-muted-foreground flex items-center">
+                                <LucideMessageCircleWarning className=" mr-1" />
+                                {t('sold')}
+                            </div>
+                        )
+                        
+                    }
+                    {/* end seller info */}
                 </div>
             </div>
             <SectionDivider dividerText={t('description')} />

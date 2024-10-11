@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { getMakeImage } from "@/lib/helpers";
 import { cn } from "@/lib/utils";
+import { LucideMessageCircleWarning } from "lucide-react";
 
 interface CarListingCardProps {
     carListing: CarListingType;
@@ -15,7 +16,13 @@ interface CarListingCardProps {
 const CarListingCard: React.FC<CarListingCardProps> = ({ carListing, className }) => {
   const t = useTranslations('FrontOffice.CarListings');
   return (
-    <div key={carListing.id} className={cn("bg-muted/40 rounded-lg border border-border col-span-1 hover:border-border/50 transition-all duration-300 flex flex-col", className)}>
+    <div key={carListing.id} className={cn("bg-muted/40 rounded-lg border border-border col-span-1 hover:border-border/50 transition-all duration-300 flex flex-col relative", className)}>
+        {carListing.is_sold && (
+          <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded-lg text-xs font-semibold z-2 flex items-center justify-center">
+            <LucideMessageCircleWarning className="w-4 h-4 mr-1" />
+            <span className="text-xs font-semibold">{t('sold')}</span>
+          </div>
+        )}
         <ImageWithPreview
             asBackground={true}
             src={carListing.primary_image?.path ?? ''}
@@ -56,4 +63,3 @@ const CarListingCard: React.FC<CarListingCardProps> = ({ carListing, className }
 };
 
 export default CarListingCard;
-            

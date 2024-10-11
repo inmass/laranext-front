@@ -38,7 +38,7 @@ const RelatedListings: React.FC<RelatedListingsProps> = ({ listing }) => {
                     <div>
                         <h2 className="text-3xl font-bold mb-4 text-center mb-8">{t('relatedListings')}</h2>
                         <div className={cn(
-                            'grid grid-cols-1 gap-4 mx-auto sm:grid-cols-2 md:grid-cols-3 md:w-[90%]',
+                            'grid grid-cols-1 gap-4 mx-auto sm:grid-cols-2 lg:grid-cols-3 md:w-[90%]',
                         )}>
                             {relatedListings?.data.map((listing) => (
                                 <CarListingCard carListing={listing} />

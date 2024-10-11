@@ -111,7 +111,8 @@
         "price": "Prix",
         "mileage": "Kilométrage",
         "km": "km",
-        "createdAt": "Créé le"
+        "createdAt": "Créé le",
+        "isSold": "Vendu"
       },
 
       "actions": {
@@ -273,7 +274,17 @@
       "api": {
         "createSuccess": "Annonce de voiture créée avec succès",
         "updateSuccess": "Annonce de voiture mise à jour avec succès",
-        "deleteSuccess": "Annonce de voiture supprimée avec succès"
+        "deleteSuccess": "Annonce de voiture supprimée avec succès",
+        "updateStatusSuccess": "Statut de l'annonce de voiture mis à jour avec succès"
+      },
+
+      "isSoldConfirmation": {
+        "description": {
+          "toSold": "Cette action ne peut pas être annulée. Cela changera le statut de l'annonce de la voiture à vendu.",
+          "toNotSold": "Cette action ne peut pas être annulée. Cela changera le statut de l'annonce de la voiture à non vendu."
+        },
+        "cancelText": "Annuler",
+        "actionText": "Oui, changer le statut"
       }
     },
 
@@ -656,12 +667,14 @@
         "fuelTypes": {
           "gasoline": "Essence",
           "diesel": "Diesel",
-          "electric": "Électrique"
+          "electric": "Électrique",
+          "hybrid": "Hybride"
         }
       },
       "askingPrice": "Prix demandé",
       "carListings": "Annonces de voiture",
-      "noListingsFound": "Aucune annonce trouvée :("
+      "noListingsFound": "Aucune annonce trouvée :(",
+      "sold": "Cette voiture a été vendue"
     },
     "CarListingView": {
       "askingPrice": "Prix demandé",
@@ -700,7 +713,8 @@
       "seller": "Vendeur",
       "anonymousSeller": "Vendeur anonyme",
       "relatedListings": "Annonces similaires",
-      "title": "Voitures similaires"
+      "title": "Voitures similaires",
+      "sold": "Cette voiture a été vendue"
     },
     "HowItWorks": {
       "title": "Comment ça marche?",

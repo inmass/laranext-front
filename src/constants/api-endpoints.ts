@@ -17,6 +17,7 @@ const ApiEndpoints = {
     profilePasswordUpdate: '/api/profile/password',
 
     carListings: '/api/backoffice/car-listings',
+    carListingStatus: (carListing: number) => `/api/backoffice/car-listings/${carListing}/status`,
 
     bodyStyles: '/api/backoffice/body-styles',
 
