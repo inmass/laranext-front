@@ -23,7 +23,7 @@ const RelatedListings: React.FC<RelatedListingsProps> = ({ listing }) => {
         'make_id': String(listing.make_id),
         'is_sold': '0',
     },
-    fields: ['id', 'title', 'slug', 'make_id', 'year', 'transmission', 'fuel_type', 'mileage', 'car_model_id', 'price'],
+    fields: ['id', 'title', 'slug', 'make_id', 'year', 'transmission', 'fuel_type', 'mileage', 'car_model_id', 'price', 'is_sold'],
     include: ['primaryImage', 'make', 'carModel'],
     aditionalParams: {
         'browsing': 'true',
