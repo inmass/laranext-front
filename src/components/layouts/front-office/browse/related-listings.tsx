@@ -21,6 +21,7 @@ const RelatedListings: React.FC<RelatedListingsProps> = ({ listing }) => {
     filters: {
         'id_ne': String(listing.id),
         'make_id': String(listing.make_id),
+        'is_sold': '0',
     },
     fields: ['id', 'title', 'slug', 'make_id', 'year', 'transmission', 'fuel_type', 'mileage', 'car_model_id', 'price'],
     include: ['primaryImage', 'make', 'carModel'],
