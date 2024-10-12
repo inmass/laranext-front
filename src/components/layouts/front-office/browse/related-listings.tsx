@@ -33,7 +33,7 @@ const RelatedListings: React.FC<RelatedListingsProps> = ({ listing }) => {
   return (
     <>
         {
-            relatedListings?.data && relatedListings?.data.length > 0 && (
+            relatedListings?.data && relatedListings?.data.length > 0 ? (
                 <div className='mb-20 mt-20 bg-foreground/5 p-10 rounded-lg'>
                     {/* <SectionDivider /> */}
                     <div>
@@ -46,6 +46,9 @@ const RelatedListings: React.FC<RelatedListingsProps> = ({ listing }) => {
                             ))}
                         </div>
                     </div>
+                </div>
+            ) : (
+                <div className='mb-40 mt-20'>
                 </div>
             )
         }
