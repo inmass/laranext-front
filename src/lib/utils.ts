@@ -5,7 +5,6 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-
 // features
 import { FeatureType } from '@/types/feature';
 
@@ -22,7 +21,7 @@ export const groupFeatures = (features: FeatureType[]): GroupedFeatures => {
     if (!acc[typeId] && feature.feature_type) {
       acc[typeId] = {
         name: feature.feature_type.name,
-        features: []
+        features: [],
       };
     }
     acc[typeId].features.push(feature);

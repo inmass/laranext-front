@@ -10,7 +10,7 @@
     "loginButton": "Se connecter",
     "dividerText": "Ou continuer avec"
   },
-  
+
   "SocialLogin": {
     "loginWithFacebook": "Se connecter avec Facebook",
     "loginWithGoogle": "Se connecter avec Google"
@@ -120,7 +120,7 @@
         "edit": "Modifier",
         "delete": "Supprimer"
       },
-      
+
       "deleteConfirmation": {
         "title": "Êtes-vous absolument sûr ?",
         "description": "Cette action ne peut pas être annulée. Cela supprimera définitivement l'annonce de la voiture.",
@@ -732,7 +732,7 @@
   "General": {
     "table": {
       "km": "km",
-      
+
       "footer": {
         "showing": "Affichage de {start} à {end} sur {total} entrées",
         "prev": "Précédent",

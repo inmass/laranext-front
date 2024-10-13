@@ -7,7 +7,10 @@ import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/
 
 const PricingStep: React.FC = () => {
   const t = useTranslations('Dashboard.CarListings.Wizard.steps.Pricing');
-  const { register, formState: { errors } } = useFormContext<CarListingFormData>();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<CarListingFormData>();
 
   return (
     <div className="space-y-4">
@@ -19,9 +22,11 @@ const PricingStep: React.FC = () => {
           {...register('price', { valueAsNumber: true })}
           className={cn(errors.price ? 'border-red-500' : '')}
         />
-        {errors.price && <p className="text-red-500 text-sm">{errors.price.message}</p>}
+        {errors.price && (
+          <p className="text-red-500 text-sm">{errors.price.message}</p>
+        )}
       </div>
-      
+
       <div>
         <label htmlFor="original_price">{t('originalPrice')}</label>
         <Input
@@ -30,7 +35,11 @@ const PricingStep: React.FC = () => {
           {...register('original_price', { valueAsNumber: true })}
           className={cn(errors.original_price ? 'border-red-500' : '')}
         />
-        {errors.original_price && <p className="text-red-500 text-sm">{errors.original_price.message}</p>}
+        {errors.original_price && (
+          <p className="text-red-500 text-sm">
+            {errors.original_price.message}
+          </p>
+        )}
       </div>
 
       <div>
@@ -41,7 +50,9 @@ const PricingStep: React.FC = () => {
           {...register('year', { valueAsNumber: true })}
           className={cn(errors.year ? 'border-red-500' : '')}
         />
-        {errors.year && <p className="text-red-500 text-sm">{errors.year.message}</p>}
+        {errors.year && (
+          <p className="text-red-500 text-sm">{errors.year.message}</p>
+        )}
       </div>
     </div>
   );

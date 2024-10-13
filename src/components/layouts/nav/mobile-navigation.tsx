@@ -29,11 +29,21 @@ const MobileNavigation = () => {
 
   const isActive = (path: string) => pathname === path;
 
-  const NavLink = ({ href, icon, children }: { href: string; icon: React.ReactNode; children: React.ReactNode }) => (
+  const NavLink = ({
+    href,
+    icon,
+    children,
+  }: {
+    href: string;
+    icon: React.ReactNode;
+    children: React.ReactNode;
+  }) => (
     <Link
       href={href}
       className={`flex items-center gap-4 px-2.5 ${
-        isActive(href) ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'
+        isActive(href)
+          ? 'text-foreground'
+          : 'text-muted-foreground hover:text-foreground'
       }`}
       onClick={closeMenu}
     >
@@ -60,27 +70,48 @@ const MobileNavigation = () => {
             <Package2 className="h-5 w-5 transition-all group-hover:scale-110" />
             <span className="sr-only">Vercel</span>
           </Link>
-          <NavLink href={AppRoutes.dashboard.home} icon={<Home className="h-5 w-5" />}>
+          <NavLink
+            href={AppRoutes.dashboard.home}
+            icon={<Home className="h-5 w-5" />}
+          >
             Dashboard
           </NavLink>
-          <NavLink href={AppRoutes.dashboard.carListings} icon={<Car className="h-5 w-5" />}>
+          <NavLink
+            href={AppRoutes.dashboard.carListings}
+            icon={<Car className="h-5 w-5" />}
+          >
             Listings
           </NavLink>
           {user?.role === 'admin' && (
             <>
-              <NavLink href={AppRoutes.dashboard.management.makes} icon={<Badge className="h-5 w-5" />}>
+              <NavLink
+                href={AppRoutes.dashboard.management.makes}
+                icon={<Badge className="h-5 w-5" />}
+              >
                 Makes
               </NavLink>
-              <NavLink href={AppRoutes.dashboard.management.models} icon={<Layers className="h-5 w-5" />}>
+              <NavLink
+                href={AppRoutes.dashboard.management.models}
+                icon={<Layers className="h-5 w-5" />}
+              >
                 Models
               </NavLink>
-              <NavLink href={AppRoutes.dashboard.management.features} icon={<Sparkles className="h-5 w-5" />}>
+              <NavLink
+                href={AppRoutes.dashboard.management.features}
+                icon={<Sparkles className="h-5 w-5" />}
+              >
                 Features
               </NavLink>
-              <NavLink href={AppRoutes.dashboard.management.bodyStyles} icon={<Caravan className="h-5 w-5" />}>
+              <NavLink
+                href={AppRoutes.dashboard.management.bodyStyles}
+                icon={<Caravan className="h-5 w-5" />}
+              >
                 Body Styles
               </NavLink>
-              <NavLink href={AppRoutes.dashboard.management.conditions} icon={<Thermometer className="h-5 w-5" />}>
+              <NavLink
+                href={AppRoutes.dashboard.management.conditions}
+                icon={<Thermometer className="h-5 w-5" />}
+              >
                 Conditions
               </NavLink>
               {/* <NavLink href={AppRoutes.dashboard.management.users} icon={<Users2 className="h-5 w-5" />}>

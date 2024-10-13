@@ -5,12 +5,12 @@ export const metadata = {
   title: 'Laravel',
 };
 
-const FrontOfficeLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const FrontOfficeLayout: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   return (
     <AppProvider>
-      <main className='bg-background'>
-       {children}
-      </main>
+      <main className="bg-background">{children}</main>
       <Footer />
     </AppProvider>
   );

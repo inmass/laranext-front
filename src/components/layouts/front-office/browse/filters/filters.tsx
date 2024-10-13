@@ -5,9 +5,9 @@ import DesktopFilters from '@/components/layouts/front-office/browse/filters/des
 import MobileFilters from './mobile-filters';
 
 interface FilterProps {
-    params: CarListingsParams;
-    setParams: (params: CarListingsParams) => void;
-    className?: string;
+  params: CarListingsParams;
+  setParams: (params: CarListingsParams) => void;
+  className?: string;
 }
 
 const Filters: React.FC<FilterProps> = ({ params, setParams, className }) => {
@@ -22,19 +22,39 @@ const Filters: React.FC<FilterProps> = ({ params, setParams, className }) => {
   };
 
   const handleMakeChange = (value: string) => {
-    setParams({ ...params, filters: { ...params.filters, make_id: value }, page: 1 });
+    setParams({
+      ...params,
+      filters: { ...params.filters, make_id: value },
+      page: 1,
+    });
   };
 
   const handleBodyStyleChange = (value: string) => {
-    setParams({ ...params, filters: { ...params.filters, body_style_id: value }, page: 1 });
+    setParams({
+      ...params,
+      filters: { ...params.filters, body_style_id: value },
+      page: 1,
+    });
   };
 
   const handleConditionChange = (value: string) => {
-    setParams({ ...params, filters: { ...params.filters, condition_id: value }, page: 1 });
+    setParams({
+      ...params,
+      filters: { ...params.filters, condition_id: value },
+      page: 1,
+    });
   };
 
   const handlePriceChange = (value: number[]) => {
-    setParams({ ...params, filters: { ...params.filters, price_gte: value[0].toString(), price_lte: value[1].toString() }, page: 1 });
+    setParams({
+      ...params,
+      filters: {
+        ...params.filters,
+        price_gte: value[0].toString(),
+        price_lte: value[1].toString(),
+      },
+      page: 1,
+    });
   };
 
   const handleTransmissionChange = (type: string, checked: boolean) => {
@@ -63,34 +83,34 @@ const Filters: React.FC<FilterProps> = ({ params, setParams, className }) => {
 
   return (
     <>
-        <DesktopFilters
-            handleReset={handleReset}
-            handleMakeChange={handleMakeChange}
-            handleBodyStyleChange={handleBodyStyleChange}
-            handleConditionChange={handleConditionChange}
-            handlePriceChange={handlePriceChange}
-            transmissionFilters={transmissionFilters}
-            handleTransmissionChange={handleTransmissionChange}
-            fuelTypeFilters={fuelTypeFilters}
-            handleFuelTypeChange={handleFuelTypeChange}
-            params={params}
-            setParams={setParams}
-            className={className}
-        />
-        <MobileFilters
-            handleReset={handleReset}
-            handleMakeChange={handleMakeChange}
-            handleBodyStyleChange={handleBodyStyleChange}
-            handleConditionChange={handleConditionChange}
-            handlePriceChange={handlePriceChange}
-            transmissionFilters={transmissionFilters}
-            handleTransmissionChange={handleTransmissionChange}
-            fuelTypeFilters={fuelTypeFilters}
-            handleFuelTypeChange={handleFuelTypeChange}
-            params={params}
-            setParams={setParams}
-            className={className}
-        />
+      <DesktopFilters
+        handleReset={handleReset}
+        handleMakeChange={handleMakeChange}
+        handleBodyStyleChange={handleBodyStyleChange}
+        handleConditionChange={handleConditionChange}
+        handlePriceChange={handlePriceChange}
+        transmissionFilters={transmissionFilters}
+        handleTransmissionChange={handleTransmissionChange}
+        fuelTypeFilters={fuelTypeFilters}
+        handleFuelTypeChange={handleFuelTypeChange}
+        params={params}
+        setParams={setParams}
+        className={className}
+      />
+      <MobileFilters
+        handleReset={handleReset}
+        handleMakeChange={handleMakeChange}
+        handleBodyStyleChange={handleBodyStyleChange}
+        handleConditionChange={handleConditionChange}
+        handlePriceChange={handlePriceChange}
+        transmissionFilters={transmissionFilters}
+        handleTransmissionChange={handleTransmissionChange}
+        fuelTypeFilters={fuelTypeFilters}
+        handleFuelTypeChange={handleFuelTypeChange}
+        params={params}
+        setParams={setParams}
+        className={className}
+      />
     </>
   );
 };

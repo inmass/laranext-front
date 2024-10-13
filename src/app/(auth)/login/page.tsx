@@ -24,7 +24,8 @@ const Login = () => {
   const router: any = useRouter();
   const t = useTranslations('Login');
 
-  const redirectIfAuthenticated = new URLSearchParams(window.location.search).get('next') || '/dashboard';
+  const redirectIfAuthenticated =
+    new URLSearchParams(window.location.search).get('next') || '/dashboard';
   const { login } = useAuth({
     middleware: 'guest',
     redirectIfAuthenticated: redirectIfAuthenticated,
@@ -110,10 +111,11 @@ const Login = () => {
                 onChange={(event) => setShouldRemember(event.target.checked)}
               />
 
-              <span className="ml-2 text-sm text-muted-foreground">{t('rememberMe')}</span>
+              <span className="ml-2 text-sm text-muted-foreground">
+                {t('rememberMe')}
+              </span>
             </label>
           </div>
-
 
           <div className="flex items-center justify-end mt-4">
             <Link

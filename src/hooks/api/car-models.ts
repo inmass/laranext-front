@@ -1,4 +1,9 @@
-import { useMutation, useQuery, useQueryClient, UseQueryResult } from '@tanstack/react-query';
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+  UseQueryResult,
+} from '@tanstack/react-query';
 import axios from '@/lib/axios';
 import ApiEndpoints from '@/constants/api-endpoints';
 import { CarModelType } from '@/types/car-model';
@@ -14,17 +19,19 @@ interface CarModelsResponse {
   [key: string]: any;
 }
 
-export interface CarModelsParams extends GetRequestParams {};
+export interface CarModelsParams extends GetRequestParams {}
 
 export const getCarModels = (
-  params: GetRequestParams,
+  params: GetRequestParams
 ): UseQueryResult<CarModelsResponse, Error> => {
-  
   return useQuery({
     queryKey: ['carModels', params],
     queryFn: async () => {
       const apiParams = buildApiParams(params);
-      const { data } = await axios.get<CarModelsResponse>(ApiEndpoints.carModels, { params: apiParams });
+      const { data } = await axios.get<CarModelsResponse>(
+        ApiEndpoints.carModels,
+        { params: apiParams }
+      );
       return data;
     },
 
@@ -36,11 +43,11 @@ export const getCarModels = (
 interface CreateMakeFormData {
   name: string;
   make_id: string;
-};
+}
 
 interface UpdateMakeFormData extends CreateMakeFormData {
   id: number;
-};
+}
 
 export const useCreateCarModel = () => {
   const queryClient = useQueryClient();
@@ -48,7 +55,10 @@ export const useCreateCarModel = () => {
 
   return useMutation({
     mutationFn: async (data: CreateMakeFormData) => {
-      const { data: response } = await axios.post<MakeType>(ApiEndpoints.carModels, data);
+      const { data: response } = await axios.post<MakeType>(
+        ApiEndpoints.carModels,
+        data
+      );
       return response;
     },
     onSuccess: () => {
@@ -66,7 +76,10 @@ export const useUpdateCarModel = () => {
 
   return useMutation({
     mutationFn: async (data: UpdateMakeFormData) => {
-      const { data: response } = await axios.put<MakeType>(`${ApiEndpoints.carModels}/${data.id}`, data);
+      const { data: response } = await axios.put<MakeType>(
+        `${ApiEndpoints.carModels}/${data.id}`,
+        data
+      );
       return response;
     },
     onSuccess: () => {

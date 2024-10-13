@@ -11,7 +11,7 @@ type RoleType = 'admin' | 'user';
 interface AuthProps {
   middleware?: 'auth' | 'guest';
   redirectIfAuthenticated?: string;
-  requiredRole?: RoleType|RoleType[];
+  requiredRole?: RoleType | RoleType[];
 }
 
 interface RegisterProps {
@@ -68,11 +68,12 @@ export const useAuth = ({
       return true;
     }
 
-    return typeof requiredRole === 'string' ? user.role === requiredRole : requiredRole.includes(user.role);
-  }
+    return typeof requiredRole === 'string'
+      ? user.role === requiredRole
+      : requiredRole.includes(user.role);
+  };
 
   const register = async ({ setErrors, ...props }: RegisterProps) => {
-
     setErrors([]);
 
     axios
@@ -86,7 +87,6 @@ export const useAuth = ({
   };
 
   const login = async ({ setErrors, setStatus, ...props }: LoginProps) => {
-
     setErrors([]);
     setStatus(null);
 
@@ -105,7 +105,6 @@ export const useAuth = ({
     setStatus,
     email,
   }: ForgotPasswordProps) => {
-
     setErrors([]);
     setStatus(null);
 
@@ -124,14 +123,15 @@ export const useAuth = ({
     setStatus,
     ...props
   }: ResetPasswordProps) => {
-
     setErrors([]);
     setStatus(null);
 
     axios
       .post(ApiEndpoints.auth.resetPassword, { ...props, token: params.token })
       .then((response) =>
-        router.push(ApiEndpoints.auth.login + '?reset=' + btoa(response.data.status))
+        router.push(
+          ApiEndpoints.auth.login + '?reset=' + btoa(response.data.status)
+        )
       )
       .catch((error) => {
         if (error.response.status !== 422) throw error;
@@ -154,13 +154,15 @@ export const useAuth = ({
     if (!error) {
       await axios.post(ApiEndpoints.auth.logout).then(() => mutateUser());
     }
-    const next = (window.location.pathname !== ApiEndpoints.auth.login) && withRedirect ? window.location.pathname : '';
+    const next =
+      window.location.pathname !== ApiEndpoints.auth.login && withRedirect
+        ? window.location.pathname
+        : '';
 
     window.location.href = `${ApiEndpoints.auth.login}?next=${next}`;
   };
 
   const socialLogin = async (provider: socialProviders) => {
-
     axios.post(ApiEndpoints.auth.SocialLogin(provider)).then((response) => {
       if (!response.data?.url) {
         throw new Error('Invalid response');
@@ -170,11 +172,12 @@ export const useAuth = ({
   };
 
   const setLocale = async (newLocale: string) => {
-    await axios.post(ApiEndpoints.auth.setLocale, { locale: newLocale })
+    await axios
+      .post(ApiEndpoints.auth.setLocale, { locale: newLocale })
       .then((response) => {
         mutateUser();
       });
-  }
+  };
 
   useEffect(() => {
     if (middleware === 'guest' && redirectIfAuthenticated && user) {

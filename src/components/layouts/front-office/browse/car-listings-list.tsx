@@ -1,4 +1,7 @@
-import { CarListingsParams, CarListingsResponse } from '@/hooks/api/car-listings';
+import {
+  CarListingsParams,
+  CarListingsResponse,
+} from '@/hooks/api/car-listings';
 import { cn } from '@/lib/utils';
 import TableFooter from '@/components/layouts/table/table-footer';
 import { useTranslations } from 'next-intl';
@@ -11,30 +14,33 @@ interface CarListingsListProps {
   className?: string;
 }
 
-const CarListingsList = ({ data, params, setParams, className }: CarListingsListProps) => {
-
+const CarListingsList = ({
+  data,
+  params,
+  setParams,
+  className,
+}: CarListingsListProps) => {
   const carListings = data?.data;
   const t = useTranslations('FrontOffice.CarListings');
   // const t = (key: string) => key;
 
   return (
-    <div className={cn(
-      'p-4 md:pl-8 pt-16 pb-40',
-      className
-    )}>
+    <div className={cn('p-4 md:pl-8 pt-16 pb-40', className)}>
       <h2 className="text-3xl font-bold mb-4">{t('carListings')}</h2>
-      <div className={cn('products grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 gap-y-12')}>
-        {
-          carListings && carListings.length > 0 ? 
-          (carListings.map((carListing) => (
+      <div
+        className={cn(
+          'products grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 gap-y-12'
+        )}
+      >
+        {carListings && carListings.length > 0 ? (
+          carListings.map((carListing) => (
             <CarListingCard carListing={carListing} />
           ))
         ) : (
           <div className="col-span-3">
             <p>{t('noListingsFound')}</p>
           </div>
-        )
-      }
+        )}
       </div>
 
       <TableFooter

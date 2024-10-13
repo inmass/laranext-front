@@ -8,7 +8,6 @@ import { asset } from '@/lib/helpers';
 import { cn } from '@/lib/utils';
 
 const HowItWorks: React.FC<{ className?: string }> = ({ className }) => {
-
   const t = useTranslations('FrontOffice.HowItWorks');
   const steps = [
     {
@@ -25,31 +24,36 @@ const HowItWorks: React.FC<{ className?: string }> = ({ className }) => {
     },
   ];
 
-    return (
-        <section className={cn("relative bg-[#020817] text-white py-16 overflow-hidden md:p-40", className)}>
-            <Image
-                src={ asset('images/layout/bmw-green.webp') }
-                alt="Background"
-                layout="fill"
-                objectFit="cover"
-                quality={100}
-                className="opacity-[0.2]"
-            />
-            <div className="container mx-auto px-4 z-10">
-                <h2 className="text-3xl font-bold mb-12 text-center">{t('title')}</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {steps.map((step, index) => (
-                    <div key={index} className="text-center">
-                    <div className="mb-4 flex items-center justify-center">
-                        {step.icon}
-                    </div>
-                    <p className="">{step.title}</p>
-                    </div>
-                ))}
-                </div>
+  return (
+    <section
+      className={cn(
+        'relative bg-[#020817] text-white py-16 overflow-hidden md:p-40',
+        className
+      )}
+    >
+      <Image
+        src={asset('images/layout/bmw-green.webp')}
+        alt="Background"
+        layout="fill"
+        objectFit="cover"
+        quality={100}
+        className="opacity-[0.2]"
+      />
+      <div className="container mx-auto px-4 z-10">
+        <h2 className="text-3xl font-bold mb-12 text-center">{t('title')}</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {steps.map((step, index) => (
+            <div key={index} className="text-center">
+              <div className="mb-4 flex items-center justify-center">
+                {step.icon}
+              </div>
+              <p className="">{step.title}</p>
             </div>
-        </section>
-    );
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default HowItWorks;

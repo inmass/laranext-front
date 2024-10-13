@@ -5,7 +5,7 @@ import JoinUs from '@/components/layouts/front-office/home/join-us';
 import { getAppName } from '@/lib/helpers';
 
 export const metadata = {
-  title: getAppName() + ' - ' + 'Home'
+  title: getAppName() + ' - ' + 'Home',
 };
 
 const Home = () => {
@@ -13,7 +13,7 @@ const Home = () => {
     <>
       <Hero />
       <AboutUs />
-      <HowItWorks/>
+      <HowItWorks />
       <JoinUs className="mb-20" />
     </>
   );

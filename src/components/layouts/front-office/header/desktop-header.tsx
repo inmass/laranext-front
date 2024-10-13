@@ -11,56 +11,72 @@ import { User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface DesktopHeaderProps {
-    isLandingPage?: boolean;
+  isLandingPage?: boolean;
 }
 
-const DesktopHeader: React.FC<DesktopHeaderProps> = ({ isLandingPage = false }) => {
-    const textClass = isLandingPage ? 'text-white' : 'text-foreground bg-background';
-    const t = useTranslations('FrontOffice.Header');
-    const headerRef = useRef<HTMLElement>(null);
-    const [isFixed, setIsFixed] = useState(false);
+const DesktopHeader: React.FC<DesktopHeaderProps> = ({
+  isLandingPage = false,
+}) => {
+  const textClass = isLandingPage
+    ? 'text-white'
+    : 'text-foreground bg-background';
+  const t = useTranslations('FrontOffice.Header');
+  const headerRef = useRef<HTMLElement>(null);
+  const [isFixed, setIsFixed] = useState(false);
 
-    useEffect(() => {
-        const header = headerRef.current;
-        if (!header) return;
+  useEffect(() => {
+    const header = headerRef.current;
+    if (!header) return;
 
-        const handleScroll = () => {
-            const headerHeight = header.offsetHeight;
-            setIsFixed(window.scrollY > headerHeight);
-        };
+    const handleScroll = () => {
+      const headerHeight = header.offsetHeight;
+      setIsFixed(window.scrollY > headerHeight);
+    };
 
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-    return (
-        <>
-            <header 
-                ref={headerRef}
-                className={cn(
-                    `hidden lg:flex justify-between items-center p-6 px-10 ${textClass} w-full z-10`,
-                    'transition-all duration-300 ease-in-out', // Add transition
-                    {
-                        'fixed': isFixed || isLandingPage,
-                        'bg-[#020817]/95 text-white': isFixed && isLandingPage,
-                    }
-                )}
-            >
-                <div className="text-xl font-bold"><Link href={AppRoutes.frontOffice.home}>{String(getAppName()).toUpperCase()}</Link></div>
-                <nav>
-                  <ul className="flex space-x-10">
-                    <li><Link href={AppRoutes.frontOffice.browse}>{t('browseCars')}</Link></li>
-                    <li><Link href={AppRoutes.dashboard.carListings}>{t('sellYourCar')}</Link></li>
-                    <li><Link href={AppRoutes.frontOffice.about}>{t('aboutUs')}</Link></li>
-                  </ul>
-                </nav>
-                <div className="flex space-x-5 justify-end items-center">
-                    <Link href={AppRoutes.dashboard.home} className="flex items-center">
-                        <button aria-label="User account">
-                            <User />
-                        </button>
-                    </Link>
-                    {/* <Link href="#" className="flex items-center">
+  return (
+    <>
+      <header
+        ref={headerRef}
+        className={cn(
+          `hidden lg:flex justify-between items-center p-6 px-10 ${textClass} w-full z-10`,
+          'transition-all duration-300 ease-in-out', // Add transition
+          {
+            fixed: isFixed || isLandingPage,
+            'bg-[#020817]/95 text-white': isFixed && isLandingPage,
+          }
+        )}
+      >
+        <div className="text-xl font-bold">
+          <Link href={AppRoutes.frontOffice.home}>
+            {String(getAppName()).toUpperCase()}
+          </Link>
+        </div>
+        <nav>
+          <ul className="flex space-x-10">
+            <li>
+              <Link href={AppRoutes.frontOffice.browse}>{t('browseCars')}</Link>
+            </li>
+            <li>
+              <Link href={AppRoutes.dashboard.carListings}>
+                {t('sellYourCar')}
+              </Link>
+            </li>
+            <li>
+              <Link href={AppRoutes.frontOffice.about}>{t('aboutUs')}</Link>
+            </li>
+          </ul>
+        </nav>
+        <div className="flex space-x-5 justify-end items-center">
+          <Link href={AppRoutes.dashboard.home} className="flex items-center">
+            <button aria-label="User account">
+              <User />
+            </button>
+          </Link>
+          {/* <Link href="#" className="flex items-center">
                         <button aria-label="Search">
                             <Search />
                         </button>
@@ -70,17 +86,17 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({ isLandingPage = false }) 
                             <ShoppingCart />
                         </button>
                     </Link> */}
-                    <LanguageSwitcher />
-                    <ThemeToggle />
-                    {/* {
+          <LanguageSwitcher />
+          <ThemeToggle />
+          {/* {
                         !isLandingPage && (
                         )
                     } */}
-                </div>
-            </header>
-            {isFixed && <div style={{ height: headerRef.current?.offsetHeight }} />}
-        </>
-    );
+        </div>
+      </header>
+      {isFixed && <div style={{ height: headerRef.current?.offsetHeight }} />}
+    </>
+  );
 };
 
 export default DesktopHeader;

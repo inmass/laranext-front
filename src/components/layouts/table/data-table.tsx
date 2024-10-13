@@ -30,7 +30,10 @@ export function DataTable<T>({
   error,
   onParamsChange,
 }: DataTableProps<T>) {
-  const [sortKey, setSortKey] = useState<{ key: string; direction: 'asc' | 'desc' } | null>(defaultSort || null);
+  const [sortKey, setSortKey] = useState<{
+    key: string;
+    direction: 'asc' | 'desc';
+  } | null>(defaultSort || null);
   const [filters, setFilters] = useState<Record<string, string>>({});
   const [page, setPage] = useState(currentPage);
 
@@ -73,72 +76,77 @@ export function DataTable<T>({
   };
 
   return (
-      <>
-        <TableFilters
-          columns={columns}
-          filters={filters}
-          handleFilter={handleFilter}
-          setFilters={setFilters}
-        />
-              
-        <Table>
-          <TableHeader className=' !rounded-br !rounded-tl  border-b-[3px]'>
-            <TableRow>
-              {columns.map((column, index) => (
-                <TableHead key={index} className={column.className}>
-                  <div className="flex items-center font-bold">
-                    {column.header}
-                    {column.sortable && (
-                      <button
-                        onClick={() => handleSort(column.accessor as string)}
-                        className="ml-2 h-8 w-8 p-0"
-                      >
-                        {sortKey?.key === column.accessor ? (
-                          sortKey.direction === 'asc' ? (
-                            <ArrowUp className="h-4 w-4 text-primary" />
-                          ) : (
-                            <ArrowDown className="h-4 w-4 text-primary" />
-                          )
-                        ) : (
-                          <ArrowUpDown className="h-4 w-4 text-muted-foreground" />
-                        )}
-                      </button>
-                    )}
-                  </div>
-                </TableHead>
-              ))}
-              <TableHead>Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {isError ? (
-              <TableRow>
-                <TableCell colSpan={columns.length + 1} className="text-center">
-                  {error?.message}
-                </TableCell>
-              </TableRow>
-            ) : isLoading ? (
-              <TableRow>
-                <TableCell colSpan={columns.length + 1} className="text-center">
-                  <ClipLoader className='text-muted-foreground' />
-                </TableCell>
-              </TableRow>
-            ) : (
-              data.map((item) => (
-                <DataTableRow key={(item as any).id} item={item} columns={columns} actions={actions} actionsAsDropdown={actionsAsDropdown} />
-              ))
-            )
-            }
-          </TableBody>
-        </Table>
+    <>
+      <TableFilters
+        columns={columns}
+        filters={filters}
+        handleFilter={handleFilter}
+        setFilters={setFilters}
+      />
 
-        <TableFooter
-          currentPage={page}
-          itemsPerPage={itemsPerPage}
-          totalItems={totalItems}
-          prevPage={prevPage}
-          nextPage={nextPage}
-        />
-      </>
+      <Table>
+        <TableHeader className=" !rounded-br !rounded-tl  border-b-[3px]">
+          <TableRow>
+            {columns.map((column, index) => (
+              <TableHead key={index} className={column.className}>
+                <div className="flex items-center font-bold">
+                  {column.header}
+                  {column.sortable && (
+                    <button
+                      onClick={() => handleSort(column.accessor as string)}
+                      className="ml-2 h-8 w-8 p-0"
+                    >
+                      {sortKey?.key === column.accessor ? (
+                        sortKey.direction === 'asc' ? (
+                          <ArrowUp className="h-4 w-4 text-primary" />
+                        ) : (
+                          <ArrowDown className="h-4 w-4 text-primary" />
+                        )
+                      ) : (
+                        <ArrowUpDown className="h-4 w-4 text-muted-foreground" />
+                      )}
+                    </button>
+                  )}
+                </div>
+              </TableHead>
+            ))}
+            <TableHead>Actions</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {isError ? (
+            <TableRow>
+              <TableCell colSpan={columns.length + 1} className="text-center">
+                {error?.message}
+              </TableCell>
+            </TableRow>
+          ) : isLoading ? (
+            <TableRow>
+              <TableCell colSpan={columns.length + 1} className="text-center">
+                <ClipLoader className="text-muted-foreground" />
+              </TableCell>
+            </TableRow>
+          ) : (
+            data.map((item) => (
+              <DataTableRow
+                key={(item as any).id}
+                item={item}
+                columns={columns}
+                actions={actions}
+                actionsAsDropdown={actionsAsDropdown}
+              />
+            ))
+          )}
+        </TableBody>
+      </Table>
+
+      <TableFooter
+        currentPage={page}
+        itemsPerPage={itemsPerPage}
+        totalItems={totalItems}
+        prevPage={prevPage}
+        nextPage={nextPage}
+      />
+    </>
   );
 }

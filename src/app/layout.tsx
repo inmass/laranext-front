@@ -15,9 +15,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
     <html className={poppinsFont.className}>
       <body className="flex min-h-screen w-full flex-col ease-in-out">
         <ThemeProvider>
-          <LanguageProvider>
-            {children}
-          </LanguageProvider>
+          <LanguageProvider>{children}</LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

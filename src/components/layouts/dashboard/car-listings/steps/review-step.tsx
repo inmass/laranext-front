@@ -14,16 +14,22 @@ const ReviewStep: React.FC = () => {
 
   const { lookupData } = useLookup();
 
-  const lookupFunctions = useMemo(() => ({
-    getMakeName: (id: string) => lookupData.makes[id] || id,
-    getModelName: (id: string) => lookupData.models[id] || id,
-    getBodyStyleName: (id: string) => lookupData.bodyStyles[id] || id,
-    getConditionName: (id: string) => lookupData.conditions[id] || id,
-    getFeatureName: (id: string) => lookupData.features[id] || id,
-  }), [lookupData]);
+  const lookupFunctions = useMemo(
+    () => ({
+      getMakeName: (id: string) => lookupData.makes[id] || id,
+      getModelName: (id: string) => lookupData.models[id] || id,
+      getBodyStyleName: (id: string) => lookupData.bodyStyles[id] || id,
+      getConditionName: (id: string) => lookupData.conditions[id] || id,
+      getFeatureName: (id: string) => lookupData.features[id] || id,
+    }),
+    [lookupData]
+  );
 
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    }).format(amount);
   };
 
   return (
@@ -35,8 +41,18 @@ const ReviewStep: React.FC = () => {
             <div>
               <p className="font-medium text-gray-500">{t('make')}:</p>
               {/* <div className="flex items-center"> */}
-                <Image src={getMakeImage(lookupFunctions.getMakeName(values.make_id).replace(/\s+/g, '-').toLowerCase())} alt={lookupFunctions.getMakeName(values.make_id)} width={60} height={30} />
-                {/* <p>{lookupFunctions.getMakeName(values.make_id)}</p> */}
+              <Image
+                src={getMakeImage(
+                  lookupFunctions
+                    .getMakeName(values.make_id)
+                    .replace(/\s+/g, '-')
+                    .toLowerCase()
+                )}
+                alt={lookupFunctions.getMakeName(values.make_id)}
+                width={60}
+                height={30}
+              />
+              {/* <p>{lookupFunctions.getMakeName(values.make_id)}</p> */}
               {/* </div> */}
             </div>
             <div>
@@ -67,7 +83,9 @@ const ReviewStep: React.FC = () => {
             </div>
             <div>
               <p className="font-medium text-gray-500">{t('mileage')}:</p>
-              <p>{t('mileageValue', { value: values.mileage.toLocaleString() })}</p>
+              <p>
+                {t('mileageValue', { value: values.mileage.toLocaleString() })}
+              </p>
             </div>
             <div>
               <p className="font-medium text-gray-500">{t('transmission')}:</p>
@@ -80,7 +98,7 @@ const ReviewStep: React.FC = () => {
           <h4 className="text-lg font-bold mb-2">{t('features')}</h4>
           <ul className="list-disc list-inside">
             {values.features.map((feature, index) => (
-              <li key={index}>{lookupFunctions.getFeatureName(feature)}</li>  
+              <li key={index}>{lookupFunctions.getFeatureName(feature)}</li>
             ))}
           </ul>
         </section>
@@ -91,13 +109,19 @@ const ReviewStep: React.FC = () => {
             <div>
               <p className="font-medium text-gray-500">{t('exteriorColor')}:</p>
               <div className="flex items-center">
-                <div className="w-12 h-6 rounded-full mr-2 p-2 border-2 border-muted" style={{ backgroundColor: values.exterior_color }}></div>
+                <div
+                  className="w-12 h-6 rounded-full mr-2 p-2 border-2 border-muted"
+                  style={{ backgroundColor: values.exterior_color }}
+                ></div>
               </div>
             </div>
             <div>
               <p className="font-medium text-gray-500">{t('interiorColor')}:</p>
               <div className="flex items-center">
-                <div className="w-12 h-6 rounded-full mr-2 p-2 border-2 border-muted" style={{ backgroundColor: values.interior_color }}></div>
+                <div
+                  className="w-12 h-6 rounded-full mr-2 p-2 border-2 border-muted"
+                  style={{ backgroundColor: values.interior_color }}
+                ></div>
               </div>
             </div>
           </div>
@@ -112,7 +136,9 @@ const ReviewStep: React.FC = () => {
             </div>
             {values.original_price ? (
               <div>
-                <p className="font-medium text-gray-500">{t('originalPrice')}:</p>
+                <p className="font-medium text-gray-500">
+                  {t('originalPrice')}:
+                </p>
                 <p>{formatCurrency(values.original_price)}</p>
               </div>
             ) : null}
@@ -122,7 +148,10 @@ const ReviewStep: React.FC = () => {
 
       <section>
         <h4 className="text-lg font-bold mb-2">{t('description')}</h4>
-        <div className="prose prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: values.description }}></div>
+        <div
+          className="prose prose-sm max-w-none"
+          dangerouslySetInnerHTML={{ __html: values.description }}
+        ></div>
       </section>
 
       <section>
@@ -130,18 +159,24 @@ const ReviewStep: React.FC = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {values.images.map((img, index) => (
             <div key={index} className="relative">
-              <Image src={asset(img.image)} alt={t('carImageAlt', { index: index + 1 })} width={200} height={150} className="object-cover rounded" />
+              <Image
+                src={asset(img.image)}
+                alt={t('carImageAlt', { index: index + 1 })}
+                width={200}
+                height={150}
+                className="object-cover rounded"
+              />
               {img.is_primary && (
-                <span className="absolute top-0 left-0 bg-blue-500 text-white text-xs px-2 py-1 rounded-br rounded-tl"><Star size={16} /></span>
+                <span className="absolute top-0 left-0 bg-blue-500 text-white text-xs px-2 py-1 rounded-br rounded-tl">
+                  <Star size={16} />
+                </span>
               )}
             </div>
           ))}
         </div>
       </section>
 
-      <p className="text-sm text-gray-500 mt-4">
-        {t('reviewInstructions')}
-      </p>
+      <p className="text-sm text-gray-500 mt-4">{t('reviewInstructions')}</p>
     </div>
   );
 };

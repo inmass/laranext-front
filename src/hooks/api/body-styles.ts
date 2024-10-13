@@ -1,4 +1,9 @@
-import { useMutation, useQuery, useQueryClient, UseQueryResult } from '@tanstack/react-query';
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+  UseQueryResult,
+} from '@tanstack/react-query';
 import axios from '@/lib/axios';
 import ApiEndpoints from '@/constants/api-endpoints';
 import { BodyStyleType } from '@/types/body-style';
@@ -13,17 +18,19 @@ interface BodyStylesResponse {
   [key: string]: any;
 }
 
-export interface BodyStylesParams extends GetRequestParams {};
+export interface BodyStylesParams extends GetRequestParams {}
 
 export const getBodyStyles = (
-  params: GetRequestParams,
+  params: GetRequestParams
 ): UseQueryResult<BodyStylesResponse, Error> => {
-  
   return useQuery({
     queryKey: ['bodyStyles', params],
     queryFn: async () => {
       const apiParams = buildApiParams(params);
-      const { data } = await axios.get<BodyStylesResponse>(ApiEndpoints.bodyStyles, { params: apiParams });
+      const { data } = await axios.get<BodyStylesResponse>(
+        ApiEndpoints.bodyStyles,
+        { params: apiParams }
+      );
       return data;
     },
 
@@ -34,11 +41,11 @@ export const getBodyStyles = (
 
 interface CreateBodyStyleFormData {
   name: string;
-};
+}
 
 interface UpdateBodyStyleFormData extends CreateBodyStyleFormData {
   id: number;
-};
+}
 
 export const useCreateBodyStyle = () => {
   const queryClient = useQueryClient();
@@ -46,7 +53,10 @@ export const useCreateBodyStyle = () => {
 
   return useMutation({
     mutationFn: async (data: CreateBodyStyleFormData) => {
-      const { data: response } = await axios.post<BodyStyleType>(ApiEndpoints.bodyStyles, data);
+      const { data: response } = await axios.post<BodyStyleType>(
+        ApiEndpoints.bodyStyles,
+        data
+      );
       return response;
     },
     onSuccess: () => {
@@ -64,7 +74,10 @@ export const useUpdateBodyStyle = () => {
 
   return useMutation({
     mutationFn: async (data: UpdateBodyStyleFormData) => {
-      const { data: response } = await axios.put<BodyStyleType>(`${ApiEndpoints.bodyStyles}/${data.id}`, data);
+      const { data: response } = await axios.put<BodyStyleType>(
+        `${ApiEndpoints.bodyStyles}/${data.id}`,
+        data
+      );
       return response;
     },
     onSuccess: () => {

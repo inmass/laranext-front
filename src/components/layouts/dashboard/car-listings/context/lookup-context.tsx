@@ -15,7 +15,9 @@ interface LookupContextType {
 
 const LookupContext = createContext<LookupContextType | undefined>(undefined);
 
-export const LookupProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const LookupProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [lookupData, setLookupData] = useState<LookupData>({
     makes: {},
     models: {},
@@ -24,12 +26,15 @@ export const LookupProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     features: {},
   });
 
-  const addLookupData = useCallback((key: keyof LookupData, id: string, name: string) => {
-    setLookupData(prev => ({
-      ...prev,
-      [key]: { ...prev[key], [id]: name }
-    }));
-  }, []);
+  const addLookupData = useCallback(
+    (key: keyof LookupData, id: string, name: string) => {
+      setLookupData((prev) => ({
+        ...prev,
+        [key]: { ...prev[key], [id]: name },
+      }));
+    },
+    []
+  );
 
   return (
     <LookupContext.Provider value={{ lookupData, addLookupData }}>

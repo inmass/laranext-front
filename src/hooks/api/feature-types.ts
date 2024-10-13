@@ -1,4 +1,9 @@
-import { useMutation, useQuery, useQueryClient, UseQueryResult } from '@tanstack/react-query';
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+  UseQueryResult,
+} from '@tanstack/react-query';
 import axios from '@/lib/axios';
 import ApiEndpoints from '@/constants/api-endpoints';
 import { FeatureTypeType } from '@/types/feature-type';
@@ -13,17 +18,19 @@ interface FeatureTypesResponse {
   [key: string]: any;
 }
 
-export interface FeatureTypesParams extends GetRequestParams {};
+export interface FeatureTypesParams extends GetRequestParams {}
 
 export const getFeatureTypes = (
-  params: FeatureTypesParams,
+  params: FeatureTypesParams
 ): UseQueryResult<FeatureTypesResponse, Error> => {
-  
   return useQuery({
     queryKey: ['featureTypes', params],
     queryFn: async () => {
       const apiParams = buildApiParams(params);
-      const { data } = await axios.get<FeatureTypesResponse>(ApiEndpoints.featureTypes, { params: apiParams });
+      const { data } = await axios.get<FeatureTypesResponse>(
+        ApiEndpoints.featureTypes,
+        { params: apiParams }
+      );
       return data;
     },
 
@@ -34,11 +41,11 @@ export const getFeatureTypes = (
 
 interface CreateFeatureTypeFormData {
   name: string;
-};
+}
 
 interface UpdateFeatureTypeFormData extends CreateFeatureTypeFormData {
   id: number;
-};
+}
 
 export const useCreateFeatureType = () => {
   const queryClient = useQueryClient();
@@ -46,7 +53,10 @@ export const useCreateFeatureType = () => {
 
   return useMutation({
     mutationFn: async (data: CreateFeatureTypeFormData) => {
-      const { data: response } = await axios.post<FeatureTypeType>(ApiEndpoints.featureTypes, data);
+      const { data: response } = await axios.post<FeatureTypeType>(
+        ApiEndpoints.featureTypes,
+        data
+      );
       return response;
     },
     onSuccess: () => {
@@ -64,7 +74,10 @@ export const useUpdateFeatureType = () => {
 
   return useMutation({
     mutationFn: async (data: UpdateFeatureTypeFormData) => {
-      const { data: response } = await axios.put<FeatureTypeType>(`${ApiEndpoints.featureTypes}/${data.id}`, data);
+      const { data: response } = await axios.put<FeatureTypeType>(
+        `${ApiEndpoints.featureTypes}/${data.id}`,
+        data
+      );
       return response;
     },
     onSuccess: () => {

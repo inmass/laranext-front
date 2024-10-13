@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { forwardRef } from 'react';
-import ReactPhoneInput, { PhoneInputProps as ReactPhoneInputProps } from 'react-phone-input-2';
+import ReactPhoneInput, {
+  PhoneInputProps as ReactPhoneInputProps,
+} from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { cn } from '@/lib/utils';
 
-export interface PhoneInputProps extends Omit<ReactPhoneInputProps, 'onChange'> {
+export interface PhoneInputProps
+  extends Omit<ReactPhoneInputProps, 'onChange'> {
   onChange?: (value: string) => void;
   className?: string;
 }

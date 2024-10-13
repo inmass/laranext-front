@@ -5,17 +5,16 @@ import DesktopHeader from '@/components/layouts/front-office/header/desktop-head
 import MobileHeader from '@/components/layouts/front-office/header/mobile-header';
 
 interface HeaderProps {
-    isLandingPage?: boolean;
+  isLandingPage?: boolean;
 }
 
 const Header: React.FC<HeaderProps> = ({ isLandingPage = false }) => {
-
-    return (
-        <>
-            <DesktopHeader isLandingPage={isLandingPage} />
-            <MobileHeader isLandingPage={isLandingPage} />
-        </>
-    );
-  };
+  return (
+    <>
+      <DesktopHeader isLandingPage={isLandingPage} />
+      <MobileHeader isLandingPage={isLandingPage} />
+    </>
+  );
+};
 
 export default Header;

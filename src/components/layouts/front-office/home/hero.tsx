@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React from 'react';
 import Image from 'next/image';
@@ -11,7 +11,6 @@ import AppRoutes from '@/constants/app-routes';
 
 // Hero component
 const Hero: React.FC = () => {
-
   const t = useTranslations('FrontOffice.Hero');
 
   return (
@@ -19,7 +18,7 @@ const Hero: React.FC = () => {
       <Header isLandingPage={true} />
       <div className="relative h-[90vh]">
         <Image
-          src={ asset('images/layout/hero-image.webp') }
+          src={asset('images/layout/hero-image.webp')}
           alt="Luxury watch background"
           layout="fill"
           objectFit="cover"
@@ -29,12 +28,10 @@ const Hero: React.FC = () => {
           <p className="text-xl mb-8 text-center">{t('description')}</p>
           <div className="flex space-x-4">
             <Link href={AppRoutes.frontOffice.browse}>
-              <Button className='md:text-md'>
-                {t('browseCars')}
-              </Button>
+              <Button className="md:text-md">{t('browseCars')}</Button>
             </Link>
             <Link href={AppRoutes.dashboard.home}>
-              <Button className='bg-[#F1F5F9] text-[#10172A] hover:bg-[#F1F5F9]/80 md:text-md'>
+              <Button className="bg-[#F1F5F9] text-[#10172A] hover:bg-[#F1F5F9]/80 md:text-md">
                 {t('sellYourCar')}
               </Button>
             </Link>

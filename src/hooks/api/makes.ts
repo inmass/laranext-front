@@ -1,4 +1,9 @@
-import { useMutation, useQuery, useQueryClient, UseQueryResult } from '@tanstack/react-query';
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+  UseQueryResult,
+} from '@tanstack/react-query';
 import axios from '@/lib/axios';
 import ApiEndpoints from '@/constants/api-endpoints';
 import { MakeType } from '@/types/make';
@@ -13,17 +18,18 @@ interface MakesResponse {
   [key: string]: any;
 }
 
-export interface MakesParams extends GetRequestParams {};
+export interface MakesParams extends GetRequestParams {}
 
 export const getMakes = (
-  params: MakesParams,
+  params: MakesParams
 ): UseQueryResult<MakesResponse, Error> => {
-  
   return useQuery({
     queryKey: ['makes', params],
     queryFn: async () => {
       const apiParams = buildApiParams(params);
-      const { data } = await axios.get<MakesResponse>(ApiEndpoints.makes, { params: apiParams });
+      const { data } = await axios.get<MakesResponse>(ApiEndpoints.makes, {
+        params: apiParams,
+      });
       return data;
     },
 
@@ -34,11 +40,11 @@ export const getMakes = (
 
 interface CreateMakeFormData {
   name: string;
-};
+}
 
 interface UpdateMakeFormData extends CreateMakeFormData {
   id: number;
-};
+}
 
 export const useCreateMake = () => {
   const queryClient = useQueryClient();
@@ -46,7 +52,10 @@ export const useCreateMake = () => {
 
   return useMutation({
     mutationFn: async (data: CreateMakeFormData) => {
-      const { data: response } = await axios.post<MakeType>(ApiEndpoints.makes, data);
+      const { data: response } = await axios.post<MakeType>(
+        ApiEndpoints.makes,
+        data
+      );
       return response;
     },
     onSuccess: () => {
@@ -64,7 +73,10 @@ export const useUpdateMake = () => {
 
   return useMutation({
     mutationFn: async (data: UpdateMakeFormData) => {
-      const { data: response } = await axios.put<MakeType>(`${ApiEndpoints.makes}/${data.id}`, data);
+      const { data: response } = await axios.put<MakeType>(
+        `${ApiEndpoints.makes}/${data.id}`,
+        data
+      );
       return response;
     },
     onSuccess: () => {
@@ -75,7 +87,6 @@ export const useUpdateMake = () => {
     },
   });
 };
-
 
 export const useDeleteMake = () => {
   const queryClient = useQueryClient();
@@ -92,4 +103,4 @@ export const useDeleteMake = () => {
       });
     },
   });
-}
+};

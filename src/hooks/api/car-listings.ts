@@ -1,4 +1,9 @@
-import { useMutation, useQuery, useQueryClient, UseQueryResult } from '@tanstack/react-query';
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+  UseQueryResult,
+} from '@tanstack/react-query';
 import axios from '@/lib/axios';
 import ApiEndpoints from '@/constants/api-endpoints';
 import { CarListingType } from '@/types/car-listing';
@@ -13,7 +18,7 @@ export interface CarListingsResponse {
   meta: Pagination;
 }
 
-export interface CarListingsParams extends GetRequestParams {};
+export interface CarListingsParams extends GetRequestParams {}
 
 export const getCarListings = (
   params: GetRequestParams
@@ -22,19 +27,26 @@ export const getCarListings = (
     queryKey: ['carListings', params],
     queryFn: async () => {
       const apiParams = buildApiParams(params);
-      const { data } = await axios.get<CarListingsResponse>(ApiEndpoints.carListings, { params: apiParams });
+      const { data } = await axios.get<CarListingsResponse>(
+        ApiEndpoints.carListings,
+        { params: apiParams }
+      );
       return data;
     },
     keepPreviousData: true,
     staleTime: 60 * 60 * 1000, // stale time means that the data will be considered fresh for 1 hour
   });
 };
-    
-export const getCarListing = (slug: string): UseQueryResult<CarListingType, Error> => {
+
+export const getCarListing = (
+  slug: string
+): UseQueryResult<CarListingType, Error> => {
   return useQuery({
     queryKey: ['carListing', slug],
     queryFn: async () => {
-      const { data } = await axios.get<{data: CarListingType}>(`${ApiEndpoints.carListings}/${slug}`);
+      const { data } = await axios.get<{ data: CarListingType }>(
+        `${ApiEndpoints.carListings}/${slug}`
+      );
       return data?.data;
     },
     keepPreviousData: true,
@@ -62,7 +74,7 @@ interface CreateCarListingFormData {
     image: File | string;
     is_primary: boolean;
   }[];
-};
+}
 
 interface UpdateCarListingFormData extends CreateCarListingFormData {
   id: number;
@@ -72,7 +84,7 @@ interface UpdateCarListingFormData extends CreateCarListingFormData {
     image: File | string;
     is_primary: boolean;
   }[];
-};
+}
 
 export const useCreateCarListing = (onSuccess?: () => void) => {
   const queryClient = useQueryClient();
@@ -81,11 +93,19 @@ export const useCreateCarListing = (onSuccess?: () => void) => {
   return useMutation({
     mutationFn: async (data: CreateCarListingFormData) => {
       const modifiedData = JSON.parse(JSON.stringify(data));
-      modifiedData.images = await Promise.all(data.images.map(async (img) => ({
-        image: typeof img.image === 'string' ? img.image : await fileToBase64(img.image),
-        is_primary: img.is_primary
-      })));
-      const { data: response } = await axios.post<CarListingType>(ApiEndpoints.carListings, modifiedData)
+      modifiedData.images = await Promise.all(
+        data.images.map(async (img) => ({
+          image:
+            typeof img.image === 'string'
+              ? img.image
+              : await fileToBase64(img.image),
+          is_primary: img.is_primary,
+        }))
+      );
+      const { data: response } = await axios.post<CarListingType>(
+        ApiEndpoints.carListings,
+        modifiedData
+      );
       return response;
     },
     onSuccess: (data) => {
@@ -93,7 +113,7 @@ export const useCreateCarListing = (onSuccess?: () => void) => {
       queryClient.refetchQueries({
         predicate: (query) => query.queryKey[0] === 'carListings',
       });
-      
+
       if (onSuccess) {
         onSuccess();
       }
@@ -116,7 +136,7 @@ export const useDeleteCarListing = () => {
       });
     },
   });
-}
+};
 
 export const useUpdateCarListing = (onSuccess?: () => void) => {
   const queryClient = useQueryClient();
@@ -125,12 +145,20 @@ export const useUpdateCarListing = (onSuccess?: () => void) => {
   return useMutation({
     mutationFn: async (data: UpdateCarListingFormData) => {
       const modifiedData = JSON.parse(JSON.stringify(data));
-      modifiedData.images = await Promise.all(data.images.map(async (img) => ({
-        id: img.id,
-        image: typeof img.image === 'string' ? img.image : await fileToBase64(img.image),
-        is_primary: img.is_primary
-      })));
-      const { data: response } = await axios.put<CarListingType>(`${ApiEndpoints.carListings}/${data.id}`, modifiedData)
+      modifiedData.images = await Promise.all(
+        data.images.map(async (img) => ({
+          id: img.id,
+          image:
+            typeof img.image === 'string'
+              ? img.image
+              : await fileToBase64(img.image),
+          is_primary: img.is_primary,
+        }))
+      );
+      const { data: response } = await axios.put<CarListingType>(
+        `${ApiEndpoints.carListings}/${data.id}`,
+        modifiedData
+      );
       return response;
     },
     onSuccess: (data) => {
@@ -138,13 +166,13 @@ export const useUpdateCarListing = (onSuccess?: () => void) => {
       queryClient.refetchQueries({
         predicate: (query) => query.queryKey[0] === 'carListings',
       });
-      
+
       if (onSuccess) {
         onSuccess();
       }
     },
   });
-}
+};
 
 export const useUpdateCarListingStatus = () => {
   const queryClient = useQueryClient();
@@ -161,4 +189,4 @@ export const useUpdateCarListingStatus = () => {
       });
     },
   });
-}
+};

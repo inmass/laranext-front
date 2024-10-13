@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 import { Filter, RefreshCcw, Search } from 'lucide-react';
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { CheckBox } from "@/components/ui/checkbox";
+import { CheckBox } from '@/components/ui/checkbox';
 import MakeSelect from '@/components/dynamic/make-select';
 import BodyStyleSelect from '@/components/dynamic/body-style-select';
 import ConditionSelect from '@/components/dynamic/condition-select';
@@ -14,18 +14,18 @@ import Slider from '@/components/ui/slider';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
 interface MobileFilterProps {
-    params: CarListingsParams;
-    setParams: (params: CarListingsParams) => void;
-    handleReset: () => void;
-    handleMakeChange: (value: string) => void;
-    handleBodyStyleChange: (value: string) => void;
-    handleConditionChange: (value: string) => void;
-    handlePriceChange: (value: number[]) => void;
-    transmissionFilters: string[];
-    handleTransmissionChange: (type: string, checked: boolean) => void;
-    fuelTypeFilters: string[];
-    handleFuelTypeChange: (type: string, checked: boolean) => void;
-    className?: string;
+  params: CarListingsParams;
+  setParams: (params: CarListingsParams) => void;
+  handleReset: () => void;
+  handleMakeChange: (value: string) => void;
+  handleBodyStyleChange: (value: string) => void;
+  handleConditionChange: (value: string) => void;
+  handlePriceChange: (value: number[]) => void;
+  transmissionFilters: string[];
+  handleTransmissionChange: (type: string, checked: boolean) => void;
+  fuelTypeFilters: string[];
+  handleFuelTypeChange: (type: string, checked: boolean) => void;
+  className?: string;
 }
 
 const MobileFilters: React.FC<MobileFilterProps> = ({
@@ -40,7 +40,7 @@ const MobileFilters: React.FC<MobileFilterProps> = ({
   handleTransmissionChange,
   fuelTypeFilters,
   handleFuelTypeChange,
-  className
+  className,
 }) => {
   const t = useTranslations('FrontOffice.CarListings.Filters');
   const [open, setOpen] = useState(false);
@@ -50,30 +50,46 @@ const MobileFilters: React.FC<MobileFilterProps> = ({
       <Sheet open={open} onOpenChange={setOpen}>
         <div className="flex justify-between items-center p-4">
           <SheetTrigger asChild>
-            <Button variant="ghost" className=' bg-muted hover:bg-muted/80 border border-input rounded-md'>
-              <Filter className='h-4 w-4' />
+            <Button
+              variant="ghost"
+              className=" bg-muted hover:bg-muted/80 border border-input rounded-md"
+            >
+              <Filter className="h-4 w-4" />
             </Button>
           </SheetTrigger>
           <div className="relative w-[200px]">
-            <Input 
-              placeholder={t('search')} 
+            <Input
+              placeholder={t('search')}
               value={params.filters?.title || ''}
-              onChange={(e) => setParams({ ...params, filters: { ...params.filters, title: e.target.value }, page: 1 })}
+              onChange={(e) =>
+                setParams({
+                  ...params,
+                  filters: { ...params.filters, title: e.target.value },
+                  page: 1,
+                })
+              }
             />
-            <Button variant="ghost" className="text-gray-400 absolute inset-y-0 right-0 flex items-center pr-2 hover:bg-transparent">
+            <Button
+              variant="ghost"
+              className="text-gray-400 absolute inset-y-0 right-0 flex items-center pr-2 hover:bg-transparent"
+            >
               <Search className="h-4 w-4" />
             </Button>
           </div>
         </div>
-        
+
         <SheetContent side="left" className="w-[300px] sm:w-[400px] pt-20">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-lg font-bold">{t('title')}</h2>
-            <Button variant="ghost" className='p-0 text-gray-400 hover:bg-transparent' onClick={handleReset}>
-              <RefreshCcw className='h-5 w-5' />
+            <Button
+              variant="ghost"
+              className="p-0 text-gray-400 hover:bg-transparent"
+              onClick={handleReset}
+            >
+              <RefreshCcw className="h-5 w-5" />
             </Button>
           </div>
-          
+
           <div className="space-y-6">
             <div>
               <h3 className="text-sm font-semibold mb-2">{t('make')}</h3>
@@ -105,25 +121,37 @@ const MobileFilters: React.FC<MobileFilterProps> = ({
                 min={0}
                 max={100000}
                 step={10000}
-                value={[Number(params.filters?.price_gte || 0), Number(params.filters?.price_lte || 100000)]}
+                value={[
+                  Number(params.filters?.price_gte || 0),
+                  Number(params.filters?.price_lte || 100000),
+                ]}
                 onValueChange={handlePriceChange}
               />
               <div className="flex justify-between text-xs mt-2">
-                <span>{t('priceRange', { min: params.filters?.price_gte || 0, max: params.filters?.price_lte || 100000 })}</span>
+                <span>
+                  {t('priceRange', {
+                    min: params.filters?.price_gte || 0,
+                    max: params.filters?.price_lte || 100000,
+                  })}
+                </span>
               </div>
             </div>
 
             <div>
-              <h3 className="text-sm font-semibold mb-2">{t('transmission')}</h3>
+              <h3 className="text-sm font-semibold mb-2">
+                {t('transmission')}
+              </h3>
               <div className="space-y-2">
                 {TransmissionTypes.map((type) => (
                   <React.Fragment key={type}>
                     <CheckBox
                       checked={transmissionFilters.includes(type)}
-                      onChange={(e) => handleTransmissionChange(type, e.target.checked)}
+                      onChange={(e) =>
+                        handleTransmissionChange(type, e.target.checked)
+                      }
                       label={t(`transmissionTypes.${type}`)}
                     />
-                    <br/>
+                    <br />
                   </React.Fragment>
                 ))}
               </div>
@@ -136,10 +164,12 @@ const MobileFilters: React.FC<MobileFilterProps> = ({
                   <React.Fragment key={type}>
                     <CheckBox
                       checked={fuelTypeFilters.includes(type)}
-                      onChange={(e) => handleFuelTypeChange(type, e.target.checked)}
+                      onChange={(e) =>
+                        handleFuelTypeChange(type, e.target.checked)
+                      }
                       label={t(`fuelTypes.${type}`)}
                     />
-                    <br/>
+                    <br />
                   </React.Fragment>
                 ))}
               </div>

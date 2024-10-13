@@ -11,7 +11,9 @@ type LanguageContextType = {
   setLocale: (locale: string) => Promise<void>;
 };
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+const LanguageContext = createContext<LanguageContextType | undefined>(
+  undefined
+);
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
@@ -21,7 +23,8 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     // Load language from user preference if logged in, otherwise from localStorage
-    const savedLocale = user?.locale || localStorage.getItem('language') || defaultLocale;
+    const savedLocale =
+      user?.locale || localStorage.getItem('language') || defaultLocale;
     setLocaleState(savedLocale);
 
     // Load messages for the language
@@ -37,7 +40,9 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
       localStorage.setItem('language', newLocale);
 
       // Load new messages
-      const newMessages = await import(`@root/locales/${newLocale}.json`).catch(console.error);
+      const newMessages = await import(`@root/locales/${newLocale}.json`).catch(
+        console.error
+      );
       if (newMessages) {
         setMessages(newMessages.default);
       }
@@ -47,20 +52,19 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
         await setLocaleHook(newLocale);
       }
 
-      setLoading(false)
+      setLoading(false);
     }
   };
 
   return (
     <LanguageContext.Provider value={{ locale, setLocale }}>
-      {
-        loading ?
-        <Loading /> : (
-          <NextIntlClientProvider locale={locale} messages={messages}>
-            {children}
-          </NextIntlClientProvider>
-        )
-      }
+      {loading ? (
+        <Loading />
+      ) : (
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          {children}
+        </NextIntlClientProvider>
+      )}
     </LanguageContext.Provider>
   );
 }

@@ -452,7 +452,7 @@
         "deleteSuccess": "Feature type deleted successfully"
       }
     },
-    
+
     "Conditions": {
       "breadcrumb": {
         "dashboard": "Dashboard",
@@ -733,7 +733,7 @@
   "General": {
     "table": {
       "km": "km",
-      
+
       "footer": {
         "showing": "Showing {start} to {end} of {total} entries",
         "prev": "Previous",

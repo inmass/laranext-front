@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React from 'react';
 import { useTranslations } from 'next-intl';
@@ -12,7 +12,7 @@ const AboutUsPage: React.FC = () => {
   return (
     <div className="container mx-auto py-20 px-4 text-center">
       <h1 className="text-4xl font-bold mb-10">{t('title')}</h1>
-      
+
       <section className="mb-12">
         <h2 className="text-2xl font-semibold mb-4">{t('ourStory.title')}</h2>
         <p className="mb-4">{t('ourStory.content', { appName })}</p>

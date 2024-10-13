@@ -1,7 +1,7 @@
 export interface ConditionType {
-    id: number;
-    created_at: string;
-    updated_at: string;
-    name: string;
-    slug: string;
-};
+  id: number;
+  created_at: string;
+  updated_at: string;
+  name: string;
+  slug: string;
+}

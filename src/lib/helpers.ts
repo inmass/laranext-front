@@ -1,5 +1,5 @@
-import axios from "@/lib/axios";
-import { useTranslations } from "next-intl";
+import axios from '@/lib/axios';
+import { useTranslations } from 'next-intl';
 
 export function createFileFromImageUrl(imageUrl: string): Promise<File> {
   return new Promise((resolve, reject) => {
@@ -10,19 +10,18 @@ export function createFileFromImageUrl(imageUrl: string): Promise<File> {
         if (!response.ok) {
           throw new Error('Failed to load image');
         }
-        response.blob()
+        response.blob();
       })
-      .then(blob => {
+      .then((blob) => {
         const fileName = imageUrl.split('/').pop() || 'image.jpg';
         const file = new File([blob], fileName, { type: blob.type });
         resolve(file);
       })
-      .catch(error => reject(error));
+      .catch((error) => reject(error));
   });
 }
 
-
-export function asset(image: string|File): string {
+export function asset(image: string | File): string {
   if (image instanceof File) {
     return URL.createObjectURL(image);
   } else {
@@ -50,7 +49,7 @@ export function fileToBase64(file: File): Promise<string> {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result as string);
-    reader.onerror = error => reject(error);
+    reader.onerror = (error) => reject(error);
   });
 }
 
@@ -74,7 +73,10 @@ function camelize(str: string): string {
     .replace(/\s/g, '');
 }
 
-export function translateFeatureType(featureType: string, t: TFunction): string {
+export function translateFeatureType(
+  featureType: string,
+  t: TFunction
+): string {
   return t(camelize(featureType));
 }
 
@@ -82,7 +84,10 @@ export function translateFeature(feature: string, t: TFunction): string {
   return t(camelize(feature));
 }
 
-export function translateConditionType(conditionType: string, t: TFunction): string {
+export function translateConditionType(
+  conditionType: string,
+  t: TFunction
+): string {
   return t(camelize(conditionType));
 }
 
@@ -94,7 +99,9 @@ export function translateFuelType(fuelType: string, t: TFunction): string {
   return t(camelize(fuelType));
 }
 
-export function translateTransmissionType(transmissionType: string, t: TFunction): string {
+export function translateTransmissionType(
+  transmissionType: string,
+  t: TFunction
+): string {
   return t(camelize(transmissionType));
 }
-

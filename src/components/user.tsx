@@ -26,9 +26,7 @@ export function User() {
         >
           <Image
             src={
-              user?.avatar
-                ? user.avatar
-                : asset('images/placeholder-user.webp')
+              user?.avatar ? user.avatar : asset('images/placeholder-user.webp')
             }
             width={100}
             height={100}

@@ -17,7 +17,9 @@ export const ThemeToggle: React.FC = () => {
           theme === 'dark' ? 'translate-x-7' : 'translate-x-1'
         } inline-block w-6 h-6 transform rounded-full transition-transform duration-200 ease-in-out bg-white dark:bg-gray-800`}
       />
-      <span className={`absolute ${theme === 'dark' ? 'left-1.5' : 'right-1.5'} text-sm`}>
+      <span
+        className={`absolute ${theme === 'dark' ? 'left-1.5' : 'right-1.5'} text-sm`}
+      >
         {theme === 'light' ? '🌙' : '☀️'}
       </span>
     </button>

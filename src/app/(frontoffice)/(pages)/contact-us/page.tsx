@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React from 'react';
 import { useTranslations } from 'next-intl';
@@ -21,16 +21,34 @@ const ContactPage: React.FC = () => {
         </div>
         <form className="space-y-4">
           <div>
-            <label htmlFor="name" className="block mb-1">{t('form.name')}</label>
-            <input type="text" id="name" className="w-full p-2 border rounded" />
+            <label htmlFor="name" className="block mb-1">
+              {t('form.name')}
+            </label>
+            <input
+              type="text"
+              id="name"
+              className="w-full p-2 border rounded"
+            />
           </div>
           <div>
-            <label htmlFor="email" className="block mb-1">{t('form.email')}</label>
-            <input type="email" id="email" className="w-full p-2 border rounded" />
+            <label htmlFor="email" className="block mb-1">
+              {t('form.email')}
+            </label>
+            <input
+              type="email"
+              id="email"
+              className="w-full p-2 border rounded"
+            />
           </div>
           <div>
-            <label htmlFor="message" className="block mb-1">{t('form.message')}</label>
-            <textarea id="message" rows={4} className="w-full p-2 border rounded"></textarea>
+            <label htmlFor="message" className="block mb-1">
+              {t('form.message')}
+            </label>
+            <textarea
+              id="message"
+              rows={4}
+              className="w-full p-2 border rounded"
+            ></textarea>
           </div>
           <Button type="submit">{t('form.submit')}</Button>
         </form>
