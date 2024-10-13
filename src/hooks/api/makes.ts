@@ -33,7 +33,6 @@ export const getMakes = (
       return data;
     },
 
-    keepPreviousData: true,
     staleTime: 60 * 60 * 1000,
   });
 };

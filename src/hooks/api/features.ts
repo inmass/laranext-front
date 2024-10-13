@@ -34,7 +34,6 @@ export const getFeatures = (
       return data;
     },
 
-    keepPreviousData: true,
     staleTime: 60 * 60 * 1000,
   });
 };

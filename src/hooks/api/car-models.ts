@@ -35,7 +35,6 @@ export const getCarModels = (
       return data;
     },
 
-    keepPreviousData: true,
     staleTime: 60 * 60 * 1000,
   });
 };

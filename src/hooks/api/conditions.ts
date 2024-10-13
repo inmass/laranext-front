@@ -34,7 +34,6 @@ export const getConditions = (
       return data;
     },
 
-    keepPreviousData: true,
     staleTime: 60 * 60 * 1000,
   });
 };

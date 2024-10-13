@@ -85,7 +85,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
     <div className="lg:hidden">
       <Sheet open={open} onOpenChange={setOpen}>
         <div
-          ref={headerRef}
+          ref={headerRef as React.LegacyRef<HTMLDivElement>}
           className={cn('z-10 flex justify-between items-center w-full p-5', {
             fixed: isScrolled || isLandingPage,
             'bg-background': isScrolled,

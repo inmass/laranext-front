@@ -33,7 +33,6 @@ export const getCarListings = (
       );
       return data;
     },
-    keepPreviousData: true,
     staleTime: 60 * 60 * 1000, // stale time means that the data will be considered fresh for 1 hour
   });
 };
@@ -49,7 +48,6 @@ export const getCarListing = (
       );
       return data?.data;
     },
-    keepPreviousData: true,
     staleTime: 60 * 60 * 1000,
   });
 };
