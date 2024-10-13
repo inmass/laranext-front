@@ -2,6 +2,13 @@ import Axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import ApiEndpoints from '@/constants/api-endpoints';
 import toast from 'react-hot-toast';
 
+// Add this type declaration
+declare module 'axios' {
+  interface AxiosRequestConfig {
+    withXSRFToken?: boolean;
+  }
+}
+
 const axios = Axios.create({
   baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
   headers: {
