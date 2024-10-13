@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import AuthCard from '@/components/AuthCard';
+import AuthCard from '@/components/auth-card';
 
 interface DefaultLayoutProps {
   className?: string;

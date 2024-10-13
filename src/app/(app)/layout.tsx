@@ -1,7 +1,7 @@
 'use client';
 
 import { useAuth } from '@/hooks/auth';
-import Loading from '@/components/Loading';
+import Loading from '@/components/loading';
 import { ReactNode } from 'react';
 
 import { Analytics } from '@vercel/analytics/react';
@@ -10,7 +10,7 @@ import AppProvider from '@/providers/AppProvider';
 import { SearchInput } from '@/components/search';
 import DesktopNavigation from '@/components/layouts/nav/desktop-navigation';
 import MobileNavigation from '@/components/layouts/nav/mobile-navigation';
-import { ThemeToggle } from '@/components/ThemeToggle';
+import { ThemeToggle } from '@/components/theme-toggle';
 import { Toaster } from 'react-hot-toast';
 import { LanguageSwitcher } from '@/components/language-switcher';
 

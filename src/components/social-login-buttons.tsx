@@ -1,4 +1,4 @@
-import Button from './Button';
+import Button from './button';
 import { useAuth } from '../hooks/auth';
 import { FaFacebookF, FaGoogle } from 'react-icons/fa';
 import { useTranslations } from 'next-intl';

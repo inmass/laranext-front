@@ -1,17 +1,17 @@
 'use client';
 
-import Button from '@/components/Button';
+import Button from '@/components/button';
 import { Input } from '@/components/ui/input';
-import InputError from '@/components/InputError';
-import Label from '@/components/Label';
+import InputError from '@/components/input-error';
+import Label from '@/components/label';
 import Link from 'next/link';
 import { useAuth } from '@/hooks/auth';
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import AuthSessionStatus from '@/components/AuthSessionStatus';
-import SocialLoginButtons from '@/components/SocialLoginButtons';
-import SectionDivider from '@/components/SectionDivider';
-import CardLayout from '@/components/layouts/CardLayout';
+import AuthSessionStatus from '@/components/auth-session-status';
+import SocialLoginButtons from '@/components/social-login-buttons';
+import SectionDivider from '@/components/section-divider';
+import CardLayout from '@/components/layouts/card-layout';
 import { useTranslations } from 'next-intl';
 
 interface Errors {

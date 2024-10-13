@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Header from '@/components/layouts/front-office/header/header';
 import { asset } from '@/lib/helpers';
 import { useTranslations } from 'next-intl';
-import Button from '@/components/Button';
+import Button from '@/components/button';
 import Link from 'next/link';
 import AppRoutes from '@/constants/app-routes';
 

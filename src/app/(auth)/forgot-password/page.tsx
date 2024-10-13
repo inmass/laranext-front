@@ -1,13 +1,13 @@
 'use client';
 
-import Button from '@/components/Button';
+import Button from '@/components/button';
 import { Input } from '@/components/ui/input';
-import InputError from '@/components/InputError';
-import Label from '@/components/Label';
+import InputError from '@/components/input-error';
+import Label from '@/components/label';
 import { useAuth } from '@/hooks/auth';
 import { useState } from 'react';
-import AuthSessionStatus from '@/components/AuthSessionStatus';
-import CardLayout from '@/components/layouts/CardLayout';
+import AuthSessionStatus from '@/components/auth-session-status';
+import CardLayout from '@/components/layouts/card-layout';
 
 interface Errors {
   email?: string[];

@@ -1,5 +1,5 @@
-import CardLayout from '@/components/layouts/CardLayout';
-import DashboardBreadcrumb from '@/components/layouts/DashboardBreadcrumb';
+import CardLayout from '@/components/layouts/card-layout';
+import DashboardBreadcrumb from '@/components/layouts/dashboard-breadcrumb';
 
 export const metadata = {
   title: 'Laravel - Dashboard',

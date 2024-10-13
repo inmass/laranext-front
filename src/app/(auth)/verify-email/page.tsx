@@ -1,7 +1,7 @@
 'use client';
 
-import Button from '@/components/Button';
-import CardLayout from '@/components/layouts/CardLayout';
+import Button from '@/components/button';
+import CardLayout from '@/components/layouts/card-layout';
 import { useAuth } from '@/hooks/auth';
 import { useState } from 'react';
 

@@ -6,7 +6,7 @@ import AppRoutes from '@/constants/app-routes';
 import { getAppName } from '@/lib/helpers';
 import { useTranslations } from 'next-intl';
 import { LanguageSwitcher } from '@/components/language-switcher';
-import { ThemeToggle } from '@/components/ThemeToggle';
+import { ThemeToggle } from '@/components/theme-toggle';
 import { User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 

@@ -1,10 +1,10 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import AlertDialog from '@/components/layouts/AlertDialog';
-import CardLayout from '@/components/layouts/CardLayout';
+import AlertDialog from '@/components/layouts/alert-dialog';
+import CardLayout from '@/components/layouts/card-layout';
 import FeatureFormDialog from '@/components/layouts/dashboard/features/feature-form-dialog'
-import DashboardBreadcrumb from '@/components/layouts/DashboardBreadcrumb';
+import DashboardBreadcrumb from '@/components/layouts/dashboard-breadcrumb';
 import { DataTable } from '@/components/layouts/table/data-table';
 import { FeaturesParams, getFeatures, useDeleteFeature } from '@/hooks/api/features';
 import { FeatureType } from '@/types/feature';

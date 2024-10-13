@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useTranslations } from 'next-intl';
-import Button from '@/components/Button';
+import Button from '@/components/button';
 
 const ContactPage: React.FC = () => {
   const t = useTranslations('FrontOffice.Contact');

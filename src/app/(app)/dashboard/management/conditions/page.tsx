@@ -1,10 +1,10 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import AlertDialog from '@/components/layouts/AlertDialog';
-import CardLayout from '@/components/layouts/CardLayout';
+import AlertDialog from '@/components/layouts/alert-dialog';
+import CardLayout from '@/components/layouts/card-layout';
 import ConditionFormDialog from '@/components/layouts/dashboard/conditons/condition-form-dialog';
-import DashboardBreadcrumb from '@/components/layouts/DashboardBreadcrumb';
+import DashboardBreadcrumb from '@/components/layouts/dashboard-breadcrumb';
 import { DataTable } from '@/components/layouts/table/data-table';
 import { ConditionsParams, getConditions, useDeleteCondition } from '@/hooks/api/conditions';
 import { ConditionType } from '@/types/condition';

@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import DashboardBreadcrumb from '@/components/layouts/DashboardBreadcrumb';
+import DashboardBreadcrumb from '@/components/layouts/dashboard-breadcrumb';
 import { useAuth } from '@/hooks/auth';
 import Head from 'next/head';
 import { useEffect } from 'react';

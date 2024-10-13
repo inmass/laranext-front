@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 import { getCarListings } from '@/hooks/api/car-listings';
 import CarListingCard from './car-listing-card';
 import { cn } from '@/lib/utils';
-import SectionDivider from '@/components/SectionDivider';
+import SectionDivider from '@/components/section-divider';
 
 interface RelatedListingsProps {
   listing: CarListingType;

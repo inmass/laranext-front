@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import CardLayout from '@/components/layouts/CardLayout';
-import Button from '@/components/Button';
+import CardLayout from '@/components/layouts/card-layout';
+import Button from '@/components/button';
 import { asset } from '@/lib/helpers';
 import Image from 'next/image';
 import { TrashIcon } from 'lucide-react';
-import AlertDialog from '@/components/layouts/AlertDialog';
+import AlertDialog from '@/components/layouts/alert-dialog';
 import { useProfile } from '@/hooks/api/profile';
 import ClipLoader from 'react-spinners/ClipLoader';
 

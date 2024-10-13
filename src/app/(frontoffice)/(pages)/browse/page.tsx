@@ -2,7 +2,7 @@
 
 import CarListingsList from '@/components/layouts/front-office/browse/car-listings-list';
 import Filters from '@/components/layouts/front-office/browse/filters/filters';
-import Loading from '@/components/Loading';
+import Loading from '@/components/loading';
 import { CarListingsParams, getCarListings } from '@/hooks/api/car-listings';
 import { useState } from 'react';
 

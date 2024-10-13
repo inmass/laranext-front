@@ -4,7 +4,7 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import * as Tabs from '@radix-ui/react-tabs';
-import Button from '@/components/Button';
+import Button from '@/components/button';
 import { cn } from '@/lib/utils';
 import BasicInfoStep from './steps/basic-info-step';
 import VehicleDetailsStep from './steps/vehicle-details-step';

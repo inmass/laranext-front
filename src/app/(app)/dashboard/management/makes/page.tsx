@@ -1,10 +1,10 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import AlertDialog from '@/components/layouts/AlertDialog';
-import CardLayout from '@/components/layouts/CardLayout';
+import AlertDialog from '@/components/layouts/alert-dialog';
+import CardLayout from '@/components/layouts/card-layout';
 import MakeFormDialog from '@/components/layouts/dashboard/makes/make-form-dialog';
-import DashboardBreadcrumb from '@/components/layouts/DashboardBreadcrumb';
+import DashboardBreadcrumb from '@/components/layouts/dashboard-breadcrumb';
 import { DataTable } from '@/components/layouts/table/data-table';
 import { MakesParams, getMakes, useDeleteMake } from '@/hooks/api/makes';
 import { MakeType } from '@/types/make';

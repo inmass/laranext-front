@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import Dialog from '@/components/layouts/dialog';
-import Button from '@/components/Button';
+import Button from '@/components/button';
 import { Pen, Plus } from 'lucide-react';
 import CarListingWizard, { mapCarListingForFormData } from './car-listing-wizard';
 import { CarListingType } from '@/types/car-listing';

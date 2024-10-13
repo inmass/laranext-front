@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import Dialog from '@/components/layouts/dialog';
-import Button from '@/components/Button';
+import Button from '@/components/button';
 import { Pen, Plus } from 'lucide-react';
 import { BodyStyleType } from '@/types/body-style';
 import { useCreateBodyStyle, useUpdateBodyStyle } from '@/hooks/api/body-styles';

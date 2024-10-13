@@ -1,10 +1,10 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import AlertDialog from '@/components/layouts/AlertDialog';
-import CardLayout from '@/components/layouts/CardLayout';
+import AlertDialog from '@/components/layouts/alert-dialog';
+import CardLayout from '@/components/layouts/card-layout';
 import CarModelFormDialog from '@/components/layouts/dashboard/car-models/car-models-form-dialog'
-import DashboardBreadcrumb from '@/components/layouts/DashboardBreadcrumb';
+import DashboardBreadcrumb from '@/components/layouts/dashboard-breadcrumb';
 import { DataTable } from '@/components/layouts/table/data-table';
 import { CarModelsParams, getCarModels, useDeleteCarModel } from '@/hooks/api/car-models'
 import { CarModelType } from '@/types/car-model';

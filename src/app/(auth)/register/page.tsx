@@ -1,15 +1,15 @@
 'use client';
 
-import Button from '@/components/Button';
+import Button from '@/components/button';
 import { Input } from '@/components/ui/input';
-import InputError from '@/components/InputError';
-import Label from '@/components/Label';
+import InputError from '@/components/input-error';
+import Label from '@/components/label';
 import Link from 'next/link';
 import { useAuth } from '@/hooks/auth';
 import { useState, useEffect } from 'react';
-import SectionDivider from '@/components/SectionDivider';
-import SocialLoginButtons from '@/components/SocialLoginButtons';
-import CardLayout from '@/components/layouts/CardLayout';
+import SectionDivider from '@/components/section-divider';
+import SocialLoginButtons from '@/components/social-login-buttons';
+import CardLayout from '@/components/layouts/card-layout';
 import { useTranslations } from 'next-intl';
 import ClipLoader from 'react-spinners/ClipLoader';
 import { PhoneInput } from '@/components/ui/phone-input';

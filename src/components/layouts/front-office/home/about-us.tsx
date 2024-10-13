@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Header from '@/components/layouts/front-office/header/header';
 import { asset, getAppName } from '@/lib/helpers';
 import { useTranslations } from 'next-intl';
-import Button from '@/components/Button';
+import Button from '@/components/button';
 
 // Hero component
 const AboutUs: React.FC = () => {

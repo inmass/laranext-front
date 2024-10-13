@@ -1,8 +1,8 @@
 import { useTranslations } from 'next-intl';
-import CardLayout from '@/components/layouts/CardLayout';
+import CardLayout from '@/components/layouts/card-layout';
 import { Input } from '@/components/ui/input';
-import Button from '@/components/Button';
-import InputError from '@/components/InputError';
+import Button from '@/components/button';
+import InputError from '@/components/input-error';
 import { useProfile } from '@/hooks/api/profile';
 import React from 'react';
 import { useForm } from 'react-hook-form';

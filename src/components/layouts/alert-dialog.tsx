@@ -1,5 +1,5 @@
 import * as RadixAlertDialog from '@radix-ui/react-alert-dialog';
-import Button from '@/components/Button';
+import Button from '@/components/button';
 import { useState } from 'react';
 
 interface AlertDialogProps {

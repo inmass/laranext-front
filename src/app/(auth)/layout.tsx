@@ -1,8 +1,8 @@
 // 'use client'
 
-import Button from '@/components/Button';
+import Button from '@/components/button';
 import { LanguageSwitcher } from '@/components/language-switcher';
-import { ThemeToggle } from '@/components/ThemeToggle';
+import { ThemeToggle } from '@/components/theme-toggle';
 import { asset, getAppName } from '@/lib/helpers';
 import Link from 'next/link';
 import Image from 'next/image';

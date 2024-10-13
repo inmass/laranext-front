@@ -1,5 +1,5 @@
 import * as RadixDialog from '@radix-ui/react-dialog'
-import Button from '@/components/Button';
+import Button from '@/components/button';
 import { X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 

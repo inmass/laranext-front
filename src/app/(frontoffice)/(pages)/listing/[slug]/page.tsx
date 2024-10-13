@@ -1,6 +1,6 @@
 'use client';
 
-import Loading from "@/components/Loading";
+import Loading from "@/components/loading";
 import ImageWithPreview from "@/components/ui/image-with-preview";
 import { getCarListing } from "@/hooks/api/car-listings";
 import { useParams } from "next/navigation";
@@ -9,7 +9,7 @@ import { asset, getMakeImage, translateConditionType, translateFeature, translat
 import Image from 'next/image';
 import { Carousel } from "@/components/ui/carousel";
 import { Badge } from "@/components/ui/badge";
-import SectionDivider from '@/components/SectionDivider';
+import SectionDivider from '@/components/section-divider';
 import { Button } from "@/components/ui/button";
 import { FaCheckCircle, FaDashcube, FaEye, FaTimesCircle, FaWhatsapp } from "react-icons/fa";
 import { getFeatures } from "@/hooks/api/features";
