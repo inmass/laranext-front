@@ -56,7 +56,7 @@ const RelatedListings: React.FC<RelatedListingsProps> = ({ listing }) => {
               )}
             >
               {relatedListings?.data.map((listing) => (
-                <CarListingCard carListing={listing} />
+                <CarListingCard key={listing.id} carListing={listing} />
               ))}
             </div>
           </div>

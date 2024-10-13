@@ -72,4 +72,5 @@ const ConditionSelect = forwardRef<SelectRef, ConditionSelectProps>(
   }
 );
 
+ConditionSelect.displayName = 'ConditionSelect';
 export default ConditionSelect;

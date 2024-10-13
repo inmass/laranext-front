@@ -82,4 +82,5 @@ const CarModelSelect = forwardRef<SelectRef, CarModelSelectProps>(
   }
 );
 
+CarModelSelect.displayName = 'CarModelSelect';
 export default CarModelSelect;

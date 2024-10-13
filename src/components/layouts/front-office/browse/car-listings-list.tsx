@@ -34,7 +34,7 @@ const CarListingsList = ({
       >
         {carListings && carListings.length > 0 ? (
           carListings.map((carListing) => (
-            <CarListingCard carListing={carListing} />
+            <CarListingCard key={carListing.id} carListing={carListing} />
           ))
         ) : (
           <div className="col-span-3">

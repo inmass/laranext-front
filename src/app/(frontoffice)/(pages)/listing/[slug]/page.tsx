@@ -192,14 +192,13 @@ const ListingPage = () => {
                       {t('viewNumber')}
                     </Button>
                   }
-                  children={
-                    <div>
-                      <Link href={`tel:${carListing.user?.phone}`}>
-                        {carListing.user?.phone ?? '---'}
-                      </Link>
-                    </div>
-                  }
-                />
+                >
+                  <div>
+                    <Link href={`tel:${carListing.user?.phone}`}>
+                      {carListing.user?.phone ?? '---'}
+                    </Link>
+                  </div>
+                </Dialog>
                 <Link
                   href={`https://wa.me/${carListing.user?.phone}`}
                   target="_blank"

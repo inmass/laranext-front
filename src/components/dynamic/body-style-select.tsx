@@ -72,4 +72,5 @@ const BodyStyleSelect = forwardRef<SelectRef, BodyStyleSelectProps>(
   }
 );
 
+BodyStyleSelect.displayName = 'BodyStyleSelect';
 export default BodyStyleSelect;
