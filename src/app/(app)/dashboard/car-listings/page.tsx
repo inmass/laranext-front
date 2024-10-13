@@ -14,7 +14,6 @@ import {
 } from '@/hooks/api/car-listings';
 import { CarListingType } from '@/types/car-listing';
 import { CircleDot, Eye, Trash2 } from 'lucide-react';
-import Head from 'next/head';
 import { useEffect, useState, useCallback } from 'react';
 import { useAuth } from '@/hooks/auth';
 import { getAppName } from '@/lib/helpers';
@@ -110,10 +109,6 @@ const CarListings = () => {
     },
   ];
 
-  if (user?.role != 'admin') {
-    columns.splice(1, 1);
-  }
-
   const actions = [
     {
       name: t('actions.view'),
@@ -161,6 +156,8 @@ const CarListings = () => {
   ];
 
   if (user?.role != 'admin') {
+    // remove user column
+    columns.splice(1, 1);
     // remove delete action
     actions.splice(2, 1);
   }

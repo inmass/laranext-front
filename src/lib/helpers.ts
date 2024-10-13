@@ -1,26 +1,3 @@
-import axios from '@/lib/axios';
-import { useTranslations } from 'next-intl';
-
-export function createFileFromImageUrl(imageUrl: string): Promise<File> {
-  return new Promise((resolve, reject) => {
-    fetch(imageUrl, {
-      credentials: 'include',
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Failed to load image');
-        }
-        response.blob();
-      })
-      .then((blob) => {
-        const fileName = imageUrl.split('/').pop() || 'image.jpg';
-        const file = new File([blob], fileName, { type: blob.type });
-        resolve(file);
-      })
-      .catch((error) => reject(error));
-  });
-}
-
 export function asset(image: string | File): string {
   if (image instanceof File) {
     return URL.createObjectURL(image);
