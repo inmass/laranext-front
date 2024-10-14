@@ -29,7 +29,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
       </div>
       <div className="relative h-screen">
         <Image
-          src={asset('images/layout/hero-image.jpeg')}
+          src={asset('images/layout/hero-image.webp')}
           alt="Luxury watch background"
           layout="fill"
           objectFit="cover"
