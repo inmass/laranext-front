@@ -47,11 +47,9 @@ const Footer: React.FC = () => {
             <h3 className="text-lg mb-4 text-gray-500 font-bold">
               {t('contactUs')}
             </h3>
-            <Link href={`mailto:${t('contact.email')}`}>
-              klasikiat@gmail.com
-            </Link>
+            <Link href="mailto:klasikiat@gmail.com">klasikiat@gmail.com</Link>
             <br />
-            <Link href={`tel:${t('contact.phone')}`}>+212 567898745</Link>
+            <Link href="tel:+212567898745">+212 567898745</Link>
           </div>
         </div>
 

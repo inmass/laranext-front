@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl';
 import { CarListingFormData } from '@/components/layouts/dashboard/car-listings/car-listing-wizard';
 import { cn } from '@/lib/utils';
 import { asset } from '@/lib/helpers';
+import Image from 'next/image';
 
 interface ImageData {
   id?: number;
@@ -124,10 +125,12 @@ const ImageUploadStep: React.FC = () => {
             }
             className="relative"
           >
-            <img
+            <Image
               src={getImageSrc(file.image)}
               alt={t('previewAlt', { index: index + 1 })}
-              className="w-full h-32 object-cover rounded-md"
+              className="w-full h-32 w-auto object-cover rounded-md"
+              width={100}
+              height={100}
             />
             <button
               type="button"
